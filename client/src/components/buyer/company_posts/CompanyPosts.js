@@ -1,16 +1,18 @@
 import React from 'react';
-import Forms from './Form';
+import CPosts from './CPosts';
+import CompanySidebar from './CompanySidebar';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 
-function OfferForm() {
+function CompanyPosts() {
     return (
         <>
             <Navbar/>
-            <Forms/>
+            <CompanySidebar/>
+            <CPosts />
             <Footer/>
         </>
     );
 }
 
-export default OfferForm;
+export default CompanyPosts;

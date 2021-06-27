@@ -1,19 +1,12 @@
 import React from "react";
-import './PendingOffers.css';
-import {useHistory} from "react-router-dom";
+import '../posts/AcceptedOffers.css';
 
-function PendingOffers() {
-
-    const history = useHistory();
-
-    const handleRoute = () =>{
-        history.push("/editpendingoffers");
-    }
+function CompanyAcceptedOffers() {
 
     return(
         <div className="tables">
             <div className="tables__container">
-                <h1>Pending Offers</h1>
+                <h1>Company Accepted Offers</h1>
                 <div className="table_responsive">
                     <table>
                         <thead>
@@ -24,7 +17,6 @@ function PendingOffers() {
                             <th>Waste Item</th>
                             <th>Quantity</th>
                             <th>Price</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,14 +25,8 @@ function PendingOffers() {
                             <td><img src="images/polythene.jpg" alt=""></img></td>
                             <td>Plastic</td>
                             <td>Bucket</td>
-                            <td>2 kg</td>
+                            <td>20 kg</td>
                             <td>Rs 20</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                            </td>
                         </tr>
 
                         <tr>
@@ -48,42 +34,24 @@ function PendingOffers() {
                             <td><img src="images/paper.jpg" alt=""></img></td>
                             <td>Paper</td>
                             <td>News Papers</td>
-                            <td>5 kg</td>
+                            <td>50 kg</td>
                             <td>Rs 25</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                            </td>
                         </tr>
                         <tr>
                             <td>03</td>
                             <td><img src="images/polythene.jpg" alt=""></img></td>
                             <td>Polythene</td>
                             <td>Bags</td>
-                            <td>3 kg</td>
+                            <td>30 kg</td>
                             <td>Rs 20</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                            </td>
                         </tr>
                         <tr>
                             <td>04</td>
                             <td><img src="images/plastic.jpg" alt=""></img></td>
                             <td>Polythene</td>
                             <td>Bags</td>
-                            <td>3 kg</td>
+                            <td>30 kg</td>
                             <td>Rs 20</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -93,4 +61,4 @@ function PendingOffers() {
     );
 }
 
-export default PendingOffers;
+export default CompanyAcceptedOffers;

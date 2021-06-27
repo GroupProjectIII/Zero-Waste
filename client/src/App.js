@@ -1,31 +1,38 @@
 import React from 'react';
-import Navbar from './components/buyer/home/Navbar';
-import Footer from './components/buyer/home/Footer'
-import './App.css';
 import Home from './components/buyer/home/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Services from './components/buyer/posts/Services';
-import Products from './components/buyer/pages/Products';
-import SignUp from './components/buyer/pages/SignUp';
 import OfferForm from './components/buyer/posts/OfferForm';
-import AcceptedOffers from './components/buyer/posts/AcceptedOffers'
-import PendingOffers from './components/buyer/posts/PendingOffers'
+import AOffers from './components/buyer/posts/AOffers';
+import POffers from './components/buyer/posts/POffers';
+import EditPendingOffers from './components/buyer/posts/EditPendingOffers';
+import CompanyPosts from "./components/buyer/company_posts/CompanyPosts";
+import CompanyOfferForm from "./components/buyer/company_posts/CompanyOfferForm";
+import CompanyAOffers from "./components/buyer/company_posts/CompanyAOffers";
+import CompanyPOffers from "./components/buyer/company_posts/CompanyPOffers";
+import EditCompanyPendingOffers from "./components/buyer/company_posts/EditCompanyPendingOffers";
+import ViewCompanyDetails from "./components/buyer/company_posts/ViewCompanyDetails";
+import CompanyNotify from "./components/buyer/company_posts/CompanyNotify";
 
 function App() {
     return (
         <>
             <Router>
-                <Navbar />
                 <Switch>
                     <Route path='/' exact component={Home} />
                     <Route path='/posts' component={Services} />
-                    <Route path='/products' component={Products} />
-                    <Route path='/sign-up' component={SignUp} />
                     <Route path='/offerforms' component={OfferForm} />
-                    <Route path='/acceptedoffers' component={AcceptedOffers} />
-                    <Route path='/pendingoffers' component={PendingOffers} />
+                    <Route path='/acceptedoffers' component={AOffers} />
+                    <Route path='/pendingoffers' component={POffers} />
+                    <Route path='/editpendingoffers' component={EditPendingOffers} />
+                    <Route path='/companyposts' component={CompanyPosts} />
+                    <Route path='/companyofferforms' component={CompanyOfferForm} />
+                    <Route path='/companyacceptedoffers' component={CompanyAOffers} />
+                    <Route path='/companypendingoffers' component={CompanyPOffers} />
+                    <Route path='/editcompanypendingoffers' component={EditCompanyPendingOffers} />
+                    <Route path='/viewcompanydetails' component={ViewCompanyDetails} />
+                    <Route path='/notifyaboutwaste' component={CompanyNotify} />
                 </Switch>
-                <Footer/>
             </Router>
         </>
     );

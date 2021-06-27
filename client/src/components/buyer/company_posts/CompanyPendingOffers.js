@@ -1,19 +1,19 @@
 import React from "react";
-import './PendingOffers.css';
+import '../posts/PendingOffers.css';
 import {useHistory} from "react-router-dom";
 
-function PendingOffers() {
+function CompanyPendingOffers() {
 
     const history = useHistory();
 
     const handleRoute = () =>{
-        history.push("/editpendingoffers");
+        history.push("/editcompanypendingoffers");
     }
 
     return(
         <div className="tables">
             <div className="tables__container">
-                <h1>Pending Offers</h1>
+                <h1>Pending Offers of Companies</h1>
                 <div className="table_responsive">
                     <table>
                         <thead>
@@ -93,4 +93,4 @@ function PendingOffers() {
     );
 }
 
-export default PendingOffers;
+export default CompanyPendingOffers;
