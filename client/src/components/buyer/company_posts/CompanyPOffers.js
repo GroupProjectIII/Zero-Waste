@@ -1,16 +1,17 @@
 import React from 'react';
-import Forms from './Form';
+import '../posts/POffers.css';
+import CompanyPendingOffers from './CompanyPendingOffers';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 
-function OfferForm() {
+function CompanyPOffers() {
     return (
         <>
             <Navbar/>
-            <Forms/>
+            <CompanyPendingOffers/>
             <Footer/>
         </>
     );
 }
 
-export default OfferForm;
+export default CompanyPOffers;

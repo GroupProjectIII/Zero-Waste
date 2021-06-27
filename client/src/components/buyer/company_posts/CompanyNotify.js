@@ -1,16 +1,16 @@
 import React from 'react';
-import Forms from './Form';
+import CompanyNotifyForms from './CompanyNotifyForm';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 
-function OfferForm() {
+function CompanyNotify() {
     return (
         <>
             <Navbar/>
-            <Forms/>
+            <CompanyNotifyForms/>
             <Footer/>
         </>
     );
 }
 
-export default OfferForm;
+export default CompanyNotify;

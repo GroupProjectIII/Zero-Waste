@@ -1,16 +1,17 @@
 import React from 'react';
-import Forms from './Form';
+import './AOffers.css';
+import AcceptedOffers from './AcceptedOffers';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 
-function OfferForm() {
+function AOffers() {
     return (
         <>
             <Navbar/>
-            <Forms/>
+            <AcceptedOffers/>
             <Footer/>
         </>
     );
 }
 
-export default OfferForm;
+export default AOffers;

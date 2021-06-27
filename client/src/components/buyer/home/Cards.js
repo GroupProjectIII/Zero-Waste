@@ -12,12 +12,12 @@ function Cards() {
                         <CardItem
                             src="images/waste_items.jpg"
                             text='Search for Waste'
-                            path='/services'
+                            path='/posts'
                         />
                         <CardItem
                             src='images/company.jpg'
                             text='Search for Companies'
-                            path='/services'
+                            path='/viewcompanydetails'
                         />
                     </ul>
                     <ul className='cards__items'>
@@ -25,19 +25,19 @@ function Cards() {
                             src='images/view_post.jpg'
                             text='View Posts'
                             label='Mystery'
-                            path='/services'
+                            path='/posts'
                         />
                         <CardItem
                             src='images/accepted.jpg'
                             text='View Accepted Offers'
                             label='Adventure'
-                            path='/products'
+                            path='/acceptedoffers'
                         />
                         <CardItem
                             src='images/pending_offers.jpg'
                             text='View Pending Offers'
                             label='Adrenaline'
-                            path='/sign-up'
+                            path='/pendingoffers'
                         />
                     </ul>
                 </div>
