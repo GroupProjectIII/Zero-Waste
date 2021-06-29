@@ -1,17 +1,19 @@
 import React from 'react';
 import * as IoIcons from 'react-icons/io';
+import * as FaIcons from 'react-icons/fa';
+import * as MdIcons from 'react-icons/md';
 
 export const CompanySidebarData = [
     {
         title: 'View Company Posts',
         path: '/companyposts',
-        icon: <IoIcons.IoIosPaper />,
+        icon: <FaIcons.FaAdversal />,
         cName: 'nav-text'
     },
     {
         title: 'Accepted Offers',
         path: '/companyacceptedoffers',
-        icon: <IoIcons.IoIosPaper />,
+        icon: <MdIcons.MdLocalOffer />,
         cName: 'nav-text'
     },
     {

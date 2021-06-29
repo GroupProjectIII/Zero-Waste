@@ -13,6 +13,7 @@ import CompanyPOffers from "./components/buyer/company_posts/CompanyPOffers";
 import EditCompanyPendingOffers from "./components/buyer/company_posts/EditCompanyPendingOffers";
 import ViewCompanyDetails from "./components/buyer/company_posts/ViewCompanyDetails";
 import CompanyNotify from "./components/buyer/company_posts/CompanyNotify";
+import PostsLocation from "./components/buyer/posts/PostsLocation";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     <Route path='/editcompanypendingoffers' component={EditCompanyPendingOffers} />
                     <Route path='/viewcompanydetails' component={ViewCompanyDetails} />
                     <Route path='/notifyaboutwaste' component={CompanyNotify} />
+                    <Route path='/location' component={PostsLocation} />
                 </Switch>
             </Router>
         </>

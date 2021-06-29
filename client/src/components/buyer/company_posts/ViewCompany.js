@@ -11,66 +11,82 @@ function ViewCompany() {
     }
 
     return(
-        <div className="tables">
-            <div className="tables__container">
-                <h1>Company Details</h1>
-                <div className="table_responsive">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Company ID</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>ABC Company LTD</td>
-                            <td>0112333334</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Notify</a>
-                              </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>02</td>
-                            <td>CDE Company LTD</td>
-                            <td>0112333335</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Notify</a>
-                              </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>FGH Company LTD</td>
-                            <td>0112333336</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Notify</a>
-                              </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>04</td>
-                            <td>JKL Company LTD</td>
-                            <td>0112333337</td>
-                            <td>
-                              <span className="action_btn">
-                                <a href="#" onClick={handleRoute}>Notify</a>
-                              </span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div className="tables-b">
+        <div className="tables__container-b">
+            <h1>Company Offers</h1>
+            <div className="search_box-b">
+                <input type="text" placeholder="What are you looking for?"></input>
+                <i className="fas fa-search"></i>
             </div>
+
+            <table className="table-b">
+                <thead>
+                <tr>
+                    <th>Company ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td data-label="Company ID">04</td>
+                    <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Phone">0112333337</td>
+                    <td data-label="Action">
+                          <span className="action_btn-b">
+                            <a href="#" onClick={handleRoute}>Notify</a>
+                          </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td data-label="Company ID">04</td>
+                    <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Phone">0112333337</td>
+                    <td data-label="Action">
+                          <span className="action_btn-b">
+                            <a href="#" onClick={handleRoute}>Notify</a>
+                          </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td data-label="Company ID">04</td>
+                    <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Phone">0112333337</td>
+                    <td data-label="Action">
+                          <span className="action_btn-b">
+                            <a href="#" onClick={handleRoute}>Notify</a>
+                          </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td data-label="Company ID">04</td>
+                    <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Phone">0112333337</td>
+                    <td data-label="Action">
+                          <span className="action_btn-b">
+                            <a href="#" onClick={handleRoute}>Notify</a>
+                          </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td data-label="Company ID">04</td>
+                    <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Phone">0112333337</td>
+                    <td data-label="Action">
+                          <span className="action_btn-b">
+                            <a href="#" onClick={handleRoute}>Notify</a>
+                          </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
     );
 }
 

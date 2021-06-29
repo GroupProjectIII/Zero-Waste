@@ -4,11 +4,11 @@
     padding: 0;
     font-family: 'PT Sans', sans-serif;
 }
-.forms {
+.forms-b {
     padding: 4rem;
     background: #CFF4D2;
 }
-.forms__container {
+.forms__container-b {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -16,7 +16,7 @@
     width: 90%;
     margin: 0 auto;
 }
-.container{
+.container-b{
     max-width: 700px;
     width: 100%;
     background-color: #fff;
@@ -24,12 +24,12 @@
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
-.container .title{
+.container-b .title-b{
     font-size: 25px;
     font-weight: 500;
     position: relative;
 }
-.container .title::before{
+.container-b .title-b::before{
     content: "";
     position: absolute;
     left: 0;
@@ -39,22 +39,22 @@
     border-radius: 5px;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
-.content form .user-details{
+.content-b form .user-details-b{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px 0 12px 0;
 }
-form .user-details .input-box{
+form .user-details-b .input-box-b{
     margin-bottom: 15px;
     width: calc(100% / 2 - 20px);
 }
-form .input-box span.details{
+form .input-box-b span.details-b{
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
 }
-.user-details .input-box input{
+.user-details-b .input-box-b input{
     height: 45px;
     width: 100%;
     outline: none;
@@ -65,22 +65,22 @@ form .input-box span.details{
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.user-details-b .input-box-b input:focus,
+.user-details-b .input-box-b input:valid{
     border-color: #9b59b6;
 }
-form .category{
+form .category-b{
     display: flex;
     width: 80%;
     margin: 14px 0 ;
     justify-content: space-between;
 }
-form .category label{
+form .category-b label{
     display: flex;
     align-items: center;
     cursor: pointer;
 }
-form .category label .dot{
+form .category-b label .dot{
     height: 18px;
     width: 18px;
     border-radius: 50%;
@@ -98,11 +98,11 @@ form .category label .dot{
 form input[type="radio"]{
     display: none;
 }
-form .button{
+form .button-b{
     height: 45px;
     margin: 35px 0
 }
-form .button input{
+form .button-b input{
     height: 100%;
     width: 100%;
     border-radius: 5px;
@@ -115,31 +115,31 @@ form .button input{
     transition: all 0.3s ease;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
-form .button input:hover{
+form .button-b input:hover{
     /* transform: scale(0.99); */
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
 @media(max-width: 584px){
-    .container{
+    .container-b{
         max-width: 100%;
     }
-    form .user-details .input-box{
+    form .user-details-b .input-box-b{
         margin-bottom: 15px;
         width: 100%;
     }
-    form .category{
+    form .category-b{
         width: 100%;
     }
-    .content form .user-details{
+    .content-b form .user-details-b{
         max-height: 300px;
         overflow-y: scroll;
     }
-    .user-details::-webkit-scrollbar{
+    .user-details-b::-webkit-scrollbar{
         width: 5px;
     }
 }
 @media(max-width: 459px){
-    .container .content .category{
+    .container-b .content-b .category-b{
         flex-direction: column;
     }
 }
