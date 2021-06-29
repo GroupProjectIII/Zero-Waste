@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif;
+}
+.location-b .location__container-b h1{
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding: 0 20px 20px;
+    color: #164A41;
+}
+.location-b {
+    padding: 4rem;
+    background: #CFF4D2;
+}
+.location__container-b {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.location-box-b{
+    width: 100%;
+    box-shadow: 0 2px 6px #0003;
+    border-color: #164A41;
+    border-width: 5px;
+}

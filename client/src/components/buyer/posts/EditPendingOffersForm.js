@@ -4,31 +4,31 @@ import './Form.css';
 function EditOfferForms() {
 
     return(
-        <div className="forms">
-            <div className="forms__container" >
-                <div className="container">
-                    <div className="title">Edit Pending Offer</div>
-                    <div className="content">
+        <div className="forms-b">
+            <div className="forms__container-b" >
+                <div className="container-b">
+                    <div className="title-b">Edit Pending Offer</div>
+                    <div className="content-b">
                         <form action="#">
-                            <div className="user-details">
-                                <div className="input-box">
-                                    <span className="details">Waste Type</span>
+                            <div className="user-details-b">
+                                <div className="input-box-b">
+                                    <span className="details-b">Waste Type</span>
                                     <input type="text" placeholder="Enter type" required></input>
                                 </div>
-                                <div className="input-box">
-                                    <span className="details">Waste Item</span>
+                                <div className="input-box-b">
+                                    <span className="details-b">Waste Item</span>
                                     <input type="text" placeholder="Enter item" required></input>
                                 </div>
-                                <div className="input-box">
-                                    <span className="details">Offer Value</span>
+                                <div className="input-box-b">
+                                    <span className="details-b">Offer Value</span>
                                     <input type="text" placeholder="Enter value" required></input>
                                 </div>
-                                <div className="input-box">
-                                    <span className="details">Expiry Date</span>
+                                <div className="input-box-b">
+                                    <span className="details-b">Expiry Date</span>
                                     <input type="date" placeholder="Enter date" required></input>
                                 </div>
                             </div>
-                            <div className="button">
+                            <div className="button-b">
                                 <input type="submit" value="Edit Offer"></input>
                             </div>
                         </form>

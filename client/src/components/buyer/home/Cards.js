@@ -4,11 +4,11 @@ import CardItem from './CardItem';
 
 function Cards() {
     return (
-        <div className='cards'>
+        <div className='cards-b'>
             <h1>Check out these Services!</h1>
-            <div className='cards__container'>
-                <div className='cards__wrapper'>
-                    <ul className='cards__items'>
+            <div className='cards__container-b'>
+                <div className='cards__wrapper-b'>
+                    <ul className='cards__items-b'>
                         <CardItem
                             src="images/waste_items.jpg"
                             text='Search for Waste'
@@ -20,7 +20,7 @@ function Cards() {
                             path='/viewcompanydetails'
                         />
                     </ul>
-                    <ul className='cards__items'>
+                    <ul className='cards__items-b'>
                         <CardItem
                             src='images/view_post.jpg'
                             text='View Posts'

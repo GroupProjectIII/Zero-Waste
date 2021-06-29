@@ -42,7 +42,7 @@ function Navbar() {
                     </li>
                     <li>
                         <Link to='/sign-up' className='nav-links-mobile-b' onClick={closeMobileMenu}>
-                            Sign Up
+                            Sign Out <i className="fas fa-sign-out-alt"></i>
                         </Link>
                     </li>
                 </ul>

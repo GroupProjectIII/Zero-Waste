@@ -1,4 +1,4 @@
-.hero-container {
+.hero-container-b {
     background: url('./images/buyer.jpg')  center center/cover no-repeat;
     height: 100vh;
     width: 100%;
@@ -10,13 +10,13 @@
     object-fit: contain;
 }
 
-.hero-container > h1 {
+.hero-container-b > h1 {
     color: #fff;
     font-size: 100px;
     margin-top: -100px;
 }
 
-.hero-container > p {
+.hero-container-b > p {
     margin-top: 8px;
     color: #fff;
     font-size: 32px;
@@ -24,11 +24,11 @@
     'Lucida Sans', Arial, sans-serif;
 }
 
-.hero-btns {
+.hero-btn-b {
     margin-top: 32px;
 }
 
-.hero-btns .btn {
+.hero-btn-b .btn-b {
     margin: 6px;
 }
 
@@ -37,28 +37,31 @@
 }
 
 @media screen and (max-width: 960px) {
-    .hero-container > h1 {
+    .hero-container-b > h1 {
         font-size: 70px;
         margin-top: -150px;
+    }
+    .hero-btn-b {
+        width: 100%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .hero-container > h1 {
+    .hero-container-b > h1 {
         font-size: 50px;
         margin-top: -100px;
     }
 
-    .hero-container > p {
+    .hero-container-b > p {
         font-size: 30px;
     }
 
-    .btn-mobile {
+    .btn-b-mobile {
         display: block;
         text-decoration: none;
     }
 
-    .btn {
+    .btn-b {
         width: 100%;
     }
 }
