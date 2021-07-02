@@ -14,6 +14,7 @@ import EditCompanyPendingOffers from "./components/buyer/company_posts/EditCompa
 import ViewCompanyDetails from "./components/buyer/company_posts/ViewCompanyDetails";
 import CompanyNotify from "./components/buyer/company_posts/CompanyNotify";
 import PostsLocation from "./components/buyer/posts/PostsLocation";
+import ViewPostDetails from "./components/buyer/posts/ViewPostDetails";
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                     <Route path='/viewcompanydetails' component={ViewCompanyDetails} />
                     <Route path='/notifyaboutwaste' component={CompanyNotify} />
                     <Route path='/location' component={PostsLocation} />
+                    <Route path='/viewpostdetails' component={ViewPostDetails} />
                 </Switch>
             </Router>
         </>
