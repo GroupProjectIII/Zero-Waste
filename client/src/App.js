@@ -1,5 +1,6 @@
 import React from 'react';
-import Home from './components/buyer/home/Home';
+import './App.css'
+import BuyerHome from './components/buyer/home/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Services from './components/buyer/posts/Services';
 import OfferForm from './components/buyer/posts/OfferForm';
@@ -15,6 +16,16 @@ import ViewCompanyDetails from "./components/buyer/company_posts/ViewCompanyDeta
 import CompanyNotify from "./components/buyer/company_posts/CompanyNotify";
 import PostsLocation from "./components/buyer/posts/PostsLocation";
 import ViewPostDetails from "./components/buyer/posts/ViewPostDetails";
+import Home from "./components/home/Home";
+import LoginScreen from "./components/home/screens/LoginScreen";
+import RegisterScreen from "./components/home/screens/RegisterScreen";
+import ForgotPasswordScreen from "./components/home/screens/ForgotPasswordScreen";
+import ResetPasswordScreen from "./components/home/screens/ResetPasswordScreen";
+import Admin from "./components/home/screens/Admin";
+import Seller from "./components/home/screens/Seller";
+import Company from "./components/home/screens/Company";
+import PrivateScreen from "./components/home/screens/PrivateScreen";
+
 
 function App() {
     return (
@@ -22,6 +33,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route path='/' exact component={Home} />
+                    <Route path='/buyerhome' exact component={BuyerHome} />
                     <Route path='/posts' component={Services} />
                     <Route path='/offerforms' component={OfferForm} />
                     <Route path='/acceptedoffers' component={AOffers} />
@@ -36,6 +48,14 @@ function App() {
                     <Route path='/notifyaboutwaste' component={CompanyNotify} />
                     <Route path='/location' component={PostsLocation} />
                     <Route path='/viewpostdetails' component={ViewPostDetails} />
+                    <Route path="/login" component={LoginScreen} />
+                    <Route path="/register" component={RegisterScreen} />
+                    <Route path="/admin" component={Admin} />
+                    <Route path="/company" component={Company} />
+                    <Route path="/seller" component={Seller} />
+                    <Route path="/forgotpassword" component={ForgotPasswordScreen}/>
+                    <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}
+                    />
                 </Switch>
             </Router>
         </>

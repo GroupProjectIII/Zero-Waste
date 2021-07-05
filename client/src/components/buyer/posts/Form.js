@@ -10,6 +10,8 @@ function Forms() {
                 <div className="container-b">
                         <div className="content-b">
                             <SimpleMap/>
+                            <h3>Image of Waste Item</h3>
+                            <img src="images/polythene.jpg" alt=""></img>
                             <div className="title-b">Make Offer</div>
                             <form action="#">
                                 <div className="user-details-b">
