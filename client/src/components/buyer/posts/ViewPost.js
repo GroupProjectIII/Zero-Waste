@@ -21,22 +21,18 @@ function ViewPost() {
                             <tr>
                                 <td >Post ID: </td>
                                 <td>1</td>
-                                <td colspan="2"></td>
                             </tr>
                             <tr>
                                 <td >Seller Name: </td>
                                 <td>ABC</td>
-                                <td colspan="2"></td>
                             </tr>
                             <tr>
                                 <td>Seller Address: </td>
                                 <td>CDE</td>
-                                <td colspan="2"></td>
                             </tr>
                             <tr>
                                 <td>Mobile No: </td>
                                 <td>123456789</td>
-                                <td colspan="2"></td>
                             </tr>
                         </table>
                     </div>

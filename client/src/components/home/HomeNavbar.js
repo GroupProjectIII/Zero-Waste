@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button } from './NavButton';
+import { Button } from '../buyer/home/NavButton';
 import {Link, useHistory} from 'react-router-dom';
-import './Navbar.css';
+import '../buyer/home/Navbar.css';
 
-function Navbar() {
+function HomeNavbar() {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
@@ -29,26 +29,21 @@ function Navbar() {
                 <ul className={click ? 'nav-menu-b active' : 'nav-menu-b'}>
                     <li className='nav-item-b'>
                         <Link to='/' className='nav-links-b' onClick={closeMobileMenu}>
-                            Home
+                            Home <i className="fa fa-home" aria-hidden="true"></i>
                         </Link>
                     </li>
                     <li className='nav-item-b'>
-                        <Link to='/companyposts' className='nav-links-b' onClick={closeMobileMenu}>
-                            Company Posts
+                        <Link to='/register' className='nav-links-b' onClick={closeMobileMenu}>
+                            Sign Up
                         </Link>
                     </li>
                     <li className='nav-item-b'>
-                        <Link to='/posts' className='nav-links-b' onClick={closeMobileMenu}>
-                            Seller Posts
-                        </Link>
-                    </li>
-                    <li className='nav-item-b'>
-                        <Link to='/contact-us' className='nav-links-b' onClick={closeMobileMenu}>
-                            Account
+                        <Link to='/login' className='nav-links-b' onClick={closeMobileMenu}>
+                            Sign In
                         </Link>
                     </li>
                     <li>
-                        <Link to='/' className='nav-links-mobile-b'  onClick={logoutHandler}>
+                        <Link to='/' className='nav-links-mobile-b' onClick={logoutHandler}>
                             Sign Out <i className="fas fa-sign-out-alt"></i>
                         </Link>
                     </li>
@@ -59,4 +54,4 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default HomeNavbar;
