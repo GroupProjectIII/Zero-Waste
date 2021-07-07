@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from '../buyer/home/NavButton';
 import {Link, useHistory} from 'react-router-dom';
 import '../buyer/home/Navbar.css';
 
@@ -28,27 +27,16 @@ function HomeNavbar() {
                 </div>
                 <ul className={click ? 'nav-menu-b active' : 'nav-menu-b'}>
                     <li className='nav-item-b'>
-                        <Link to='/' className='nav-links-b' onClick={closeMobileMenu}>
-                            Home <i className="fa fa-home" aria-hidden="true"></i>
-                        </Link>
-                    </li>
-                    <li className='nav-item-b'>
                         <Link to='/register' className='nav-links-b' onClick={closeMobileMenu}>
-                            Sign Up
+                            <i className="fas fa-user-plus"></i> SIGN UP
                         </Link>
                     </li>
                     <li className='nav-item-b'>
                         <Link to='/login' className='nav-links-b' onClick={closeMobileMenu}>
-                            Sign In
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to='/' className='nav-links-mobile-b' onClick={logoutHandler}>
-                            Sign Out <i className="fas fa-sign-out-alt"></i>
+                            <i className="fas fa-sign-in-alt"></i> SIGN IN
                         </Link>
                     </li>
                 </ul>
-                <Button />
             </nav>
         </>
     );

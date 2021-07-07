@@ -6,25 +6,25 @@ import * as MdIcons from 'react-icons/md';
 export const CompanySidebarData = [
     {
         title: 'View Company Posts',
-        path: '/companyposts',
+        path: '/buyer/companyposts',
         icon: <FaIcons.FaAdversal />,
         cName: 'nav-text'
     },
     {
         title: 'Accepted Offers',
-        path: '/companyacceptedoffers',
+        path: '/buyer/companyacceptedoffers',
         icon: <MdIcons.MdLocalOffer />,
         cName: 'nav-text'
     },
     {
         title: 'Pending Offers',
-        path: '/companypendingoffers',
+        path: '/buyer/companypendingoffers',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },
     {
         title: 'Search Company',
-        path: '/viewcompanydetails',
+        path: '/buyer/viewcompanydetails',
         icon: <IoIcons.IoIosSearch />,
         cName: 'nav-text'
     },

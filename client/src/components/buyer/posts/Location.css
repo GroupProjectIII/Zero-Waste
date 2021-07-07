@@ -12,7 +12,20 @@
 }
 .location-b {
     padding: 4rem;
-    background: #CFF4D2;
+    background: linear-gradient(-45deg, #ccffcc, #b3ffb3, #ccffff, #d9ffb3);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 .location__container-b {
     display: flex;

@@ -12,14 +12,6 @@ function EditOfferForms() {
                         <form action="#">
                             <div className="user-details-b">
                                 <div className="input-box-b">
-                                    <span className="details-b">Waste Type</span>
-                                    <input type="text" placeholder="Enter type" required></input>
-                                </div>
-                                <div className="input-box-b">
-                                    <span className="details-b">Waste Item</span>
-                                    <input type="text" placeholder="Enter item" required></input>
-                                </div>
-                                <div className="input-box-b">
                                     <span className="details-b">Offer Value</span>
                                     <input type="text" placeholder="Enter value" required></input>
                                 </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import './Form.css';
-import SimpleMap from "./Location";
 
 function Forms() {
 
@@ -9,20 +8,11 @@ function Forms() {
             <div className="forms__container-b" >
                 <div className="container-b">
                         <div className="content-b">
-                            <SimpleMap/>
                             <h3>Image of Waste Item</h3>
-                            <img src="images/polythene.jpg" alt=""></img>
+                            <img src="../images/polythene.jpg" alt=""></img>
                             <div className="title-b">Make Offer</div>
                             <form action="#">
                                 <div className="user-details-b">
-                                    <div className="input-box-b">
-                                        <span className="details-b">Waste Type</span>
-                                        <input type="text" placeholder="Enter type" required></input>
-                                    </div>
-                                    <div className="input-box-b">
-                                        <span className="details-b">Waste Item</span>
-                                        <input type="text" placeholder="Enter item" required></input>
-                                    </div>
                                     <div className="input-box-b">
                                         <span className="details-b">Offer Value</span>
                                         <input type="text" placeholder="Enter value" required></input>

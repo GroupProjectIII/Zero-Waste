@@ -7,7 +7,7 @@ function ViewCompany() {
     const history = useHistory();
 
     const handleRoute = () =>{
-        history.push("/notifyaboutwaste");
+        history.push("/buyer/notifyaboutwaste");
     }
 
     return(
@@ -24,6 +24,7 @@ function ViewCompany() {
                 <tr>
                     <th>Company ID</th>
                     <th>Name</th>
+                    <th>Waste Type</th>
                     <th>Phone</th>
                     <th>Action</th>
                 </tr>
@@ -32,6 +33,7 @@ function ViewCompany() {
                 <tr>
                     <td data-label="Company ID">04</td>
                     <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Waste Type">Plastic</td>
                     <td data-label="Phone">0112333337</td>
                     <td data-label="Action">
                           <span className="action_btn-b">
@@ -43,6 +45,7 @@ function ViewCompany() {
                 <tr>
                     <td data-label="Company ID">04</td>
                     <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Waste Type">Plastic</td>
                     <td data-label="Phone">0112333337</td>
                     <td data-label="Action">
                           <span className="action_btn-b">
@@ -54,6 +57,7 @@ function ViewCompany() {
                 <tr>
                     <td data-label="Company ID">04</td>
                     <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Waste Type">Plastic</td>
                     <td data-label="Phone">0112333337</td>
                     <td data-label="Action">
                           <span className="action_btn-b">
@@ -65,6 +69,7 @@ function ViewCompany() {
                 <tr>
                     <td data-label="Company ID">04</td>
                     <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Waste Type">Plastic</td>
                     <td data-label="Phone">0112333337</td>
                     <td data-label="Action">
                           <span className="action_btn-b">
@@ -76,6 +81,7 @@ function ViewCompany() {
                 <tr>
                     <td data-label="Company ID">04</td>
                     <td data-label="Name">JKL Company LTD</td>
+                    <td data-label="Waste Type">Plastic</td>
                     <td data-label="Phone">0112333337</td>
                     <td data-label="Action">
                           <span className="action_btn-b">

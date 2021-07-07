@@ -36,7 +36,7 @@ const LoginScreen = ({ history }) => {
       localStorage.setItem("usertype", data.usertype);
 
       if(data.usertype==="buyer"){
-        history.push("/buyerhome");
+        history.push("/buyer/home");
       }else if(data.usertype==="seller"){
         history.push("/seller");
       }

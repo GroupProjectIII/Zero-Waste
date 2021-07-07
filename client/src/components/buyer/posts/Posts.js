@@ -7,7 +7,7 @@ function Posts() {
     const history = useHistory();
 
     const handleRoute = () =>{
-        history.push("/viewpostdetails");
+        history.push("/buyer/viewpostdetails");
     }
 
     return(
@@ -70,7 +70,7 @@ function Posts() {
                 </div>
                 <main className="grid-b">
                     <article>
-                        <img src="images/polythene.jpg" alt=""></img>
+                        <img src="../images/polythene.jpg" alt=""></img>
                             <div className="text-b">
                                 <h3>Polythene - පොලිතින්</h3>
                                 <p>Post ID: 1</p>
@@ -81,7 +81,7 @@ function Posts() {
                     </article>
 
                     <article>
-                        <img src="images/plastic.jpg" alt=""></img>
+                        <img src="../images/plastic.jpg" alt=""></img>
                             <div className="text-b">
                                 <h3>Plastic - ප්ලාස්ටික්</h3>
                                 <p>Post ID: 2</p>
@@ -92,7 +92,7 @@ function Posts() {
                     </article>
 
                     <article>
-                        <img src="images/paper.jpg" alt=""></img>
+                        <img src="../images/paper.jpg" alt=""></img>
                             <div className="text-b">
                                 <h3>Paper - කඩදාසි</h3>
                                 <p>Post ID: 3</p>
@@ -103,7 +103,7 @@ function Posts() {
                     </article>
 
                     <article>
-                        <img src="images/paper.jpg" alt=""></img>
+                        <img src="../images/paper.jpg" alt=""></img>
                         <div className="text-b">
                             <h3>Paper - කඩදාසි</h3>
                             <p>Post ID: 4</p>
@@ -114,7 +114,7 @@ function Posts() {
                     </article>
 
                     <article>
-                        <img src="images/plastic.jpg" alt=""></img>
+                        <img src="../images/plastic.jpg" alt=""></img>
                         <div className="text-b">
                             <h3>Plastic - ප්ලාස්ටික්</h3>
                             <p>Post ID: 5</p>
@@ -125,7 +125,7 @@ function Posts() {
                     </article>
 
                     <article>
-                        <img src="images/polythene.jpg" alt=""></img>
+                        <img src="../images/polythene.jpg" alt=""></img>
                         <div className="text-b">
                             <h3>Polythene - පොලිතින්</h3>
                             <p>Post ID: 6</p>
