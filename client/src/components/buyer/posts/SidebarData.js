@@ -6,19 +6,19 @@ import * as MdIcons from 'react-icons/md';
 export const SidebarData = [
     {
         title: 'View Posts',
-        path: '/posts',
+        path: '/buyer/posts',
         icon: <FaIcons.FaAdversal />,
         cName: 'nav-text'
     },
     {
         title: 'Accepted Offers',
-        path: '/acceptedoffers',
+        path: '/buyer/acceptedoffers',
         icon: <MdIcons.MdLocalOffer />,
         cName: 'nav-text'
     },
     {
         title: 'Pending Offers',
-        path: '/pendingoffers',
+        path: '/buyer/pendingoffers',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },

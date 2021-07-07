@@ -24,7 +24,7 @@ import ResetPasswordScreen from "./components/home/screens/ResetPasswordScreen";
 import Admin from "./components/home/screens/Admin";
 import Seller from "./components/home/screens/Seller";
 import Company from "./components/home/screens/Company";
-import PrivateScreen from "./components/home/screens/PrivateScreen";
+
 
 
 function App() {
@@ -33,21 +33,21 @@ function App() {
             <Router>
                 <Switch>
                     <Route path='/' exact component={Home} />
-                    <Route path='/buyerhome' exact component={BuyerHome} />
-                    <Route path='/posts' component={Services} />
-                    <Route path='/offerforms' component={OfferForm} />
-                    <Route path='/acceptedoffers' component={AOffers} />
-                    <Route path='/pendingoffers' component={POffers} />
-                    <Route path='/editpendingoffers' component={EditPendingOffers} />
-                    <Route path='/companyposts' component={CompanyPosts} />
-                    <Route path='/companyofferforms' component={CompanyOfferForm} />
-                    <Route path='/companyacceptedoffers' component={CompanyAOffers} />
-                    <Route path='/companypendingoffers' component={CompanyPOffers} />
-                    <Route path='/editcompanypendingoffers' component={EditCompanyPendingOffers} />
-                    <Route path='/viewcompanydetails' component={ViewCompanyDetails} />
-                    <Route path='/notifyaboutwaste' component={CompanyNotify} />
-                    <Route path='/location' component={PostsLocation} />
-                    <Route path='/viewpostdetails' component={ViewPostDetails} />
+                    <Route path='/buyer/home' exact component={BuyerHome} />
+                    <Route path='/buyer/posts' component={Services} />
+                    <Route path='/buyer/offerforms' component={OfferForm} />
+                    <Route path='/buyer/acceptedoffers' component={AOffers} />
+                    <Route path='/buyer/pendingoffers' component={POffers} />
+                    <Route path='/buyer/editpendingoffers' component={EditPendingOffers} />
+                    <Route path='/buyer/companyposts' component={CompanyPosts} />
+                    <Route path='/buyer/companyofferforms' component={CompanyOfferForm} />
+                    <Route path='/buyer/companyacceptedoffers' component={CompanyAOffers} />
+                    <Route path='/buyer/companypendingoffers' component={CompanyPOffers} />
+                    <Route path='/buyer/editcompanypendingoffers' component={EditCompanyPendingOffers} />
+                    <Route path='/buyer/viewcompanydetails' component={ViewCompanyDetails} />
+                    <Route path='/buyer/notifyaboutwaste' component={CompanyNotify} />
+                    <Route path='/buyer/location' component={PostsLocation} />
+                    <Route path='/buyer/viewpostdetails' component={ViewPostDetails} />
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/admin" component={Admin} />

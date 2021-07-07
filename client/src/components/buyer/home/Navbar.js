@@ -19,7 +19,7 @@ function Navbar() {
     return (
         <>
             <nav className='navbar-b'>
-                <Link to='/' className='navbar-logo-b' onClick={closeMobileMenu}>
+                <Link to='/buyer/home' className='navbar-logo-b' onClick={closeMobileMenu}>
                     ZERO-WASTE
                     <i class='fab fa-firstdraft' />
                 </Link>
@@ -28,17 +28,17 @@ function Navbar() {
                 </div>
                 <ul className={click ? 'nav-menu-b active' : 'nav-menu-b'}>
                     <li className='nav-item-b'>
-                        <Link to='/' className='nav-links-b' onClick={closeMobileMenu}>
+                        <Link to='/buyer/home' className='nav-links-b' onClick={closeMobileMenu}>
                             Home
                         </Link>
                     </li>
                     <li className='nav-item-b'>
-                        <Link to='/companyposts' className='nav-links-b' onClick={closeMobileMenu}>
+                        <Link to='/buyer/companyposts' className='nav-links-b' onClick={closeMobileMenu}>
                             Company Posts
                         </Link>
                     </li>
                     <li className='nav-item-b'>
-                        <Link to='/posts' className='nav-links-b' onClick={closeMobileMenu}>
+                        <Link to='/buyer/posts' className='nav-links-b' onClick={closeMobileMenu}>
                             Seller Posts
                         </Link>
                     </li>

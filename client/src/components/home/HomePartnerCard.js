@@ -17,13 +17,13 @@ function HomePartnerCards() {
                         />
                         <HomePartnerCardItems
                             src='images/homebuyer.jpg'
-                            text='Buyers : Businessmen who are looking for buy waste items'
+                            text='Waste Collectors : Businessmen who are looking for buy waste items'
                             label='Adventure'
                             path='/acceptedoffers'
                         />
                         <HomePartnerCardItems
                             src='images/homecompany.jpg'
-                            text='Company : Large organizations who are looking for buying large quantity of a waste item'
+                            text='Recycle Company : Large organizations who are looking for buying large quantity of a waste item'
                             label='Adrenaline'
                             path='/pendingoffers'
                         />

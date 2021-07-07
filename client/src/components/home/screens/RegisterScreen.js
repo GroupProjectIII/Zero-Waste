@@ -48,7 +48,7 @@ const RegisterScreen = ({ history }) => {
       localStorage.setItem("usertype", data.usertype);
       console.log(data.usertype);
       if(data.usertype==="buyer"){
-        history.push("/buyerhome");
+        history.push("/buyer/home");
       }else if(data.usertype==="seller"){
         history.push("/seller");
       }

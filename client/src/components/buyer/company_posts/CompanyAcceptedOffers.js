@@ -16,7 +16,7 @@ function CompanyAcceptedOffers() {
                     <thead>
                     <tr>
                         <th>Offer ID</th>
-                        <th>Image</th>
+                        <th>Company Name</th>
                         <th>Waste Type</th>
                         <th>Waste Item</th>
                         <th>Quantity</th>
@@ -26,7 +26,7 @@ function CompanyAcceptedOffers() {
                     <tbody>
                     <tr>
                         <td data-label="Offer ID">01</td>
-                        <td data-label="Image"><img src="images/polythene.jpg" alt=""></img></td>
+                        <td data-label="Company Name">ABC</td>
                         <td data-label="Waste Type">Plastic</td>
                         <td data-label="Waste Item">Bucket</td>
                         <td data-label="Quantity">2 kg</td>
@@ -35,7 +35,7 @@ function CompanyAcceptedOffers() {
 
                     <tr>
                         <td data-label="Offer ID">02</td>
-                        <td data-label="Image"><img src="images/polythene.jpg" alt=""></img></td>
+                        <td data-label="Company Name">ABC</td>
                         <td data-label="Waste Type">Plastic</td>
                         <td data-label="Waste Item">Bucket</td>
                         <td data-label="Quantity">2 kg</td>
@@ -44,7 +44,7 @@ function CompanyAcceptedOffers() {
 
                     <tr>
                         <td data-label="Offer ID">03</td>
-                        <td data-label="Image"><img src="images/paper.jpg" alt=""></img></td>
+                        <td data-label="Company Name">ABC</td>
                         <td data-label="Waste Type">Paper</td>
                         <td data-label="Waste Item">News Papers</td>
                         <td data-label="Quantity">5 kg</td>
@@ -53,7 +53,7 @@ function CompanyAcceptedOffers() {
 
                     <tr>
                         <td data-label="Offer ID">04</td>
-                        <td data-label="Image"><img src="images/polythene.jpg" alt=""></img></td>
+                        <td data-label="Company Name">ABC</td>
                         <td data-label="Waste Type">Polythene</td>
                         <td data-label="Waste Item">Bags</td>
                         <td data-label="Quantity">3 kg</td>
@@ -62,7 +62,7 @@ function CompanyAcceptedOffers() {
 
                     <tr>
                         <td data-label="Offer ID">05</td>
-                        <td data-label="Image"><img src="images/polythene.jpg" alt=""></img></td>
+                        <td data-label="Company Name">ABC</td>
                         <td data-label="Waste Type">Polythene</td>
                         <td data-label="Waste Item">Bags</td>
                         <td data-label="Quantity">3 kg</td>
