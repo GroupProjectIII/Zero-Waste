@@ -21,6 +21,10 @@ function Forms() {
                                         <span className="details-b">Expiry Date</span>
                                         <input type="date" placeholder="Enter date" required></input>
                                     </div>
+                                    <div className="input-box-b">
+                                        <span className="details-b">Quantity</span>
+                                        <input type="text" placeholder="Enter quantity" required></input>
+                                    </div>
                                 </div>
                                 <div className="button-b">
                                     <input type="submit" value="Send Offer"></input>

@@ -1,6 +1,5 @@
 import React from "react";
-import '../posts/AcceptedOffers.css';
-import '../posts/ViewPost.module.css';
+import './Posts.css';
 import {useHistory} from "react-router-dom";
 import SimpleMap from "./Location";
 
@@ -13,114 +12,58 @@ function ViewPost() {
     }
 
     return(
-        <div className="tables-b">
-            <div className="tables__container-b">
+        <div className="posts-b">
+            <div className="posts__container-b">
                 <h1>Post Details</h1>
-                <div className="tablebox__container-b">
-                    <SimpleMap/>
-                <div className="content-posts">
-                    <div className="container-table">
-                        <table className="data-display">
-                            <tr>
-                                <td >Post ID: </td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td >Seller Name: </td>
-                                <td>ABC</td>
-                            </tr>
-                            <tr>
-                                <td>Seller Address: </td>
-                                <td>CDE</td>
-                            </tr>
-                            <tr>
-                                <td>Mobile No: </td>
-                                <td>123456789</td>
-                            </tr>
-                        </table>
+                <div className="seller-container-b">
+                    <ol className="list">
+                        <li ><span>Seller Name: Frodo</span></li>
+                        <li ><span>Seller Address: Kinigama, Gampaha</span></li>
+                        <li ><span>Mobile No: 0711409911</span></li>
+                    </ol>
+                </div>
+                <main className="grid-b">
+                    <article>
+                        <img src="../images/polythene.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Polythene - පොලිතින්</h3>
+                            <p>Post ID: 1</p>
+                            <p>Waste Item: Polythene Roll</p>
+                            <p>Quantity: 1 kg</p>
+                            <button onClick={handleRoute}>Make Offer <i className="fas fa-angle-double-right"></i></button>
+                        </div>
+                    </article>
+
+                    <article>
+                        <img src="../images/plastic.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Plastic - ප්ලාස්ටික්</h3>
+                            <p>Post ID: 1</p>
+                            <p>Waste Item: Bottles</p>
+                            <p>Quantity: 2 kg</p>
+                            <button onClick={handleRoute}>Make Offer <i className="fas fa-angle-double-right"></i></button>
+                        </div>
+                    </article>
+
+                    <article>
+                        <img src="../images/paper.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Paper - කඩදාසි</h3>
+                            <p>Post ID: 1</p>
+                            <p>Waste Item: Papers</p>
+                            <p>Quantity: 1 kg</p>
+                            <button onClick={handleRoute}>Make Offer <i className="fas fa-angle-double-right"></i></button>
+                        </div>
+                    </article>
+                </main>
+                    <div className="all-items-button-b">
+                        <p>Do you want to make an offer for all these items at once?</p>
+                        <button onClick={handleRoute}>Make Offer for All Items <i className="fas fa-angle-double-right"></i></button>
                     </div>
-                </div>
-
-                <table className="table-b">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Waste Type</th>
-                        <th>Waste Item</th>
-                        <th>Quantity</th>
-                        <th>Image</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td data-label="No">04</td>
-                        <td data-label="Waste Type">Plastic</td>
-                        <td data-label="Waste Item">Bottle</td>
-                        <td data-label="Quantity">1 kg</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Action">
-                          <span className="action_btn-b">
-                            <a href="#" onClick={handleRoute}>Make Offer</a>
-                          </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td data-label="No">04</td>
-                        <td data-label="Waste Type">Plastic</td>
-                        <td data-label="Waste Item">Bottle</td>
-                        <td data-label="Quantity">1 kg</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Action">
-                          <span className="action_btn-b">
-                            <a href="#" onClick={handleRoute}>Make Offer</a>
-                          </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td data-label="No">04</td>
-                        <td data-label="Waste Type">Paper</td>
-                        <td data-label="Waste Item">Book</td>
-                        <td data-label="Quantity">1 kg</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Action">
-                          <span className="action_btn-b">
-                            <a href="#" onClick={handleRoute}>Make Offer</a>
-                          </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td data-label="No">04</td>
-                        <td data-label="Waste Type">Paper</td>
-                        <td data-label="Waste Item">Book</td>
-                        <td data-label="Quantity">1 kg</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Action">
-                          <span className="action_btn-b">
-                            <a href="#" onClick={handleRoute}>Make Offer</a>
-                          </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td data-label="No">04</td>
-                        <td data-label="Waste Type">Polythene</td>
-                        <td data-label="Waste Item">Bag</td>
-                        <td data-label="Quantity">1 kg</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Action">
-                          <span className="action_btn-b">
-                            <a href="#" onClick={handleRoute}>Make Offer</a>
-                          </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                </div>
             </div>
+                <div className="seller-location-b">
+                    <SimpleMap/>
+                </div>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import './AcceptedOffers.css';
+import './Posts.css';
 import {useHistory} from "react-router-dom";
 
 function PendingOffers() {
@@ -11,103 +11,105 @@ function PendingOffers() {
     }
 
     return(
-        <div className="tables-b">
-            <div className="tables__container-b">
+        <div className="posts-b">
+            <div className="posts__container-b">
                 <h1>Pending Offers</h1>
                 <div className="search_box-b">
                     <input type="text" placeholder="What are you looking for?"></input>
                     <i className="fas fa-search"></i>
                 </div>
+                <main className="grid-b">
+                    <article>
+                        <img src="../images/polythene.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Polythene - පොලිතින්</h3>
+                            <p>Post ID: 111</p>
+                            <p>Location: Buthpitiya</p>
+                            <p>Quantity: 1 kg</p>
+                            <p>Unit Price: Rs. 20</p>
+                            <button onClick={handleRoute}>Edit Offer <i className="fas fa-edit"></i></button>
+                            <div className="delete-button-b">
+                                <button >Delete Offer <i className="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </article>
 
-                <table className="table-b">
-                    <thead>
-                    <tr>
-                        <th>Offer ID</th>
-                        <th>Image</th>
-                        <th>Waste Type</th>
-                        <th>Waste Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td data-label="Offer ID">01</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Waste Type">Plastic</td>
-                        <td data-label="Waste Item">Bucket</td>
-                        <td data-label="Quantity">2 kg</td>
-                        <td data-label="Price">Rs 20</td>
-                        <td data-label="Location">
-                              <span className="action_btn-b">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                        </td>
-                    </tr>
+                    <article>
+                        <img src="../images/plastic.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Plastic - ප්ලාස්ටික්</h3>
+                            <p>Post ID: 221</p>
+                            <p>Location: Miriswatta</p>
+                            <p>Quantity: 2 kg</p>
+                            <p>Unit Price: Rs. 20</p>
+                            <button onClick={handleRoute}>Edit Offer <i className="fas fa-edit"></i></button>
+                            <div className="delete-button-b">
+                                <button >Delete Offer <i className="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </article>
 
-                    <tr>
-                        <td data-label="Offer ID">02</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Waste Type">Plastic</td>
-                        <td data-label="Waste Item">Bucket</td>
-                        <td data-label="Quantity">2 kg</td>
-                        <td data-label="Price">Rs 20</td>
-                        <td data-label="Location">
-                              <span className="action_btn-b">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                        </td>
-                    </tr>
+                    <article>
+                        <img src="../images/paper.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Paper - කඩදාසි</h3>
+                            <p>Post ID: 332</p>
+                            <p>Location: Gampaha</p>
+                            <p>Quantity: 1 kg</p>
+                            <p>Unit Price: Rs. 10</p>
+                            <button onClick={handleRoute}>Edit Offer <i className="fas fa-edit"></i></button>
+                            <div className="delete-button-b">
+                                <button >Delete Offer <i className="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </article>
 
-                    <tr>
-                        <td data-label="Offer ID">03</td>
-                        <td data-label="Image"><img src="../images/paper.jpg" alt=""></img></td>
-                        <td data-label="Waste Type">Paper</td>
-                        <td data-label="Waste Item">News Papers</td>
-                        <td data-label="Quantity">5 kg</td>
-                        <td data-label="Price">Rs 25</td>
-                        <td data-label="Location">
-                              <span className="action_btn-b">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                        </td>
-                    </tr>
+                    <article>
+                        <img src="../images/paper.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Paper - කඩදාසි</h3>
+                            <p>Post ID: 124</p>
+                            <p>Location: Yagoda</p>
+                            <p>Quantity: 1 kg</p>
+                            <p>Unit Price: Rs. 20</p>
+                            <button onClick={handleRoute}>Edit Offer <i className="fas fa-edit"></i></button>
+                            <div className="delete-button-b">
+                                <button >Delete Offer <i className="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </article>
 
-                    <tr>
-                        <td data-label="Offer ID">04</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Waste Type">Polythene</td>
-                        <td data-label="Waste Item">Bags</td>
-                        <td data-label="Quantity">3 kg</td>
-                        <td data-label="Price">Rs 20</td>
-                        <td data-label="Location">
-                              <span className="action_btn-b">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                        </td>
-                    </tr>
+                    <article>
+                        <img src="../images/plastic.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Plastic - ප්ලාස්ටික්</h3>
+                            <p>Post ID: 155</p>
+                            <p>Location: Yakkala</p>
+                            <p>Quantity: 5 kg</p>
+                            <p>Unit Price: Rs. 50</p>
+                            <button onClick={handleRoute}>Edit Offer <i className="fas fa-edit"></i></button>
+                            <div className="delete-button-b">
+                                <button >Delete Offer <i className="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </article>
 
-                    <tr>
-                        <td data-label="Offer ID">05</td>
-                        <td data-label="Image"><img src="../images/polythene.jpg" alt=""></img></td>
-                        <td data-label="Waste Type">Polythene</td>
-                        <td data-label="Waste Item">Bags</td>
-                        <td data-label="Quantity">3 kg</td>
-                        <td data-label="Price">Rs 20</td>
-                        <td data-label="Location">
-                              <span className="action_btn-b">
-                                <a href="#" onClick={handleRoute}>Edit</a>
-                                <a href="#">Remove</a>
-                              </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <article>
+                        <img src="../images/polythene.jpg" alt=""></img>
+                        <div className="text-b">
+                            <h3>Polythene - පොලිතින්</h3>
+                            <p>Post ID: 162</p>
+                            <p>Location: Kadawatha</p>
+                            <p>Quantity: 4 kg</p>
+                            <p>Unit Price: Rs. 30</p>
+                            <button onClick={handleRoute}>Edit Offer <i className="fas fa-edit"></i></button>
+                            <div className="delete-button-b">
+                                <button >Delete Offer <i className="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                </main>
             </div>
         </div>
     );
