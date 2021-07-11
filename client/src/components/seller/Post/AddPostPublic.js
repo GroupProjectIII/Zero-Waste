@@ -6,8 +6,14 @@ import Navbar from "../Nav/Navbar";
 import Footer from "../Nav/Footer";
 
 export default function PostHome() {
-
+    
     const history = useHistory();
+
+    if((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype")==="seller")){
+        history.push("/");
+    }
+
+    
 
     const directPost = () => {
         history.push("/seller/findbuyers");

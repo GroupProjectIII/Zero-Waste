@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router';
 import React, { useState } from 'react';
 import { Button } from './NavButton';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,14 @@ function Navbar() {
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
+
+    const history = useHistory();
+
+    const logoutHandler = () =>{
+        localStorage.removeItem("authToken");
+        history.push("/");
+    };
+
 
     return (
         <>
@@ -46,7 +55,7 @@ function Navbar() {
                         </Link>
                     </li>
                     <li>
-                        <Link to='/seller/sign-up' className='nav-links-mobile-b' onClick={closeMobileMenu}>
+                        <Link to='/' className='nav-links-mobile-b' onClick={logoutHandler}>
                             Sign Out <i className="fas fa-sign-out-alt"></i>
                         </Link>
                     </li>
