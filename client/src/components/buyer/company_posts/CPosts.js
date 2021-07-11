@@ -73,8 +73,8 @@ function CPosts() {
                 <main className="grid-b">
                     <article>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 1</p>
+                            <h3>Post ID: 1</h3>
+                            <p>Waste Type: Polythene - පොලිතින්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Buthpitiya</p>
                             <p>Quantity: 100 kg</p>
@@ -84,8 +84,8 @@ function CPosts() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 2</p>
+                            <h3>Post ID: 2</h3>
+                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Miriswatta</p>
                             <p>Quantity: 20 kg</p>
@@ -95,8 +95,8 @@ function CPosts() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 3</p>
+                            <h3>Post ID: 3</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Gampaha</p>
                             <p>Quantity: 10 kg</p>
@@ -106,8 +106,8 @@ function CPosts() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 4</p>
+                            <h3>Post ID: 4</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Yagoda</p>
                             <p>Quantity: 100 kg</p>
@@ -117,8 +117,8 @@ function CPosts() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 5</p>
+                            <h3>Post ID: 20</h3>
+                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Yakkala</p>
                             <p>Quantity: 50 kg</p>
@@ -128,8 +128,8 @@ function CPosts() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 6</p>
+                            <h3>Post ID: 17</h3>
+                            <p>Waste Type: Polythene - පොලිතින්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Kadawatha</p>
                             <p>Quantity: 4 kg</p>
