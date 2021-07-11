@@ -26,8 +26,8 @@ function ViewPost() {
                     <article>
                         <img src="../images/polythene.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 1</p>
+                            <h3>Post ID: 1</h3>
+                            <p>Waste Type: Polythene - පොලිතින්</p>
                             <p>Waste Item: Polythene Roll</p>
                             <p>Quantity: 1 kg</p>
                             <button onClick={handleRoute}>Make Offer <i className="fas fa-angle-double-right"></i></button>
@@ -37,8 +37,8 @@ function ViewPost() {
                     <article>
                         <img src="../images/plastic.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 1</p>
+                            <h3>Post ID: 1</h3>
+                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
                             <p>Waste Item: Bottles</p>
                             <p>Quantity: 2 kg</p>
                             <button onClick={handleRoute}>Make Offer <i className="fas fa-angle-double-right"></i></button>
@@ -48,8 +48,8 @@ function ViewPost() {
                     <article>
                         <img src="../images/paper.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 1</p>
+                            <h3>Post ID: 1</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
                             <p>Waste Item: Papers</p>
                             <p>Quantity: 1 kg</p>
                             <button onClick={handleRoute}>Make Offer <i className="fas fa-angle-double-right"></i></button>

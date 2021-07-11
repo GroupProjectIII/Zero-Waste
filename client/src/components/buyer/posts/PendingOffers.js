@@ -22,8 +22,9 @@ function PendingOffers() {
                     <article>
                         <img src="../images/polythene.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 111</p>
+                            <h3>Post ID: 11</h3>
+                            <p>Waste Type: Polythene - පොලිතින්</p>
+                            <p>Waste Item: Polythene Roll</p>
                             <p>Location: Buthpitiya</p>
                             <p>Quantity: 1 kg</p>
                             <p>Unit Price: Rs. 20</p>
@@ -37,8 +38,9 @@ function PendingOffers() {
                     <article>
                         <img src="../images/plastic.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 221</p>
+                            <h3>Post ID: 21</h3>
+                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
+                            <p>Waste Item: Bottles</p>
                             <p>Location: Miriswatta</p>
                             <p>Quantity: 2 kg</p>
                             <p>Unit Price: Rs. 20</p>
@@ -52,8 +54,9 @@ function PendingOffers() {
                     <article>
                         <img src="../images/paper.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 332</p>
+                            <h3>Post ID: 32</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
+                            <p>Waste Item: News Papers</p>
                             <p>Location: Gampaha</p>
                             <p>Quantity: 1 kg</p>
                             <p>Unit Price: Rs. 10</p>
@@ -67,8 +70,9 @@ function PendingOffers() {
                     <article>
                         <img src="../images/paper.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 124</p>
+                            <h3>Post ID: 44</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
+                            <p>Waste Item: News Papers</p>
                             <p>Location: Yagoda</p>
                             <p>Quantity: 1 kg</p>
                             <p>Unit Price: Rs. 20</p>
@@ -82,8 +86,9 @@ function PendingOffers() {
                     <article>
                         <img src="../images/plastic.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 155</p>
+                            <h3>Post ID: 45</h3>
+                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
+                            <p>Waste Item: Bottles</p>
                             <p>Location: Yakkala</p>
                             <p>Quantity: 5 kg</p>
                             <p>Unit Price: Rs. 50</p>
@@ -97,8 +102,9 @@ function PendingOffers() {
                     <article>
                         <img src="../images/polythene.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 162</p>
+                            <h3>Post ID: 46</h3>
+                            <p>Waste Type: Polythene - පොලිතින්</p>
+                            <p>Waste Item: Polythene Roll</p>
                             <p>Location: Kadawatha</p>
                             <p>Quantity: 4 kg</p>
                             <p>Unit Price: Rs. 30</p>

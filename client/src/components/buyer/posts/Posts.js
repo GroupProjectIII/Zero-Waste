@@ -74,8 +74,8 @@ function Posts() {
                     <article>
                         <img src="../images/polythene.jpg" alt=""></img>
                             <div className="text-b">
-                                <h3>Polythene - පොලිතින්</h3>
-                                <p>Post ID: 1</p>
+                                <h3>Post ID: 1</h3>
+                                <p>Waste Type: Polythene - පොලිතින්, Plastic - ප්ලාස්ටික්</p>
                                 <p>Location: Buthpitiya</p>
                                 <p>Quantity: 1 kg</p>
                                 <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
@@ -85,8 +85,8 @@ function Posts() {
                     <article>
                         <img src="../images/plastic.jpg" alt=""></img>
                             <div className="text-b">
-                                <h3>Plastic - ප්ලාස්ටික්</h3>
-                                <p>Post ID: 2</p>
+                                <h3>Post ID: 2</h3>
+                                <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
                                 <p>Location: Miriswatta</p>
                                 <p>Quantity: 2 kg</p>
                                 <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
@@ -96,8 +96,8 @@ function Posts() {
                     <article>
                         <img src="../images/paper.jpg" alt=""></img>
                             <div className="text-b">
-                                <h3>Paper - කඩදාසි</h3>
-                                <p>Post ID: 3</p>
+                                <h3>Post ID: 3</h3>
+                                <p>Waste Type: Plastic - ප්ලාස්ටික්, Paper - කඩදාසි</p>
                                 <p>Location: Gampaha</p>
                                 <p>Quantity: 1 kg</p>
                                 <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
@@ -107,8 +107,8 @@ function Posts() {
                     <article>
                         <img src="../images/paper.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 4</p>
+                            <h3>Post ID: 4</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
                             <p>Location: Yagoda</p>
                             <p>Quantity: 1 kg</p>
                             <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
@@ -118,8 +118,8 @@ function Posts() {
                     <article>
                         <img src="../images/plastic.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 5</p>
+                            <h3>Post ID: 5</h3>
+                            <p>Waste Type: Paper - කඩදාසි, Plastic - ප්ලාස්ටික්</p>
                             <p>Location: Yakkala</p>
                             <p>Quantity: 5 kg</p>
                             <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
@@ -129,8 +129,8 @@ function Posts() {
                     <article>
                         <img src="../images/polythene.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 6</p>
+                            <h3>Post ID: 6</h3>
+                            <p>Waste Type: Paper - කඩදාසි, Plastic - ප්ලාස්ටික්</p>
                             <p>Location: Kadawatha</p>
                             <p>Quantity: 4 kg</p>
                             <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>

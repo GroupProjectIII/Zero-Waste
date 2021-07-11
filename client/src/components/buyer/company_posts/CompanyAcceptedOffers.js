@@ -14,8 +14,8 @@ function CompanyAcceptedOffers() {
                 <main className="grid-b">
                     <article>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 12</p>
+                            <h3>Post ID: 12</h3>
+                            <p>Waste Type: Polythene - පොලිතින්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Buthpitiya</p>
                             <p>Quantity: 100 kg</p>
@@ -25,8 +25,8 @@ function CompanyAcceptedOffers() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 21</p>
+                            <h3>Post ID: 21</h3>
+                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Miriswatta</p>
                             <p>Quantity: 20 kg</p>
@@ -36,8 +36,8 @@ function CompanyAcceptedOffers() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 34</p>
+                            <h3>Post ID: 34</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Gampaha</p>
                             <p>Quantity: 10 kg</p>
@@ -47,8 +47,8 @@ function CompanyAcceptedOffers() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Post ID: 42</p>
+                            <h3>Post ID: 42</h3>
+                            <p>Waste Type: Paper - කඩදාසි</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Yagoda</p>
                             <p>Quantity: 100 kg</p>
@@ -58,8 +58,8 @@ function CompanyAcceptedOffers() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Post ID: 54</p>
+                            <h3>Post ID: 52</h3>
+                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Yakkala</p>
                             <p>Quantity: 50 kg</p>
@@ -69,8 +69,8 @@ function CompanyAcceptedOffers() {
 
                     <article>
                         <div className="text-b">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Post ID: 60</p>
+                            <h3>Post ID: 60</h3>
+                            <p>Waste Type: Polythene - පොලිතින්</p>
                             <p>Company Name: ABC Pvt LTD</p>
                             <p>Location: Kadawatha</p>
                             <p>Quantity: 4 kg</p>
