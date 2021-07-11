@@ -22,17 +22,16 @@ import RegisterScreen from "./components/home/screens/RegisterScreen";
 import ForgotPasswordScreen from "./components/home/screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./components/home/screens/ResetPasswordScreen";
 import Admin from "./components/home/screens/Admin";
-import Seller from "./components/home/screens/Seller";
 import Company from "./components/home/screens/Company";
 
-import Home from './components/seller/Home/Home';
-import AddPostDirect from './components/seller/Post/AddPostDirect';
-import AddPostPublic from './components/seller/Post/AddPostPublic';
-import MyPost from './components/seller/viewpost/Services';
-import Profile from './components/seller/Profile/Profile';
-import BuyersHome from './components/seller/Buyers/SearchBuyerPage';
-import ViewPost from './components/seller/viewpost/ViewPosts';
-import ViewBuyer from './components/seller/Buyers/ViewBuyer';
+import SellerHome from './components/seller/Home/Home';
+import SellerAddPostDirect from './components/seller/Post/AddPostDirect';
+import SellerAddPostPublic from './components/seller/Post/AddPostPublic';
+import SellerMyPost from './components/seller/viewpost/Services';
+import SellerProfile from './components/seller/Profile/Profile';
+import SellerBuyersHome from './components/seller/Buyers/SearchBuyerPage';
+import SellerViewPost from './components/seller/viewpost/ViewPosts';
+import SellerViewBuyer from './components/seller/Buyers/ViewBuyer';
 
 
 function App() {
@@ -60,20 +59,19 @@ function App() {
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/admin" component={Admin} />
                     <Route path="/company" component={Company} />
-                    <Route path="/seller" component={Seller} />
                     <Route path="/forgotpassword" component={ForgotPasswordScreen}/>
                     <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}
                     />
 
                     
-                    <Route path='/publicpost' exact component={AddPostPublic} />
-                    <Route path='/directpost' exact component={AddPostDirect} />
-                    <Route path='/myposts' exact component={MyPost} />
-                    <Route path='/viewposts' exact component={ViewPost} />
-                    <Route path='/findbuyers' exact component={BuyersHome} />
-                    <Route path='/buyer' exact component={ViewBuyer} />
-                    <Route path='/profile' exact component={Profile} />
-                    <Route path='/seller' exact component={Home} />
+                    <Route path='/seller/publicpost' exact component={SellerAddPostPublic} />
+                    <Route path='/seller/directpost' exact component={SellerAddPostDirect} />
+                    <Route path='/seller/myposts' exact component={SellerMyPost} />
+                    <Route path='/seller/viewposts' exact component={SellerViewPost} />
+                    <Route path='/seller/findbuyers' exact component={SellerBuyersHome} />
+                    <Route path='/seller/buyer' exact component={SellerViewBuyer} />
+                    <Route path='/seller/profile' exact component={SellerProfile} />
+                    <Route path='/seller' exact component={SellerHome} />
                 </Switch>
             </Router>
         </>
