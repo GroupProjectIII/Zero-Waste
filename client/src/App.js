@@ -2,20 +2,20 @@ import React from 'react';
 import './App.css'
 import BuyerHome from './components/buyer/home/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Services from './components/buyer/posts/Services';
-import OfferForm from './components/buyer/posts/OfferForm';
-import AOffers from './components/buyer/posts/AOffers';
-import POffers from './components/buyer/posts/POffers';
-import EditPendingOffers from './components/buyer/posts/EditPendingOffers';
-import CompanyPosts from "./components/buyer/company_posts/CompanyPosts";
-import CompanyOfferForm from "./components/buyer/company_posts/CompanyOfferForm";
-import CompanyAOffers from "./components/buyer/company_posts/CompanyAOffers";
-import CompanyPOffers from "./components/buyer/company_posts/CompanyPOffers";
-import EditCompanyPendingOffers from "./components/buyer/company_posts/EditCompanyPendingOffers";
-import ViewCompanyDetails from "./components/buyer/company_posts/ViewCompanyDetails";
-import CompanyNotify from "./components/buyer/company_posts/CompanyNotify";
-import PostsLocation from "./components/buyer/posts/PostsLocation";
-import ViewPostDetails from "./components/buyer/posts/ViewPostDetails";
+import BuyerServices from './components/buyer/posts/Services';
+import BuyerOfferForm from './components/buyer/posts/OfferForm';
+import BuyerAOffers from './components/buyer/posts/AOffers';
+import BuyerPOffers from './components/buyer/posts/POffers';
+import BuyerEditPendingOffers from './components/buyer/posts/EditPendingOffers';
+import BuyerCompanyPosts from "./components/buyer/company_posts/CompanyPosts";
+import BuyerCompanyOfferForm from "./components/buyer/company_posts/CompanyOfferForm";
+import BuyerCompanyAOffers from "./components/buyer/company_posts/CompanyAOffers";
+import BuyerCompanyPOffers from "./components/buyer/company_posts/CompanyPOffers";
+import BuyerEditCompanyPendingOffers from "./components/buyer/company_posts/EditCompanyPendingOffers";
+import BuyerViewCompanyDetails from "./components/buyer/company_posts/ViewCompanyDetails";
+import BuyerCompanyNotify from "./components/buyer/company_posts/CompanyNotify";
+import BuyerPostsLocation from "./components/buyer/posts/PostsLocation";
+import BuyerViewPostDetails from "./components/buyer/posts/ViewPostDetails";
 import Home from "./components/home/Home";
 import LoginScreen from "./components/home/screens/LoginScreen";
 import RegisterScreen from "./components/home/screens/RegisterScreen";
@@ -34,20 +34,20 @@ function App() {
                 <Switch>
                     <Route path='/' exact component={Home} />
                     <Route path='/buyer/home' exact component={BuyerHome} />
-                    <Route path='/buyer/posts' component={Services} />
-                    <Route path='/buyer/offerforms' component={OfferForm} />
-                    <Route path='/buyer/acceptedoffers' component={AOffers} />
-                    <Route path='/buyer/pendingoffers' component={POffers} />
-                    <Route path='/buyer/editpendingoffers' component={EditPendingOffers} />
-                    <Route path='/buyer/companyposts' component={CompanyPosts} />
-                    <Route path='/buyer/companyofferforms' component={CompanyOfferForm} />
-                    <Route path='/buyer/companyacceptedoffers' component={CompanyAOffers} />
-                    <Route path='/buyer/companypendingoffers' component={CompanyPOffers} />
-                    <Route path='/buyer/editcompanypendingoffers' component={EditCompanyPendingOffers} />
-                    <Route path='/buyer/viewcompanydetails' component={ViewCompanyDetails} />
-                    <Route path='/buyer/notifyaboutwaste' component={CompanyNotify} />
-                    <Route path='/buyer/location' component={PostsLocation} />
-                    <Route path='/buyer/viewpostdetails' component={ViewPostDetails} />
+                    <Route path='/buyer/posts' component={BuyerServices} />
+                    <Route path='/buyer/offerforms' component={BuyerOfferForm} />
+                    <Route path='/buyer/acceptedoffers' component={BuyerAOffers} />
+                    <Route path='/buyer/pendingoffers' component={BuyerPOffers} />
+                    <Route path='/buyer/editpendingoffers' component={BuyerEditPendingOffers} />
+                    <Route path='/buyer/companyposts' component={BuyerCompanyPosts} />
+                    <Route path='/buyer/companyofferforms' component={BuyerCompanyOfferForm} />
+                    <Route path='/buyer/companyacceptedoffers' component={BuyerCompanyAOffers} />
+                    <Route path='/buyer/companypendingoffers' component={BuyerCompanyPOffers} />
+                    <Route path='/buyer/editcompanypendingoffers' component={BuyerEditCompanyPendingOffers} />
+                    <Route path='/buyer/viewcompanydetails' component={BuyerViewCompanyDetails} />
+                    <Route path='/buyer/notifyaboutwaste' component={BuyerCompanyNotify} />
+                    <Route path='/buyer/location' component={BuyerPostsLocation} />
+                    <Route path='/buyer/viewpostdetails' component={BuyerViewPostDetails} />
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/admin" component={Admin} />
