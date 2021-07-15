@@ -5,3 +5,14 @@
     font-family: 'PT Sans', sans-serif;
 }
 
+.container{
+    display: flex;
+    padding-top: 40px;
+    margin-top: 10px;
+  }
+  .link{
+    text-decoration: none;
+    color: inherit;
+  }
+  
+
