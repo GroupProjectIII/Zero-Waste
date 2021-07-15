@@ -16,6 +16,14 @@ import BuyerViewCompanyDetails from "./components/buyer/company_posts/ViewCompan
 import BuyerCompanyNotify from "./components/buyer/company_posts/CompanyNotify";
 import BuyerPostsLocation from "./components/buyer/posts/PostsLocation";
 import BuyerViewPostDetails from "./components/buyer/posts/ViewPostDetails";
+import BuyerEditProfile from "./components/buyer/account/EditProfile";
+
+import BuyerViewProfile from './components/buyer/account/ViewProfile';
+import BuyerRateAndComment from './components/buyer/account/RateAndComment';
+import BuyerViewNotifications from './components/buyer/account/ViewNotifications';
+import BuyerAddComplaints from './components/buyer/account/AddComplaints';
+import BuyerViewStats from './components/buyer/account/ViewStats';
+
 import Home from "./components/home/Home";
 import LoginScreen from "./components/home/screens/LoginScreen";
 import RegisterScreen from "./components/home/screens/RegisterScreen";
@@ -79,6 +87,14 @@ function App() {
                     <Route path='/buyer/notifyaboutwaste' component={BuyerCompanyNotify} />
                     <Route path='/buyer/location' component={BuyerPostsLocation} />
                     <Route path='/buyer/viewpostdetails' component={BuyerViewPostDetails} />
+                    <Route path='/buyer/editprofile' component={BuyerEditProfile} />
+
+                    <Route path='/buyer/vprofile' component={BuyerViewProfile} />
+                    <Route path='/buyer/rcomment' component={BuyerRateAndComment} />
+                    <Route path='/buyer/vnotifications' component={BuyerViewNotifications} />
+                    <Route path='/buyer/addcomplaints' component={BuyerAddComplaints} />
+                    <Route path='/buyer/viewstats' component={BuyerViewStats} />
+
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
 
