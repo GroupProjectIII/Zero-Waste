@@ -21,7 +21,6 @@ import LoginScreen from "./components/home/screens/LoginScreen";
 import RegisterScreen from "./components/home/screens/RegisterScreen";
 import ForgotPasswordScreen from "./components/home/screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./components/home/screens/ResetPasswordScreen";
-import Admin from "./components/home/screens/Admin";
 
 
 import SellerHome from './components/seller/Home/Home';
@@ -32,6 +31,14 @@ import SellerProfile from './components/seller/Profile/Profile';
 import SellerBuyersHome from './components/seller/Buyers/SearchBuyerPage';
 import SellerViewPost from './components/seller/viewpost/ViewPosts';
 import SellerViewBuyer from './components/seller/Buyers/ViewBuyer';
+
+import AdminHome from "./components/admin/components/home/Home";
+import AdminUserlist from "./components/admin/pages/userlist/Userlist";
+import AdminUser from "./components/admin/pages/user/User";
+import AdminNewuser from './components/admin/pages/newuser/Newuser';
+import AdminReport from './components/admin/pages/report/Report';
+import AdminStatistics from './components/admin/pages/statistics/Statistics';
+
 
 
 import CompanyHome from './components/company/pages/Home';
@@ -74,7 +81,7 @@ function App() {
                     <Route path='/buyer/viewpostdetails' component={BuyerViewPostDetails} />
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
-                    <Route path="/admin" component={Admin} />                   
+
                     <Route path="/forgotpassword" component={ForgotPasswordScreen}/>
                     <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}/>
 
@@ -88,6 +95,15 @@ function App() {
                     <Route path='/seller/buyer' exact component={SellerViewBuyer} />
                     <Route path='/seller/profile' exact component={SellerProfile} />
                     <Route path='/seller' exact component={SellerHome} />
+
+
+                    <Route path='/admin' exact component={AdminHome} />
+                    <Route path='/admin/users' component={AdminUserlist} />
+                    <Route path='/admin/user/:userid' component={AdminUser} />
+                    <Route path='/admin/newuser' component={AdminNewuser} />
+                    <Route path='/admin/report' component={AdminReport} />
+                    <Route path='/admin/statistics' component={AdminStatistics} />
+
 					
 					
 					<Route path='/company' exact component={CompanyHome} />
@@ -105,6 +121,7 @@ function App() {
                     <Route path='/company/acceptedp' component={CompanyAcceptedP} />
                     <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
                     <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
+
 
                 </Switch>
             </Router>
