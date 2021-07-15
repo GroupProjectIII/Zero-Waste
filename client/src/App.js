@@ -22,8 +22,6 @@ import RegisterScreen from "./components/home/screens/RegisterScreen";
 import ForgotPasswordScreen from "./components/home/screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./components/home/screens/ResetPasswordScreen";
 import Admin from "./components/home/screens/Admin";
-import Seller from "./components/home/screens/Seller";
-import Company from "./components/home/screens/Company";
 
 
 
@@ -50,12 +48,11 @@ function App() {
                     <Route path='/buyer/viewpostdetails' component={BuyerViewPostDetails} />
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
-                    <Route path="/admin" component={Admin} />
-                    <Route path="/company" component={Company} />
-                    <Route path="/seller" component={Seller} />
+                    <Route path="/admin" component={Admin} />                   
                     <Route path="/forgotpassword" component={ForgotPasswordScreen}/>
-                    <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}
-                    />
+                    <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}/>
+
+
                 </Switch>
             </Router>
         </>
