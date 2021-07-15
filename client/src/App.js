@@ -13,6 +13,14 @@ import CompanyPOffers from "./components/buyer/company_posts/CompanyPOffers";
 import EditCompanyPendingOffers from "./components/buyer/company_posts/EditCompanyPendingOffers";
 import ViewCompanyDetails from "./components/buyer/company_posts/ViewCompanyDetails";
 import CompanyNotify from "./components/buyer/company_posts/CompanyNotify";
+import ViewProfile from './components/buyer/bsc/ViewProfile';
+import RateAndComment from './components/buyer/bsc/RateAndComment';
+import ViewNotifications from './components/buyer/bsc/ViewNotifications';
+import AddComplaints from './components/buyer/bsc/AddComplaints';
+import ViewStats from './components/buyer/bsc/ViewStats';
+
+
+
 
 function App() {
     return (
@@ -32,6 +40,14 @@ function App() {
                     <Route path='/editcompanypendingoffers' component={EditCompanyPendingOffers} />
                     <Route path='/viewcompanydetails' component={ViewCompanyDetails} />
                     <Route path='/notifyaboutwaste' component={CompanyNotify} />
+                    <Route path='/vprofile' component={ViewProfile} />
+                    <Route path='/rcomment' component={RateAndComment} />
+                    <Route path='/vnotifications' component={ViewNotifications} />
+                    <Route path='/addcomplaints' component={AddComplaints} />
+                    <Route path='/viewstats' component={ViewStats} />
+                    
+                    
+
                 </Switch>
             </Router>
         </>
