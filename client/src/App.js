@@ -78,6 +78,7 @@ function App() {
                     <Route path="/forgotpassword" component={ForgotPasswordScreen}/>
                     <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}/>
 
+
                     
                     <Route path='/seller/publicpost' exact component={SellerAddPostPublic} />
                     <Route path='/seller/directpost' exact component={SellerAddPostDirect} />
@@ -104,6 +105,7 @@ function App() {
                     <Route path='/company/acceptedp' component={CompanyAcceptedP} />
                     <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
                     <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
+
                 </Switch>
             </Router>
         </>
