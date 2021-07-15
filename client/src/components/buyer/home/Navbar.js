@@ -43,7 +43,7 @@ function Navbar() {
                         </Link>
                     </li>
                     <li className='nav-item-b'>
-                        <Link to='/contact-us' className='nav-links-b' onClick={closeMobileMenu}>
+                        <Link to='/buyer/vprofile' className='nav-links-b' onClick={closeMobileMenu}>
                             Account
                         </Link>
                     </li>
