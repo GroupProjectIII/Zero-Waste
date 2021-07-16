@@ -1,5 +1,4 @@
 import React from 'react';
-import '../components/company/posts/CompanyPost.css';
 import NotificationTable from '../components/company/posts/NotificationTable';
 import Navbar from '../components/company/home/Navbar';
 import Footer from '../components/company/home/Footer';

@@ -11,14 +11,14 @@ function BuyerInfo() {
 
     return(
         <>
-        <div className="tables-b">
-            <div className="tables__container-b">
+        <div className="tables-c">
+            <div className="tables__container-c">
                 <h1>Direct Offers</h1>
-                <div className="search_box-b">
+                <div className="search_box-c">
                     <input type="text" placeholder="What are you looking for?"></input>
                     <i className="fas fa-search"></i>
                 </div>
-                <table className="table-b">
+                <table className="table-c">
                     <thead>
                         <tr>
                             <th>Buyer ID</th>
@@ -39,7 +39,7 @@ function BuyerInfo() {
                             <td data-label="Waste Item">011-1111111</td>
                             <td data-label="date">Colombo</td>
                             <td data-label="Location">
-                                <span className="action_btn-b">
+                                <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
                             </td>
@@ -53,7 +53,7 @@ function BuyerInfo() {
                             <td data-label="Waste Item">011-1111111</td>
                             <td data-label="date">Colombo</td>
                             <td data-label="Location">
-                                <span className="action_btn-b">
+                                <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
                             </td>
@@ -67,7 +67,7 @@ function BuyerInfo() {
                             <td data-label="Waste Item">011-1111111</td>
                             <td data-label="date">Colombo</td>
                             <td data-label="Location">
-                                <span className="action_btn-b">
+                                <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
                             </td>
@@ -81,7 +81,7 @@ function BuyerInfo() {
                             <td data-label="Waste Item">011-1111111</td>
                             <td data-label="date">Colombo</td>
                             <td data-label="Location">
-                                <span className="action_btn-b">
+                                <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
                             </td>
@@ -95,7 +95,7 @@ function BuyerInfo() {
                             <td data-label="Waste Item">011-1111111</td>
                             <td data-label="date">Colombo</td>
                             <td data-label="Location">
-                                <span className="action_btn-b">
+                                <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
                             </td>

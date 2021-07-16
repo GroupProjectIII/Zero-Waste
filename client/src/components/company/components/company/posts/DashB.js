@@ -3,12 +3,12 @@ import './Dashboard.css';
 
 function DashB() {
     return(
-        <div className="dashboard_body">
-            <div className="tables-b">
-                <div className="tables__container-b">
+        <div className="dashboard_body-c">
+            <div className="tables-c">
+                <div className="tables__container-c">
                     <h1>Dashboard</h1>
-                    <h3 className="table_title">Collection Summary</h3>
-                    <table className="table-b">
+                    <h3 className="table_title-c">Collection Summary</h3>
+                    <table className="table-c">
                         <thead>
                             <tr>
                                 <th>ID</th>

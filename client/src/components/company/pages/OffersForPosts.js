@@ -1,5 +1,4 @@
 import React from 'react';
-import '../components/company/posts/CompanyPost.css';
 import OfferPost from '../components/company/posts/OfferPost';
 import Navbar from '../components/company/home/Navbar';
 import Footer from '../components/company/home/Footer';

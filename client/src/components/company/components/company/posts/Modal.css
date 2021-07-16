@@ -1,15 +1,15 @@
-body.active-modal {
+body.active-modal-c {
     overflow-y: hidden;
 }
 
-.btn-modal {   
+.btn-modal-c {   
     border: none;
     font-size: 18px;
     background-color: transparent;
     color: royalblue;
 }
 
-.modal, .overlay {
+.modal-c, .overlay-c {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -19,11 +19,11 @@ body.active-modal {
     position: fixed;
 }
 
-.overlay {
+.overlay-c {
     background: rgba(49,49,49,0.8);
 }
 
-.modal-content {
+.modal-content-c {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -39,14 +39,14 @@ body.active-modal {
     height: fit-content;
 }
 
-.profileimage {
+.profileimage-c {
     height: 120px;
     width: 120px;
     padding: 10px;
     border-radius: 50%;
 }
 
-.contact {
+.contact-c {
     width: 50%;
     margin: 0px;
     float: left;
@@ -55,26 +55,26 @@ body.active-modal {
     text-align: center;
 }
 
-.contact h2 {
+.contact-c h2 {
     font-size: 15px;
 }
 
-.contact h1 {
+.contact-c h1 {
     font-size: 25px;
 }
 
-.detail {
+.detail-c {
     width: 50%;
     float: right;
     padding-left: 20px;
 }
 
-.detail h2 {
+.detail-c h2 {
     font-size: 15px;
     font-weight: normal;
 }
 
-.detail p {
+.detail-c p {
     font-size: 15px;
     font-weight: normal;
 }
@@ -84,7 +84,7 @@ label {
     font-weight: bold;
 }
 
-.close-modal {
+.close-modal-c {
     position: absolute;
     top: 10px;
     right: 10px;
