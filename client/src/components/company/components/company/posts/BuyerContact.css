@@ -3,7 +3,7 @@
   --main-padding: 5px;
 }
 
-.container {
+.body-c {
   display: grid;
   height: fit-content;
   z-index: -1;
@@ -18,9 +18,9 @@
   background: url('../home/images/background1.jpg') no-repeat center center fixed;
 }
 
-#content1 {
+#content1-c {
   background: #fff;
-  grid-area: content1;
+  grid-area: content1-c;
   border-radius: var(--main-radius);
   padding-top: var(--main-padding);
   text-align: left;
@@ -30,173 +30,145 @@
   padding-bottom: 20px;
 }
 
-#content1 img {
+#content1-c img {
   height: 50%;
   width: 50%;
   border-radius: 50%;
   margin-top: 20px;
 }
 
-.buyer_contact {
+.buyer_contact-c {
   margin-top: -90px;
 }
 
-#buyer_contact h3 {
+#buyer_contact-c h3 {
   font-size: 20px;
   margin-top: 20px;
 }
 
-#content2 {
+#buyer_contact-c h4 {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+#content2-c {
   background: #fff;
-  grid-area: content2;
+  grid-area: content2-c;
   border-radius: var(--main-radius);
   padding-top: var(--main-padding);
   margin-top: 0;
 }
 
-#content3 {
+#content3-c {
   background: #fff;
-  grid-area: content3;
+  grid-area: content3-c;
   border-radius: var(--main-radius);
   padding-top: var(--main-padding);
   height: fit-content; 
 }
 
-#content3 img {
+#content3-c img {
   height: 40px;
   width: 40px;
   border-radius: 50%;
 }
 
-#content3 h1 {
+#content3-c h1 {
   margin: 20px;
 }
 
-#content3 i {
+#content3-c i {
   color: orange;
 }
 
-#content3 .reviews_star_c {
+#content3-c .reviews_star_c {
   display: inline;
 }
 
-#content3 .reviews_header_c {
+#content3-c .reviews_header_c {
   color: orange;
 }
 
-#content3 .reviews_header_c h3 {
+#content3-c .reviews_header_c h3 {
   color: #000;
 }
 
-#content3 .reviews_button_c {
+#content3-c .reviews_button_c {
   width: 80px;
   height: 30px;
   background-color: #000;
   color: #fff; 
 }
 
-#content3 .reviews_header_c {
+#content3-c .reviews_header_c {
   display: flex;
   margin: 20px;
   flex-direction: column;
   text-align: left;
 }
 
-#content3 .review_body_header_c {
+#content3-c .review_body_header_c {
   display: flex;
   margin: 20px;
 }
 
-#content3 .review_body_header_c h3 {
+#content3-c .review_body_header_c h3 {
   margin-left: 20px;
 }
 
-#content3 .review_body_b_c {
+#content3-c .review_body-c {
   text-align: left;
   margin: 20px;
 }
 
-#content3 .review_body_header_c i,h3 {
+#content3-c .review_body_header_c i,h3 {
   margin-top: 10px;
 }
 
-#content3 .div_star {
+#content3-c .div_star-c {
   margin-left: 10px;
 }
 
-#content3 .reviews_body_c h3 {
+#content3-c .reviews_body_c h3 {
   color: rgb(41, 39, 39);
 }
 
-#content4 {
-  height: fit-content;
-}
-
-a {
-  text-align: center;
-  display: block;
-  font-family: inherit;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 1rem;
-}
-
-#content1, #content2, #content3, #content4 {
+#content1-c, #content2-c, #content3-c {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: var(--main-radius);
 }
 
-.content-c form .user-details-b {
-  text-align: center;
-  margin: 20%;
-  justify-self: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px 0 12px 0;
-}
 
-.container-c {
-  max-width: 300px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  margin-left: -10%;
-  margin-top: 30px;
-}
 
 @media only screen and (min-width: 480px) {
-  .container {
+  .body-c {
     grid-template-columns: 1fr;
-    grid-template-rows: 0.3fr 0.5fr 1fr 0.5fr;
+    grid-template-rows: 0.3fr 0.5fr 1fr;
     grid-template-areas:
-      "content1"
-      "content2"
-      "content3"
-      "content4";
+      "content1-c"
+      "content2-c"
+      "content3-c";
   }
 }
 
 @media only screen and (min-width:768px) {
-  .container {
+  .body-c {
     grid-gap: 4rem;
     grid-template-columns: 0.6fr 1fr;
-    grid-template-rows: 0.3fr 0.5fr 1fr;
+    grid-template-rows: 0.3fr 0.8fr;
     grid-template-areas:
-      "content1 content4"
-      "content2 content2"
-      "content3 content3";
+      "content1-c content2-c"
+      "content3-c content3-c";
   }
 }
 
 @media only screen and (min-width:992px) {
-  .container {
-    grid-template-columns: 0.4fr 0.4fr 0.8fr;
-  grid-template-rows: 0.3fr 1.5fr;
-  grid-template-areas:
-    "content1 content4 content2"
-    "content3  content3 content3";
+  .body-c {
+    grid-template-columns: 0.5fr 0.8fr;
+    grid-template-rows: 0.3fr 1.5fr;
+    grid-template-areas:
+    "content1-c content2-c"
+    "content3-c  content3-c";
   }
 }
 

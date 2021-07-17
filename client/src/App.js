@@ -50,7 +50,6 @@ import AdminStatistics from './components/admin/pages/statistics/Statistics';
 
 
 import CompanyHome from './components/company/pages/Home';
-import CompanyServices from './components/company/components/company/posts/Services';
 import CompanyProfile from './components/company/pages/Profile';
 import CompanyDashboard from './components/company/pages/Dashboard';
 import CompanyHelpdesk from './components/company/pages/Helpdesk';
@@ -123,7 +122,6 @@ function App() {
 					
 					
 					<Route path='/company' exact component={CompanyHome} />
-                    <Route path='/posts' component={CompanyServices} />
                     <Route path='/company/profile' component={CompanyProfile} />                 
                     <Route path='/company/dashboard' component={CompanyDashboard} />
                     <Route path='/company/helpdesk' component={CompanyHelpdesk} />

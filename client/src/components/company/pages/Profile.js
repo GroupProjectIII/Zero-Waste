@@ -1,5 +1,4 @@
 import React from 'react';
-import '../components/company/posts/POffers.css';
 import Userprofile from '../components/company/posts/Userprofile';
 import Navbar from '../components/company/home/Navbar';
 import Footer from '../components/company/home/Footer';

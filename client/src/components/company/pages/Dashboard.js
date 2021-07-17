@@ -1,5 +1,4 @@
 import React from 'react';
-import '../components/company/posts/POffers.css';
 import DashB from '../components/company/posts/DashB';
 import Navbar from '../components/company/home/Navbar';
 import Footer from '../components/company/home/Footer';

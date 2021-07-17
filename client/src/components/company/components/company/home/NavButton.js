@@ -13,7 +13,7 @@ export function Button() {
 
     return (
         <Link to='/'>
-            <button className='btn-nav-b' onClick={logoutHandler}>Sign Out</button>
+            <button className='btn-nav-b' onClick={logoutHandler}>Sign Out <i className="fas fa-sign-out-alt"></i></button>
         </Link>
     );
 }

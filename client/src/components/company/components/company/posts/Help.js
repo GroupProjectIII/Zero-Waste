@@ -4,18 +4,18 @@ import './Help.css';
 function Help() {
    return(
         <>
-			<img src="../../images/wave.png" className="wave"></img>
-			<div className="helpcontainer">
-				<div className="img">
+			<img src="../../images/wave.png" className="wave-c"></img>
+			<div className="helpcontainer-c">
+				<div className="img-c">
 					<img src="../../images/bg.png"></img>
 				</div>
-				<div className="help-content">
+				<div className="help-content-c">
 					<form >
 						<img src="../../images/avatar.png"></img>
-						<h2 className="helptitle">Need Help?</h2>
-						<div className="help-input one">
-							<div className="i">
-								<select name="choice" id="choice" className="selection">
+						<h2 className="helptitle-c">Need Help?</h2>
+						<div className="help-input-c one">
+							<div className="i-c">
+								<select name="choice" id="choice" className="selection-c">
 									<option value="q0" disabled selected value> -- select an option -- </option>
 									<option value="Incorrect/outdated information on a page.">I found incorrect/outdated information on a page.</option>
 									<option value="Website is not working">The website is not working the way they should.</option>
@@ -25,12 +25,12 @@ function Help() {
 								</select>
 							</div>
 						</div>
-						<div className="help-input pass">
-							<div className="i"> 
-								<textarea type="te"  rows="3" cols="50" class="textareaa" placeholder="Describe yourself here..."></textarea>
+						<div className="help-input-c pass">
+							<div className="i-c"> 
+								<textarea type="te"  rows="3" cols="50" class="textareaa-c" placeholder="Describe yourself here..."></textarea>
 							</div>
 						</div>
-						<input type="submit" className="helpbtn" value="Submit"></input>
+						<input type="submit" className="helpbtn-c" value="Submit"></input>
 					</form>
 				</div>
 			</div>

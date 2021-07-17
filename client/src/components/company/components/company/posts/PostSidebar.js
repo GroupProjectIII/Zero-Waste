@@ -15,14 +15,14 @@ function PostSidebar() {
         <>
             <IconContext.Provider value={{ color: '#fff' }}>
                 <div className='navbar'>
-                    <Link to='#' className='menu-bars'>
+                    <Link to='#' className='menu-bars-c'>
                         <FaIcons.FaBars style={{color: '#164A41'}} onClick={showSidebar} />
                     </Link>
                 </div>
-                <nav className={postsidebar ? 'nav-menu active' : 'nav-menu'}>
-                    <ul className='nav-menu-items' onClick={showSidebar}>
-                        <li className='navbar-toggle'>
-                            <Link to='#' className='menu-bars'>
+                <nav className={postsidebar ? 'nav-menu-c active' : 'nav-menu-c'}>
+                    <ul className='nav-menu-items-c' onClick={showSidebar}>
+                        <li className='navbar-toggle-c'>
+                            <Link to='#' className='menu-bars-c'>
                                 <AiIcons.AiOutlineClose />
                             </Link>
                         </li>

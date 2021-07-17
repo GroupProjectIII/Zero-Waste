@@ -1,16 +1,16 @@
-.n_content h1 {
+.n_content-c h1 {
     text-align: center;
     padding: 15px;
     text-transform: uppercase;
     color: #239F56;
 }
 
-.n_content {
+.n_content-c {
     padding-bottom: 20px;
     background: url('../home/images/background1.jpg') no-repeat center center fixed;
 }
 
-.n_wraper {
+.n_wraper-c {
     justify-content: center;
     margin: auto;
     width: 80%;
@@ -18,7 +18,7 @@
     padding-top: 30px;
 }
 
-.notify_card {
+.notify_card-c {
     height: fit-content;
     position: relative;
     box-shadow: 0px 0px 18px #888888;
@@ -27,7 +27,7 @@
     background-color: #fff;
 }
 
-.n_header {
+.n_header-c {
     width: 700px;
     height: fit-content;
     display: flex;
@@ -35,7 +35,7 @@
     width: 100%;
 }
 
-#n_image {
+#n_image-c {
     border-radius: 50%;
     height: 60px;
     width: 60px;
@@ -43,7 +43,7 @@
     margin-left: 15px;
 }
 
-.notify_card h3 {
+.notify_card-c h3 {
     font-size: 10px;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -52,32 +52,32 @@
     float: unset;
 }
 
-.notify_card h2 {
+.notify_card-c h2 {
     font-size: 15px;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 17px 17px 17px 5px;
 }
 
-.notify_card p {
+.notify_card-c p {
     padding: 2%;
     font-weight: bold;
     font-size: 15px;
     font-family: serif;
 }
 
-#timestamp {
+#timestamp-c {
     margin-left: 70%;
 }
 
  @media(max-width: 768px) {
-    #timestamp {
+    #timestamp-c {
         margin-left: 10%;
     }  
 }
 
 @media(max-width: 1000px) {
-    #timestamp {
+    #timestamp-c {
         margin-left: 50%;
     }  
 }

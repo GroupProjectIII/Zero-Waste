@@ -1,13 +1,14 @@
 import React from "react";
+import './Posts.css';
 
 function PreviousPost() {
     return(
-        <div className="posts-b">
-            <div className="posts__container-b">
-                <div className="title-b">Previous Post</div>
-                <main className="grid-b">
+        <div className="posts-c">
+            <div className="posts__container-c">
+                <div className="title-c">Previous Post</div>
+                <main className="grid-c">
                     <article>
-                        <div className="text-b">
+                        <div className="text-c">
                             <h3>Polythene - පොලිතින්</h3>
                             <p>Waste Type: Bags</p>
                             <p>Collector: Tom</p>
@@ -17,7 +18,7 @@ function PreviousPost() {
                     </article>
 
                     <article>
-                        <div className="text-b">
+                        <div className="text-c">
                             <h3>Plastic - ප්ලාස්ටික්</h3>
                             <p>Waste Type: Bags</p>
                             <p>Collector: Tom</p>
@@ -27,7 +28,7 @@ function PreviousPost() {
                     </article>
 
                     <article>
-                        <div className="text-b">
+                        <div className="text-c">
                             <h3>Paper - කඩදාසි</h3>
                             <p>Waste Type: Bags</p>
                             <p>Collector: Tom</p>
@@ -37,7 +38,7 @@ function PreviousPost() {
                     </article>
 
                     <article>
-                        <div className="text-b">
+                        <div className="text-c">
                             <h3>Paper - කඩදාසි</h3>
                             <p>Waste Type: Bags</p>
                             <p>Collector: Tom</p>
@@ -47,7 +48,7 @@ function PreviousPost() {
                     </article>
 
                     <article>
-                        <div className="text-b">
+                        <div className="text-c">
                             <h3>Plastic - ප්ලාස්ටික්</h3>
                             <p>Waste Type: Bags</p>
                             <p>Collector: Tom</p>
@@ -57,7 +58,7 @@ function PreviousPost() {
                     </article>
 
                     <article>
-                        <div className="text-b">
+                        <div className="text-c">
                             <h3>Polythene - පොලිතින්</h3>
                             <p>Waste Type: Bags</p>
                             <p>Collector: Tom</p>
