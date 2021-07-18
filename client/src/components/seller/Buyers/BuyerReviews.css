@@ -1,15 +1,15 @@
-.add-comment{
+.seller-add-comment{
     width: 75vw;
     margin: auto;
 }
 
-.card-container {
+.seller-card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.card {
+.seller-card {
   margin: 20px;
   padding: 20px;
   width: 500px;
@@ -21,51 +21,51 @@
   transition: all 0.5s;
 }
 
-.card:hover {
+.seller-card:hover {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
   transform: scale(1.01);
 }
 
-.card__title {
+.seller-card__title {
   font-weight: 400;
  
 }
 
-.reply-details{
+.seller-reply-details{
     margin-top: 10px;
     font-size: 18px;
 }
- .reply-details p, .sender-details p{
+ .seller-reply-details p, .seller-sender-details p{
     font-size: 14px;
 }
-.user-comment h2, .user-reply h2{
+.seller-user-comment h2, .seller-user-reply h2{
     font-weight: 400;
     font-size: 18px;
 }
-.sender-details, .reply-details{
+.seller-sender-details, .seller-reply-details{
     margin-bottom: 20px;
 }
-.sender-details h3, .sender-details i, .reply-details h3, .reply-details i{
+.seller-sender-details h3, .seller-sender-details i, .seller-reply-details h3, .seller-reply-details i{
     display: inline-block;
     font-size: 24px;
 }
 
 
 
-.card {
+.seller-card {
   background: radial-gradient(#60efbc, #58d5c9);
 }
-.add-comment-form {  
+.seller-add-comment-form {  
     display: flex;
     flex-flow: row wrap;
     align-items: center;
   }
   
-  .add-comment-form label {
+  .seller-add-comment-form label {
     margin: 5px 10px 5px 0;
   }
   
-  .add-comment-form input {
+  .seller-add-comment-form input {
     vertical-align: middle;
     margin: 5px 10px 5px 0;
     padding: 10px;
@@ -74,7 +74,7 @@
     width: 70vw;
   }
   
-  .add-comment-form button {
+  .seller-add-comment-form button {
     padding: 10px 20px;
     background-color: forestgreen;
     border: 1px solid #ddd;
@@ -82,17 +82,17 @@
     cursor: pointer;
   }
   
-  .add-comment-form button:hover {
+  .seller-add-comment-form button:hover {
     background-color: darkgreen;
   }
-  .user-reply{
+  .seller-user-reply{
       margin-left: 100px;
       font-size: 12px;
       padding: 5px;
   }
   
   @media (max-width: 800px) {
-    .add-comment-form input {
+    .seller-add-comment-form input {
       margin: 10px 0;
       width: 50vw;
     }
@@ -101,12 +101,12 @@
 
 
 @media (max-width: 1600px) {
-  .card-container {
+  .seller-card-container {
     justify-content: center;
   }
 }
 @media screen and (max-width: 600px){
-    .add-comment{
+    .seller-add-comment{
         width: 80vw;
     }
 }
