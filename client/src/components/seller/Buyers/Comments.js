@@ -1,14 +1,12 @@
-import "./BuyerReviews.css";
+import './Comments.css';
 
-export default function BuyerReviews() {
+export default function Comments() {
     return (
-        <div>
-            <h1>Reviews & Comments <i class="fas fa-comments"></i></h1>
+        <>
             <div className="seller-add-comment">
                 <form className="seller-add-comment-form">
-                
-                    <input type="text" placeholder="Add New Comment" id="comment" />
-                    <button type="submit"><i class="fas fa-envelope"></i></button>
+                    <input type="textarea" placeholder="Add New Comment" id="comment" />
+                    <button type="submit" className="seller-add-comment-btn">Add Comment</button>
                 </form>
             </div>
             <div className="buyer-comments-area">
@@ -35,8 +33,6 @@ export default function BuyerReviews() {
 
                 </div>
             </div>
-    
-           
-        </div>
+        </>
     )
 }

@@ -16,8 +16,8 @@
   
 }
 .seller-buyer-details{
-  border-style: groove;
-  border-color: black;
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 15px;
 }
 
@@ -80,11 +80,11 @@ float: right;
 }
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .col-25, .col-75 {
+  .seller-col-25, .seller-col-75 {
     width: 100%;
     margin-top: 0;
   }
-  .buyer-details-card{
+  .seller-buyer-details-card{
     width: 100%;
     padding: 10px;
   }
