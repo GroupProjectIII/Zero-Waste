@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import Navbar from "../Nav/Navbar";
 import Footer from "../Nav/Footer";
 import BuyerDetails from "./BuyerDetails";
+import BuyerReviews from "./BuyerReviews";
 import "./ViewBuyer.css";
 
 
@@ -17,6 +18,7 @@ export default function ViewBuyer() {
         <>
             <Navbar />
             <BuyerDetails />
+            <BuyerReviews />
             <Footer />
         </>
     )
