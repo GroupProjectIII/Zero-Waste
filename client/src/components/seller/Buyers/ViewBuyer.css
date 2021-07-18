@@ -1,13 +1,13 @@
 
 
-.col-25 {
+.seller-col-25 {
   float: left;
   width: 35%;
   margin-top: 6px;
  padding: 20px;
 }
 
-.col-75 {
+.seller-col-75 {
   float: left;
   width: 65%;
   margin-top: 6px;
@@ -15,28 +15,28 @@
   padding-left: 10vw;
   
 }
-.buyer-details{
+.seller-buyer-details{
   border-style: groove;
   border-color: black;
   border-radius: 15px;
 }
 
 /* Clear floats after the columns */
-.buyer-details:after {
+.seller-buyer-details:after {
   content: "";
   display: table;
   clear: both;
 }
-.buyer-details-card{
+.seller-buyer-details-card{
   width: 75vw;
   margin: auto;
   padding: 25px;
 }
-.col-25 h1{
+.seller-col-25 h1{
     color: brown;
     
 }
-.col-25 img{
+.seller-col-25 img{
     width: 100%;
     margin: auto;
    max-width: 250px;
@@ -47,27 +47,27 @@
   padding: 5px;
 }
 
-.buyer-area-list ul{
+.seller-buyer-area-list ul{
 list-style-image: url('./BuyerImages/map32.png');
 }
 
-.buyer-type-list ul {
+.seller-buyer-type-list ul {
 list-style-image: url('./BuyerImages/bin.png');
 
 }
-ul{
+.seller-buyer-type-lis ul, .seller-buyer-area-list ul {
 display: grid;
 grid: auto auto auto / auto auto auto;
 grid-gap: 10px;
 
 }
-ul li {
+.seller-buyer-area-list ul li, .seller-buyer-type-lis ul li {
 padding: 5px;
 }
 .s-b-detail{
 padding-bottom: 10px;
 }
-.sell-now button{
+.seller-sell-now button{
 width: 150px;
 height: 50px;
 background-color: red;

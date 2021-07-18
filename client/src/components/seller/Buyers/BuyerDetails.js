@@ -3,9 +3,9 @@ import ProPIc from './BuyerImages/images.jpg';
 export default function BuyerDetails() {
     return (
         
-        <div className="buyer-details-card">
-            <div className="buyer-details">
-                <div className="col-25">
+        <div className="seller-buyer-details-card">
+            <div className="seller-buyer-details">
+                <div className="seller-col-25">
                     <h1>Lk Collectors</h1>
                     <div className="ratings-star">
                             <span className="fa fa-star checked"></span>
@@ -18,7 +18,7 @@ export default function BuyerDetails() {
                     <img src={ProPIc}></img>
                     <p>discription***</p>
                 </div>
-                <div className="col-75">
+                <div className="seller-col-75">
                     <div className="s-b-detail">
                         <h2>Address:</h2>
                         <p>No 127, Kandy Rd, Kadawatha.</p>
@@ -29,7 +29,7 @@ export default function BuyerDetails() {
                     </div>
                     
                     
-                    <div className="buyer-type-list">
+                    <div className="seller-buyer-type-list">
                         <h2>Favourite Waste Types:</h2>
                         <ul>
                             <li>Plastic</li>
@@ -37,7 +37,7 @@ export default function BuyerDetails() {
                         </ul>
                         <button>View All</button>
                     </div>
-                    <div className="buyer-area-list">
+                    <div className="seller-buyer-area-list">
                         <h2>Favourite Collecting Areas:</h2>
                         <ul>
                             <li>Gampaha</li>
@@ -48,7 +48,7 @@ export default function BuyerDetails() {
                             
                         </ul>
                         <button>View All</button>
-                        <div className="sell-now">
+                        <div className="seller-sell-now">
                             <button>Sell Now</button>
                         </div>
                         
