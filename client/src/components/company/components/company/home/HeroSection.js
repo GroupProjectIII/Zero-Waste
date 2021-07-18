@@ -6,14 +6,14 @@ import './HeroSection.css';
 function HeroSection() {
 
     return (
-        <div className='hero-container-b'>
+        <div className='hero-container-c'>
             <h1>Your Trash, Our Treasure</h1>
             <p>Get connected with waste collectors</p>
-            <div className='hero-btn-b'>
+            <div className='hero-btn-c'>
                 <Button
-                    className='btn-b'
-                    buttonStyle='btn-b--outline'
-                    buttonSize='btn-b--large'
+                    className='btn-c'
+                    buttonStyle='btn-c--outline'
+                    buttonSize='btn-c--large'
                 >
                     GET STARTED
                 </Button>

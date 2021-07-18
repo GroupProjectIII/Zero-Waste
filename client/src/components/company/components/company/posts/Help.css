@@ -37,7 +37,7 @@ body {
 	width: 500px;
 }
 
-form {
+.help-content-c form {
 	width: 360px;
 }
 
@@ -74,7 +74,7 @@ form {
 }
 
 .help-input-c select {
-	max-width: 400px;
+	max-width: 350px;
 	position: relative;
 	height: 45px;
 }
@@ -198,10 +198,6 @@ form {
 }
 
 @media screen and (max-width: 1000px) {
-	form {
-		width: 290px;
-	}
-
 	.help-content-c h2 {
         font-size: 2.4rem;
         margin: 8px 0;

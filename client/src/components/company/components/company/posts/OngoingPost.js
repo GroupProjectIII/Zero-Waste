@@ -13,7 +13,7 @@ function OngoingPost() {
     return(
         <div className="posts-c">
             <div className="posts__container-c">
-                <div className="title-c">Ongoing Post</div>
+                <div className="title-c"><h1>Ongoing Post</h1></div>
                 <main className="grid-c">
                     <article>
                         <div className="text-c">
