@@ -1,3 +1,13 @@
+
+.seller-post-list-background{
+    padding: 4rem;
+    background: url('../../buyer/home/images/background1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .seller-post-list{
     width: 80vw;
     margin: auto;

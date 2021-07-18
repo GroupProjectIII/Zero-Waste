@@ -3,7 +3,10 @@ import * as IoIcons from 'react-icons/io';
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md';
 
-export const SidebarData = [
+
+export const SellerSidebarData = [
+
+
     {
         title: 'Available Posts',
         path: '/seller/viewposts',

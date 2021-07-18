@@ -3,6 +3,10 @@ import Navbar from '../Nav/Navbar';
 import Footer from '../Nav/Footer';
 import PendingPosts from './PendingPosts';
 
+import SellerSidebar from './Sidebar';
+import React from "react";
+
+
 export default function ViewPosts() {
 
     const history = useHistory();
@@ -13,6 +17,9 @@ export default function ViewPosts() {
     return (
         <div>
             <Navbar />
+
+            <SellerSidebar/>
+
             <PendingPosts />
             <Footer />
       </div>
