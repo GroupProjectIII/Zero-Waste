@@ -16,13 +16,20 @@ import BuyerViewCompanyDetails from "./components/buyer/company_posts/ViewCompan
 import BuyerCompanyNotify from "./components/buyer/company_posts/CompanyNotify";
 import BuyerPostsLocation from "./components/buyer/posts/PostsLocation";
 import BuyerViewPostDetails from "./components/buyer/posts/ViewPostDetails";
+import BuyerEditProfile from "./components/buyer/account/EditProfile";
+
+import BuyerViewProfile from './components/buyer/account/ViewProfile';
+import BuyerRateAndComment from './components/buyer/account/RateAndComment';
+import BuyerViewNotifications from './components/buyer/account/ViewNotifications';
+import BuyerAddComplaints from './components/buyer/account/AddComplaints';
+import BuyerViewStats from './components/buyer/account/ViewStats';
+
 import Home from "./components/home/Home";
 import LoginScreen from "./components/home/screens/LoginScreen";
 import RegisterScreen from "./components/home/screens/RegisterScreen";
 import ForgotPasswordScreen from "./components/home/screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./components/home/screens/ResetPasswordScreen";
-import Admin from "./components/home/screens/Admin";
-import Company from "./components/home/screens/Company";
+
 
 import SellerHome from './components/seller/Home/Home';
 import SellerAddPostDirect from './components/seller/Post/AddPostDirect';
@@ -32,6 +39,30 @@ import SellerProfile from './components/seller/Profile/Profile';
 import SellerBuyersHome from './components/seller/Buyers/SearchBuyerPage';
 import SellerViewPost from './components/seller/viewpost/ViewPosts';
 import SellerViewBuyer from './components/seller/Buyers/ViewBuyer';
+
+import AdminHome from "./components/admin/components/home/Home";
+import AdminUserlist from "./components/admin/pages/userlist/Userlist";
+import AdminUser from "./components/admin/pages/user/User";
+import AdminNewuser from './components/admin/pages/newuser/Newuser';
+import AdminReport from './components/admin/pages/report/Report';
+import AdminStatistics from './components/admin/pages/statistics/Statistics';
+
+
+
+import CompanyHome from './components/company/pages/Home';
+import CompanyProfile from './components/company/pages/Profile';
+import CompanyDashboard from './components/company/pages/Dashboard';
+import CompanyHelpdesk from './components/company/pages/Helpdesk';
+import CompanyPost from './components/company/pages/CompanyPost';
+import CompanyOffersForPosts from './components/company/pages/OffersForPosts';
+import CompanyEditProfile from './components/company/pages/EditProfile';
+import CompanyDirectPosts from './components/company/pages/DirectPosts';
+import CompanyNotification from './components/company/pages/Notification';
+import CompanyOngoingP from './components/company/pages/OngoingP';
+import CompanyPreviousP from './components/company/pages/PreviousP';
+import CompanyAcceptedP from './components/company/pages/AcceptedP';
+import CompanyBuyersInfo from './components/company/pages/BuyersInfo';
+import CompanyBuyersContact from './components/company/pages/BuyersContact';
 
 
 function App() {
@@ -55,13 +86,20 @@ function App() {
                     <Route path='/buyer/notifyaboutwaste' component={BuyerCompanyNotify} />
                     <Route path='/buyer/location' component={BuyerPostsLocation} />
                     <Route path='/buyer/viewpostdetails' component={BuyerViewPostDetails} />
+                    <Route path='/buyer/editprofile' component={BuyerEditProfile} />
+
+                    <Route path='/buyer/vprofile' component={BuyerViewProfile} />
+                    <Route path='/buyer/rcomment' component={BuyerRateAndComment} />
+                    <Route path='/buyer/vnotifications' component={BuyerViewNotifications} />
+                    <Route path='/buyer/addcomplaints' component={BuyerAddComplaints} />
+                    <Route path='/buyer/viewstats' component={BuyerViewStats} />
+
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
-                    <Route path="/admin" component={Admin} />
-                    <Route path="/company" component={Company} />
+
                     <Route path="/forgotpassword" component={ForgotPasswordScreen}/>
-                    <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}
-                    />
+                    <Route path="/passwordreset/:resetToken" component={ResetPasswordScreen}/>
+
 
                     
                     <Route path='/seller/publicpost' exact component={SellerAddPostPublic} />
@@ -72,6 +110,33 @@ function App() {
                     <Route path='/seller/buyer' exact component={SellerViewBuyer} />
                     <Route path='/seller/profile' exact component={SellerProfile} />
                     <Route path='/seller' exact component={SellerHome} />
+
+
+                    <Route path='/admin' exact component={AdminHome} />
+                    <Route path='/admin/users' component={AdminUserlist} />
+                    <Route path='/admin/user/:userid' component={AdminUser} />
+                    <Route path='/admin/newuser' component={AdminNewuser} />
+                    <Route path='/admin/report' component={AdminReport} />
+                    <Route path='/admin/statistics' component={AdminStatistics} />
+
+					
+					
+					<Route path='/company' exact component={CompanyHome} />
+                    <Route path='/company/profile' component={CompanyProfile} />                 
+                    <Route path='/company/dashboard' component={CompanyDashboard} />
+                    <Route path='/company/helpdesk' component={CompanyHelpdesk} />
+                    <Route path='/company/companypost' component={CompanyPost} />
+                    <Route path='/company/offersforposts' component={CompanyOffersForPosts} />
+                    <Route path='/company/editprofile' component={CompanyEditProfile} />    
+                    <Route path='/company/DirectPosts' component={CompanyDirectPosts} />  
+                    <Route path='/company/notification' component={CompanyNotification} /> 
+                    <Route path='/company/ongoingp' component={CompanyOngoingP} />
+                    <Route path='/company/previousp' component={CompanyPreviousP} />
+                    <Route path='/company/acceptedp' component={CompanyAcceptedP} />
+                    <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
+                    <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
+
+
                 </Switch>
             </Router>
         </>

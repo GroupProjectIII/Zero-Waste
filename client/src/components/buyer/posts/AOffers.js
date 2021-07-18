@@ -1,5 +1,4 @@
 import React from 'react';
-import './AOffers.css';
 import AcceptedOffers from './AcceptedOffers';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';

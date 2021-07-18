@@ -3,6 +3,9 @@ import Bottles from './postPics/bottles.jpg';
 
 export default function PendingPosts() {
     return (
+
+        <div className="seller-post-list-background">
+
         <div className="seller-post-list">
             
             <div className="seller-post-card">
@@ -107,6 +110,9 @@ export default function PendingPosts() {
             </div>
             
         </div>
+
+        </div>
+
 
     )
 }
