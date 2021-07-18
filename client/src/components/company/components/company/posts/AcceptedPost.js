@@ -6,7 +6,7 @@ function AcceptedPost() {
     return(
         <div className="posts-c">
             <div className="posts__container-c">
-                <div className="title-c">Accepted Post</div>
+                <div className="title-c"><h1>Accepted Post</h1></div>
                 <main className="grid-c">
                     <article>
                         <div className="text-c">

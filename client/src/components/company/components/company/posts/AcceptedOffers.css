@@ -26,6 +26,10 @@
     margin: 0 auto;
 }
 
+.tables-c h1{
+    color: #239F56;
+}
+
 .table-c{
     width: 100%;
     border-collapse: collapse;

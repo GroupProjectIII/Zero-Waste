@@ -3,6 +3,7 @@ import '../components/company/home/Home.css';
 import HeroSection from '../components/company/home/HeroSection';
 import Navbar from '../components/company/home/Navbar';
 import Footer from '../components/company/home/Footer';
+import Cards from '../components/company/home/Cards';
 import { useHistory } from "react-router-dom";
 
 function Home() {
@@ -16,6 +17,7 @@ function Home() {
         <>
             <Navbar/>
             <HeroSection />
+            <Cards />
             <Footer/>
         </>
     );
