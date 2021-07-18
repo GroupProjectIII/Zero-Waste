@@ -16,21 +16,28 @@ export default function BuyerDetails() {
                     </div>
                     <p>Active Collector Since 2020 Apr</p>
                     <img src={ProPIc}></img>
+                    <p>discription***</p>
                 </div>
                 <div className="col-75">
-                    <h3>Location:</h3>
-                    <p>No 127, Kandy Rd, Kadawatha.</p>
-                    <h3>Contact Number:</h3>
-                    <p>+94264158756, +94587596321</p>
+                    <div className="s-b-detail">
+                        <h2>Address:</h2>
+                        <p>No 127, Kandy Rd, Kadawatha.</p>
+                    </div>
+                    <div className="s-b-detail">
+                        <h2>Contact Number:</h2>
+                        <p>+94264158756, +94587596321</p>
+                    </div>
                     
-                    <div className="buyer-profile-list">
+                    
+                    <div className="buyer-type-list">
                         <h2>Favourite Waste Types:</h2>
                         <ul>
                             <li>Plastic</li>
                             <li>Polythene</li>
                         </ul>
+                        <button>View All</button>
                     </div>
-                    <div className="buyer-profile-list">
+                    <div className="buyer-area-list">
                         <h2>Favourite Collecting Areas:</h2>
                         <ul>
                             <li>Gampaha</li>
@@ -38,7 +45,13 @@ export default function BuyerDetails() {
                             <li>Kadawatha</li>
                             <li>Nittabuwa</li>
                             <li>Ragama</li>
+                            
                         </ul>
+                        <button>View All</button>
+                        <div className="sell-now">
+                            <button>Sell Now</button>
+                        </div>
+                        
                     </div>
                     
                     

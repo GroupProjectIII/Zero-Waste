@@ -1,6 +1,4 @@
-* {
-  box-sizing: border-box;
-}
+
 
 /* Float four columns side by side */
 
@@ -8,6 +6,7 @@
     max-width: 80vw;
     margin: auto;
     padding: 25px;
+    box-sizing: border-box;
 }
 .buyer-column {
   float: left;

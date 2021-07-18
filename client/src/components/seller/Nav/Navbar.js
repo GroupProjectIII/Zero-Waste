@@ -2,7 +2,7 @@ import { useHistory } from 'react-router';
 import React, { useState } from 'react';
 import { Button } from './NavButton';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -17,6 +17,8 @@ function Navbar() {
         history.push("/");
     };
 
+    
+    
 
     return (
         <>
@@ -44,6 +46,7 @@ function Navbar() {
                             View My Posts
                         </Link>
                     </li>
+                    
                     <li className='nav-item-b'>
                         <Link to='/seller/findbuyers' className='nav-links-b' onClick={closeMobileMenu}>
                             Find Buyers
