@@ -1,0 +1,112 @@
+.seller-add-comment{
+    width: 75vw;
+    margin: auto;
+}
+
+.seller-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.seller-card {
+  margin: 20px;
+  padding: 20px;
+  width: 500px;
+  min-height: 200px;
+  display: grid;
+  grid-template-rows: auto;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.5s;
+}
+
+.seller-card:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
+}
+
+.seller-card__title {
+  font-weight: 400;
+ 
+}
+
+.seller-reply-details{
+    margin-top: 10px;
+    font-size: 18px;
+}
+ .seller-reply-details p, .seller-sender-details p{
+    font-size: 14px;
+}
+.seller-user-comment h2, .seller-user-reply h2{
+    font-weight: 400;
+    font-size: 18px;
+}
+.seller-sender-details, .seller-reply-details{
+    margin-bottom: 20px;
+}
+.seller-sender-details h3, .seller-sender-details i, .seller-reply-details h3, .seller-reply-details i{
+    display: inline-block;
+    font-size: 24px;
+}
+
+
+
+.seller-card {
+  background: radial-gradient(#60efbc, #58d5c9);
+}
+.seller-add-comment-form {  
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+  }
+  
+  .seller-add-comment-form label {
+    margin: 5px 10px 5px 0;
+  }
+  
+  .seller-add-comment-form input {
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 70vw;
+  }
+  
+  .seller-add-comment-form button {
+    padding: 10px 20px;
+    background-color: forestgreen;
+    border: 1px solid #ddd;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .seller-add-comment-form button:hover {
+    background-color: darkgreen;
+  }
+  .seller-user-reply{
+      margin-left: 100px;
+      font-size: 12px;
+      padding: 5px;
+  }
+  
+  @media (max-width: 800px) {
+    .seller-add-comment-form input {
+      margin: 10px 0;
+      width: 50vw;
+    }
+  }
+
+
+
+@media (max-width: 1600px) {
+  .seller-card-container {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 600px){
+    .seller-add-comment{
+        width: 80vw;
+    }
+}

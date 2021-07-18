@@ -1,0 +1,68 @@
+.seller-post-list-background{
+    padding: 4rem;
+    background: url('../../buyer/home/images/background1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.seller-post-list{
+    width: 80vw;
+    margin: auto;
+    box-sizing: border-box;
+}
+.seller-post-card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: left;
+    background-color: #f1f1f1;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.seller-post-card-item-row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.seller-post-card-item{
+    float: left;
+    width: 30%;
+    padding: 0 10px;
+    border: 1px solid;
+    box-shadow: 5px 5px 8px #888888;
+    margin-left: 10px;
+}
+
+.seller-post-card-itm-header{
+    display: inline-block;
+}
+.item-edit-button{
+    float: right;
+    padding: 5px 15px;
+    border: none;
+    background-color: blue;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 3px;
+    margin: 10px;
+
+}
+
+.item-edit-button:hover{
+    background-color: darkblue;
+
+}
+
+.seller-post-card-item-details img{
+    width: 100%;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .seller-post-card-item {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+}
