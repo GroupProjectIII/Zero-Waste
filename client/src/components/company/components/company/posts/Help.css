@@ -190,7 +190,6 @@ body {
 	background-position: right;
 }
 
-
 @media screen and (max-width: 1050px) {
 	.helpcontainer-c {
 		grid-gap: 7rem;
@@ -223,5 +222,26 @@ body {
 
 	.help-content-c {
 		justify-content: center;
+	}
+
+	.help-content-c .helptitle-c{
+		margin-top: 10px;
+	
+	}
+	.help-content-c .textareaa-c{
+		margin-top: 60px;
+	
+	}
+
+	.help-content-c .selection-c{
+		margin-top: 40px;
+	}
+
+	form img{
+		margin-top: 0px;
+	}
+
+	form .helpbtn-c{
+		margin-top: 50px;
 	}
 }

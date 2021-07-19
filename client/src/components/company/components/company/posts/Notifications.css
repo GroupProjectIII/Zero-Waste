@@ -68,11 +68,12 @@
 
 #timestamp-c {
     margin-left: 70%;
+    
 }
 
  @media(max-width: 768px) {
     #timestamp-c {
-        margin-left: 10%;
+        margin-left: none;
     }  
 }
 
