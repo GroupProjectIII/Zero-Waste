@@ -40,13 +40,13 @@ function DirectP() {
               <tbody>
                 <tr>
                   <td data-label="Offer ID">01</td>
-                  <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
                   <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                   <td data-label="Waste Type">Plastic</td>
                   <td data-label="Waste Item">Bucket</td>
-                  <td data-label="date">2020 July 07</td>
+                  <td data-label="Date">2020 July 07</td>
                   <td data-label="Quantity">2 kg</td>
-                  <td data-label="Location">
+                  <td data-label="Action">
                     <span className="action_btn-c">
                       <a href="#" >Accept</a>
                       <a href="#">Reject</a>
@@ -56,13 +56,13 @@ function DirectP() {
 
                 <tr>
                   <td data-label="Offer ID">02</td>
-                  <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
                   <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                   <td data-label="Waste Type">Plastic</td>
                   <td data-label="Waste Item">Bucket</td>
-                  <td data-label="date">2020 July 07</td>
+                  <td data-label="Date">2020 July 07</td>
                   <td data-label="Quantity">2 kg</td>
-                  <td data-label="Location">
+                  <td data-label="Action">
                     <span className="action_btn-c">
                       <a href="#" >Accept</a>
                       <a href="#">Reject</a>
@@ -72,13 +72,13 @@ function DirectP() {
 
                 <tr>
                   <td data-label="Offer ID">03</td>
-                  <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
                   <td data-label="Image"><img src="../../images/paper.jpg" alt=""></img></td>
                   <td data-label="Waste Type">Paper</td>
                   <td data-label="Waste Item">News Papers</td>
-                  <td data-label="date">2020 July 07</td>
+                  <td data-label="Date">2020 July 07</td>
                   <td data-label="Quantity">5 kg</td>
-                  <td data-label="Location">
+                  <td data-label="Action">
                     <span className="action_btn-c">
                       <a href="#" >Accept</a>
                       <a href="#">Reject</a>
@@ -88,13 +88,13 @@ function DirectP() {
 
                 <tr>
                   <td data-label="Offer ID">04</td>
-                  <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
                   <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                   <td data-label="Waste Type">Polythene</td>
                   <td data-label="Waste Item">Bags</td>
-                  <td data-label="date">2020 July 07</td>
+                  <td data-label="Date">2020 July 07</td>
                   <td data-label="Quantity">3 kg</td>
-                  <td data-label="Location">
+                  <td data-label="Action">
                     <span className="action_btn-c">
                       <a href="#" >Accept</a>
                       <a href="#">Reject</a>
@@ -104,13 +104,13 @@ function DirectP() {
 
                 <tr>
                   <td data-label="Offer ID">05</td>
-                  <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
                   <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                   <td data-label="Waste Type">Polythene</td>
                   <td data-label="Waste Item">Bags</td>
-                  <td data-label="date">2020 July 07</td>
+                  <td data-label="Date">2020 July 07</td>
                   <td data-label="Quantity">3 kg</td>
-                  <td data-label="Location">
+                  <td data-label="Action">
                     <span className="action_btn-c">
                       <a href="#" >Accept</a>
                       <a href="#">Reject</a>

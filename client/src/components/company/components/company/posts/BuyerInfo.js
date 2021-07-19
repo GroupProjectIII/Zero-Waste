@@ -33,12 +33,12 @@ function BuyerInfo() {
                     <tbody>
                         <tr>
                             <td data-label="Offer ID">01</td>
-                            <td>Tom</td>
+                            <td data-label="Buyer">Tom</td>
                             <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                             <td data-label="Waste Type">tom@gmail.com</td>
                             <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="date">Colombo</td>
-                            <td data-label="Location">
+                            <td data-label="Date">Colombo</td>
+                            <td data-label="Action">
                                 <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
@@ -47,12 +47,12 @@ function BuyerInfo() {
 
                         <tr>
                             <td data-label="Offer ID">02</td>
-                            <td>Tom</td>
+                            <td data-label="Buyer">Tom</td>
                             <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                             <td data-label="Waste Type">tom@gmail.com</td>
                             <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="date">Colombo</td>
-                            <td data-label="Location">
+                            <td data-label="Date">Colombo</td>
+                            <td data-label="Action">
                                 <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
@@ -61,12 +61,12 @@ function BuyerInfo() {
 
                         <tr>
                             <td data-label="Offer ID">03</td>
-                            <td>Tom</td>
+                            <td data-label="Buyer">Tom</td>
                             <td data-label="Image"><img src="../../images/paper.jpg" alt=""></img></td>
                             <td data-label="Waste Type">tom@gmail.com</td>
                             <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="date">Colombo</td>
-                            <td data-label="Location">
+                            <td data-label="Date">Colombo</td>
+                            <td data-label="Action">
                                 <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
@@ -75,12 +75,12 @@ function BuyerInfo() {
 
                         <tr>
                             <td data-label="Offer ID">04</td>
-                            <td>Tom</td>
+                            <td data-label="Buyer">Tom</td>
                             <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                             <td data-label="Waste Type">tom@gmail.com</td>
                             <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="date">Colombo</td>
-                            <td data-label="Location">
+                            <td data-label="Date">Colombo</td>
+                            <td data-label="Action">
                                 <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
@@ -89,12 +89,12 @@ function BuyerInfo() {
 
                         <tr>
                             <td data-label="Offer ID">05</td>
-                            <td>Tom</td>
+                            <td data-label="Buyer">Tom</td>
                             <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
                             <td data-label="Waste Type">tom@gmail.com</td>
                             <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="date">Colombo</td>
-                            <td data-label="Location">
+                            <td data-label="Date">Colombo</td>
+                            <td data-label="Action">
                                 <span className="action_btn-c">
                                     <a href="#" onClick={handleRoute}>Contact</a>
                                 </span>
