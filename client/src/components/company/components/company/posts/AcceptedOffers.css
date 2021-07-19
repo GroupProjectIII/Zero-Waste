@@ -26,6 +26,10 @@
     margin: 0 auto;
 }
 
+.tables-c h1{
+    color: #239F56;
+}
+
 .table-c{
     width: 100%;
     border-collapse: collapse;
@@ -93,6 +97,11 @@
 
 .table-c tbody tr:hover{
     filter: drop-shadow(0px 2px 6px #0002);
+}
+
+.btn-modal-c{
+    display: block;
+    width: 100%;
 }
 
 .search_box-c{
@@ -178,6 +187,10 @@
     
     .search_box-c{
         width: 95%;
+    }
+
+    .btn-modal-c{
+        margin-left: 40%;
     }
 }
 

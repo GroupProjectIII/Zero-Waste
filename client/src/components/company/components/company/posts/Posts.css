@@ -11,6 +11,12 @@
     width: 90%;
     margin: 0 auto;
 }
+.posts__container-c .title-c{
+    text-align: center;
+    padding: 15px;
+    text-transform: uppercase;
+    color: #0c4927;
+}
 
 .grid-c {
     margin: 80px;

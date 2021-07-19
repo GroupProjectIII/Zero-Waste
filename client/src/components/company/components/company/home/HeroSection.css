@@ -1,4 +1,4 @@
-.hero-container-b {
+.hero-container-c {
     background: url('./images/company.jpg')  center center/cover no-repeat;
     height: 100vh;
     width: 100%;
@@ -10,13 +10,13 @@
     object-fit: contain;
 }
 
-.hero-container-b > h1 {
+.hero-container-c > h1 {
     color: #fff;
     font-size: 100px;
     margin-top: -100px;
 }
 
-.hero-container-b > p {
+.hero-container-c > p {
     margin-top: 8px;
     color: #fff;
     font-size: 32px;
@@ -24,11 +24,11 @@
     'Lucida Sans', Arial, sans-serif;
 }
 
-.hero-btn-b {
+.hero-btn-c {
     margin-top: 32px;
 }
 
-.hero-btn-b .btn-b {
+.hero-btn-c .btn-c {
     margin: 6px;
 }
 
@@ -37,31 +37,31 @@
 }
 
 @media screen and (max-width: 960px) {
-    .hero-container-b > h1 {
+    .hero-container-c > h1 {
         font-size: 70px;
         margin-top: -150px;
     }
-    .hero-btn-b {
+    .hero-btn-c {
         width: 100%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .hero-container-b > h1 {
+    .hero-container-c > h1 {
         font-size: 50px;
         margin-top: -100px;
     }
 
-    .hero-container-b > p {
+    .hero-container-c > p {
         font-size: 30px;
     }
 
-    .btn-b-mobile {
+    .btn-c-mobile {
         display: block;
         text-decoration: none;
     }
 
-    .btn-b {
+    .btn-c {
         width: 100%;
     }
 }

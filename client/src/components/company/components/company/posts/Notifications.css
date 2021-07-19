@@ -2,7 +2,7 @@
     text-align: center;
     padding: 15px;
     text-transform: uppercase;
-    color: #239F56;
+    color: #0c4927;
 }
 
 .n_content-c {
@@ -68,11 +68,12 @@
 
 #timestamp-c {
     margin-left: 70%;
+    
 }
 
  @media(max-width: 768px) {
     #timestamp-c {
-        margin-left: 10%;
+        margin-left: none;
     }  
 }
 

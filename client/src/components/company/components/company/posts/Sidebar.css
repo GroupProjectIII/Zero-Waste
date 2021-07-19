@@ -3,6 +3,7 @@
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
+    z-index: 1000;
 }
 
 .nav-menu-c {
@@ -16,6 +17,7 @@
     top: 0;
     left: -100%;
     transition: 850ms;
+    z-index: 1000;
 }
 
 .nav-menu-c.active {

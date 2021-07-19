@@ -37,7 +37,7 @@ body {
 	width: 500px;
 }
 
-form {
+.help-content-c form {
 	width: 360px;
 }
 
@@ -74,7 +74,7 @@ form {
 }
 
 .help-input-c select {
-	max-width: 400px;
+	max-width: 350px;
 	position: relative;
 	height: 45px;
 }
@@ -190,7 +190,6 @@ form {
 	background-position: right;
 }
 
-
 @media screen and (max-width: 1050px) {
 	.helpcontainer-c {
 		grid-gap: 7rem;
@@ -198,10 +197,6 @@ form {
 }
 
 @media screen and (max-width: 1000px) {
-	form {
-		width: 290px;
-	}
-
 	.help-content-c h2 {
         font-size: 2.4rem;
         margin: 8px 0;
@@ -227,5 +222,26 @@ form {
 
 	.help-content-c {
 		justify-content: center;
+	}
+
+	.help-content-c .helptitle-c{
+		margin-top: 10px;
+	
+	}
+	.help-content-c .textareaa-c{
+		margin-top: 60px;
+	
+	}
+
+	.help-content-c .selection-c{
+		margin-top: 40px;
+	}
+
+	form img{
+		margin-top: 0px;
+	}
+
+	form .helpbtn-c{
+		margin-top: 50px;
 	}
 }

@@ -21,42 +21,42 @@ function DashB() {
                         <tbody>
                             <tr>
                                 <td data-label="Offer ID">01</td>
-                                <td data-label="date">01 Jun 2020</td>
-                                <td data-label="amount">20kg</td>
-                                <td data-label="type">Plastic</td>
-                                <td data-label="price">Rs.100</td>
+                                <td data-label="Date">01 Jun 2020</td>
+                                <td data-label="Amount">20kg</td>
+                                <td data-label="Type">Plastic</td>
+                                <td data-label="Price">Rs.100</td>
                             </tr>
 
                             <tr>
                                 <td data-label="Offer ID">01</td>
-                                <td data-label="date">01 Jun 2020</td>
-                                <td data-label="amount">20kg</td>
-                                <td data-label="type">Plastic</td>
-                                <td data-label="price">Rs.100</td>
+                                <td data-label="Date">01 Jun 2020</td>
+                                <td data-label="Amount">20kg</td>
+                                <td data-label="Type">Plastic</td>
+                                <td data-label="Price">Rs.100</td>
                             </tr>
 
                             <tr>
                                 <td data-label="Offer ID">01</td>
-                                <td data-label="date">01 Jun 2020</td>
-                                <td data-label="amount">20kg</td>
-                                <td data-label="type">Plastic</td>
-                                <td data-label="price">Rs.100</td>
+                                <td data-label="Date">01 Jun 2020</td>
+                                <td data-label="Amount">20kg</td>
+                                <td data-label="Type">Plastic</td>
+                                <td data-label="Price">Rs.100</td>
                             </tr>
 
                             <tr>
                                 <td data-label="Offer ID">01</td>
-                                <td data-label="date">01 Jun 2020</td>
-                                <td data-label="amount">20kg</td>
-                                <td data-label="type">Plastic</td>
-                                <td data-label="price">Rs.100</td>
+                                <td data-label="Date">01 Jun 2020</td>
+                                <td data-label="Amount">20kg</td>
+                                <td data-label="Type">Plastic</td>
+                                <td data-label="Price">Rs.100</td>
                             </tr>
 
                             <tr>
                                 <td data-label="Offer ID">01</td>
-                                <td data-label="date">01 Jun 2020</td>
-                                <td data-label="amount">20kg</td>
-                                <td data-label="type">Plastic</td>
-                                <td data-label="price">Rs.100</td>
+                                <td data-label="Date">01 Jun 2020</td>
+                                <td data-label="Amount">20kg</td>
+                                <td data-label="Type">Plastic</td>
+                                <td data-label="Price">Rs.100</td>
                             </tr>
                         </tbody>
                     </table>
