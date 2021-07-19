@@ -35,11 +35,11 @@ function OfferPost() {
             <tbody>
               <tr>
                 <td data-label="Offer ID">01</td>
-                <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="date">2020 July 07</td>
+                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                <td data-label="Date">2020 July 07</td>
                 <td data-label="Quantity">2 kg</td>
                 <td data-label="Price">Rs 20</td>
-                <td data-label="Location">
+                <td data-label="Action">
                   <span className="action_btn-c">
                     <a href="#" >Accept</a>
                     <a href="#">Reject</a>
@@ -49,11 +49,11 @@ function OfferPost() {
 
               <tr>
                 <td data-label="Offer ID">02</td>
-                <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="date">2020 July 07</td>
+                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                <td data-label="Date">2020 July 07</td>
                 <td data-label="Quantity">2 kg</td>
                 <td data-label="Price">Rs 20</td>
-                <td data-label="Location">
+                <td data-label="Action">
                   <span className="action_btn-c">
                     <a href="#" >Accept</a>
                     <a href="#">Reject</a>
@@ -63,11 +63,11 @@ function OfferPost() {
 
               <tr>
                 <td data-label="Offer ID">03</td>
-                <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="date">2020 July 07</td>
+                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                <td data-label="Date">2020 July 07</td>
                 <td data-label="Quantity">5 kg</td>
                 <td data-label="Price">Rs 25</td>
-                <td data-label="Location">
+                <td data-label="Action">
                   <span className="action_btn-c">
                     <a href="#" >Accept</a>
                     <a href="#">Reject</a>
@@ -77,11 +77,11 @@ function OfferPost() {
 
               <tr>
                 <td data-label="Offer ID">04</td>
-                <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="date">2020 July 07</td>
+                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                <td data-label="Date">2020 July 07</td>
                 <td data-label="Quantity">3 kg</td>
                 <td data-label="Price">Rs 20</td>
-                <td data-label="Location">
+                <td data-label="Action">
                   <span className="action_btn-c">
                     <a href="#" >Accept</a>
                     <a href="#">Reject</a>
@@ -91,11 +91,11 @@ function OfferPost() {
 
               <tr>
                 <td data-label="Offer ID">05</td>
-                <td><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="date">2020 July 07</td>
+                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
+                <td data-label="Date">2020 July 07</td>
                 <td data-label="Quantity">3 kg</td>
                 <td data-label="Price">Rs 20</td>
-                <td data-label="Location">
+                <td data-label="Action">
                   <span className="action_btn-c">
                     <a href="#" >Accept</a>
                     <a href="#">Reject</a>
