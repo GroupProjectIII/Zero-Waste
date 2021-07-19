@@ -12,12 +12,6 @@ export const AccountSidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Rate and Comment',
-        path: '/buyer/rcomment',
-        icon: <MdIcons.MdLocalOffer />,
-        cName: 'nav-text'
-    },
-    {
         title: 'View Notifications',
         path: '/buyer/vnotifications',
         icon: <FaCommentDots />,

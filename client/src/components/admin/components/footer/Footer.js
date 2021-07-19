@@ -1,7 +1,7 @@
 import React from 'react';
 import './footer.css';
 import { Link } from 'react-router-dom';
-import { Button } from './../navbar/NavButton';
+import { Button } from '../../../buyer/home/Button';
 
 function Footer() {
     return (
