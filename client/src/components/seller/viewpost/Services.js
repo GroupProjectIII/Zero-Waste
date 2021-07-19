@@ -1,7 +1,9 @@
 import React from 'react';
 import './Services.css';
 import Posts from './ViewPosts';
+
 import SellerSidebar from './Sidebar';
+
 import { useHistory } from 'react-router';
 
 function Services() {
@@ -13,8 +15,10 @@ function Services() {
     
     return (
         <>
+
             <SellerSidebar/>
             <Posts />
+
         </>
     );
 }

@@ -67,7 +67,8 @@ function PublicPost() {
                     </div>
                 <button className="delete-item-btn" onClick={deleteItem}>Delete Item</button>
                 
-            </div>
+
+            </div>           
         );
     }
     useEffect(() => addWasteItem(), []);

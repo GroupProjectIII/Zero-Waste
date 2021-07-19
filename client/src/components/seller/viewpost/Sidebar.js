@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+
 import { SellerSidebarData } from './SidebarData';
 import './Sidebar.css';
 import { IconContext } from 'react-icons';
 
 function SellerSidebar() {
+
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
@@ -26,7 +28,9 @@ function SellerSidebar() {
                                 <AiIcons.AiOutlineClose />
                             </Link>
                         </li>
+
                         {SellerSidebarData.map((item, index) => {
+
                             return (
                                 <li key={index} className={item.cName}>
                                     <Link to={item.path}>
@@ -43,4 +47,6 @@ function SellerSidebar() {
     );
 }
 
+
 export default SellerSidebar;
+
