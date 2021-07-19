@@ -3,9 +3,8 @@ import { useHistory } from "react-router";
 import Navbar from "../Nav/Navbar";
 import Footer from "../Nav/Footer";
 import BuyerDetails from "./BuyerDetails";
-import BuyerReviews from "./BuyerReviews";
 import "./ViewBuyer.css";
-
+import BuyerReviews from './BuyerReviews';
 
 export default function ViewBuyer() {
 

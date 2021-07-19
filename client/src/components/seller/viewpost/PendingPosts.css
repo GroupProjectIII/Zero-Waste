@@ -38,20 +38,26 @@
 .seller-post-card-itm-header{
     display: inline-block;
 }
-.item-edit-button{
+.item-edit-button,.item-remove-button{
     float: right;
     padding: 5px 15px;
     border: none;
-    background-color: blue;
     cursor: pointer;
     color: #fff;
     border-radius: 3px;
     margin: 10px;
+    text-decoration: none;
 
 }
+.item-edit-button{
+    background-color: blue;
+}
+.item-remove-button{
+    background-color: red;
+}
 
-.item-edit-button:hover{
-    background-color: darkblue;
+.item-edit-button:hover, .item-remove-button:hover{
+    background-color: darkred;
 
 }
 
