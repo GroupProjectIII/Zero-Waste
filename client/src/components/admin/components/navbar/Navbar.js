@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import './navbar.css';
+import '../../../buyer/home/Navbar.css';
+import './NavButton';
+import {Button} from "../../../buyer/home/NavButton";
 
 function Navbar() {
 
@@ -39,12 +41,8 @@ function Navbar() {
                         Account
                     </Link>
                 </li>
-                <li className='nav-item-c'>
-                    <Link to='/' className='nav-links-b'  onClick={logoutHandler}>
-                        Sign Out <i className="fas fa-sign-out-alt"></i>
-                    </Link>
-                </li>
             </ul>
+            <Button />
         </nav>
     </>
     );
