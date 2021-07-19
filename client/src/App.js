@@ -35,10 +35,13 @@ import SellerHome from './components/seller/Home/Home';
 import SellerAddPostDirect from './components/seller/Post/AddPostDirect';
 import SellerAddPostPublic from './components/seller/Post/AddPostPublic';
 import SellerMyPost from './components/seller/viewpost/Services';
-import SellerProfile from './components/seller/Profile/Profile';
+import SellerProfile from './components/seller/Profile/SellerProfile';
 import SellerBuyersHome from './components/seller/Buyers/SearchBuyerPage';
 import SellerViewPost from './components/seller/viewpost/ViewPosts';
 import SellerViewBuyer from './components/seller/Buyers/ViewBuyer';
+import SellerViewOffers from './components/seller/viewpost/ViewOffers';
+import SellerPreviousPosts from './components/seller/viewpost/ViewPreviousPosts';
+
 
 import AdminHome from "./components/admin/components/home/Home";
 import AdminUserlist from "./components/admin/pages/userlist/Userlist";
@@ -110,6 +113,8 @@ function App() {
                     <Route path='/seller/buyer' exact component={SellerViewBuyer} />
                     <Route path='/seller/profile' exact component={SellerProfile} />
                     <Route path='/seller' exact component={SellerHome} />
+                    <Route path='/seller/offers' component={SellerViewOffers} />
+                    <Route path='/seller/previousposts' component={SellerPreviousPosts} />
 
 
                     <Route path='/admin' exact component={AdminHome} />

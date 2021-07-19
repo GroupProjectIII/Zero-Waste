@@ -20,9 +20,16 @@ export const SellerSidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Previous Posts',
-        path: '/seller/pendingoffers',
+        title: 'Accepyted Offers',
+        path: '/seller/acceptedoffers',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },
+    {
+        title: 'Previous Posts',
+        path: '/seller/previousposts',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'nav-text'
+    },
+    
 ];
