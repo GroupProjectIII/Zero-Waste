@@ -11,7 +11,7 @@ function Forms() {
                             <h3>Image of Waste Item</h3>
                             <img src="../images/polythene.jpg" alt=""></img>
                             <div className="title-b">Make Offer</div>
-                            <form action="#">
+                            <form className="buyer-form-b" action="#">
                                 <div className="user-details-b">
                                     <div className="input-box-b">
                                         <span className="details-b">Offer Value</span>
