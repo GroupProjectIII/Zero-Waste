@@ -9,7 +9,7 @@ function EditCompanyOfferForms() {
                 <div className="container-b">
                     <div className="title-b">Edit Company Pending Offer</div>
                     <div className="content-b">
-                        <form action="#">
+                        <form className="buyer-form-b" action="#">
                             <div className="user-details-b">
                                 <div className="input-box-b">
                                     <span className="details-b">Waste Type</span>
