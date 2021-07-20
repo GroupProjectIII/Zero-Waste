@@ -1,39 +1,48 @@
-.newuser{
+.an_newuser{
     flex: 4;
-    margin-bottom: 50px;
-    margin-left: 30px;
-    
 } 
-.newform{
+.an_newform{
     display: flex;
     flex-wrap: wrap;
+    
 }
-.newuserTitle{
+.an_newuserTitle{
     text-align: left;
 }
-.fitems{
+.an_fitems{
     width: 400px;
     display: flex;
     flex-direction: column;
     margin-top: 10px;
     margin-right: 20px;
 }
-.fitems>label{
+.an_fitems>label{
     margin-bottom: 10px;
     font-size: 14px;
     font-weight: 600;
     color: gray;
 }
-.fitems>input{
-     height: 20px;
+.an_fitems>input{
+     height: 35px;
      padding: 10px;
      border: 1px solid gray;
      border-radius: 5px;
 }
-.nbutton{
+
+.an_role>input{
+    margin-top: 15px;
+    color: black;
+    display: inline;
+}
+.an_role>label{
+    margin: 10px;
+    font-size: 18px;
+    color: #555;
+}
+.an_nbutton{
     width: 200px;
     border: none;
-    background-color: darkblue;
+    background-color: #2E8B57;
     color: white;
     padding: 7px 10px;
     font-weight: 600;

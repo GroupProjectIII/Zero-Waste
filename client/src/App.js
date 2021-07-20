@@ -34,11 +34,14 @@ import SellerViewBuyer from './components/seller/Buyers/ViewBuyer';
 
 import AdminHome from "./components/admin/components/home/Home";
 import AdminUserlist from "./components/admin/pages/userlist/Userlist";
+import AdminBuyer from "./components/admin/pages/userlist/AdminBuyer";
+import AdminSeller from "./components/admin/pages/userlist/AdminSeller";
+import AdminCompany from "./components/admin/pages/userlist/AdminCompany";
 import AdminUser from "./components/admin/pages/user/User";
 import AdminNewuser from './components/admin/pages/newuser/Newuser';
 import AdminReport from './components/admin/pages/report/Report';
+import AdminUserReport from './components/admin/pages/userreport/UserReport';
 import AdminStatistics from './components/admin/pages/statistics/Statistics';
-
 
 
 function App() {
@@ -81,7 +84,11 @@ function App() {
 
                     <Route path='/admin' exact component={AdminHome} />
                     <Route path='/admin/users' component={AdminUserlist} />
+                    <Route path='/admin/buyers' component={AdminBuyer} />
+                    <Route path='/admin/sellers' component={AdminSeller} />
+                    <Route path='/admin/companies' component={AdminCompany} />
                     <Route path='/admin/user/:userid' component={AdminUser} />
+                    <Route path='/admin/userreport/:userid' component={AdminUserReport} />
                     <Route path='/admin/newuser' component={AdminNewuser} />
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />

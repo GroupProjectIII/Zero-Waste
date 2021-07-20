@@ -41,6 +41,29 @@ export default function Statistics() {
                         </div>
 
                     </div>
+
+                    <div className='fe_info'>
+                        <div className="infoItem">
+                            <span className="featuredTitle">Buyers Registered</span>
+                            <div className="featuredMoneyContainer">
+                                <span className="featuredMoney">85</span>
+                            </div>
+                        </div>
+
+                        <div className="infoItem">
+                            <span className="featuredTitle">Companies Registered</span>
+                            <div className="featuredMoneyContainer">
+                                <span className="featuredMoney">34</span>
+                            </div>
+                        </div>
+                        <div className="infoItem">
+                            <span className="featuredTitle">Sellers Registered</span>
+                            <div className="featuredMoneyContainer">
+                                <span className="featuredMoney">65</span>
+                            </div>
+                        </div>
+
+                    </div>
                     <div className='bb'>
                     <h3 className="chartTitle">Waste Type Selling Precentage</h3>
                         <PieChart width={400} height={350}>
