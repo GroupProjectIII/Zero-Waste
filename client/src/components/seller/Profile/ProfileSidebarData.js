@@ -8,26 +8,26 @@ export const SellerSidebarData = [
 
 
     {
-        title: 'Available Posts',
-        path: '/seller/viewposts',
+        title: 'Profile',
+        path: '/seller/profile',
         icon: <FaIcons.FaAdversal />,
         cName: 'nav-text'
     },
     {
-        title: 'View Offers',
-        path: '/seller/offers',
+        title: 'Notifications',
+        path: '/seller/notification',
         icon: <MdIcons.MdLocalOffer />,
         cName: 'nav-text'
     },
     {
-        title: 'Accepted Offers',
-        path: '/seller/acceptedoffers',
+        title: 'Add Complain',
+        path: '/seller/complaint',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },
     {
-        title: 'Previous Posts',
-        path: '/seller/previousposts',
+        title: 'Stats',
+        path: '/seller/stats',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },

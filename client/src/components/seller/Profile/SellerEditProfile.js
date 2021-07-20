@@ -1,13 +1,14 @@
-import Navbar from '../Nav/Navbar';
+import React from 'react';
+import SellerEditProfileForms from "./SellerEditProfileForm";
+import Navbar from '../Nav/Navbar'
 import Footer from '../Nav/Footer';
-import ProfileDetails from './ProfileDetails';
-
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import ProfileSidebar from './ProfileSidebar';
 
-export default function SellerProfile() {
+export default function EditProfile() {
 
     const history = useHistory();
+
     if((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype")==="seller")){
         history.push("/");
     }
@@ -16,8 +17,8 @@ export default function SellerProfile() {
         <>
             <Navbar />
             <ProfileSidebar />
-            <ProfileDetails />
-            <Footer />
+            <SellerEditProfileForms/>
+            <Footer/>
         </>
-    )
+    );
 }

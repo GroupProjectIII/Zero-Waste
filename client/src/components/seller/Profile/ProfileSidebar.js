@@ -3,7 +3,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
-import { SellerSidebarData } from './SidebarData';
+import { SellerSidebarData } from './ProfileSidebarData';
 
 import { IconContext } from 'react-icons';
 

@@ -1,6 +1,14 @@
+import { useHistory } from 'react-router';
 import './SellerOfferList.css';
 
 export default function SellerOfferList() {
+
+    const history = useHistory()
+    const viewBuyer = () => {
+        history.push('/seller/buyer')
+    }
+
+    
     return (
         <>
             <div className="seller-offer-list-background">
@@ -25,7 +33,7 @@ export default function SellerOfferList() {
                         <td>Bottles</td>
                         <td>2021-07-24</td>
                         <td>2021-07-24</td>
-                        <td>23 <a className="offer-list-view-buyer" href="#">View Buyer</a></td>
+                        <td>23 <a className="offer-list-view-buyer" href="#" onClick={viewBuyer}>View Buyer</a></td>
                         <td>Lk Collectors</td>
                         <td>200.00</td>
                         <td>

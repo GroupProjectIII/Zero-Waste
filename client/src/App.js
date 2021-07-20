@@ -40,7 +40,11 @@ import SellerViewPost from './components/seller/viewpost/ViewPosts';
 import SellerViewBuyer from './components/seller/Buyers/ViewBuyer';
 import SellerViewOffers from './components/seller/viewpost/ViewOffers';
 import SellerPreviousPosts from './components/seller/viewpost/ViewPreviousPosts';
-
+import SelllerAcceptedOffers from './components/seller/viewpost/ViewAcceptedOffers';
+import SellerEditProfile from './components/seller/Profile/SellerEditProfile';
+import SellerViewNotifications from './components/seller/Profile/SellerViewNotifications';
+import SellerAddComplaint from './components/seller/Profile/AddComplaints';
+import SellerViewStats from './components/seller/Profile/SellerViewStats';
 
 
 import CompanyHome from './components/company/pages/Home';
@@ -121,8 +125,11 @@ function App() {
                     <Route path='/seller' exact component={SellerHome} />
                     <Route path='/seller/offers' component={SellerViewOffers} />
                     <Route path='/seller/previousposts' component={SellerPreviousPosts} />
-
-                    
+                    <Route path='/seller/acceptedoffers' component={SelllerAcceptedOffers} />
+                    <Route path='/seller/editprofile' component={SellerEditProfile} />
+                    <Route path='/seller/notification' component={SellerViewNotifications} />
+                    <Route path='/seller/complaint' component={SellerAddComplaint} />
+                    <Route path='/seller/stats' component={SellerViewStats} />
 
 					<Route path='/company' exact component={CompanyHome} />
                     <Route path='/company/profile' component={CompanyProfile} />                 
