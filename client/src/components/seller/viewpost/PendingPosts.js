@@ -11,11 +11,16 @@ export default function PendingPosts() {
             <div className="seller-post-card">
                 <h2>Post Id : 0001</h2>
                 <h2>Buyers : All</h2>
+                <a className="item-edit-all-button" href="#">Edit</a>
+                <a className="item-remove-all-button" href="#">Remove</a>    
                 <div className="seller-post-card-item-row">
                     <div className="seller-post-card-item">
                         <div className="seller-post-card-item-header">
                             <h3>Item: 1</h3>
-                            <button className="item-edit-button">edit</button>
+                         
+                            <a className="item-edit-button" href="#">Edit</a>
+                            <a className="item-remove-button" href="#">Remove</a>    
+
                         </div>
                         <div className="seller-post-card-item-details">
                             <h4>Plastic | Bottle</h4>
@@ -27,7 +32,8 @@ export default function PendingPosts() {
                     <div className="seller-post-card-item">
                         <div className="seller-post-card-item-header">
                             <h3>Item: 1</h3>
-                            <button className="item-edit-button">edit</button>
+                            <a className="item-edit-button" href="#">Edit</a>
+                            <a className="item-remove-button" href="#">Remove</a>
                         </div>
                         <div className="seller-post-card-item-details">
                             <h4>Plastic | Bottle</h4>
@@ -41,13 +47,16 @@ export default function PendingPosts() {
                     
             </div>
             <div className="seller-post-card">
-                <h2>Post Id : 0001</h2>
+                <h2>Post Id : 0002</h2>
                 <h2>Buyers : All</h2>
+                <a className="item-edit-all-button" href="#">Edit</a>
+                <a className="item-remove-all-button" href="#">Remove</a>
                 <div className="seller-post-card-item-row">
                     <div className="seller-post-card-item">
                         <div className="seller-post-card-item-header">
                             <h3>Item: 1</h3>
-                            <button className="item-edit-button">edit</button>
+                            <a className="item-edit-button" href="#">Edit</a>
+                            <a className="item-remove-button" href="#">Remove</a>
                         </div>
                         <div className="seller-post-card-item-details">
                             <h4>Plastic | Bottle</h4>
@@ -59,7 +68,8 @@ export default function PendingPosts() {
                     <div className="seller-post-card-item">
                         <div className="seller-post-card-item-header">
                             <h3>Item: 1</h3>
-                            <button className="item-edit-button">edit</button>
+                            <a className="item-edit-button" href="#">Edit</a>
+                            <a className="item-remove-button" href="#">Remove</a>
                         </div>
                         <div className="seller-post-card-item-details">
                             <h4>Plastic | Bottle</h4>
@@ -71,7 +81,8 @@ export default function PendingPosts() {
                     <div className="seller-post-card-item">
                         <div className="seller-post-card-item-header">
                             <h3>Item: 1</h3>
-                            <button className="item-edit-button">edit</button>
+                            <a className="item-edit-button" href="#">Edit</a>
+                            <a className="item-remove-button" href="#">Remove</a>
                         </div>
                         <div className="seller-post-card-item-details">
                             <h4>Plastic | Bottle</h4>
@@ -83,7 +94,8 @@ export default function PendingPosts() {
                     <div className="seller-post-card-item">
                         <div className="seller-post-card-item-header">
                             <h3>Item: 1</h3>
-                            <button className="item-edit-button">edit</button>
+                            <a className="item-edit-button" href="#">Edit</a>
+                            <a className="item-remove-button" href="#">Remove</a>
                         </div>
                         <div className="seller-post-card-item-details">
                             <h4>Plastic | Bottle</h4>
@@ -95,7 +107,8 @@ export default function PendingPosts() {
                     <div className="seller-post-card-item">
                         <div className="seller-post-card-item-header">
                             <h3>Item: 1</h3>
-                            <button className="item-edit-button">edit</button>
+                            <a className="item-edit-button" href="#">Edit</a>
+                            <a className="item-remove-button" href="#">Remove</a>
                         </div>
                         <div className="seller-post-card-item-details">
                             <h4>Plastic | Bottle</h4>

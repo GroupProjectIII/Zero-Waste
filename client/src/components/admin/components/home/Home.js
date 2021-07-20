@@ -17,8 +17,7 @@ export default function Home() {
                 <div className="container">
                     <Sidebar/>
                     <div className='adminHome'>
-                            <FeaturedInfo/>
-                            <Chart data={userdata} title="Statistics" grid dataKey="Sales"/>
+                            <Chart data={userdata} title="Sales Done Through The Site" grid dataKey="Sales"/>
                         <div className="homeWidgets">
                                 <WidgetSm/>
                                 <WidgetLg/>

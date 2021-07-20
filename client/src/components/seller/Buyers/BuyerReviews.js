@@ -11,69 +11,31 @@ export default function BuyerReviews() {
                     <button type="submit"><i class="fas fa-envelope"></i></button>
                 </form>
             </div>
-            <div className="seller-card-container">
-                <div className="seller-card">
-                    <div>
-                        <div className="seller-sender-details">                      
-                            <i class="fas fa-user-circle"></i>           
-                            <h3>John Snow</h3>
-                            <p>December 24, 2020 at 3:45 pm</p>
-                            <p>Seller</p>                      
-                        </div>
-                    </div>
-                    <div className="seller-user-comment">
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-                    </div>
-                    <div className="seller-user-reply">
-                        <div className="seller-reply-details">                      
-                            <i class="fas fa-user-circle"></i>           
-                            <h3>Lk Collectors</h3>
-                            <p>December 26, 2020 at 3:55 pm</p>
-                            <p>Owner</p>
-                        </div> 
-                        <div>
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-                        </div>
-                    </div>
-                </div>
+            <div className="buyer-comments-area">
+                <div className="seller-comment-card">
+                    <div className="seller-comment-details">
+                        <h4>John Snow</h4>
+                        <p>2021 Apr 20  20:21</p>
 
-                <div className="seller-card">
-                    <div>
-                        <div className="seller-sender-details">                      
-                            <i class="fas fa-user-circle"></i>           
-                            <h3>John Snow</h3>
-                            <p>December 24, 2020 at 3:45 pm</p>
-                            <p>Seller</p>                      
-                        </div>
                     </div>
-                    <div className="seller-user-comment">
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+                    <div className="seller-comment">
+                        <p>very good service.</p>
                     </div>
-                    <div className="seller-user-reply">
-                        <div className="seller-reply-details">                      
-                            <i class="fas fa-user-circle"></i>           
-                            <h3>Lk Collectors</h3>
-                            <p>December 26, 2020 at 3:55 pm</p>
-                            <p>Owner</p>
-                        </div> 
-                        <div>
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-                        </div>
-                    </div>
-                    <div className="seller-user-reply">
-                        <div className="seller-reply-details">                      
-                            <i class="fas fa-user-circle"></i>           
-                            <h3>Lk Collectors</h3>
-                            <p>December 26, 2020 at 3:55 pm</p>
-                            <p>Owner</p>
-                        </div> 
-                        <div>
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-                        </div>
-                    </div>
+
                 </div>
-                
+                <div className="seller-reply-card">
+                    <div className="seller-comment-details">
+                        <h4>John Snow</h4>
+                        <p>2021 Apr 20  20:21</p>
+
+                    </div>
+                    <div className="seller-comment">
+                        <p>very good service.</p>
+                    </div>
+
+                </div>
             </div>
+    
            
         </div>
     )

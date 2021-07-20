@@ -1,6 +1,6 @@
 import React from 'react'
 import "./sidebar.css"
-import {LineStyle , Timeline , TrendingUp , People , Forum , Report} from "@material-ui/icons"
+import {LineStyle , Timeline , TrendingUp , People , Forum , Report , Business , AssignmentInd , PersonAdd, ListAlt} from "@material-ui/icons"
 import { Link } from 'react-router-dom'
 
 export default function Sidebar() {
@@ -12,7 +12,7 @@ export default function Sidebar() {
                     <h3 className="sidebarTitle">Dashboard</h3>
                     <ul className="sidebarList">
                         <Link to="/admin" className="link">
-                            <li className="sidebarListItem active">
+                            <li className="sidebarListItem">
                                 <LineStyle className="sidebarIcon"/>
                                 Home
                             </li>
@@ -31,27 +31,51 @@ export default function Sidebar() {
 
                         <Link to="/admin/newUser" className="link">
                             <li className="sidebarListItem">
-                                <People className="sidebarIcon"/>
+                                <PersonAdd className="sidebarIcon"/>
                                 Add New User
                             </li>
                         </Link>    
 
                     </ul>    
                 </div>
+                <div className="sidebarMenu">
+                    <h3 className="sidebarTitle">Users</h3>
+                    <ul className="sidebarList">
+                        <Link to="/admin/buyers" className="link">
+                            <li className="sidebarListItem">
+                                <People className="sidebarIcon"/>
+                                Buyers
+                            </li>
+                        </Link>  
+
+                        <Link to="/admin/sellers" className="link">
+                            <li className="sidebarListItem">
+                                <AssignmentInd className="sidebarIcon"/>
+                                Sellers
+                            </li>
+                        </Link> 
+
+                        <Link to="/admin/companies" className="link">
+                        <li className="sidebarListItem">
+                            <Business className="sidebarIcon"/>
+                            Companies
+                        </li>
+                        </Link>
+                    </ul>    
+                </div>
 
                 <div className="sidebarMenu">
                     <h3 className="sidebarTitle">Quick Menu</h3>
                     <ul className="sidebarList">
-                        <Link to="/admin/users" className="link">
-                            <li className="sidebarListItem">
-                                <People className="sidebarIcon"/>
-                                Users
-                            </li>
-                        </Link>  
-
+                       
                         <li className="sidebarListItem">
                             <Forum className="sidebarIcon"/>
                             Messages
+                        </li>
+
+                        <li className="sidebarListItem">
+                            <ListAlt className="sidebarIcon"/>
+                            Newsfeed
                         </li>
 
                         <Link to="/admin/report" className="link">
@@ -62,6 +86,8 @@ export default function Sidebar() {
                         </Link>
                     </ul>    
                 </div>
+
+               
 
             </div>
         </div>

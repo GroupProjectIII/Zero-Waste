@@ -15,12 +15,13 @@ export default function Report() {
             <form action="" className="newform">
 
                 <div className="fitems">
-                    <label>Select User</label>
+                    <label>Report Type</label>
                     <select className="selectList" id="selectList1">
-                        <option value="option 1">Ruvidu</option>
-                        <option value="option 2">Yasas</option>
+                        <option value="option 1">Sales Report</option>
+                        <option value="option 2">Waste Items Report</option>
                     </select>
                 </div>
+                
 
                 <div className="fitems">
                     <label>Select Time Period</label>

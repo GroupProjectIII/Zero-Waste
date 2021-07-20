@@ -37,12 +37,12 @@ function Navbar() {
                 </li>
                
                 <li className='nav-item-b'>
-                    <Link to='/contact-us' className='nav-links-b' onClick={closeMobileMenu}>
-                        Account
+                    <Link to='/' className='nav-links-b'  onClick={logoutHandler}>
+                        Sign Out <i className="fas fa-sign-out-alt"></i>
                     </Link>
                 </li>
             </ul>
-            <Button />
+     
         </nav>
     </>
     );

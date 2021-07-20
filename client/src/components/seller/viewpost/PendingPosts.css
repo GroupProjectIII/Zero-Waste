@@ -38,20 +38,36 @@
 .seller-post-card-itm-header{
     display: inline-block;
 }
-.item-edit-button{
-    float: right;
+.item-edit-button,
+.item-remove-button,
+.item-edit-all-button,
+.item-remove-all-button{
     padding: 5px 15px;
     border: none;
-    background-color: blue;
     cursor: pointer;
     color: #fff;
     border-radius: 3px;
     margin: 10px;
+    text-decoration: none;
 
 }
+.item-edit-button,
+.item-remove-button{
+    float: right;
+}
+.item-edit-all-button,
+.item-remove-all-button{
+    float: left;
+}
+.item-edit-button, .item-edit-all-button{
+    background-color: blue;
+}
+.item-remove-button, .item-remove-all-button{
+    background-color: red;
+}
 
-.item-edit-button:hover{
-    background-color: darkblue;
+.item-edit-button:hover, .item-remove-button:hover{
+    background-color: darkred;
 
 }
 
