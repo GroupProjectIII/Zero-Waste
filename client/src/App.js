@@ -134,7 +134,6 @@ function App() {
                     <Route path='/seller/complaint' component={SellerAddComplaint} />
                     <Route path='/seller/stats' component={SellerViewStats} />
 
-<<<<<<< HEAD
                     <Route path='/admin' exact component={AdminHome} />
                     <Route path='/admin/users' component={AdminUserlist} />
                     <Route path='/admin/buyers' component={AdminBuyer} />
@@ -146,22 +145,6 @@ function App() {
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />
 
-=======
-					<Route path='/company' exact component={CompanyHome} />
-                    <Route path='/company/profile' component={CompanyProfile} />                 
-                    <Route path='/company/dashboard' component={CompanyDashboard} />
-                    <Route path='/company/helpdesk' component={CompanyHelpdesk} />
-                    <Route path='/company/companypost' component={CompanyPost} />
-                    <Route path='/company/offersforposts' component={CompanyOffersForPosts} />
-                    <Route path='/company/editprofile' component={CompanyEditProfile} />    
-                    <Route path='/company/DirectPosts' component={CompanyDirectPosts} />  
-                    <Route path='/company/notification' component={CompanyNotification} /> 
-                    <Route path='/company/ongoingp' component={CompanyOngoingP} />
-                    <Route path='/company/previousp' component={CompanyPreviousP} />
-                    <Route path='/company/acceptedp' component={CompanyAcceptedP} />
-                    <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
-                    <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
->>>>>>> e6e07c24d2298a497819f44b01b4c452c98d7f9a
                 </Switch>
             </Router>
         </>

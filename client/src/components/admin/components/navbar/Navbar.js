@@ -36,19 +36,13 @@ function Navbar() {
                     </Link>
                 </li>
                
-<<<<<<< HEAD
-                <li className='nav-item-c'>
+                <li className='nav-item-b'>
                     <Link to='/' className='nav-links-b'  onClick={logoutHandler}>
                         Sign Out <i className="fas fa-sign-out-alt"></i>
-=======
-                <li className='nav-item-b'>
-                    <Link to='/contact-us' className='nav-links-b' onClick={closeMobileMenu}>
-                        Account
->>>>>>> e6e07c24d2298a497819f44b01b4c452c98d7f9a
                     </Link>
                 </li>
             </ul>
-            <Button />
+     
         </nav>
     </>
     );
