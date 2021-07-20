@@ -1,5 +1,5 @@
 import React from 'react'
-import "./report.css"
+import "./userreport.css"
 import Footer from '../../components/footer/Footer';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
@@ -11,17 +11,8 @@ export default function Report() {
         <div className="container">
             <Sidebar/>
         <div className="newuser">
-            <h1 className="reportTitle">Generate Reports</h1>
+            <h1 className="reportTitle">User Report</h1>
             <form action="" className="newform">
-
-                <div className="fitems">
-                    <label>Report Type</label>
-                    <select className="selectList" id="selectList1">
-                        <option value="option 1">Sales Report</option>
-                        <option value="option 2">Waste Items Report</option>
-                    </select>
-                </div>
-                
 
                 <div className="fitems">
                     <label>Select Time Period</label>

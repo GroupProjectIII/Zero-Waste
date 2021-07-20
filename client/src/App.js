@@ -65,11 +65,14 @@ import CompanyBuyersContact from './components/company/pages/BuyersContact';
 
 import AdminHome from "./components/admin/components/home/Home";
 import AdminUserlist from "./components/admin/pages/userlist/Userlist";
+import AdminBuyer from "./components/admin/pages/userlist/AdminBuyer";
+import AdminSeller from "./components/admin/pages/userlist/AdminSeller";
+import AdminCompany from "./components/admin/pages/userlist/AdminCompany";
 import AdminUser from "./components/admin/pages/user/User";
 import AdminNewuser from './components/admin/pages/newuser/Newuser';
 import AdminReport from './components/admin/pages/report/Report';
+import AdminUserReport from './components/admin/pages/userreport/UserReport';
 import AdminStatistics from './components/admin/pages/statistics/Statistics';
-
 
 
 function App() {
@@ -131,6 +134,19 @@ function App() {
                     <Route path='/seller/complaint' component={SellerAddComplaint} />
                     <Route path='/seller/stats' component={SellerViewStats} />
 
+<<<<<<< HEAD
+                    <Route path='/admin' exact component={AdminHome} />
+                    <Route path='/admin/users' component={AdminUserlist} />
+                    <Route path='/admin/buyers' component={AdminBuyer} />
+                    <Route path='/admin/sellers' component={AdminSeller} />
+                    <Route path='/admin/companies' component={AdminCompany} />
+                    <Route path='/admin/user/:userid' component={AdminUser} />
+                    <Route path='/admin/userreport/:userid' component={AdminUserReport} />
+                    <Route path='/admin/newuser' component={AdminNewuser} />
+                    <Route path='/admin/report' component={AdminReport} />
+                    <Route path='/admin/statistics' component={AdminStatistics} />
+
+=======
 					<Route path='/company' exact component={CompanyHome} />
                     <Route path='/company/profile' component={CompanyProfile} />                 
                     <Route path='/company/dashboard' component={CompanyDashboard} />
@@ -145,6 +161,7 @@ function App() {
                     <Route path='/company/acceptedp' component={CompanyAcceptedP} />
                     <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
                     <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
+>>>>>>> e6e07c24d2298a497819f44b01b4c452c98d7f9a
                 </Switch>
             </Router>
         </>
