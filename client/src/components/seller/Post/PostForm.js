@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component} from 'react';
 import { useHistory } from 'react-router-dom';
-import './s-post.css';
+import './PostForm.css';
 
 function PublicPost() {
 
@@ -8,66 +8,67 @@ function PublicPost() {
 
 
     const FormItem = () => {
+        
+        const [image, setImage] = useState();
+        const [preview, setPreview] = useState();
+
+        useEffect(() => {
+            if (image) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setPreview(reader.result);
+                }
+                reader.readAsDataURL(image);
+            } else {
+                setPreview(null);
+            }
+        })
+
         return (
-            <div className="form-item">
-                <h3>Waste Item</h3>
-                <div className="form-row">
-                    <div className="col-25">
-                        <label>Waste Type</label>
-                    </div>
-                    <div className="col-75">
-                        <select>
-                            <option value="plastic">Plastic</option>
-                            <option value="glass">Glass</option>
-                            <option value="paper">Paper</option>
-                            <option value="polythene">Polythene</option>
-                            <option value="organic">Organic</option>
-                            <option value="Other" onChange={handleChange}>Other</option>
-                        </select>
-                    
-                    </div>
-                        
+            <div className="seller-post-item">
+                <div className="seller-add-post-item-header">
+                    <h3>Add Waste Item</h3>
                 </div>
-                <div className="form-row">
-                    <div className="col-25">
-                        <label>Waste Item Name</label>
-                    </div>
-                    <div className="col-75">
-                        <input type="text" placeholder="Item Name"></input>
-                    </div>    
+                <select className="seller-add-post-select" name="option">
+                    <option value="0"disabled selected>Select Waste Type</option>
+                    <option value="1">Plastic</option>
+                    <option value="2">Glass</option>
+                    <option value="3">Paper</option>
+                    <option value="4">Polythene</option>
+                    <option value="5">Organic</option>
+                    <option value="6">Electronic</option>
+                    <option value="7">Other</option>
+
+                </select>
+                <div className="seller-add-post-row"> 
+                    <label className="seller-add-post-label" for="item">Waste Item</label>
+                    <input className="seller-add-post-input" id="input" name="item" type="text"></input>
                 </div>
-                <div className="form-row">
-                    <div className="col-25">
-                        <label>Quantity</label>
-                    </div>
-                    <div className="col-75">
-                        <input type="text" placeholder="Quantity"></input>
-                    </div>
-                   
-                   
+                <div className="seller-add-post-row"> 
+                    <label className="seller-add-post-label" for="quantity">Quantity</label>
+                    <input className="seller-add-post-input" id="input" name="quantity" type="text"></input>
                 </div>
-                <div className="form-row">
-                <div className="col-25">
-                    <label>Collecting Date Time</label>
+                <div className="seller-add-post-row"> 
+                    <label className="seller-add-post-label" for="date">Available On</label>
+                    <input className="seller-add-post-input" id="input" name="quantity" type="date"></input>
                 </div>
-                <div className="col-75">
-                    <input type="datetime" placeholder="Date Time"></input>
+                <div className="seller-add-post-row"> 
+                    <label className="seller-add-post-label" for="picture">Add Picture</label>
+                    <input className="seller-add-post-input" id="input" name="picture"
+                        type="file" accept="image/*"
+                        onChange={(event) => {
+                            const file = event.target.files[0];
+                            if (file && file.type.substr(0,5) === "image") {
+                                setImage(file);
+                            } else {
+                                setImage(null);
+                            }
+                    }}></input>
+                    <img className="item-preview-picture" src={preview}></img>
                 </div>
-                    
-                    
-                </div>
-                <div className="form-row">
-                <div className="col-25">
-                    <label>Pictures</label>
-                </div>
-                <div className="col-75">
-                    <input type="file"></input>
-                </div>
-                        
-                    </div>
-                <button className="delete-item-btn" onClick={deleteItem}>Delete Item</button>
-                
-            </div>           
+
+                <a href="#" className="seller-waste-item-delete-btn" onClick={(e)=>deleteItem(e)}>Delete Item</a>
+            </div>
         );
     }
     useEffect(() => addWasteItem(), []);
@@ -77,16 +78,8 @@ function PublicPost() {
         setFormItemList(formItemList.concat(<FormItem key={formItemList.length} />));
     }
 
-    const addPost = () => {
-       
-    }
-
-    const handleChange = () => {
-
-    }
-
-    const deleteItem = () => {
-
+    const deleteItem = (e) => {
+        e.preventDefault();
     }
     //this.props.history.push('/select-buyer');
     const history = useHistory();
@@ -102,57 +95,45 @@ function PublicPost() {
           } else {
             console.log("Not Available");
           }
-   }
+    }
+    
 
     return (
-        <div className="s-addwaste-container">
-            
-            <br></br>
-            
-
-            <div className="form-card">
-                <form onSubmit={addPost}>
-                    <div className="form-row">
-                        <div>
-                            <label>Post Type:</label>
-                        </div>
-                        
-                    </div>
-                    <div className="form-row">
-                        <div>
-                            <label>Buyers:</label>
-                        </div>
-                        
-                    </div>
-                   
-                    <div className="form-row">
-                        <div className="col-25">
-                            <label for="address">Address: </label>
-                       </div>
-                        <div className="col-75">
-                            <input type="text" id="adddress" placeholder="address..."></input>
-                        </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="col-25">
-                        <label>Location: </label>
-                       </div>
-                        <div className="col-75">
-                        <button className="get-location-btn" onClick={(e) => { location(e) }}>Get My Location</button>
-                        </div>
-                        
-                        
-                    </div>
-                    
-                    {formItemList}
-                   
-                    <button className="submit-btn" type="submit">Submit</button>
-               </form>
+        <div className="seller-add-post-background">
+        <div className="seller-add-post">
+            <div className="seller-add-post-header">
+                <h2>Add New Post</h2>
             </div>
-            <button className="add-item-btn" onClick={addWasteItem}>
-                Add Item
-            </button>
+            <form className="seller-add-new-post-form">
+                <label className="seller-add-post-label"></label>
+                <select class="seller-add-post-select" name="option" >
+                    <option value="0" disabled selected>Select Post Type</option>
+                    <option value="1">Public</option>
+                    <option value="2">Direct</option>
+                </select>
+                    <select className="seller-add-post-select" name="option">
+                    <option value="0" selected>All Buyers</option>
+                    <option value="1">Lk Collectors</option>
+                    <option value="2">Abc Industries</option>
 
+                </select>
+                <div className="seller-add-post-row"> 
+                    <label className="seller-add-post-label" for="address">Address</label>
+                    <input className="seller-add-post-input" id="input" name="address" type="text"></input>
+                </div>
+                <div className="seller-add-post-row"> 
+                    <label className="seller-add-post-label" for="contact">Contact Nuber</label>
+                    <input className="seller-add-post-input" id="input" name="contact" type="tel"></input>
+                </div>
+                <div className="seller-add-post-row">
+                    <label className="seller-add-post-label" for="location">Location</label>
+                    <a href="#" onClick={(e) => { location(e) }}>Get Location</a>
+                </div>
+                {formItemList}
+                <button className="seller-post-submit-btn" type="submit">Submit</button>
+            </form>
+            <a href="#" className="seller-add-waste-item-btn" onClick={addWasteItem}>Add Item</a>
+        </div>
         </div>
     )
 }

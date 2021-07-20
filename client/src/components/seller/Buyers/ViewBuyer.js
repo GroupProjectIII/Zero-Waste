@@ -4,7 +4,7 @@ import Navbar from "../Nav/Navbar";
 import Footer from "../Nav/Footer";
 import BuyerDetails from "./BuyerDetails";
 import "./ViewBuyer.css";
-
+import BuyerReviews from './BuyerReviews';
 
 export default function ViewBuyer() {
 
@@ -17,6 +17,7 @@ export default function ViewBuyer() {
         <>
             <Navbar />
             <BuyerDetails />
+            <BuyerReviews />
             <Footer />
         </>
     )
