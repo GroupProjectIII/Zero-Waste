@@ -24,10 +24,6 @@ export default function PostHome() {
         <div>
             <Navbar />
             <PostForm />
-
-            <div className="send-direct-post">
-                <h3>Need to send post directly to your favourite Buyer??<a href="#" onClick={directPost}>Try This</a></h3>
-            </div>
            <Footer />
         </div>
     )

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Component} from 'react';
 import { useHistory } from 'react-router-dom';
-import './s-post.css';
 import './PostForm.css';
 
 function PublicPost() {
@@ -9,10 +8,26 @@ function PublicPost() {
 
 
     const FormItem = () => {
+        
+        const [image, setImage] = useState();
+        const [preview, setPreview] = useState();
+
+        useEffect(() => {
+            if (image) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setPreview(reader.result);
+                }
+                reader.readAsDataURL(image);
+            } else {
+                setPreview(null);
+            }
+        })
+
         return (
             <div className="seller-post-item">
                 <div className="seller-add-post-item-header">
-                    <h4>Add Waste Item</h4>
+                    <h3>Add Waste Item</h3>
                 </div>
                 <select className="seller-add-post-select" name="option">
                     <option value="0"disabled selected>Select Waste Type</option>
@@ -27,17 +42,32 @@ function PublicPost() {
                 </select>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="item">Waste Item</label>
-                    <input className="seller-add-post-input" id="address" name="item" type="text"></input>
+                    <input className="seller-add-post-input" id="input" name="item" type="text"></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="quantity">Quantity</label>
-                    <input className="seller-add-post-input" id="address" name="quantity" type="text"></input>
+                    <input className="seller-add-post-input" id="input" name="quantity" type="text"></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="date">Available On</label>
-                    <input className="seller-add-post-input" id="address" name="quantity" type="date"></input>
+                    <input className="seller-add-post-input" id="input" name="quantity" type="date"></input>
                 </div>
-                <a href="#" className="seller-waste-item-delete-btn" onClick={deleteItem}>Delete Item</a>
+                <div className="seller-add-post-row"> 
+                    <label className="seller-add-post-label" for="picture">Add Picture</label>
+                    <input className="seller-add-post-input" id="input" name="picture"
+                        type="file" accept="image/*"
+                        onChange={(event) => {
+                            const file = event.target.files[0];
+                            if (file && file.type.substr(0,5) === "image") {
+                                setImage(file);
+                            } else {
+                                setImage(null);
+                            }
+                    }}></input>
+                    <img className="item-preview-picture" src={preview}></img>
+                </div>
+
+                <a href="#" className="seller-waste-item-delete-btn" onClick={(e)=>deleteItem(e)}>Delete Item</a>
             </div>
         );
     }
@@ -48,8 +78,8 @@ function PublicPost() {
         setFormItemList(formItemList.concat(<FormItem key={formItemList.length} />));
     }
 
-    const deleteItem = () => {
-
+    const deleteItem = (e) => {
+        e.preventDefault();
     }
     //this.props.history.push('/select-buyer');
     const history = useHistory();
@@ -69,7 +99,8 @@ function PublicPost() {
     
 
     return (
-        <div seller-add-post>
+        <div className="seller-add-post-background">
+        <div className="seller-add-post">
             <div className="seller-add-post-header">
                 <h2>Add New Post</h2>
             </div>
@@ -80,18 +111,19 @@ function PublicPost() {
                     <option value="1">Public</option>
                     <option value="2">Direct</option>
                 </select>
-                <select className="seller-add-post-select" name="option">
+                    <select className="seller-add-post-select" name="option">
+                    <option value="0" selected>All Buyers</option>
                     <option value="1">Lk Collectors</option>
                     <option value="2">Abc Industries</option>
 
                 </select>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="address">Address</label>
-                    <input className="seller-add-post-input" id="address" name="address" type="text"></input>
+                    <input className="seller-add-post-input" id="input" name="address" type="text"></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="contact">Contact Nuber</label>
-                    <input className="seller-add-post-input" id="address" name="contact" type="tel"></input>
+                    <input className="seller-add-post-input" id="input" name="contact" type="tel"></input>
                 </div>
                 <div className="seller-add-post-row">
                     <label className="seller-add-post-label" for="location">Location</label>
@@ -102,7 +134,7 @@ function PublicPost() {
             </form>
             <a href="#" className="seller-add-waste-item-btn" onClick={addWasteItem}>Add Item</a>
         </div>
-        
+        </div>
     )
 }
 export default PublicPost;
