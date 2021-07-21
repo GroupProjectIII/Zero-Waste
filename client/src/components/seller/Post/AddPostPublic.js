@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { useHistory } from "react-router";
 import PostForm from './PostForm';
 import "./AddPost.css";
 import Navbar from "../Nav/Navbar";
 import Footer from "../Nav/Footer";
+import { useDispatch } from 'react-redux';
 
 export default function PostHome() {
+    const [currentId, setCurrentId] = useState(0);
+    const dispatch = useDispatch();
     
     const history = useHistory();
 
@@ -23,7 +26,7 @@ export default function PostHome() {
     return (
         <div>
             <Navbar />
-            <PostForm />
+            <PostForm currentId={currentId} setCurrentId={setCurrentId}/>
            <Footer />
         </div>
     )

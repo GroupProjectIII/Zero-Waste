@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 connectDB();
 
@@ -15,6 +17,14 @@ app.get("/", (req, res, next) => {
 // Connecting Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
+
+const postRoutes = require("./routes/posts.js");
+
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(cors());
+
+app.use('/posts', postRoutes);
 
 // Error Handler Middleware
 app.use(errorHandler);

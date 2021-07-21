@@ -1,11 +1,40 @@
 import React, { useState, useEffect, Component} from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import FileBase from 'react-file-base64';
+import { createPost, updatePost } from '../../../actions/posts';
+
 import './PostForm.css';
 
-function PublicPost() {
+function PublicPost({currentId, setCurrentId}) {
 
     const [formItemList, setFormItemList] = useState([]);
 
+    const [postData, setPostData] = useState({ address: '', contact: '', message: '', tags: '', selectedFile: '' });
+    const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (post) setPostData(post);
+    }, [post]);
+
+
+    const clear = () => {
+        setCurrentId(0);
+        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (currentId === 0) {
+            dispatch(createPost(postData));
+            clear();
+        } else {
+            dispatch(updatePost(currentId, postData));
+            clear();
+        }
+    };
 
     const FormItem = () => {
         
@@ -54,16 +83,10 @@ function PublicPost() {
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="picture">Add Picture</label>
-                    <input className="seller-add-post-input" id="input" name="picture"
-                        type="file" accept="image/*"
-                        onChange={(event) => {
-                            const file = event.target.files[0];
-                            if (file && file.type.substr(0,5) === "image") {
-                                setImage(file);
-                            } else {
-                                setImage(null);
-                            }
-                    }}></input>
+                    
+                    <div className="seller-add-post-row"><FileBase type="file" multiple={false} onDone={({ base64 }) => {
+                        setPostData({ ...postData, selectedFile: base64 });
+                    }} /></div>
                     <img className="item-preview-picture" src={preview}></img>
                 </div>
 
@@ -104,7 +127,7 @@ function PublicPost() {
             <div className="seller-add-post-header">
                 <h2>Add New Post</h2>
             </div>
-            <form className="seller-add-new-post-form">
+            <form className="seller-add-new-post-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <label className="seller-add-post-label"></label>
                 <select class="seller-add-post-select" name="option" >
                     <option value="0" disabled selected>Select Post Type</option>
@@ -118,17 +141,30 @@ function PublicPost() {
 
                 </select>
                 <div className="seller-add-post-row"> 
-                    <label className="seller-add-post-label" for="address">Address</label>
-                    <input className="seller-add-post-input" id="input" name="address" type="text"></input>
+                    <label className="seller-add-post-label" htmlfor="address">Address</label>
+                        <input className="seller-add-post-input"
+                            id="input"
+                            name="address"
+                            type="text"
+                            value={postData.creator}
+                           onChange={(e) => setPostData({ ...postData, address: e.target.value })}
+                        ></input>
                 </div>
                 <div className="seller-add-post-row"> 
-                    <label className="seller-add-post-label" for="contact">Contact Nuber</label>
-                    <input className="seller-add-post-input" id="input" name="contact" type="tel"></input>
+                    <label className="seller-add-post-label" htmlfor="contact">Contact Nuber</label>
+                        <input className="seller-add-post-input"
+                            id="input"
+                            name="contact"
+                            type="tel"
+                            value={postData.creator}
+                           onChange={(e) => setPostData({ ...postData, contact: e.target.value })}
+                        ></input>
                 </div>
                 <div className="seller-add-post-row">
                     <label className="seller-add-post-label" for="location">Location</label>
                     <a href="#" onClick={(e) => { location(e) }}>Get Location</a>
-                </div>
+                    </div>
+                    
                 {formItemList}
                 <button className="seller-post-submit-btn" type="submit">Submit</button>
             </form>

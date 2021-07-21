@@ -24,7 +24,6 @@ export default function BuyersHome() {
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
-            <h1>Top Buyers</h1>
            
         </div>
     )
