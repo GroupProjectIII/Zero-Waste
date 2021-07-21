@@ -140,8 +140,8 @@ function App() {
                     <Route path='/admin/buyers' component={AdminBuyer} />
                     <Route path='/admin/sellers' component={AdminSeller} />
                     <Route path='/admin/companies' component={AdminCompany} />
-                    <Route path='/admin/user/:userid' component={AdminUser} />
-                    <Route path='/admin/userreport/:userid' component={AdminUserReport} />
+                    <Route path='/admin/user/:_id' component={AdminUser} />
+                    <Route path='/admin/userreport/:_id' component={AdminUserReport} />
                     <Route path='/admin/newuser' component={AdminNewuser} />
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />

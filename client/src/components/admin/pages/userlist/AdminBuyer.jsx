@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './userlist.css'
+import axios from 'axios'
 import { DataGrid } from '@material-ui/data-grid';
 import { DeleteOutline, Assessment } from '@material-ui/icons';
 import { Link } from 'react-router-dom'
@@ -10,39 +11,46 @@ import Sidebar from '../../components/sidebar/Sidebar';
 
 export default function Userlist() {
 
+    const [tdata, settdata] = useState([])
+
+    useEffect(()=>{
+        axios.get('/api/adminuser/getbuyers').then(res=>{
+            console.log(res.data)
+            settdata(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+
+    } , [])
+
+
+
     const handleDelete = (id) => {
-        setdata(data.filter(item => item.id !== id))
+        settdata(tdata.filter(item => item.id !== id))
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'username', headerName: 'Username', width: 200 },
-        { field: 'email', headerName: 'E-mail', width: 200 },
+        { field: 'username', headerName: 'Username', width: 250 },
+        { field: 'email', headerName: 'E-mail', width: 300 },
         {
-            field: 'role',
+            field: 'usertype',
             headerName: 'Role',
-            width: 200,
-        },
-        {
-            field: 'contact',
-            headerName: 'Contact umber',
-            type: Number,
             width: 200,
         },
         {
             field: "action",
             headerName: "Action",
             width: 200,
-            renderCell: (params) => {
+            renderCell: (tdata) => {
                 return (
                     <div className="ticons">
-                        <Link to={"/admin/user/" + params.row.id}>
+                        <Link to={`/admin/user/${tdata._id}`}>
                             <button className="userlistEdit">Edit</button>
                         </Link>
 
-                        <DeleteOutline className="userlistDelete" onClick={() => handleDelete(params.row.id)} />
+                        <DeleteOutline className="userlistDelete" /*onClick={() => handleDelete(params.row.id)}*//>
 
-                        <Link to={"/admin/userreport/" + params.row.id}>
+                        <Link to={`/admin/userreport/${tdata._id}`}>
                             <Assessment className="userlistreport" />
                         </Link>
                     </div>
@@ -51,24 +59,16 @@ export default function Userlist() {
         }
     ];
 
-
-    const rows = [
-        { id: 1, username: 'Jon Snow', email: 'Jon@gmail.com', role: 'Buyer', contact: '0776564197' },
-        { id: 2, username: 'Ruvidu Munasinghe', email: 'ruv@gmail.com', role: 'Buyer', contact: '0776564198' },
-        { id: 3, username: 'Waste Managers', email: 'WMgmail.com', role: 'Buyer', contact: '0776564199' },
-        { id: 4, username: 'Jon Snow', email: 'Jon@gmail.com', role: 'Buyer', contact: '0776564197' },
-        { id: 5, username: 'Ruvidu Munasinghe', email: 'ruv@gmail.com', role: 'Buyer', contact: '0776564198' },
-
-    ];
-    const [data, setdata] = useState(rows)
-
     return (
         <div>
             <Navbar />
             <div className="container">
                 <Sidebar />
                 <div className='userList'>
-                    <DataGrid rows={data} disableSelectionOnClick columns={columns} pageSize={9} checkboxSelection />
+                    <DataGrid rows={tdata} disableSelectionOnClick 
+                    columns={columns} 
+                    getRowId={(row) => row._id}
+                    pageSize={10} checkboxSelection />
                 </div>
             </div>
             <Footer />
