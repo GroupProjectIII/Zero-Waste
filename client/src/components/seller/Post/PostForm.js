@@ -6,14 +6,22 @@ import { createPost, updatePost } from '../../../actions/posts';
 
 import './PostForm.css';
 
-function PublicPost({currentId, setCurrentId}) {
+function PublicPost({ currentId, setCurrentId }) {
+    const wasteItem = {
+        type: ' ',
+        item: ' ',
+        avbDate: ' ',
+        quantity: ' ',
+        selectedFile: ' ',
+    };
 
-    const [formItemList, setFormItemList] = useState([]);
-
-    const [postData, setPostData] = useState({ address: '', contact: '', message: '', tags: '', selectedFile: '' });
+    const [formItemList, setFormItemList] = useState([{ wasteItem }]);
+    
+    const [postData, setPostData] = useState({ postType: '', buyer: '', address: '', contact: '', location: {}, createdAt: '', wasteItem: [{}] });
     const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
     const dispatch = useDispatch();
-
+    
+   
     useEffect(() => {
         if (post) setPostData(post);
     }, [post]);
@@ -21,7 +29,7 @@ function PublicPost({currentId, setCurrentId}) {
 
     const clear = () => {
         setCurrentId(0);
-        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+        setPostData({ postType: '', buyer: '', address: '', contact: '', location: {}, createdAt: '', wasteItem: [{}] });
     };
 
     const handleSubmit = async (e) => {
@@ -71,29 +79,48 @@ function PublicPost({currentId, setCurrentId}) {
                 </select>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="item">Waste Item</label>
-                    <input className="seller-add-post-input" id="input" name="item" type="text"></input>
+                    <input className="seller-add-post-input"
+                        id="input"
+                        name="item"
+                        type="text"
+                        value={postData.creator}
+                        onChange={(e) => setFormItemList({ ...postData, item: e.target.value })}
+                        
+                    ></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="quantity">Quantity</label>
-                    <input className="seller-add-post-input" id="input" name="quantity" type="text"></input>
+                    <input className="seller-add-post-input"
+                        id="input"
+                        name="quantity"
+                        type="text"
+                    ></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="date">Available On</label>
-                    <input className="seller-add-post-input" id="input" name="quantity" type="date"></input>
+                    <input className="seller-add-post-input"
+                        id="input"
+                        name="quantity"
+                        type="date"
+                    ></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for="picture">Add Picture</label>
                     
-                    <div className="seller-add-post-row"><FileBase type="file" multiple={false} onDone={({ base64 }) => {
+                    <div className="seller-add-post-row">
+                        <FileBase type="file" multiple={false} onDone={({ base64 }) => {
                         setPostData({ ...postData, selectedFile: base64 });
                     }} /></div>
                     <img className="item-preview-picture" src={preview}></img>
                 </div>
 
                 <a href="#" className="seller-waste-item-delete-btn" onClick={(e)=>deleteItem(e)}>Delete Item</a>
+                
             </div>
         );
     }
+
+
     useEffect(() => addWasteItem(), []);
     
 
@@ -107,13 +134,18 @@ function PublicPost({currentId, setCurrentId}) {
     //this.props.history.push('/select-buyer');
     const history = useHistory();
     
-    const location = (e) => {
+    const getlocation = (e) => {
         e.preventDefault();
         if ("geolocation" in navigator) {
             console.log("Available");
-            navigator.geolocation.getCurrentPosition(function(position) {
+            navigator.geolocation.getCurrentPosition(function (position) {
                 console.log(position.coords.latitude)
                 console.log(position.coords.longitude)
+                let location = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                }
+                setPostData({ ...postData, location: location }); 
               });
           } else {
             console.log("Not Available");
@@ -148,7 +180,7 @@ function PublicPost({currentId, setCurrentId}) {
                             type="text"
                             value={postData.creator}
                            onChange={(e) => setPostData({ ...postData, address: e.target.value })}
-                        ></input>
+                        required></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlfor="contact">Contact Nuber</label>
@@ -158,13 +190,13 @@ function PublicPost({currentId, setCurrentId}) {
                             type="tel"
                             value={postData.creator}
                            onChange={(e) => setPostData({ ...postData, contact: e.target.value })}
-                        ></input>
+                        required></input>
                 </div>
                 <div className="seller-add-post-row">
                     <label className="seller-add-post-label" for="location">Location</label>
-                    <a href="#" onClick={(e) => { location(e) }}>Get Location</a>
+                    <a href="#" onClick={(e) => { getlocation(e) }}>Get Location</a>
                     </div>
-                    
+
                 {formItemList}
                 <button className="seller-post-submit-btn" type="submit">Submit</button>
             </form>
