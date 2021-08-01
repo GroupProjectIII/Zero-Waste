@@ -21,7 +21,7 @@ function Footer() {
                             type='email'
                             placeholder='Your Message'
                         />
-                        <button buttonStyle='btn-b-outline'>Send</button>
+                        <Button buttonStyle='btn-b-outline'>Send</Button>
                     </form>
                 </div>
             </section>

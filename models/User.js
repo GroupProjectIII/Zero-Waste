@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide usertype"],
   },
+  registeredAt: {
+    type: Date,
+    default: new Date(),
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
