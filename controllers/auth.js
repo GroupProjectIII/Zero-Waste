@@ -27,7 +27,7 @@ exports.login = async (req, res, next) => {
       return next(new ErrorResponse("Invalid credentials", 401));
     }
 
-    sendToken(user, 200, res, user.usertype);
+    sendToken(user, 200, res, user.usertype, user.registeredAt, user.username, user.email, user.id);
 
   } catch (err) {
     next(err);
@@ -58,7 +58,7 @@ exports.register = async (req, res, next) => {
         text: message,
       });
 
-    sendToken(user, 200, res, user.usertype);
+    sendToken(user, 200, res, user.usertype, user.registeredAt, user.username, user.email, user.id);
   } catch (err) {
     next(err);
   }
@@ -148,8 +148,8 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
-const sendToken = (user, statusCode, res, usertype) => {
+const sendToken = (user, statusCode, res, usertype,registeredAt,username,email,id ) => {
   const token = user.getSignedJwtToken();
-  res.status(statusCode).json({ success: true, token, usertype });
+  res.status(statusCode).json({ success: true, token, usertype,registeredAt,username,email,id });
 };
 
