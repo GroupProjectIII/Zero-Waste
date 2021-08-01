@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useHistory } from "react-router";
-import PostForm from './PostForm';
+import PostForm from './PostFormNew';
 import "./AddPost.css";
 import Navbar from "../Nav/Navbar";
 import Footer from "../Nav/Footer";
