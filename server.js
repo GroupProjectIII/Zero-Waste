@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended:'true'}))
 
 const AuserRoute = require('./routes/adminUser')
 const cors = require("cors");
-
+app.use(cors());
 connectDB();
 
 app.use(express.json());
@@ -21,6 +21,11 @@ app.get("/", (req, res, next) => {
 // Connecting Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
+
+const buyerPosts = require("./routes/buyerPosts");
+const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
+app.use(buyerPosts);
+app.use(buyerOffersForSeller);
 
 app.use('/api/adminuser' , AuserRoute);
 

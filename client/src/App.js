@@ -83,10 +83,10 @@ function App() {
                     <Route path='/' exact component={Home} />
                     <Route path='/buyer/home' exact component={BuyerHome} />
                     <Route path='/buyer/posts' component={BuyerServices} />
-                    <Route path='/buyer/offerforms' component={BuyerOfferForm} />
+                    <Route path='/buyer/offerforms/:id' component={BuyerOfferForm} />
                     <Route path='/buyer/acceptedoffers' component={BuyerAOffers} />
                     <Route path='/buyer/pendingoffers' component={BuyerPOffers} />
-                    <Route path='/buyer/editpendingoffers' component={BuyerEditPendingOffers} />
+                    <Route path='/buyer/editpendingoffers/:id' component={BuyerEditPendingOffers} />
                     <Route path='/buyer/companyposts' component={BuyerCompanyPosts} />
                     <Route path='/buyer/companyofferforms' component={BuyerCompanyOfferForm} />
                     <Route path='/buyer/companyacceptedoffers' component={BuyerCompanyAOffers} />
@@ -95,7 +95,7 @@ function App() {
                     <Route path='/buyer/viewcompanydetails' component={BuyerViewCompanyDetails} />
                     <Route path='/buyer/notifyaboutwaste' component={BuyerCompanyNotify} />
                     <Route path='/buyer/location' component={BuyerPostsLocation} />
-                    <Route path='/buyer/viewpostdetails' component={BuyerViewPostDetails} />
+                    <Route path='/buyer/viewpostdetails/:id' component={BuyerViewPostDetails} />
                     <Route path='/buyer/editprofile' component={BuyerEditProfile} />
 
                     <Route path='/buyer/vprofile' component={BuyerViewProfile} />
@@ -117,7 +117,7 @@ function App() {
                     <Route path='/admin/newuser' component={AdminNewuser} />
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />
-                    
+
                     <Route path='/seller/publicpost' exact component={SellerAddPostPublic} />
                     <Route path='/seller/directpost' exact component={SellerAddPostDirect} />
                     <Route path='/seller/myposts' exact component={SellerMyPost} />
@@ -148,14 +148,14 @@ function App() {
 
 
 					<Route path='/company' exact component={CompanyHome} />
-                    <Route path='/company/profile' component={CompanyProfile} />                 
+                    <Route path='/company/profile' component={CompanyProfile} />
                     <Route path='/company/dashboard' component={CompanyDashboard} />
                     <Route path='/company/helpdesk' component={CompanyHelpdesk} />
                     <Route path='/company/companypost' component={CompanyPost} />
                     <Route path='/company/offersforposts' component={CompanyOffersForPosts} />
-                    <Route path='/company/editprofile' component={CompanyEditProfile} />    
-                    <Route path='/company/DirectPosts' component={CompanyDirectPosts} />  
-                    <Route path='/company/notification' component={CompanyNotification} /> 
+                    <Route path='/company/editprofile' component={CompanyEditProfile} />
+                    <Route path='/company/DirectPosts' component={CompanyDirectPosts} />
+                    <Route path='/company/notification' component={CompanyNotification} />
                     <Route path='/company/ongoingp' component={CompanyOngoingP} />
                     <Route path='/company/previousp' component={CompanyPreviousP} />
                     <Route path='/company/acceptedp' component={CompanyAcceptedP} />
