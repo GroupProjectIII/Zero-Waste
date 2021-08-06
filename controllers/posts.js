@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const PostMessage = require("../models/postMessage");
+const SellerPost = require("../models/SellerPost");
 
 exports.getPosts = async (req, res) => {
     try {
@@ -26,12 +26,12 @@ exports.getPost = async (req, res) => {
 }
 
 exports.createPost = async (req, res) => {
-    const { title, message, selectedFile, creator, tags } = req.body;
+    const { postType, buyer, address, contact, location, createdAt, wasteItem } = req.body;
 
-    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
+    const newSellerPost = new SellerPost({ postType, buyer, address, contact, location, createdAt, wasteItem })
 
     try {
-        await newPostMessage.save();
+        await newSellerPost.save();
 
         res.status(201).json(newPostMessage );
     } catch (error) {

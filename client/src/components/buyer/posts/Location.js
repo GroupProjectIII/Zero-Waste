@@ -1,40 +1,70 @@
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-import './Location.css';
+import React, { useState } from "react";
+import { GoogleMap, LoadScript, Marker, InfoWindow  } from '@react-google-maps/api';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const SimpleMap = (props) => {
 
-class SimpleMap extends Component {
-    static defaultProps = {
-        center: {
-            lat: 59.95,
-            lng: 30.33
-        },
-        zoom: 11
-    };
+    const [ selected, setSelected ] = useState({});
 
-    render() {
-        return (
-            <div className="location-b">
-                <div className="location__container-b">
-                    <h1>Seller's Location</h1>
-                    <div className="location-box-b" style={{ height: '100vh', width: '100%' }}>
-                        <GoogleMapReact
-                            bootstrapURLKeys={{ key: "AIzaSyBibEsSWGqXjOS3DbXiFM4i2cbQhZHb2wo" }}
-                            defaultCenter={this.props.center}
-                            defaultZoom={this.props.zoom}
-                        >
-                            <AnyReactComponent
-                                lat={59.955413}
-                                lng={30.337844}
-                                text="My Marker"
-                            />
-                        </GoogleMapReact>
-                    </div>
-                </div>
-            </div>
-        );
+    const onSelect = item => {
+        setSelected(item);
     }
-}
 
+    const mapStyles = {
+        height: "100vh",
+        width: "100%"};
+
+    const defaultCenter = {
+        lat: props.loc.lat, lng: props.loc.long
+    }
+
+    const locations = [
+        {
+            name: "Seller's Location",
+            location: {
+                lat: props.loc.lat,
+                lng: props.loc.long
+            },
+        }
+    ];
+
+    return (
+        <LoadScript
+            googleMapsApiKey='AIzaSyBibEsSWGqXjOS3DbXiFM4i2cbQhZHb2wo'>
+            <GoogleMap
+                mapContainerStyle={mapStyles}
+                zoom={13}
+                center={defaultCenter}>
+                {
+                    locations.map(item => {
+                        return (
+                            <Marker key={item.name} position={item.location}/>
+                        )
+                    })
+                }
+                {
+                    locations.map(item => {
+                        return (
+                            <Marker key={item.name}
+                                    position={item.location}
+                                    onClick={() => onSelect(item)}
+                            />
+                        )
+                    })
+                }
+                {
+                    selected.location &&
+                    (
+                        <InfoWindow
+                            position={selected.location}
+                            clickable={true}
+                            onCloseClick={() => setSelected({})}
+                        >
+                            <p>{selected.name}</p>
+                        </InfoWindow>
+                    )
+                }
+            </GoogleMap>
+        </LoadScript>
+    )
+}
 export default SimpleMap;

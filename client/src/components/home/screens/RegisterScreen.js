@@ -48,7 +48,6 @@ const RegisterScreen = ({ history }) => {
       localStorage.setItem("usertype", data.usertype);
       localStorage.setItem("username", data.username);
       localStorage.setItem("email", data.email);
-      localStorage.setItem("id", data.id);
       localStorage.setItem("registeredAt", data.registeredAt);
       console.log(data.usertype);
       if(data.usertype==="buyer"){
