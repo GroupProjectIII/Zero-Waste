@@ -26,6 +26,7 @@ const buyerPosts = require("./routes/buyerPosts");
 const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
+
 app.use('/api/adminuser' , AuserRoute);
 
 const postRoutes = require("./routes/posts.js");
