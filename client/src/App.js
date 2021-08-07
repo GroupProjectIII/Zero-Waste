@@ -17,6 +17,7 @@ import BuyerCompanyNotify from "./components/buyer/company_posts/CompanyNotify";
 import BuyerPostsLocation from "./components/buyer/posts/PostsLocation";
 import BuyerViewPostDetails from "./components/buyer/posts/ViewPostDetails";
 import BuyerEditProfile from "./components/buyer/account/EditProfile";
+import BuyerSingleOffers from "./components/buyer/posts/SingleOffers"
 
 import BuyerViewProfile from './components/buyer/account/ViewProfile';
 import BuyerRateAndComment from './components/buyer/account/RateAndComment';
@@ -94,9 +95,10 @@ function App() {
                     <Route path='/buyer/editcompanypendingoffers' component={BuyerEditCompanyPendingOffers} />
                     <Route path='/buyer/viewcompanydetails' component={BuyerViewCompanyDetails} />
                     <Route path='/buyer/notifyaboutwaste' component={BuyerCompanyNotify} />
-                    <Route path='/buyer/location' component={BuyerPostsLocation} />
+                    <Route path='/buyer/location/:id' component={BuyerPostsLocation} />
                     <Route path='/buyer/viewpostdetails/:id' component={BuyerViewPostDetails} />
                     <Route path='/buyer/editprofile' component={BuyerEditProfile} />
+                    <Route path='/buyer/singleoffers/:postId/:arrayId' component={BuyerSingleOffers} />
 
                     <Route path='/buyer/vprofile' component={BuyerViewProfile} />
                     <Route path='/buyer/rcomment' component={BuyerRateAndComment} />

@@ -3,6 +3,7 @@ import './Posts.css';
 import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import SimpleMap from "./Location";
+import moment from 'moment';
 
 function ViewPost() {
 
@@ -42,7 +43,7 @@ function ViewPost() {
     console.log(lat);
 
     const location={lat,long};
-
+    console.log(posts.wasteItemList);
     return(
         <div className="posts-b">
             <div className="posts__container-b">
@@ -51,47 +52,31 @@ function ViewPost() {
                     <ol className="list">
                         <li ><span>Seller Name: {posts.address}</span></li>
                         <li ><span>Seller Address: {posts.address}</span></li>
-                        <li ><span>Mobile No: {posts.address}</span></li>
+                        <li ><span>Telephone No: {posts.contact}</span></li>
+                        <li ><span>Post Type: {posts.postType}</span></li>
                     </ol>
                 </div>
                 <main className="grid-b">
+                    {posts && posts.wasteItemList && posts.wasteItemList.map((post,index)=>(
                     <article>
-                        <img src="../images/polythene.jpg" alt=""></img>
                         <div className="text-b">
-                            <h3>Post ID: 1</h3>
-                            <p>Waste Type: Polythene - පොලිතින්</p>
-                            <p>Waste Item: Polythene Roll</p>
-                            <p>Quantity: 1 kg</p>
-                            <button >Make Offer <i className="fas fa-angle-double-right"></i></button>
+                            <h3>Post ID: {index+1}</h3>
+                            <p>Waste Type: {post.wasteType}</p>
+                            <p>Waste Item: {post.item}</p>
+                            <p>Quantity: {post.quantity} kg</p>
+                            <p>Can Collect Items: {moment(post.avbDate).fromNow()}</p>
+                            <div className="buyerlink-b">
+                                <Link style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/singleoffers/${id}/${post._id}`}>Make Offer <i className="fas fa-angle-double-right"></i></Link>
+                            </div>
                         </div>
                     </article>
-
-                    <article>
-                        <img src="../images/plastic.jpg" alt=""></img>
-                        <div className="text-b">
-                            <h3>Post ID: 1</h3>
-                            <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
-                            <p>Waste Item: Bottles</p>
-                            <p>Quantity: 2 kg</p>
-                            <button >Make Offer <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <img src="../images/paper.jpg" alt=""></img>
-                        <div className="text-b">
-                            <h3>Post ID: 1</h3>
-                            <p>Waste Type: Paper - කඩදාසි</p>
-                            <p>Waste Item: Papers</p>
-                            <p>Quantity: 1 kg</p>
-                            <button >Make Offer <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
+                    ))}
                 </main>
                     <div className="all-items-button-b">
                         <p>Do you want to make an offer for all these items at once?</p>
                         <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/offerforms/${id}`}>Make Offer for All Items <i className="fas fa-angle-double-right"></i></Link>
                     </div>
+                <h1>Seller's Location</h1>
             </div>
             <SimpleMap loc={location}/>
         </div>
