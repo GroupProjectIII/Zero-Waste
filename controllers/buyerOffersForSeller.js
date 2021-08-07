@@ -40,3 +40,30 @@ exports.deletePendingSellerOffer = async (req, res) => {
 
     res.json({ message: "Post deleted successfully." });
 }
+
+exports.editPendingSellerOffer = async (req, res) => {
+    const { id } = req.params;
+    const { value, expiryDate, quantity } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedPost = { value, expiryDate, quantity, _id: id };
+
+    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedPost, { new: true });
+
+    res.json(updatedPost);
+}
+
+exports.buyerGetOneSellerOffer= async (req,res)=>{
+    let offerId = req.params.id;
+
+    BuyerOffersForSeller.findById(offerId,(err,offer)=>{
+        if(err){
+            return res.status(400).json({success:false, err});
+        }
+        return res.status(200).json({
+            success:true,
+            oneOffer:offer
+        })
+    })
+}

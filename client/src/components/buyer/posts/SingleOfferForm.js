@@ -1,38 +1,44 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import React, {useEffect, useState} from "react";
 import './Form.css';
 import {useParams, useHistory} from "react-router-dom";
-import {Slide, toast, ToastContainer} from "react-toastify";
-import moment from 'moment';
+import axios from 'axios';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function EditOfferForms() {
+function SingleOfferForm(props) {
 
-    const { id } = useParams();
-    console.log(id);
+    const { postId, arrayId } = useParams();
+    console.log(postId,arrayId);
 
+    const apiUrl = '/addSellerOffer';
     const initialValues = {
         value: '',
         expiryDate: '',
-        quantity: ''
+        quantity: '',
+        buyerName: '',
+        buyerEmail:'',
+        postId:'',
+        location:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     //const history = useHistory();
 
-    useEffect(() => {
-        const GetData = async () => {
-            const result = await axios.get(`/buyerGetOneSellerOffer/${id}`);
-            setFormValues(result.data.oneOffer);
-        };
-        GetData();
-    }, []);
-
-    console.log(formValues);
-
     const submitForm = () => {
-        const data = {value:formValues.value, expiryDate:formValues.expiryDate, quantity:formValues.quantity};
-        axios.patch(`/editPendingSellerOffer/${id}`, data)
+        const data = {
+            value:formValues.value,
+            expiryDate:formValues.expiryDate,
+            quantity:formValues.quantity,
+            buyerName:name,
+            buyerEmail:email,
+            postId:postId,
+            location:{
+                latitude:lat,
+                longitude:long
+            }
+        };
+        axios.post(apiUrl, data)
             .then((result) => {
                 clear();
                 toastNotification();
@@ -92,45 +98,82 @@ function EditOfferForms() {
         }
     }, [formErrors]);
 
-    const d1 = new Date(formValues.expiryDate);
-    console.log(d1);
-    const d2 = moment(d1).format('YYYY-MM-DD');
-    console.log(d2);
-
     const clear = () => {
         setFormValues({
             value: '',
             expiryDate: '',
-            quantity: ''
+            quantity: '',
+            buyerName: '',
+            buyerEmail:'',
+            postId:'',
+            location:''
         });
     };
 
     const toastNotification = () => {
-        toast.info("You're updated offer successfully !", {
+        toast.info("You're added offer successfully !", {
             transition: Slide
         })
     };
+
+    const [posts, setPosts] = useState({});
+
+    const name=(localStorage.getItem("username"));
+    const email=(localStorage.getItem("email"));
+    console.log(name);
+    console.log(email);
+
+    useEffect(()=>{
+        getOnePost();
+    }, []);
+
+    useEffect(()=>{
+        if (posts && posts.location) {
+            console.log(posts.location);
+            console.log(posts.location.longitude);
+            console.log(posts.location.latitude);
+        }
+    }, [posts]);
+
+    const getOnePost = async () => {
+        try {
+            const response = await axios.get(`/buyerGetOnePost/${postId}`)
+            console.log(response);
+            const allPost=response.data.onePost;
+            setPosts(allPost);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(posts);
+
+    const long = posts?.location?.longitude;
+    console.log(long);
+    const lat=posts?.location?.latitude;
+    console.log(lat);
 
     return(
         <div className="forms-b">
             <div className="forms__container-b" >
                 <div className="container-b">
-                    <div className="title-b">Edit Pending Offer</div>
                     <div className="content-b">
+                        <h3>Image of Waste Item</h3>
+                        <img src="../images/polythene.jpg" alt=""></img>
+                        <div className="title-b">Make Offer</div>
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
                                 <div className="input-box-b">
                                     <span className="details-b">Offer Value</span>
-                                    <input type="text" placeholder="Enter value" name="value" id="value" value={formValues.value}
+                                    <input type="text" name="value" id="value" placeholder="Enter value" value={formValues.value}
                                            onChange={handleChange}
-                                           className={formErrors.value && "input-error"} ></input>
+                                           className={formErrors.value && "input-error"}></input>
                                     {formErrors.value && (
                                         <span className="error" style={{color:'red'}}>{formErrors.value}</span>
                                     )}
                                 </div>
                                 <div className="input-box-b">
                                     <span className="details-b">Expiry Date</span>
-                                    <input type="date" placeholder="Enter date" name="expiryDate" id="expiryDate" value={d2}
+                                    <input type="date" name="expiryDate" id="expiryDate" placeholder="Enter date" value={formValues.expiryDate}
                                            onChange={handleChange}
                                            className={formErrors.expiryDate && "input-error"}></input>
                                     {formErrors.expiryDate && (
@@ -139,7 +182,7 @@ function EditOfferForms() {
                                 </div>
                                 <div className="input-box-b">
                                     <span className="details-b">Quantity</span>
-                                    <input type="text" placeholder="Enter quantity" name="quantity" id="quantity" value={formValues.quantity}
+                                    <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
                                            onChange={handleChange}
                                            className={formErrors.quantity && "input-error"}></input>
                                     {formErrors.quantity && (
@@ -148,7 +191,7 @@ function EditOfferForms() {
                                 </div>
                             </div>
                             <div className="button-b">
-                                <input type="submit" value="Edit Offer"></input>
+                                <input type="submit" value="Send Offer"></input>
                                 <ToastContainer position="top-right" toastStyle={{ backgroundColor: "green" }} autoClose={3000} />
                             </div>
                         </form>
@@ -159,4 +202,4 @@ function EditOfferForms() {
     );
 }
 
-export default EditOfferForms;
+export default SingleOfferForm;

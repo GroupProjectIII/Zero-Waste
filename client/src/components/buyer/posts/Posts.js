@@ -82,16 +82,16 @@ function Posts() {
                     </div>
                 </div>
                 <main className="grid-b">
-                    {notes.map((notes,index)=>(
+                    {notes.map((note,index)=>(
                         <article>
                             <div className="text-b">
                                 <h3>Post ID: {index+1}</h3>
-                                <p>Location: {notes.address}</p>
-                                <p>Location: {notes.address}</p>
-                                <p>Location: {notes.address}</p>
-                                <p>Location: {notes.address}</p>
+                                <p>Location: {note.address}</p>
+                                <p>Post Type: {note.postType}</p>
+                                <p>Address: {note.address}</p>
+                                <p>Telephone No: {note.contact}</p>
                                 <div className="buyerlink-b">
-                                    <Link style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/viewpostdetails/${notes._id}`}>View Post <i className="fas fa-angle-double-right"></i></Link>
+                                    <Link style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/viewpostdetails/${note._id}`}>View Post <i className="fas fa-angle-double-right"></i></Link>
                                 </div>
                             </div>
                         </article>
