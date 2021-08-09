@@ -9,7 +9,7 @@ function EditOfferForms() {
                 <div className="container-b">
                     <div className="title-b">Edit Pending Offer</div>
                     <div className="content-b">
-                        <form action="#">
+                        <form className="buyer-form-b" action="#">
                             <div className="user-details-b">
                                 <div className="input-box-b">
                                     <span className="details-b">Offer Value</span>

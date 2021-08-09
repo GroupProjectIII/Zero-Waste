@@ -41,7 +41,7 @@ export default function Userlist() {
             field: "action",
             headerName: "Action",
             width: 200,
-            renderCell: (tdata) => {
+            renderCell: (params) => {
                 return (
                     <div className="ticons">
                         <Link to={`/admin/user/${tdata._id}`}>
