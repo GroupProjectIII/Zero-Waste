@@ -35,6 +35,10 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 
 app.use('/posts', postRoutes);
+//seller
+
+const sellerPostRoutes = require("./routes/sellerPosts");
+app.use(sellerPostRoutes);
 
 // Error Handler Middleware
 app.use(errorHandler);

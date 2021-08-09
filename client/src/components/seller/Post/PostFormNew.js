@@ -4,10 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { createPost, updatePost } from '../../../actions/posts';
 import './PostForm.css';
+import axios from 'axios';
 
 export default function PublicPost( {currentId, setCurrentId}) {
 
-const [postData, setPostData] = useState({ postType: '', buyer: '', address: '', contact: '', location: {}, createdAt: '', wasteItemList: [{}] });  
+    const history = useHistory();
+    
+    if((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype")==="seller")){
+        history.push("/");
+    }
+   
+    const sellerId=(localStorage.getItem("id"));
+   
+
+    const [postType, setPostType] = useState("");
+    const [buyer, setBuyer] = useState("");
+    const [address, setAddress] = useState("");
+    const [location, setLocation] = useState([]);
+    const [contact, setContact] = useState("");
+
   const wasteItem = {
     wasteType: '',
     item: '',
@@ -31,34 +46,34 @@ const [postData, setPostData] = useState({ postType: '', buyer: '', address: '',
         const updatedCats = [...wasteItemList];
         updatedCats[e.target.dataset.idx][e.target.className] = e.target.value;
         setWasteItemList(updatedCats);
-        setPostData({ ...postData, wasteItemList: wasteItemList });
     };
     
-  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
-  const dispatch = useDispatch();
   
  
-  useEffect(() => {
-      if (post) setPostData(post);
-  }, [post]);
-
-
-  const clear = () => {
-      setCurrentId(0);
-      setPostData({ postType: '', buyer: '', address: '', contact: '', location: {}, createdAt: '', wasteItemList: [{}] });
-  };
-
+  
   
    const handleSubmit = async (e) => {
-    e.preventDefault();
+       e.preventDefault();
+       const newPostData = {
+           sellerId,
+           postType,
+           buyer,
+           address,
+           location,
+           contact,
+           wasteItemList
+       }    
 
        if (currentId === 0) {
-        console.log(postData)
-        dispatch(createPost(postData));
-        clear();
+           console.log(newPostData);
+            axios.post('/sellerAddPost', newPostData).then(res => console.log(res)
+            ).catch((err) => {
+            alert(err)
+            })
+      
     } else {
-        dispatch(updatePost(currentId, postData));
-        clear();
+        
+        
     }
     };
     
@@ -70,11 +85,11 @@ const [postData, setPostData] = useState({ postType: '', buyer: '', address: '',
             navigator.geolocation.getCurrentPosition(function (position) {
                 console.log(position.coords.latitude)
                 console.log(position.coords.longitude)
-                let location = {
+                let locationTp = {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
                 }
-                setPostData({ ...postData, location: location }); 
+               setLocation(locationTp)
               });
           } else {
             console.log("Not Available");
@@ -92,26 +107,31 @@ const [postData, setPostData] = useState({ postType: '', buyer: '', address: '',
             <form className="seller-add-new-post-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <label className="seller-add-post-label"></label>
                     <select class="seller-add-post-select" name="option"
-                        onChange={(e)=>setPostData({ ...postData, postType: e.target.value })}>
-                    <option value="0" disabled selected>Select Post Type</option>
-                    <option value="public">Public</option>
-                    <option value="direct">Direct</option>
-                </select>
+                        onChange={(e) => {
+                            setPostType(e.target.value)
+                        }}>
+                        <option value="0" disabled selected>Select Post Type</option>
+                        <option value="public">Public</option>
+                        <option value="direct">Direct</option>
+                    </select>
                     <select className="seller-add-post-select" name="option"
-                     onChange={(e)=>setPostData({ ...postData, buyer: e.target.value })}>
-                    <option value="all" selected>All Buyers</option>
-                    <option value="bid1">Lk Collectors</option>
-                    <option value="bid2">Abc Industries</option>
+                        onChange={(e) => {
+                         setBuyer(e.target.value)
+                     }}>
+                        <option value="all" selected>All Buyers</option>
+                        <option value="bid1">Lk Collectors</option>
+                        <option value="bid2">Abc Industries</option>
 
-                </select>
+                    </select>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlfor="address">Address</label>
                         <input className="address"
                             id="input"
                             name="address"
                             type="text"
-                            value={postData.creator}
-                           onChange={(e) => setPostData({ ...postData, address: e.target.value })}
+                            onChange={(e) => {
+                                setAddress(e.target.value)
+                            }}
                         required></input>
                 </div>
                 <div className="seller-add-post-row"> 
@@ -120,8 +140,7 @@ const [postData, setPostData] = useState({ postType: '', buyer: '', address: '',
                             id="input"
                             name="contact"
                             type="tel"
-                            value={postData.creator}
-                           onChange={(e) => setPostData({ ...postData, contact: e.target.value })}
+                           onChange={(e) => setContact(e.target.value)}
                         required></input>
                 </div>
                 <div className="seller-add-post-row">
@@ -141,15 +160,15 @@ const [postData, setPostData] = useState({ postType: '', buyer: '', address: '',
                       <h3>{`Waste Item #${idx + 1}`}</h3>
                       <button className="seller-waste-item-delete-btn">Delete Item</button>
                   </div>
-                  <select className="seller-add-post-select" name="option">
+                  <select className="wasteType" name="wastetype">
                     <option value="0"disabled selected>Select Waste Type</option>
-                    <option value="1">Plastic</option>
-                    <option value="2">Glass</option>
-                    <option value="3">Paper</option>
-                    <option value="4">Polythene</option>
-                    <option value="5">Organic</option>
-                    <option value="6">Electronic</option>
-                    <option value="7">Other</option>
+                    <option value="plastic">Plastic</option>
+                    <option value="glass">Glass</option>
+                    <option value="paper">Paper</option>
+                    <option value="polythene">Polythene</option>
+                    <option value="organic">Organic</option>
+                    <option value="electronic">Electronic</option>
+                    <option value="other">Other</option>
 
                   </select>
                   <div className="seller-add-post-row"> 
@@ -186,9 +205,39 @@ const [postData, setPostData] = useState({ postType: '', buyer: '', address: '',
                         onChange={handleCatChange}
                     ></input>
                 </div>
-                
-                
                   
+                  <div className="seller-add-post-row">
+                      <label className="seller-add-post-label" for={selectedFileid}>Select Image</label>
+                      <input className="selectedFile"
+                          id="input"
+                          name={selectedFileid}
+                          data-idx={idx}
+                          type="file"
+                          accept="image/*"
+                      //  value={wasteItemList[idx].selectedFile= target.files[0]}
+                        //  onChange={handleCatChange}
+                          onChange={
+                              (e) => {
+                                  let picfile = e.target.files[0];
+                                  console.log(picfile);
+                                  
+                              }
+                          }
+                        ></input>
+                </div>
+                <div className="seller-add-post-row">
+                      <FileBase className="selectedFile"
+                          id="input"
+                          name={selectedFileid}
+                          data-idx={idx}
+                          type="file"
+                          multiple={false}
+                          value={wasteItemList[idx].selectedFile}
+                          onDone={({base64}) => {
+                              console.log(base64);
+                              handleCatChange(base64);
+                          }}
+                     /></div> 
                        
              
              
