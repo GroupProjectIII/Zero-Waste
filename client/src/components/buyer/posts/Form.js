@@ -21,7 +21,8 @@ function Forms() {
         buyerName: '',
         buyerEmail:'',
         postId:'',
-        wasteItemsListId:''
+        wasteItemsListId:'',
+        sellerId:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -39,7 +40,8 @@ function Forms() {
             buyerName:name,
             buyerEmail:email,
             postId:postId,
-            wasteItemsListId:''
+            wasteItemsListId:'completePost',
+            sellerId:posts.sellerId
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -121,7 +123,8 @@ function Forms() {
             buyerName: '',
             buyerEmail:'',
             postId:'',
-            wasteItemsListId:''
+            wasteItemsListId:'',
+            sellerId:''
         });
     };
 
