@@ -7,18 +7,21 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Forms() {
 
-    const { id } = useParams();
-    console.log(id);
+    const { postId } = useParams();
+    console.log(postId);
 
     const apiUrl = '/addSellerOffer';
     const initialValues = {
         value: '',
         expiryDate: '',
+        collectingDate: '',
+        collectingTime: '',
         quantity: '',
+        status:'',
         buyerName: '',
         buyerEmail:'',
         postId:'',
-        location:''
+        wasteItemsListId:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -29,14 +32,14 @@ function Forms() {
         const data = {
             value:formValues.value,
             expiryDate:formValues.expiryDate,
+            collectingDate:formValues.collectingDate,
+            collectingTime:formValues.collectingTime,
             quantity:formValues.quantity,
+            status:'pending',
             buyerName:name,
             buyerEmail:email,
-            postId:id,
-            location:{
-                latitude:lat,
-                longitude:long
-            }
+            postId:postId,
+            wasteItemsListId:''
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -58,7 +61,7 @@ function Forms() {
     };
 
     const date = new Date();
-    date.setDate(date.getDate() + 8);
+    date.setDate(date.getDate() + 28);
 
     const date2 = new Date();
     date2.setDate(date2.getDate());
@@ -67,6 +70,7 @@ function Forms() {
         let errors = {};
         const regex = /^[0-9]+$/;
         const d1 = new Date(values.expiryDate);
+        const d3 = new Date(values.collectingDate);
         console.log(d1);
         if (!values.value) {
             errors.value = "Cannot be blank";
@@ -78,9 +82,17 @@ function Forms() {
         if (!values.expiryDate) {
             errors.expiryDate = "Cannot be blank";
         }else if (date<=d1) {
-            errors.expiryDate = "Expiry date should not be longer than a week.";
+            errors.expiryDate = "Expiry date should not be longer than a month.";
         }else if (d1<=date2) {
             errors.expiryDate = "Expiry date should not be a past date.";
+        }
+        if (!values.collectingDate) {
+            errors.collectingDate = "Cannot be blank";
+        }else if (d3<=date2) {
+            errors.collectingDate = "Collecting date should not be a past date.";
+        }
+        if (!values.collectingTime) {
+            errors.collectingTime = "Cannot be blank";
         }
         if (!values.quantity) {
             errors.quantity = "Cannot be blank";
@@ -102,11 +114,14 @@ function Forms() {
         setFormValues({
             value: '',
             expiryDate: '',
+            collectingDate: '',
+            collectingTime: '',
             quantity: '',
+            status:'',
             buyerName: '',
             buyerEmail:'',
             postId:'',
-            location:''
+            wasteItemsListId:''
         });
     };
 
@@ -137,7 +152,7 @@ function Forms() {
 
     const getOnePost = async () => {
         try {
-            const response = await axios.get(`/buyerGetOnePost/${id}`)
+            const response = await axios.get(`/buyerGetOnePost/${postId}`)
             console.log(response);
             const allPost=response.data.onePost;
             setPosts(allPost);
@@ -151,6 +166,7 @@ function Forms() {
     console.log(long);
     const lat=posts?.location?.latitude;
     console.log(lat);
+    console.log(posts?.location?._id);
 
     return(
         <div className="forms-b">
@@ -178,6 +194,24 @@ function Forms() {
                                            className={formErrors.expiryDate && "input-error"}></input>
                                     {formErrors.expiryDate && (
                                         <span className="error" style={{color:'red'}}>{formErrors.expiryDate}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Waste Items Collecting Date</span>
+                                    <input type="date" name="collectingDate" id="collectingDate" placeholder="Enter date" value={formValues.collectingDate}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingDate && "input-error"}></input>
+                                    {formErrors.collectingDate && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingDate}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Waste Items Collecting Approximate Time</span>
+                                    <input type="time" name="collectingTime" id="collectingTime" placeholder="Enter time" value={formValues.collectingTime}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingTime && "input-error"}></input>
+                                    {formErrors.collectingTime && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingTime}</span>
                                     )}
                                 </div>
                                 <div className="input-box-b">

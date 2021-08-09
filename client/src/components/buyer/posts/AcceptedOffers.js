@@ -40,6 +40,7 @@ function AcceptedOffers() {
                                         <p>Quantity (Kg): {offer.quantity}</p>
                                         <p>Unit Price (Rs): {offer.value}</p>
                                         <p>Expiry Date: {moment(offer.expiryDate).fromNow()}</p>
+                                        <p>Collecting Date: {moment(offer.collectingDate).fromNow()}</p>
                                         <p>Offer Gives: {moment(offer.offerCreatedAt).fromNow()}</p>
                                         <div className="buyerlink-b">
                                             <Link style={{color: '#fff', textDecoration: 'none'}}

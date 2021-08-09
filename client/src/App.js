@@ -84,10 +84,10 @@ function App() {
                     <Route path='/' exact component={Home} />
                     <Route path='/buyer/home' exact component={BuyerHome} />
                     <Route path='/buyer/posts' component={BuyerServices} />
-                    <Route path='/buyer/offerforms/:id' component={BuyerOfferForm} />
+                    <Route path='/buyer/offerforms/:postId' component={BuyerOfferForm} />
                     <Route path='/buyer/acceptedoffers' component={BuyerAOffers} />
                     <Route path='/buyer/pendingoffers' component={BuyerPOffers} />
-                    <Route path='/buyer/editpendingoffers/:id' component={BuyerEditPendingOffers} />
+                    <Route path='/buyer/editpendingoffers/:postId' component={BuyerEditPendingOffers} />
                     <Route path='/buyer/companyposts' component={BuyerCompanyPosts} />
                     <Route path='/buyer/companyofferforms' component={BuyerCompanyOfferForm} />
                     <Route path='/buyer/companyacceptedoffers' component={BuyerCompanyAOffers} />
@@ -95,8 +95,8 @@ function App() {
                     <Route path='/buyer/editcompanypendingoffers' component={BuyerEditCompanyPendingOffers} />
                     <Route path='/buyer/viewcompanydetails' component={BuyerViewCompanyDetails} />
                     <Route path='/buyer/notifyaboutwaste' component={BuyerCompanyNotify} />
-                    <Route path='/buyer/location/:id' component={BuyerPostsLocation} />
-                    <Route path='/buyer/viewpostdetails/:id' component={BuyerViewPostDetails} />
+                    <Route path='/buyer/location/:offerId' component={BuyerPostsLocation} />
+                    <Route path='/buyer/viewpostdetails/:postId' component={BuyerViewPostDetails} />
                     <Route path='/buyer/editprofile' component={BuyerEditProfile} />
                     <Route path='/buyer/singleoffers/:postId/:arrayId' component={BuyerSingleOffers} />
 
