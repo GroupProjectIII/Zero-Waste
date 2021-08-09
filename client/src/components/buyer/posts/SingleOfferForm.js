@@ -10,6 +10,9 @@ function SingleOfferForm() {
     const { postId, arrayId } = useParams();
     console.log(postId,arrayId);
 
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
+
     const apiUrl = '/addSellerOffer';
     const initialValues = {
         value: '',
@@ -18,8 +21,7 @@ function SingleOfferForm() {
         collectingTime: '',
         quantity: '',
         status:'',
-        buyerName: '',
-        buyerEmail:'',
+        buyerId: '',
         postId:'',
         wasteItemsListId:'',
         sellerId:''
@@ -37,8 +39,7 @@ function SingleOfferForm() {
             collectingTime:formValues.collectingTime,
             quantity:formValues.quantity,
             status:'pending',
-            buyerName:name,
-            buyerEmail:email,
+            buyerId:buyerId,
             postId:postId,
             wasteItemsListId:wasteItem?._id,
             sellerId:posts.sellerId
@@ -123,8 +124,7 @@ function SingleOfferForm() {
             collectingTime: '',
             quantity: '',
             status:'',
-            buyerName: '',
-            buyerEmail:'',
+            buyerId: '',
             postId:'',
             wasteItemsListId:'',
             sellerId:''
@@ -189,7 +189,7 @@ function SingleOfferForm() {
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
                                 <div className="input-box-b">
-                                    <span className="details-b">Offer Value</span>
+                                    <span className="details-b">Offer Value (Rs)</span>
                                     <input type="text" name="value" id="value" placeholder="Enter value" value={formValues.value}
                                            onChange={handleChange}
                                            className={formErrors.value && "input-error"}></input>
@@ -225,7 +225,7 @@ function SingleOfferForm() {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Quantity</span>
+                                    <span className="details-b">Quantity (Kg)</span>
                                     <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
                                            onChange={handleChange}
                                            className={formErrors.quantity && "input-error"}></input>

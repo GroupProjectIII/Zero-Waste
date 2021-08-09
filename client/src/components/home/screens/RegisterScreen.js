@@ -49,6 +49,8 @@ const RegisterScreen = ({ history }) => {
       localStorage.setItem("username", data.username);
       localStorage.setItem("email", data.email);
       localStorage.setItem("registeredAt", data.registeredAt);
+      localStorage.setItem("userId", data.id);
+
       console.log(data.usertype);
       if(data.usertype==="buyer"){
         history.push("/buyer/home");

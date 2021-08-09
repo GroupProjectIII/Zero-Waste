@@ -29,11 +29,7 @@ const sellerOfferSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    buyerName: {
-        type: String,
-        required:true
-    },
-    buyerEmail: {
+    buyerId: {
         type: String,
         required:true
     },

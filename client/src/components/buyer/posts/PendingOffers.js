@@ -7,6 +7,9 @@ import {Slide, toast, ToastContainer} from "react-toastify";
 
 function PendingOffers() {
 
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
+
     const [offers, getOffers] = useState([]);
 
     useEffect(()=>{
@@ -47,7 +50,7 @@ function PendingOffers() {
                 </div>
                 <main className="grid-b">
                     {offers.map((offer,index)=> {
-                        if(offer.status==='pending')
+                        if(offer.status==='pending' && offer.buyerId===buyerId)
                         return (
                             <article>
                                 <div className="text-b">
@@ -57,6 +60,10 @@ function PendingOffers() {
                                     <p>Expiry Date: {moment(offer.expiryDate).fromNow()}</p>
                                     <p>Collecting Date: {moment(offer.collectingDate).fromNow()}</p>
                                     <p>Offer Gave: {moment(offer.offerCreatedAt).fromNow()}</p>
+                                    <div className="buyerlink-b">
+                                        <Link style={{color: '#fff', textDecoration: 'none'}}
+                                              to={`/buyer/viewofferdetails/${offer._id}`}>View Details <i className="fas fa-angle-double-right"></i></Link>
+                                    </div>
                                     <div className="buyerlink-b">
                                         <Link style={{color: '#fff', textDecoration: 'none'}}
                                               to={`/buyer/editpendingoffers/${offer._id}`}>Edit Offer <i className="fas fa-edit"></i></Link>
