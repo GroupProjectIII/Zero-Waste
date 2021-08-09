@@ -16,10 +16,12 @@ function BuyerHome() {
     const name=(localStorage.getItem("username"));
     const email=(localStorage.getItem("email"));
     const date=(localStorage.getItem("registeredAt"));
+    const buyerId=(localStorage.getItem("userId"));
     console.log(type);
     console.log(name);
     console.log(email);
     console.log(date);
+    console.log(buyerId);
 
     return (
         <>

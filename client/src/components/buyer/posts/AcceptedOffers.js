@@ -6,6 +6,9 @@ import moment from 'moment';
 
 function AcceptedOffers() {
 
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
+
     const [offers, getOffers] = useState([]);
 
     useEffect(()=>{
@@ -32,7 +35,7 @@ function AcceptedOffers() {
                 </div>
                 <main className="grid-b">
                     {offers.map((offer,index)=> {
-                        if(offer.status==='accepted')
+                        if(offer.status==='accepted' && offer.buyerId===buyerId)
                             return (
                                 <article>
                                     <div className="text-b">
@@ -45,6 +48,10 @@ function AcceptedOffers() {
                                         <div className="buyerlink-b">
                                             <Link style={{color: '#fff', textDecoration: 'none'}}
                                                   to={`/buyer/location/${offer._id}`}>View Location <i className="fas fa-search-location"></i></Link>
+                                        </div>
+                                        <div className="buyerlink-b">
+                                            <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                  to={`/buyer/viewofferdetails/${offer._id}`}>View Details <i className="fas fa-angle-double-right"></i></Link>
                                         </div>
                                     </div>
                                 </article>
