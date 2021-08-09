@@ -7,8 +7,8 @@ import moment from 'moment';
 
 function ViewPost() {
 
-    const { id } = useParams();
-    console.log(id);
+    const { postId } = useParams();
+    console.log(postId);
 
     const [posts, setPosts] = useState({});
     const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ function ViewPost() {
 
     const getOnePost = async () => {
         try {
-            const response = await axios.get(`/buyerGetOnePost/${id}`)
+            const response = await axios.get(`/buyerGetOnePost/${postId}`)
             console.log(response);
             const allPost=response.data.onePost;
             setPosts(allPost);
@@ -66,7 +66,7 @@ function ViewPost() {
                             <p>Quantity: {post.quantity} kg</p>
                             <p>Can Collect Items: {moment(post.avbDate).fromNow()}</p>
                             <div className="buyerlink-b">
-                                <Link style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/singleoffers/${id}/${post._id}`}>Make Offer <i className="fas fa-angle-double-right"></i></Link>
+                                <Link style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/singleoffers/${postId}/${post._id}`}>Make Offer <i className="fas fa-angle-double-right"></i></Link>
                             </div>
                         </div>
                     </article>
@@ -74,7 +74,7 @@ function ViewPost() {
                 </main>
                     <div className="all-items-button-b">
                         <p>Do you want to make an offer for all these items at once?</p>
-                        <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/offerforms/${id}`}>Make Offer for All Items <i className="fas fa-angle-double-right"></i></Link>
+                        <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/offerforms/${postId}`}>Make Offer for All Items <i className="fas fa-angle-double-right"></i></Link>
                     </div>
                 <h1>Seller's Location</h1>
             </div>

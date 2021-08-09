@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-const Location = new mongoose.Schema({
-    latitude: Number,
-    longitude: Number,
-})
-
 const sellerOfferSchema = new mongoose.Schema({
     value:{
         type: Number,
@@ -12,6 +7,14 @@ const sellerOfferSchema = new mongoose.Schema({
     },
     expiryDate:{
         type:Date,
+        required:true
+    },
+    collectingDate:{
+        type:Date,
+        required:true
+    },
+    collectingTime:{
+        type:String,
         required:true
     },
     quantity:{
@@ -24,7 +27,7 @@ const sellerOfferSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'pending',
+        required:true
     },
     buyerName: {
         type: String,
@@ -38,7 +41,10 @@ const sellerOfferSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    location: Location,
+    wasteItemsListId: {
+        type: String,
+        required:false
+    }
 });
 
 module.exports = mongoose.model('BuyerOffersForSeller', sellerOfferSchema);
