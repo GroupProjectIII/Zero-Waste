@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SingleOfferForm(props) {
+function SingleOfferForm() {
 
     const { postId, arrayId } = useParams();
     console.log(postId,arrayId);
@@ -21,7 +21,8 @@ function SingleOfferForm(props) {
         buyerName: '',
         buyerEmail:'',
         postId:'',
-        wasteItemsListId:''
+        wasteItemsListId:'',
+        sellerId:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -39,7 +40,8 @@ function SingleOfferForm(props) {
             buyerName:name,
             buyerEmail:email,
             postId:postId,
-            wasteItemsListId:wasteItem?._id
+            wasteItemsListId:wasteItem?._id,
+            sellerId:posts.sellerId
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -124,7 +126,8 @@ function SingleOfferForm(props) {
             buyerName: '',
             buyerEmail:'',
             postId:'',
-            wasteItemsListId:''
+            wasteItemsListId:'',
+            sellerId:''
         });
     };
 

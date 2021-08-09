@@ -44,6 +44,10 @@ const sellerOfferSchema = new mongoose.Schema({
     wasteItemsListId: {
         type: String,
         required:false
+    },
+    sellerId: {
+        type: String,
+        required:false
     }
 });
 

@@ -43,16 +43,7 @@ function PostsLocation() {
         }
     }
     console.log(posts);
-
-    const onePostId=posts.postId
-    console.log(onePostId);
-    const type=typeof (onePostId);
-    console.log(type);
-
-    useEffect(()=>{
-        getOneOfferPost();
-    }, []);
-
+    
     useEffect(()=>{
         if (offerPosts && offerPosts.location) {
             console.log(offerPosts.location);
@@ -62,15 +53,23 @@ function PostsLocation() {
     }, [offerPosts]);
 
     const getOneOfferPost = async () => {
-        try {
-            const response = await axios.get(`/buyerGetOnePost/${onePostId}`)
-            console.log(response);
-            const allOfferPost=response.data.onePost;
-            setOfferPosts(allOfferPost);
-        } catch (error) {
-            console.error(`Error: ${error}`)
+        if(PostId2 !== undefined) {
+            try {
+                const response = await axios.get(`/buyerGetOnePost/${PostId2}`)
+                console.log(response);
+                const allOfferPost=response.data.onePost;
+                setOfferPosts(allOfferPost);
+            } catch (error) {
+                console.error(`Error: ${error}`)
+            }
         }
     }
+    const PostId2=posts.postId;
+
+    useEffect(()=>{
+        getOneOfferPost();
+    }, [PostId2]);
+
     console.log(offerPosts);
 
     const long = offerPosts?.location?.longitude;

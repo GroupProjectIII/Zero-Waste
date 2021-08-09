@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 const BuyerOffersForSeller = require("../models/BuyerOffersForSeller");
 
 exports.addSellerOffer= async (req,res)=>{
-    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerName, buyerEmail, postId, wasteItemsListId } = req.body;
+    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerName, buyerEmail, postId, wasteItemsListId, sellerId } = req.body;
 
-    const newSellerOffer = new BuyerOffersForSeller({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerName, buyerEmail, postId, wasteItemsListId})
+    const newSellerOffer = new BuyerOffersForSeller({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerName, buyerEmail, postId, wasteItemsListId, sellerId})
 
     try {
         await newSellerOffer.save();
