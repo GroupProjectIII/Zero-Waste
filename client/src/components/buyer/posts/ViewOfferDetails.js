@@ -84,6 +84,7 @@ function ViewOfferDetails() {
                         if(post._id === wasteItemsListId){
                             return (
                                 <article>
+                                    <img src={post.selectedFile} alt=""></img>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
                                         <p>Waste Type: {post.wasteType}</p>
@@ -96,6 +97,7 @@ function ViewOfferDetails() {
                         }else if(wasteItemsListId === 'completePost'){
                             return (
                                 <article>
+                                    <img src={post.selectedFile} alt=""></img>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
                                         <p>Waste Type: {post.wasteType}</p>
