@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const SellerPost = require("../models/SellerPost");
+const BuyerOffersForSeller = require("../models/BuyerOffersForSeller");
 
 exports.sellerAddPost = async (req, res) => {
     const sellerId = req.body.sellerId;
@@ -48,4 +49,36 @@ exports.sellerViewPosts = async (req, res) => {
     });
 
     
+}
+
+exports.sellerViewOffers = async (req, res) => {
+
+    BuyerOffersForSeller.find({ buyerName: "harshana" , status:"pending" }).exec((err, posts) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
+        return res.status(200).json({
+            sucess: true,
+            existingPosts: posts
+        });
+    });
+
+    
+}
+
+exports.sellerViewAcceptedOffers = async (req, res) => {
+    BuyerOffersForSeller.find({ buyerName: "harshana" , status:"accepted" }).exec((err, posts) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
+        return res.status(200).json({
+            sucess: true,
+            existingPosts: posts
+        });
+    });
+
 }

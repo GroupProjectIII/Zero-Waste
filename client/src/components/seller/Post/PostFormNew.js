@@ -5,16 +5,17 @@ import FileBase from 'react-file-base64';
 import { createPost, updatePost } from '../../../actions/posts';
 import './PostForm.css';
 import axios from 'axios';
+import e from 'cors';
 
-export default function PublicPost( {currentId, setCurrentId}) {
+export default function PublicPost({ currentId, setCurrentId }) {
 
     const history = useHistory();
     
-    if((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype")==="seller")){
+    if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "seller")) {
         history.push("/");
     }
    
-    const sellerId=(localStorage.getItem("id"));
+    const sellerId = (localStorage.getItem("id"));
    
 
     const [postType, setPostType] = useState("");
@@ -23,58 +24,72 @@ export default function PublicPost( {currentId, setCurrentId}) {
     const [location, setLocation] = useState([]);
     const [contact, setContact] = useState("");
 
-  const wasteItem = {
-    wasteType: '',
-    item: '',
-    avbDate: null,
-    quantity: null,
-    selectedFile: '',
-  };
+    const wasteItem = {
+        wasteType: '',
+        item: '',
+        avbDate: null,
+        quantity: null,
+        selectedFile: '',
+    };
 
-  //catstste = wasteItemList
-  //blankcat= wasteitem
+    //catstste = wasteItemList
+    //blankcat= wasteitem
 
     const [wasteItemList, setWasteItemList] = useState([
-        {...wasteItem}
+        { ...wasteItem }
     ]);
     
     const addWasteItem = () => {
-        setWasteItemList([...wasteItemList, {...wasteItem}]);
+        setWasteItemList([...wasteItemList, { ...wasteItem }]);
     };
 
-    const handleCatChange = (e) => {
+    const handleCatChange = (e,base64) => {
         const updatedCats = [...wasteItemList];
-        updatedCats[e.target.dataset.idx][e.target.className] = e.target.value;
-        setWasteItemList(updatedCats);
+      //  console.log(e);
+        if (base64) {
+          // console.log(e);
+         //   console.log(base64);
+            updatedCats[e.target.dataset.idx][e.target.className] = base64;
+            setWasteItemList(updatedCats);
+        } else {
+           // console.log("data")
+         //   console.log(e);
+            updatedCats[e.target.dataset.idx][e.target.className] = e.target.value;
+            setWasteItemList(updatedCats);
+        }
+       
     };
     
   
  
   
   
-   const handleSubmit = async (e) => {
-       e.preventDefault();
-       const newPostData = {
-           sellerId,
-           postType,
-           buyer,
-           address,
-           location,
-           contact,
-           wasteItemList
-       }    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const newPostData = {
+            sellerId,
+            postType,
+            buyer,
+            address,
+            location,
+            contact,
+            wasteItemList
+        }
 
-       if (currentId === 0) {
-           console.log(newPostData);
-            axios.post('/sellerAddPost', newPostData).then(res => console.log(res)
+        if (currentId === 0) {
+            console.log(newPostData);
+            axios.post('/sellerAddPost', newPostData).then((res) => {
+                console.log(res);
+                alert("Post Added Sucessfully!");
+            }
             ).catch((err) => {
-            alert(err)
+                alert(err)
             })
       
-    } else {
+        } else {
         
         
-    }
+        }
     };
     
 
@@ -89,12 +104,14 @@ export default function PublicPost( {currentId, setCurrentId}) {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
                 }
-               setLocation(locationTp)
-              });
-          } else {
+                setLocation(locationTp)
+            });
+        } else {
             console.log("Not Available");
-          }
+        }
     }
+
+    
     
     
     return (
@@ -160,7 +177,7 @@ export default function PublicPost( {currentId, setCurrentId}) {
                       <h3>{`Waste Item #${idx + 1}`}</h3>
                       <button className="seller-waste-item-delete-btn">Delete Item</button>
                   </div>
-                  <select className="wasteType" name="wastetype">
+                  <select className="wasteType" name="wastetype" data-idx={idx} onChange={handleCatChange}>
                     <option value="0"disabled selected>Select Waste Type</option>
                     <option value="plastic">Plastic</option>
                     <option value="glass">Glass</option>
@@ -218,27 +235,20 @@ export default function PublicPost( {currentId, setCurrentId}) {
                         //  onChange={handleCatChange}
                           onChange={
                               (e) => {
-                                  let picfile = e.target.files[0];
-                                  console.log(picfile);
+                                  console.log(e);
+                                  const file = e.target.files[0];
+                                  const fileReader = new FileReader();
+                                  fileReader.readAsDataURL(file);
+                                  fileReader.onload = () => {
+                                 //     console.log(fileReader.result);
+                                      let base64 = fileReader.result;
+                                      handleCatChange(e, base64);
+                                  }
                                   
                               }
                           }
                         ></input>
                 </div>
-                <div className="seller-add-post-row">
-                      <FileBase className="selectedFile"
-                          id="input"
-                          name={selectedFileid}
-                          data-idx={idx}
-                          type="file"
-                          multiple={false}
-                          value={wasteItemList[idx].selectedFile}
-                          onDone={({base64}) => {
-                              console.log(base64);
-                              handleCatChange(base64);
-                          }}
-                     /></div> 
-                       
              
              
             </div>
@@ -248,6 +258,8 @@ export default function PublicPost( {currentId, setCurrentId}) {
         <a href="#" className="seller-add-waste-item-btn" onClick={addWasteItem}>Add Item</a>
         <button className="seller-post-submit-btn" type="submit">Submit</button>
     </form>
+    
+          
     </div>
     </div>
     );
