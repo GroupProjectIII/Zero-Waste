@@ -184,7 +184,7 @@ function SingleOfferForm() {
                 <div className="container-b">
                     <div className="content-b">
                         <h3>Image of Waste Item</h3>
-                        <img src="../images/polythene.jpg" alt=""></img>
+                        <img src={wasteItem?.selectedFile} alt=""></img>
                         <div className="title-b">Make Offer</div>
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
