@@ -38,6 +38,7 @@
     margin-left: 10px;
 }
 .seller-waste-item-delete-btn{
+    float: right;
     background-color: red;
 }
 .seller-add-waste-item-btn:hover,

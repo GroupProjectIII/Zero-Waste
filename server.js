@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({extended:'true'}))
 const AuserRoute = require('./routes/adminUser')
 const cors = require("cors");
 
+app.use(cors());
 connectDB();
 
 app.use(express.json());
@@ -24,6 +25,17 @@ app.use('/api/adminuser' , AuserRoute);
 
 const postRoutes = require("./routes/posts.js");
 app.use(cors());
+const buyerPosts = require("./routes/buyerPosts");
+const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
+app.use(buyerPosts);
+app.use(buyerOffersForSeller);
+
+app.use('/api/adminuser' , AuserRoute);
+
+//const postRoutes = require("./routes/posts.js");
+
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 
 app.use('/posts', postRoutes);
 

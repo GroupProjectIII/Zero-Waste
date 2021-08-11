@@ -12,6 +12,14 @@ function BuyerHome() {
     if((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype")==="buyer")){
         history.push("/");
     }
+    const type=(localStorage.getItem("usertype"));
+    const name=(localStorage.getItem("username"));
+    const email=(localStorage.getItem("email"));
+    const date=(localStorage.getItem("registeredAt"));
+    console.log(type);
+    console.log(name);
+    console.log(email);
+    console.log(date);
 
     return (
         <>
