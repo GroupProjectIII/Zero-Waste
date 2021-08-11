@@ -4,25 +4,21 @@ const app = express();
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 const bodyParser = require('body-parser')
-<<<<<<< HEAD
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:'true'}))
-=======
-//app.use(bodyParser.json())
-//app.use(bodyParser.urlencoded({extended:'true'}))
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 
->>>>>>> 31c69dc413a193dd98f0259f9cd8fa29637991d7
 const AuserRoute = require('./routes/adminUser')
 const cors = require("cors");
 
 app.use(cors());
 connectDB();
 
-app.use(bodyParser.json({ limit: '30mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+
 
 app.use(express.json());
 
