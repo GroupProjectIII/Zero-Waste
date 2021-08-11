@@ -53,7 +53,7 @@ const RegisterScreen = ({ history }) => {
 
       console.log(data.usertype);
       if(data.usertype==="buyer"){
-        history.push("/buyer/home");
+        history.push("/buyer/profileDetails");
       }else if(data.usertype==="seller"){
         history.push("/seller");
       }
