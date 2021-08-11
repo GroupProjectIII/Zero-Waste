@@ -35,8 +35,10 @@ const postRoutes = require("./routes/posts.js");
 app.use(cors());
 const buyerPosts = require("./routes/buyerPosts");
 const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
+const buyerProfile = require("./routes/buyerProfile");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
+app.use(buyerProfile);
 
 app.use('/api/adminuser' , AuserRoute);
 
