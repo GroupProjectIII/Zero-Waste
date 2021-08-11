@@ -28,36 +28,37 @@ export default function Userlist() {
     const handleDelete = (id) => {
         settdata(tdata.filter(item => item.id !== id))
     }
-
-    const columns = [
-        { field: 'username', headerName: 'Username', width: 250 },
-        { field: 'email', headerName: 'E-mail', width: 300 },
-        {
-            field: 'usertype',
-            headerName: 'Role',
-            width: 200,
-        },
-        {
-            field: "action",
-            headerName: "Action",
-            width: 200,
-            renderCell: (tdata) => {
-                return (
-                    <div className="ticons">
-                        <Link to={`/admin/user/${tdata._id}`}>
-                            <button className="userlistEdit">Edit</button>
-                        </Link>
-
-                        <DeleteOutline className="userlistDelete" /*onClick={() => handleDelete(params.row.id)}*//>
-
-                        <Link to={`/admin/userreport/${tdata._id}`}>
-                            <Assessment className="userlistreport" />
-                        </Link>
-                    </div>
-                )
+        const columns = [
+            { field: 'username', headerName: 'Username', width: 250 },
+            { field: 'email', headerName: 'E-mail', width: 300 },
+            {
+                field: 'usertype',
+                headerName: 'Role',
+                width: 200,
+            },
+            {
+                field: "action",
+                headerName: "Action",
+                width: 200,
+    
+                renderCell: (params) => {
+                    return (
+                        <div className="ticons">
+                            <Link to={`/admin/user/${params.row._id}`}>
+                                <button className="userlistEdit">Edit</button>
+                            </Link>
+    
+                            <DeleteOutline className="userlistDelete" /*onClick={() => handleDelete(params.row.id)}*//>
+    
+                            <Link to={`/admin/userreport/${params.row._id}`}>
+                                <Assessment className="userlistreport" />
+                            </Link>
+                        </div>
+                    )
+                }
             }
-        }
-    ];
+        ];
+   
 
     return (
         <div>

@@ -49,4 +49,29 @@ Arouter.get('/getcompanies' , (req,res)=>{
     })
 })
 
+Arouter.post('/getuserdata' , (req,res)=>{
+    Ausermodel.find({_id:req.body._id} , (docs,err)=>{
+        if(!err){
+            res.send(docs)
+        }
+        else{
+            res.send(err)
+        }
+    })
+})
+
+Arouter.post('/updateuser' , (req,res)=>{
+    Ausermodel.findOneAndUpdate({_id:req.body._id}, {
+        username : req.body.username,
+        email : req.body.email
+    }, (err)=>{
+        if(!err){
+           res.send('Post Updated Successfully')
+        }
+        else{
+            res.send(err)
+        }
+    })
+})
+
 module.exports = Arouter
