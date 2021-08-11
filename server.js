@@ -40,7 +40,6 @@ app.use(buyerOffersForSeller);
 
 app.use('/api/adminuser' , AuserRoute);
 
-//const postRoutes = require("./routes/posts.js");
 
 
 
