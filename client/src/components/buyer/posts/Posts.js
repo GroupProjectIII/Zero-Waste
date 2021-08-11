@@ -21,6 +21,28 @@ function Posts() {
     }
     console.log(notes);
 
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
+
+    const [offers, getOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllOffers();
+    }, []);
+
+    const getAllOffers = async () => {
+        await axios.get(`/viewPendingSellerOffers`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                getOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(offers);
+
+    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.wasteItemsListId==='completePost');
+    console.log(wasteItem);
+
     return(
         <div className="posts-b">
             <div className="posts__container-b">
@@ -82,20 +104,25 @@ function Posts() {
                     </div>
                 </div>
                 <main className="grid-b">
-                    {notes.map((note,index)=>(
-                        <article>
-                            <div className="text-b">
-                                <h3>Post ID: {index+1}</h3>
-                                <p>Location: {note.address}</p>
-                                <p>Post Type: {note.postType}</p>
-                                <p>Address: {note.address}</p>
-                                <p>Telephone No: {note.contact}</p>
-                                <div className="buyerlink-b">
-                                    <Link style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/viewpostdetails/${note._id}`}>View Post <i className="fas fa-angle-double-right"></i></Link>
+                    {notes.map((note,index)=> {
+                        if(wasteItem.find(o=>o.postId === note._id) === undefined)
+                            return (
+                            <article>
+                                <div className="text-b">
+                                    <h3>Post ID: {index + 1}</h3>
+                                    <p>Location: {note.address}</p>
+                                    <p>Post Type: {note.postType}</p>
+                                    <p>Address: {note.address}</p>
+                                    <p>Telephone No: {note.contact}</p>
+                                    <div className="buyerlink-b">
+                                        <Link style={{color: '#fff', textDecoration: 'none'}}
+                                              to={`/buyer/viewpostdetails/${note._id}`}>View Post <i
+                                            className="fas fa-angle-double-right"></i></Link>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    ))}
+                            </article>
+                            );
+                    })}
                 </main>
             </div>
         </div>

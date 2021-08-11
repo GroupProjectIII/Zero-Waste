@@ -5,20 +5,26 @@ import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SingleOfferForm(props) {
+function SingleOfferForm() {
 
     const { postId, arrayId } = useParams();
     console.log(postId,arrayId);
+
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
 
     const apiUrl = '/addSellerOffer';
     const initialValues = {
         value: '',
         expiryDate: '',
+        collectingDate: '',
+        collectingTime: '',
         quantity: '',
-        buyerName: '',
-        buyerEmail:'',
+        status:'',
+        buyerId: '',
         postId:'',
-        location:''
+        wasteItemsListId:'',
+        sellerId:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -29,14 +35,14 @@ function SingleOfferForm(props) {
         const data = {
             value:formValues.value,
             expiryDate:formValues.expiryDate,
+            collectingDate:formValues.collectingDate,
+            collectingTime:formValues.collectingTime,
             quantity:formValues.quantity,
-            buyerName:name,
-            buyerEmail:email,
+            status:'pending',
+            buyerId:buyerId,
             postId:postId,
-            location:{
-                latitude:lat,
-                longitude:long
-            }
+            wasteItemsListId:wasteItem?._id,
+            sellerId:posts.sellerId
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -58,7 +64,7 @@ function SingleOfferForm(props) {
     };
 
     const date = new Date();
-    date.setDate(date.getDate() + 8);
+    date.setDate(date.getDate() + 28);
 
     const date2 = new Date();
     date2.setDate(date2.getDate());
@@ -67,7 +73,9 @@ function SingleOfferForm(props) {
         let errors = {};
         const regex = /^[0-9]+$/;
         const d1 = new Date(values.expiryDate);
+        const d3 = new Date(values.collectingDate);
         console.log(d1);
+
         if (!values.value) {
             errors.value = "Cannot be blank";
         }else if (!regex.test(values.value)) {
@@ -78,9 +86,17 @@ function SingleOfferForm(props) {
         if (!values.expiryDate) {
             errors.expiryDate = "Cannot be blank";
         }else if (date<=d1) {
-            errors.expiryDate = "Expiry date should not be longer than a week.";
+            errors.expiryDate = "Expiry date should not be longer than a month.";
         }else if (d1<=date2) {
             errors.expiryDate = "Expiry date should not be a past date.";
+        }
+        if (!values.collectingDate) {
+            errors.collectingDate = "Cannot be blank";
+        }else if (d3<=date2) {
+            errors.collectingDate = "Collecting date should not be a past date.";
+        }
+        if (!values.collectingTime) {
+            errors.collectingTime = "Cannot be blank";
         }
         if (!values.quantity) {
             errors.quantity = "Cannot be blank";
@@ -88,6 +104,8 @@ function SingleOfferForm(props) {
             errors.quantity = "Invalid quantity format";
         }else if (values.quantity<=0) {
             errors.quantity = "Invalid quantity format";
+        }else if (wasteItem?.quantity<values.quantity) {
+            errors.quantity = "You can not add more than post's quantity";
         }
         return errors;
     };
@@ -102,11 +120,14 @@ function SingleOfferForm(props) {
         setFormValues({
             value: '',
             expiryDate: '',
+            collectingDate: '',
+            collectingTime: '',
             quantity: '',
-            buyerName: '',
-            buyerEmail:'',
+            status:'',
+            buyerId: '',
             postId:'',
-            location:''
+            wasteItemsListId:'',
+            sellerId:''
         });
     };
 
@@ -152,18 +173,23 @@ function SingleOfferForm(props) {
     const lat=posts?.location?.latitude;
     console.log(lat);
 
+    const wasteItem = posts?.wasteItemList?.find(wasteItem => wasteItem._id===arrayId);
+    console.log(wasteItem);
+    console.log(wasteItem?._id);
+    console.log(posts?.location?._id);
+
     return(
         <div className="forms-b">
             <div className="forms__container-b" >
                 <div className="container-b">
                     <div className="content-b">
                         <h3>Image of Waste Item</h3>
-                        <img src="../images/polythene.jpg" alt=""></img>
+                        <img src={wasteItem?.selectedFile} alt=""></img>
                         <div className="title-b">Make Offer</div>
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
                                 <div className="input-box-b">
-                                    <span className="details-b">Offer Value</span>
+                                    <span className="details-b">Offer Value (Rs)</span>
                                     <input type="text" name="value" id="value" placeholder="Enter value" value={formValues.value}
                                            onChange={handleChange}
                                            className={formErrors.value && "input-error"}></input>
@@ -172,7 +198,7 @@ function SingleOfferForm(props) {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Expiry Date</span>
+                                    <span className="details-b">Post Expiry Date</span>
                                     <input type="date" name="expiryDate" id="expiryDate" placeholder="Enter date" value={formValues.expiryDate}
                                            onChange={handleChange}
                                            className={formErrors.expiryDate && "input-error"}></input>
@@ -181,7 +207,25 @@ function SingleOfferForm(props) {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Quantity</span>
+                                    <span className="details-b">Waste Items Collecting Date</span>
+                                    <input type="date" name="collectingDate" id="collectingDate" placeholder="Enter date" value={formValues.collectingDate}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingDate && "input-error"}></input>
+                                    {formErrors.collectingDate && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingDate}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Waste Items Collecting Approximate Time</span>
+                                    <input type="time" name="collectingTime" id="collectingTime" placeholder="Enter time" value={formValues.collectingTime}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingTime && "input-error"}></input>
+                                    {formErrors.collectingTime && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingTime}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Quantity (Kg)</span>
                                     <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
                                            onChange={handleChange}
                                            className={formErrors.quantity && "input-error"}></input>

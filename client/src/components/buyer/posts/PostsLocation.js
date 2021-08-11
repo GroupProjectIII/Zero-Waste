@@ -14,11 +14,11 @@ function PostsLocation() {
         history.push("/");
     }
 
-    const { id } = useParams();
-    console.log(id);
+    const { offerId } = useParams();
+    console.log(offerId);
 
     const [posts, setPosts] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [offerPosts, setOfferPosts] = useState({});
 
     useEffect(()=>{
         getOnePost();
@@ -34,7 +34,7 @@ function PostsLocation() {
 
     const getOnePost = async () => {
         try {
-            const response = await axios.get(`/buyerGetOneSellerOffer/${id}`)
+            const response = await axios.get(`/buyerGetOneSellerOffer/${offerId}`)
             console.log(response);
             const allPost=response.data.oneOffer;
             setPosts(allPost);
@@ -43,10 +43,38 @@ function PostsLocation() {
         }
     }
     console.log(posts);
+    
+    useEffect(()=>{
+        if (offerPosts && offerPosts.location) {
+            console.log(offerPosts.location);
+            console.log(offerPosts.location.longitude);
+            console.log(offerPosts.location.latitude);
+        }
+    }, [offerPosts]);
 
-    const long = posts?.location?.longitude;
+    const getOneOfferPost = async () => {
+        if(PostId2 !== undefined) {
+            try {
+                const response = await axios.get(`/buyerGetOnePost/${PostId2}`)
+                console.log(response);
+                const allOfferPost=response.data.onePost;
+                setOfferPosts(allOfferPost);
+            } catch (error) {
+                console.error(`Error: ${error}`)
+            }
+        }
+    }
+    const PostId2=posts.postId;
+
+    useEffect(()=>{
+        getOneOfferPost();
+    }, [PostId2]);
+
+    console.log(offerPosts);
+
+    const long = offerPosts?.location?.longitude;
     console.log(long);
-    const lat=posts?.location?.latitude;
+    const lat=offerPosts?.location?.latitude;
     console.log(lat);
 
     const location={lat,long};
