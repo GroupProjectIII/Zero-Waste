@@ -40,9 +40,12 @@ app.use(buyerPosts);
 app.use(buyerOffersForSeller);
 app.use(buyerProfile);
 
+
+const companyPosts = require("./routes/companyPosts");
+app.use(companyPosts);
+
+
 app.use('/api/adminuser' , AuserRoute);
-
-
 
 
 app.use('/posts', postRoutes);

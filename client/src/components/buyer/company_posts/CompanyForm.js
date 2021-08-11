@@ -20,7 +20,7 @@ function CompanyForms() {
                                     <input type="text" placeholder="Enter item" required></input>
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Offer Value</span>
+                                    <span className="details-b">Offer Value (Rs)</span>
                                     <input type="text" placeholder="Enter value" required></input>
                                 </div>
                                 <div className="input-box-b">
@@ -28,7 +28,7 @@ function CompanyForms() {
                                     <input type="date" placeholder="Enter date" required></input>
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Quantity</span>
+                                    <span className="details-b">Quantity (Kg)</span>
                                     <input type="text" placeholder="Enter quantity" required></input>
                                 </div>
                             </div>

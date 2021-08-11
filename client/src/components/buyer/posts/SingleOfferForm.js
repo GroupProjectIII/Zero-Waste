@@ -198,7 +198,7 @@ function SingleOfferForm() {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Post Expiry Date</span>
+                                    <span className="details-b">Offer Expiry Date</span>
                                     <input type="date" name="expiryDate" id="expiryDate" placeholder="Enter date" value={formValues.expiryDate}
                                            onChange={handleChange}
                                            className={formErrors.expiryDate && "input-error"}></input>
