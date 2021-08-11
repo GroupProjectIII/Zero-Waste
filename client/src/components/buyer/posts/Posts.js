@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Posts() {
 
-    const [notes, getNotes] = useState([]);
+    const [notes, setNotes] = useState([]);
 
     useEffect(()=>{
         getAllNotes();
@@ -15,7 +15,7 @@ function Posts() {
         await axios.get(`/buyerPosts`)
             .then ((response)=>{
                 const allNotes=response.data.existingPosts;
-                getNotes(allNotes);
+                setNotes(allNotes);
             })
             .catch(error=>console.error(`Error: ${error}`));
     }
@@ -43,13 +43,32 @@ function Posts() {
     const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.wasteItemsListId==='completePost');
     console.log(wasteItem);
 
+    const filterData = (postsPara, searchKey) => {
+        const result = postsPara.filter(
+            (notes) =>
+                notes?.address.toLowerCase().includes(searchKey) ||
+                notes?.contact.toString().toLowerCase().includes(searchKey)
+        );
+        setNotes(result);
+    };
+
+    const handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+
+        axios.get(`/buyerPosts`).then((res) => {
+            if (res?.data?.success) {
+                filterData(res?.data?.existingPosts, searchKey);
+            }
+        });
+    };
+
     return(
         <div className="posts-b">
             <div className="posts__container-b">
                 <div className="search-box-shadow-b">
                     <div className="search-bar-box-b">
                         <div className="post-search-box-b">
-                            <input type="text" placeholder="What are you looking for?"></input>
+                            <input type="text" placeholder="What are you looking for?" onChange={handleSearchArea}></input>
                             <i className="fas fa-search"></i>
                         </div>
                         <div className="search-button-b">
@@ -92,20 +111,40 @@ function Posts() {
                         </div>
                         <div className="box-b">
                             <h3>Location</h3>
-                            <select>
-                                <option>All</option>
-                                <option>Gampaha</option>
-                                <option>Miriswatte</option>
-                                <option>Kadawatha</option>
-                                <option>Imbulgoda</option>
-                                <option>Yakkala</option>
+                            <select onChange={handleSearchArea}>
+                                <option disabled selected >All</option>
+                                <option value="ampara">Ampara</option>
+                                <option value="anuradhapura">Anuradhapura</option>
+                                <option value="badulla">Badulla</option>
+                                <option value="batticaloa">Batticaloa</option>
+                                <option value="colombo">Colombo</option>
+                                <option value="galle">Galle</option>
+                                <option value="gampaha">Gampaha</option>
+                                <option value="hambantota">Hambantota</option>
+                                <option value="jaffna">Jaffna</option>
+                                <option value="kalutara">Kalutara</option>
+                                <option value="kandy">Kandy</option>
+                                <option value="kegalle">Kegalle</option>
+                                <option value="kilinochchi">Kilinochchi</option>
+                                <option value="kurunegala">Kurunegala</option>
+                                <option value="mannar">Mannar</option>
+                                <option value="matale">Matale</option>
+                                <option value="matara">Matara</option>
+                                <option value="monaragala">Monaragala</option>
+                                <option value="mullaitivu">Mullaitivu</option>
+                                <option value="nuwaraeliya">Nuwara Eliya</option>
+                                <option value="polonnaruwa">Polonnaruwa</option>
+                                <option value="puttalam">Puttalam</option>
+                                <option value="ratnapura">Ratnapura</option>
+                                <option value="trincomalee">Trincomalee</option>
+                                <option value="vavuniya">Vavuniya</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <main className="grid-b">
                     {notes.map((note,index)=> {
-                        if(wasteItem.find(o=>o.postId === note._id) === undefined)
+                        if(wasteItem.find(o=>o.postId === note._id) === undefined && note.postType==='public')
                             return (
                             <article>
                                 <div className="text-b">

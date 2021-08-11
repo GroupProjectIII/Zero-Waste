@@ -18,7 +18,8 @@ import BuyerPostsLocation from "./components/buyer/posts/PostsLocation";
 import BuyerViewPostDetails from "./components/buyer/posts/ViewPostDetails";
 import BuyerEditProfile from "./components/buyer/account/EditProfile";
 import BuyerSingleOffers from "./components/buyer/posts/SingleOffers";
-import BuyerViewOfferDetails from "./components/buyer/posts/ViewOffers"
+import BuyerViewOfferDetails from "./components/buyer/posts/ViewOffers";
+import BuyerDirectPosts from "./components/buyer/posts/DirectPosts";
 
 import BuyerViewProfile from './components/buyer/account/ViewProfile';
 import BuyerRateAndComment from './components/buyer/account/RateAndComment';
@@ -90,7 +91,7 @@ function App() {
                     <Route path='/buyer/pendingoffers' component={BuyerPOffers} />
                     <Route path='/buyer/editpendingoffers/:postId' component={BuyerEditPendingOffers} />
                     <Route path='/buyer/companyposts' component={BuyerCompanyPosts} />
-                    <Route path='/buyer/companyofferforms' component={BuyerCompanyOfferForm} />
+                    <Route path='/buyer/companyofferforms/:postId' component={BuyerCompanyOfferForm} />
                     <Route path='/buyer/companyacceptedoffers' component={BuyerCompanyAOffers} />
                     <Route path='/buyer/companypendingoffers' component={BuyerCompanyPOffers} />
                     <Route path='/buyer/editcompanypendingoffers' component={BuyerEditCompanyPendingOffers} />
@@ -101,6 +102,7 @@ function App() {
                     <Route path='/buyer/editprofile' component={BuyerEditProfile} />
                     <Route path='/buyer/singleoffers/:postId/:arrayId' component={BuyerSingleOffers} />
                     <Route path='/buyer/viewofferdetails/:offerId/' component={BuyerViewOfferDetails} />
+                    <Route path='/buyer/directposts' component={BuyerDirectPosts} />
 
                     <Route path='/buyer/vprofile' component={BuyerViewProfile} />
                     <Route path='/buyer/rcomment' component={BuyerRateAndComment} />
