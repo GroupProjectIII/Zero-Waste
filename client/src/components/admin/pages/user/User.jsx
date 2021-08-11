@@ -99,12 +99,12 @@ export default function User() {
                                         value={email} onCHange={(e)=>{setemail(e.target.value)}} />
                                     </div>
 
+                                   
+
 
                                 </div>
-                                <div className="uright">
-                                    <button className="ubutton" onClick={updateuser}>Update</button>
-                                </div>
                             </form>
+                            <button className="ubutton" onClick={updateuser}>Update</button>
                         </div>
                     </div>
                 </div>
