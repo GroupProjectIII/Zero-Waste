@@ -1,7 +1,134 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import '../posts/Form.css';
+import {useParams} from "react-router-dom";
+import axios from "axios";
+import {Slide, toast, ToastContainer} from "react-toastify";
 
 function CompanyNotifyForms() {
+
+    const { detailId } = useParams();
+    console.log(detailId);
+
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
+
+    const apiUrl = '/addBuyerNotifyCompany';
+    const initialValues = {
+        value: '',
+        expiryDate: '',
+        wasteType: '',
+        wasteItem: '',
+        quantity: '',
+        deliveryDate:'',
+        buyerId: '',
+        companyListId: ''
+    };
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    //const history = useHistory();
+
+    const submitForm = () => {
+        const data = {
+            value:formValues.value,
+            expiryDate:formValues.expiryDate,
+            wasteType:formValues.wasteType,
+            wasteItem:formValues.wasteItem,
+            quantity:formValues.quantity,
+            deliveryDate:formValues.deliveryDate,
+            buyerId:buyerId,
+            companyListId:detailId,
+        };
+        axios.post(apiUrl, data)
+            .then((result) => {
+                clear();
+                toastNotification();
+                //history.push(`/buyer/viewpostdetails/${id}`);
+            });
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormErrors(validate(formValues));
+        setIsSubmitting(true);
+    };
+
+    const date = new Date();
+    date.setDate(date.getDate() + 28);
+
+    const date2 = new Date();
+    date2.setDate(date2.getDate());
+
+    const validate = (values) => {
+        let errors = {};
+        const regex = /^[0-9]+$/;
+        const d1 = new Date(values.expiryDate);
+        const d3 = new Date(values.deliveryDate);
+        console.log(d1);
+        if (!values.value) {
+            errors.value = "Cannot be blank";
+        }else if (!regex.test(values.value)) {
+            errors.value = "Invalid value format";
+        }else if (values.value<=0) {
+            errors.value = "Invalid value format";
+        }
+        if (!values.expiryDate) {
+            errors.expiryDate = "Cannot be blank";
+        }else if (date<=d1) {
+            errors.expiryDate = "Expiry date should not be longer than a month.";
+        }else if (d1<=date2) {
+            errors.expiryDate = "Expiry date should not be a past date.";
+        }
+        if (!values.deliveryDate) {
+            errors.deliveryDate = "Cannot be blank";
+        }else if (d3<=date2) {
+            errors.deliveryDate = "Delivery date should not be a past date.";
+        }
+        if (!values.quantity) {
+            errors.quantity = "Cannot be blank";
+        }else if (!regex.test(values.quantity)) {
+            errors.quantity = "Invalid quantity format";
+        }else if (values.quantity<=0) {
+            errors.quantity = "Invalid quantity format";
+        }
+        if (!values.wasteType) {
+            errors.wasteType = "Cannot be blank";
+        }
+        if (!values.wasteItem) {
+            errors.wasteItem = "Cannot be blank";
+        }
+        return errors;
+    };
+
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmitting) {
+            submitForm();
+        }
+    }, [formErrors]);
+
+    const clear = () => {
+        setFormValues({
+            value: '',
+            expiryDate: '',
+            wasteType: '',
+            wasteItem: '',
+            quantity: '',
+            deliveryDate:'',
+            buyerId: '',
+            companyListId: ''
+        });
+    };
+
+    const toastNotification = () => {
+        toast.info("You're notified company successfully !", {
+            transition: Slide
+        })
+    };
 
     return(
         <div className="forms-b">
@@ -9,31 +136,66 @@ function CompanyNotifyForms() {
                 <div className="container-b">
                     <div className="title-b">Notify Company</div>
                     <div className="content-b">
-                        <form className="buyer-form-b" action="#">
+                        <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
                                 <div className="input-box-b">
+                                    <span className="details-b">Offer Value (Rs)</span>
+                                    <input type="text" name="value" id="value" placeholder="Enter value" value={formValues.value}
+                                           onChange={handleChange}
+                                           className={formErrors.value && "input-error"}></input>
+                                    {formErrors.value && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.value}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Notification Expiry Date</span>
+                                    <input type="date" name="expiryDate" id="expiryDate" placeholder="Enter date" value={formValues.expiryDate}
+                                           onChange={handleChange}
+                                           className={formErrors.expiryDate && "input-error"}></input>
+                                    {formErrors.expiryDate && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.expiryDate}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
                                     <span className="details-b">Waste Type</span>
-                                    <input type="text" placeholder="Enter type" required></input>
+                                    <input type="text" name="wasteType" id="wasteType" placeholder="Enter waste type" value={formValues.wasteType}
+                                           onChange={handleChange}
+                                           className={formErrors.wasteType && "input-error"}></input>
+                                    {formErrors.wasteType && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.wasteType}</span>
+                                    )}
                                 </div>
                                 <div className="input-box-b">
                                     <span className="details-b">Waste Item</span>
-                                    <input type="text" placeholder="Enter item" required></input>
+                                    <input type="text" name="wasteItem" id="wasteItem" placeholder="Enter waste item" value={formValues.wasteItem}
+                                           onChange={handleChange}
+                                           className={formErrors.wasteItem && "input-error"}></input>
+                                    {formErrors.wasteItem && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.wasteItem}</span>
+                                    )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Offer Value</span>
-                                    <input type="text" placeholder="Enter value" required></input>
+                                    <span className="details-b">Quantity (Kg)</span>
+                                    <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
+                                           onChange={handleChange}
+                                           className={formErrors.quantity && "input-error"}></input>
+                                    {formErrors.quantity && (
+                                        <span className="error" style={{color:'red'}} >{formErrors.quantity}</span>
+                                    )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Expiry Date</span>
-                                    <input type="date" placeholder="Enter date" required></input>
-                                </div>
-                                <div className="input-box-b">
-                                    <span className="details-b">Quantity</span>
-                                    <input type="text" placeholder="Enter quantity" required></input>
+                                    <span className="details-b">Waste Items Delivery Date</span>
+                                    <input type="date" name="deliveryDate" id="deliveryDate" placeholder="Enter date" value={formValues.deliveryDate}
+                                           onChange={handleChange}
+                                           className={formErrors.deliveryDate && "input-error"}></input>
+                                    {formErrors.deliveryDate && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.deliveryDate}</span>
+                                    )}
                                 </div>
                             </div>
                             <div className="button-b">
-                                <input type="submit" value="Send"></input>
+                                <input type="submit" value="Notify Company"></input>
+                                <ToastContainer position="top-right" toastStyle={{ backgroundColor: "green" }} autoClose={3000} />
                             </div>
                         </form>
                     </div>

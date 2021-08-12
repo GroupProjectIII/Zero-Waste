@@ -24,8 +24,10 @@ app.use("/api/private", require("./routes/private"));
 
 const buyerPosts = require("./routes/buyerPosts");
 const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
+const buyerOffersForCompany = require("./routes/buyerOffersForCompany");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
+app.use(buyerOffersForCompany);
 
 const companyPosts = require("./routes/companyPosts");
 app.use(companyPosts);

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import './Posts.css';
+import React, {useEffect, useState} from "react";
+import '../posts/Posts.css';
+import axios from "axios";
 import {Link} from "react-router-dom";
-import axios from 'axios';
+import moment from 'moment';
 
-function ViewDirectPosts() {
+function CompanyDirectPostsView() {
 
     const [notes, setNotes] = useState([]);
 
@@ -12,7 +13,7 @@ function ViewDirectPosts() {
     }, []);
 
     const getAllNotes = async () => {
-        await axios.get(`/buyerPosts`)
+        await axios.get(`/buyerGetCompanyPosts`)
             .then ((response)=>{
                 const allNotes=response.data.existingPosts;
                 setNotes(allNotes);
@@ -31,7 +32,7 @@ function ViewDirectPosts() {
     }, []);
 
     const getAllOffers = async () => {
-        await axios.get(`/viewPendingSellerOffers`)
+        await axios.get(`/viewPendingCompanyOffers`)
             .then ((response)=>{
                 const allNotes=response.data.existingOffers;
                 getOffers(allNotes);
@@ -40,17 +41,18 @@ function ViewDirectPosts() {
     }
     console.log(offers);
 
-    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.wasteItemsListId==='completePost');
+    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted');
     console.log(wasteItem);
 
     const filterData = (postsPara, searchKey) => {
         const result = postsPara.filter(
             (notes) =>
-                notes?.address.toLowerCase().includes(searchKey) ||
+                notes?.address?.district.toLowerCase().includes(searchKey) ||
+                notes?.address?.city.toLowerCase().includes(searchKey) ||
+                notes?.wasteType.toLowerCase().includes(searchKey) ||
+                notes?.item.toLowerCase().includes(searchKey) ||
                 notes?.contact.toString().toLowerCase().includes(searchKey) ||
-                notes?.wasteItemList?.map(wasteItem => wasteItem.wasteType).join(' ').toLowerCase().includes(searchKey) ||
-                notes?.wasteItemList?.map(wasteItem => wasteItem.item).join(' ').toLowerCase().includes(searchKey) ||
-                notes?.wasteItemList?.map(wasteItem => wasteItem.quantity).join(' ').toString().toLowerCase().includes(searchKey)
+                notes?.quantity.toString().toLowerCase().includes(searchKey)
         );
         setNotes(result);
     };
@@ -58,7 +60,7 @@ function ViewDirectPosts() {
     const handleSearchArea = (e) => {
         const searchKey = e.currentTarget.value;
 
-        axios.get(`/buyerPosts`).then((res) => {
+        axios.get(`/buyerGetCompanyPosts`).then((res) => {
             if (res?.data?.success) {
                 filterData(res?.data?.existingPosts, searchKey);
             }
@@ -105,11 +107,11 @@ function ViewDirectPosts() {
                             <h3>Quantity</h3>
                             <select onChange={handleSearchArea}>
                                 <option disabled selected >All</option>
-                                <option value="1">1 kg</option>
-                                <option value="2">2 kg</option>
-                                <option value="3">3 kg</option>
-                                <option value="4">4 kg</option>
-                                <option value="5">5 kg</option>
+                                <option value="100">100 kg</option>
+                                <option value="200">200 kg</option>
+                                <option value="300">300 kg</option>
+                                <option value="400">400 kg</option>
+                                <option value="500">500 kg</option>
                             </select>
                         </div>
                         <div className="box-b">
@@ -152,13 +154,17 @@ function ViewDirectPosts() {
                                 <article>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
-                                        <p>Location: {note.address}</p>
                                         <p>Post Type: {note.postType}</p>
-                                        <p>Address: {note.address}</p>
+                                        <p>Waste Type: {note.wasteType}</p>
+                                        <p>Waste Item: {note.item}</p>
+                                        <p>Quantity: {note.quantity} Kg</p>
                                         <p>Telephone No: {note.contact}</p>
+                                        <p>Can Collect Items: {moment(note.avbDate).fromNow()}</p>
+                                        <p>City: {note.address.city}</p>
+                                        <p>Location: {note.address.district}</p>
                                         <div className="buyerlink-b">
                                             <Link style={{color: '#fff', textDecoration: 'none'}}
-                                                  to={`/buyer/viewpostdetails/${note._id}`}>View Post <i
+                                                  to={`/buyer/companyofferforms/${note._id}`}>Make Offer <i
                                                 className="fas fa-angle-double-right"></i></Link>
                                         </div>
                                     </div>
@@ -171,4 +177,4 @@ function ViewDirectPosts() {
     );
 }
 
-export default ViewDirectPosts;
+export default CompanyDirectPostsView;

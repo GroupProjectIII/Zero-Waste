@@ -24,7 +24,7 @@ function Posts() {
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
 
-    const [offers, getOffers] = useState([]);
+    const [offers, setOffers] = useState([]);
 
     useEffect(()=>{
         getAllOffers();
@@ -34,7 +34,7 @@ function Posts() {
         await axios.get(`/viewPendingSellerOffers`)
             .then ((response)=>{
                 const allNotes=response.data.existingOffers;
-                getOffers(allNotes);
+                setOffers(allNotes);
             })
             .catch(error=>console.error(`Error: ${error}`));
     }
@@ -47,7 +47,10 @@ function Posts() {
         const result = postsPara.filter(
             (notes) =>
                 notes?.address.toLowerCase().includes(searchKey) ||
-                notes?.contact.toString().toLowerCase().includes(searchKey)
+                notes?.contact.toString().toLowerCase().includes(searchKey) ||
+                notes?.wasteItemList?.map(wasteItem => wasteItem.wasteType).join(' ').toLowerCase().includes(searchKey) ||
+                notes?.wasteItemList?.map(wasteItem => wasteItem.item).join(' ').toLowerCase().includes(searchKey) ||
+                notes?.wasteItemList?.map(wasteItem => wasteItem.quantity).join(' ').toString().toLowerCase().includes(searchKey)
         );
         setNotes(result);
     };
@@ -78,35 +81,36 @@ function Posts() {
                     <div className="search-bar-b">
                         <div className="box-b">
                             <h3>Waste Type</h3>
-                            <select>
-                                <option>All</option>
-                                <option>Polythene</option>
-                                <option>Plastic</option>
-                                <option>Organic Waste</option>
-                                <option>Paper</option>
-                                <option>Metal</option>
+                            <select onChange={handleSearchArea}>
+                                <option disabled selected >All</option>
+                                <option value="polythene">Polythene</option>
+                                <option value="plastic">Plastic</option>
+                                <option value="organic waste">Organic Waste</option>
+                                <option value="paper">Paper</option>
+                                <option value="metal">Metal</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div className="box-b">
                             <h3>Waste Item</h3>
-                            <select>
-                                <option>All</option>
-                                <option>Bag</option>
-                                <option>Bucket</option>
-                                <option>Plate</option>
-                                <option>Paper</option>
-                                <option>Chair</option>
+                            <select onChange={handleSearchArea}>
+                                <option disabled selected >All</option>
+                                <option value="bag" >Bag</option>
+                                <option value="bucket" >Bucket</option>
+                                <option value="plate" >Plate</option>
+                                <option value="paper" >Paper</option>
+                                <option value="chair" >Chair</option>
                             </select>
                         </div>
                         <div className="box-b">
                             <h3>Quantity</h3>
-                            <select>
-                                <option>All</option>
-                                <option>1 kg</option>
-                                <option>2 kg</option>
-                                <option>3 kg</option>
-                                <option>4 kg</option>
-                                <option>5 kg</option>
+                            <select onChange={handleSearchArea}>
+                                <option disabled selected >All</option>
+                                <option value="1">1 kg</option>
+                                <option value="2">2 kg</option>
+                                <option value="3">3 kg</option>
+                                <option value="4">4 kg</option>
+                                <option value="5">5 kg</option>
                             </select>
                         </div>
                         <div className="box-b">

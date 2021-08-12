@@ -20,6 +20,7 @@ import BuyerEditProfile from "./components/buyer/account/EditProfile";
 import BuyerSingleOffers from "./components/buyer/posts/SingleOffers";
 import BuyerViewOfferDetails from "./components/buyer/posts/ViewOffers";
 import BuyerDirectPosts from "./components/buyer/posts/DirectPosts";
+import BuyerCompanyDirectPosts from "./components/buyer/company_posts/CompanyDirectPosts";
 
 import BuyerViewProfile from './components/buyer/account/ViewProfile';
 import BuyerRateAndComment from './components/buyer/account/RateAndComment';
@@ -64,6 +65,7 @@ import CompanyPreviousP from './components/company/pages/PreviousP';
 import CompanyAcceptedP from './components/company/pages/AcceptedP';
 import CompanyBuyersInfo from './components/company/pages/BuyersInfo';
 import CompanyBuyersContact from './components/company/pages/BuyersContact';
+import CompanyGetCompanyDetails from "./components/company/components/company/home/GetCompanyDetails";
 
 
 import AdminHome from "./components/admin/components/home/Home";
@@ -94,15 +96,16 @@ function App() {
                     <Route path='/buyer/companyofferforms/:postId' component={BuyerCompanyOfferForm} />
                     <Route path='/buyer/companyacceptedoffers' component={BuyerCompanyAOffers} />
                     <Route path='/buyer/companypendingoffers' component={BuyerCompanyPOffers} />
-                    <Route path='/buyer/editcompanypendingoffers' component={BuyerEditCompanyPendingOffers} />
+                    <Route path='/buyer/editcompanypendingoffers/:offerId' component={BuyerEditCompanyPendingOffers} />
                     <Route path='/buyer/viewcompanydetails' component={BuyerViewCompanyDetails} />
-                    <Route path='/buyer/notifyaboutwaste' component={BuyerCompanyNotify} />
+                    <Route path='/buyer/notifyaboutwaste/:detailId' component={BuyerCompanyNotify} />
                     <Route path='/buyer/location/:offerId' component={BuyerPostsLocation} />
                     <Route path='/buyer/viewpostdetails/:postId' component={BuyerViewPostDetails} />
                     <Route path='/buyer/editprofile' component={BuyerEditProfile} />
                     <Route path='/buyer/singleoffers/:postId/:arrayId' component={BuyerSingleOffers} />
                     <Route path='/buyer/viewofferdetails/:offerId/' component={BuyerViewOfferDetails} />
                     <Route path='/buyer/directposts' component={BuyerDirectPosts} />
+                    <Route path='/buyer/companydirectposts' component={BuyerCompanyDirectPosts} />
 
                     <Route path='/buyer/vprofile' component={BuyerViewProfile} />
                     <Route path='/buyer/rcomment' component={BuyerRateAndComment} />
@@ -167,7 +170,7 @@ function App() {
                     <Route path='/company/acceptedp' component={CompanyAcceptedP} />
                     <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
                     <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
-
+                    <Route path='/company/getcompanydetails' component={CompanyGetCompanyDetails} />
                 </Switch>
             </Router>
         </>

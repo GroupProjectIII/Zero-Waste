@@ -25,6 +25,25 @@ function CPosts() {
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
 
+    const [offers, getOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllOffers();
+    }, []);
+
+    const getAllOffers = async () => {
+        await axios.get(`/viewPendingCompanyOffers`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                getOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(offers);
+
+    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted');
+    console.log(wasteItem);
+
     const filterData = (postsPara, searchKey) => {
         const result = postsPara.filter(
             (notes) =>
@@ -129,26 +148,29 @@ function CPosts() {
                     </div>
                 </div>
                 <main className="grid-b">
-                    {notes.map((note,index)=> (
-                        <article>
-                            <div className="text-b">
-                                <h3>Post ID: {index + 1}</h3>
-                                <p>Post Type: {note.postType}</p>
-                                <p>Waste Type: {note.wasteType}</p>
-                                <p>Waste Item: {note.item}</p>
-                                <p>Quantity: {note.quantity} Kg</p>
-                                <p>Telephone No: {note.contact}</p>
-                                <p>Can Collect Items: {moment(note.avbDate).fromNow()}</p>
-                                <p>City: {note.address.city}</p>
-                                <p>Location: {note.address.district}</p>
-                                <div className="buyerlink-b">
-                                    <Link style={{color: '#fff', textDecoration: 'none'}}
-                                          to={`/buyer/companyofferforms/${note._id}`}>Make Offer <i
-                                        className="fas fa-angle-double-right"></i></Link>
-                                </div>
-                            </div>
-                        </article>
-                    ))}
+                    {notes.map((note,index)=> {
+                        if(wasteItem.find(o=>o.postId === note._id) === undefined && note.postType==='public')
+                            return (
+                                <article>
+                                    <div className="text-b">
+                                        <h3>Post ID: {index + 1}</h3>
+                                        <p>Post Type: {note.postType}</p>
+                                        <p>Waste Type: {note.wasteType}</p>
+                                        <p>Waste Item: {note.item}</p>
+                                        <p>Quantity: {note.quantity} Kg</p>
+                                        <p>Telephone No: {note.contact}</p>
+                                        <p>Can Collect Items: {moment(note.avbDate).fromNow()}</p>
+                                        <p>City: {note.address.city}</p>
+                                        <p>Location: {note.address.district}</p>
+                                        <div className="buyerlink-b">
+                                            <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                  to={`/buyer/companyofferforms/${note._id}`}>Make Offer <i
+                                                className="fas fa-angle-double-right"></i></Link>
+                                        </div>
+                                    </div>
+                                </article>
+                            );
+                    })}
                 </main>
             </div>
         </div>
