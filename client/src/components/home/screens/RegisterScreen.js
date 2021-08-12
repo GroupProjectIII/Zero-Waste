@@ -58,7 +58,7 @@ const RegisterScreen = ({ history }) => {
         history.push("/seller");
       }
       else if(data.usertype==="company"){
-        history.push("/company");
+        history.push("/company/getcompanydetails");
       }
       else if(data.usertype==="admin"){
         history.push("/admin");

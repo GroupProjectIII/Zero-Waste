@@ -35,10 +35,15 @@ const postRoutes = require("./routes/posts.js");
 app.use(cors());
 const buyerPosts = require("./routes/buyerPosts");
 const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
-const buyerProfile = require("./routes/buyerProfile");
+
+const buyerOffersForCompany = require("./routes/buyerOffersForCompany");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
+app.use(buyerOffersForCompany);
+
+const buyerProfile = require("./routes/buyerProfile");
 app.use(buyerProfile);
+
 
 
 const companyPosts = require("./routes/companyPosts");
