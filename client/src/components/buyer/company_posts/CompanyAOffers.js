@@ -3,6 +3,7 @@ import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import CompanyAcceptedOffers from "./CompanyAcceptedOffers";
 import {useHistory} from "react-router-dom";
+import CompanySidebar from './CompanySidebar';
 
 function CompanyAOffers() {
 
@@ -15,6 +16,7 @@ function CompanyAOffers() {
     return (
         <>
             <Navbar/>
+            <CompanySidebar/>
             <CompanyAcceptedOffers/>
             <Footer/>
         </>

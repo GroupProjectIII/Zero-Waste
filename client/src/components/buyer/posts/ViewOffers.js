@@ -3,6 +3,7 @@ import ViewOfferDetails from "./ViewOfferDetails";
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import Sidebar from './Sidebar';
 
 function ViewOffers() {
 
@@ -15,6 +16,7 @@ function ViewOffers() {
     return (
         <>
             <Navbar/>
+            <Sidebar/>
             <ViewOfferDetails/>
             <Footer/>
         </>
