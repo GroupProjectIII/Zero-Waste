@@ -4,6 +4,7 @@ import {useParams, useHistory} from "react-router-dom";
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import emailjs from 'emailjs-com';
 
 function Forms() {
 
@@ -47,6 +48,7 @@ function Forms() {
         axios.post(apiUrl, data)
             .then((result) => {
                 clear();
+                //sendEmail();
                 toastNotification();
                 //history.push(`/buyer/viewpostdetails/${id}`);
             });
@@ -170,6 +172,23 @@ function Forms() {
     const lat=posts?.location?.latitude;
     console.log(lat);
     console.log(posts?.location?._id);
+
+    const templateParams = {
+        from_name: 'Zero-Waste',
+        to_name: 'Harshana',
+        message: 'Test',
+        reply_to: 'zerowasteproject3@gmail.com',
+        user_email:'harshanawalpita@gmail.com'
+    };
+
+    const sendEmail = () => {
+        emailjs.send('service_34ny3hp', 'template_91bru6e', templateParams, 'user_pzyBOo0Td3FLgOvuNU4mq')
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    };
 
     return(
         <div className="forms-b">

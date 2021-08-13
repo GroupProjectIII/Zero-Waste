@@ -3,6 +3,7 @@ import CompanyNotifyForms from './CompanyNotifyForm';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import CompanySidebar from './CompanySidebar';
 
 function CompanyNotify() {
 
@@ -15,6 +16,7 @@ function CompanyNotify() {
     return (
         <>
             <Navbar/>
+            <CompanySidebar/>
             <CompanyNotifyForms/>
             <Footer/>
         </>
