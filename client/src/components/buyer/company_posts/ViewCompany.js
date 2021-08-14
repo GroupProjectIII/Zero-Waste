@@ -79,7 +79,7 @@ function ViewCompany() {
                             <td data-label="Action">
                               <span className="action_btn-b">
                                   <Link style={{color: '#000', textDecoration: 'none'}}
-                                        to={`/buyer/notifyaboutwaste/${note._id}`}>Notify</Link>
+                                        to={`/buyer/notifyaboutwaste/${note._id}/${note.companyId}`}>Notify</Link>
                               </span>
                             </td>
                         </tr>

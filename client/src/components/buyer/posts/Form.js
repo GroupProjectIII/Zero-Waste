@@ -8,8 +8,9 @@ import emailjs from 'emailjs-com';
 
 function Forms() {
 
-    const { postId } = useParams();
+    const { postId, sellerId } = useParams();
     console.log(postId);
+    console.log(sellerId);
 
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
@@ -138,10 +139,10 @@ function Forms() {
 
     const [posts, setPosts] = useState({});
 
-    const name=(localStorage.getItem("username"));
-    const email=(localStorage.getItem("email"));
-    console.log(name);
-    console.log(email);
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
 
     useEffect(()=>{
         getOnePost();
@@ -173,12 +174,35 @@ function Forms() {
     console.log(lat);
     console.log(posts?.location?._id);
 
+    const [seller, setSeller] = useState({});
+
+    useEffect(()=>{
+        getOneSellerOrCompany();
+    }, []);
+
+    const getOneSellerOrCompany = async () => {
+        try {
+            const response = await axios.get(`/getOneSellerOrCompany/${sellerId}`)
+            console.log(response);
+            const oneSellerOrCompany=response.data.oneSellerOrCompany;
+            setSeller(oneSellerOrCompany);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(seller);
+    const sellerEmail=seller.email;
+    const sellerName=seller.username;
+    console.log(sellerEmail);
+    console.log(sellerName);
+
     const templateParams = {
         from_name: 'Zero-Waste',
-        to_name: 'Harshana',
-        message: 'Test',
+        to_name: sellerName,
+        message: 'Your post has been given an offer by a buyer! Please visit our site for more details.',
         reply_to: 'zerowasteproject3@gmail.com',
-        user_email:'harshanawalpita@gmail.com'
+        user_email:sellerEmail,
+        project_email:'zerowasteproject3@gmail.com'
     };
 
     const sendEmail = () => {
