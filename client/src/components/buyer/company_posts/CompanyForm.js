@@ -3,11 +3,12 @@ import '../posts/Form.css';
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Slide, toast, ToastContainer} from "react-toastify";
+import emailjs from "emailjs-com";
 
 function CompanyForms() {
 
-    const { postId } = useParams();
-    console.log(postId);
+    const { postId, companyId } = useParams();
+    console.log(postId, companyId);
 
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
@@ -44,6 +45,7 @@ function CompanyForms() {
         axios.post(apiUrl, data)
             .then((result) => {
                 clear();
+                //sendEmail();
                 toastNotification();
                 //history.push(`/buyer/viewpostdetails/${id}`);
             });
@@ -135,10 +137,10 @@ function CompanyForms() {
 
     const [posts, setPosts] = useState({});
 
-    const name=(localStorage.getItem("username"));
-    const email=(localStorage.getItem("email"));
-    console.log(name);
-    console.log(email);
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
 
     useEffect(()=>{
         getOnePost();
@@ -155,6 +157,46 @@ function CompanyForms() {
         }
     }
     console.log(posts);
+
+    const [seller, setSeller] = useState({});
+
+    useEffect(()=>{
+        getOneSellerOrCompany();
+    }, []);
+
+    const getOneSellerOrCompany = async () => {
+        try {
+            const response = await axios.get(`/getOneSellerOrCompany/${companyId}`)
+            console.log(response);
+            const oneSellerOrCompany=response.data.oneSellerOrCompany;
+            setSeller(oneSellerOrCompany);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(seller);
+    const sellerEmail=seller.email;
+    const sellerName=seller.username;
+    console.log(sellerEmail);
+    console.log(sellerName);
+
+    const templateParams = {
+        from_name: 'Zero-Waste',
+        to_name: sellerName,
+        message: 'Your post has been given an offer by a buyer! Please visit our site for more details.',
+        reply_to: 'zerowasteproject3@gmail.com',
+        user_email:sellerEmail,
+        project_email:'zerowasteproject3@gmail.com'
+    };
+
+    const sendEmail = () => {
+        emailjs.send('service_34ny3hp', 'template_91bru6e', templateParams, 'user_pzyBOo0Td3FLgOvuNU4mq')
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    };
 
     return(
         <div className="forms-b">

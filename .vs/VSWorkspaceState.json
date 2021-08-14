@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\client\\src",
+    "\\client\\src\\components",
+    "\\client\\src\\components\\buyer",
+    "\\client\\src\\components\\buyer\\company_posts",
+    "\\client\\src\\components\\buyer\\posts",
+    "\\controllers",
+    "\\models",
+    "\\routes"
+  ],
+  "SelectedNode": "\\routes\\buyerOffersForCompany.js",
+  "PreviewInSolutionExplorer": false
+}

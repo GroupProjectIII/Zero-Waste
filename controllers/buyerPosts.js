@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 const SellerPost = require("../models/SellerPost");
 const CompanyPost = require("../models/CompanyPost");
-const CompanyDetails = require("../models/CompanyDetail")
+const CompanyDetails = require("../models/CompanyDetail");
+const User = require("../models/User");
 
 exports.getPosts= async (req,res)=>{
     SellerPost.find().exec((err,posts)=>{
@@ -73,5 +74,19 @@ exports.getBuyerCompanyDetails= async (req,res)=>{
             existingPosts:posts
         });
     });
+}
+
+exports.getOneSellerOrCompany= async (req,res)=>{
+    let sellerOrCompanyId = req.params.id;
+
+    User.findById(sellerOrCompanyId,(err,sellerOrCompany)=>{
+        if(err){
+            return res.status(400).json({success:false, err});
+        }
+        return res.status(200).json({
+            success:true,
+            oneSellerOrCompany:sellerOrCompany
+        })
+    })
 }
 

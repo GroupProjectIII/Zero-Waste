@@ -164,7 +164,7 @@ function CPosts() {
                                         <p>Location: {note.address.district}</p>
                                         <div className="buyerlink-b">
                                             <Link style={{color: '#fff', textDecoration: 'none'}}
-                                                  to={`/buyer/companyofferforms/${note._id}`}>Make Offer <i
+                                                  to={`/buyer/companyofferforms/${note._id}/${note.companyId}`}>Make Offer <i
                                                 className="fas fa-angle-double-right"></i></Link>
                                         </div>
                                     </div>
