@@ -5,12 +5,11 @@
     "\\client\\src",
     "\\client\\src\\components",
     "\\client\\src\\components\\buyer",
-    "\\client\\src\\components\\buyer\\company_posts",
-    "\\client\\src\\components\\buyer\\posts",
-    "\\controllers",
+    "\\client\\src\\components\\buyer\\account",
+    "\\client\\src\\components\\home",
+    "\\client\\src\\components\\home\\screens",
     "\\models",
     "\\routes"
   ],
-  "SelectedNode": "\\routes\\buyerOffersForCompany.js",
   "PreviewInSolutionExplorer": false
 }

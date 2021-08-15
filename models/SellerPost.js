@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-const WasteItem = new mongoose.Schema(
-    Number,
-    {
+const WasteItem = new mongoose.Schema({
     wasteType: String,
     item: String,
     avbDate: Date,
@@ -15,6 +13,7 @@ const Location = new mongoose.Schema({
     longitude: Number,
 })
 const postSchema = new mongoose.Schema({
+    sellerId: String,
     postType: String,
     buyer: String,
     address: String,
@@ -24,7 +23,7 @@ const postSchema = new mongoose.Schema({
         type: Date,
         default: new Date(),
     },
-    wasteItem: [WasteItem],
+    wasteItemList: [WasteItem],
     
 })
 

@@ -22,6 +22,7 @@ import BuyerViewOfferDetails from "./components/buyer/posts/ViewOffers";
 import BuyerDirectPosts from "./components/buyer/posts/DirectPosts";
 import BuyerCompanyDirectPosts from "./components/buyer/company_posts/CompanyDirectPosts";
 
+import BuyerProfileDetails from "./components/buyer/account/ProfileDetails";
 import BuyerViewProfile from './components/buyer/account/ViewProfile';
 import BuyerRateAndComment from './components/buyer/account/RateAndComment';
 import BuyerViewNotifications from './components/buyer/account/ViewNotifications';
@@ -112,6 +113,9 @@ function App() {
                     <Route path='/buyer/vnotifications' component={BuyerViewNotifications} />
                     <Route path='/buyer/addcomplaints' component={BuyerAddComplaints} />
                     <Route path='/buyer/viewstats' component={BuyerViewStats} />
+
+                    <Route path='/buyer/profileDetails' component={BuyerProfileDetails} />
+                    
 
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
