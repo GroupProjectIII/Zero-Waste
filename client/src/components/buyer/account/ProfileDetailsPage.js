@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import '../posts/Form.css';
+
 
 export default function ProfileDetailsPage ({ currentId, setCurrentId }) {
     
     const history = useHistory();
-    if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "buyer")) {
-        history.push("/");
-    }
     const buyerId = (localStorage.getItem("id"));
 
     const [buyerDescription, setDescription] = useState("");
@@ -60,98 +59,104 @@ export default function ProfileDetailsPage ({ currentId, setCurrentId }) {
            // console.log(newPostData);
             axios.post('/buyerAddDetails', newBuyerDetails).then((res) => {
                 console.log(res);
-                alert("Post Added Sucessfully!");
             }
             ).catch((err) => {
                 alert(err)
             })
-      
         } else {
-        
-        
         }
         history.push("/buyer/home");
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label for="discription">Description:</label>
-                    <input type="textarea" onChange={(e) => {
-                        setDescription(e.target.value);
-                        
-                    }}/>
+        <div className="forms-b">
+            <div className="forms__container-b" >
+                <div className="container-b">
+                    <div className="content-b">
+                        <div className="title-b">Get Registered Buyer Details</div>
+                            <form className="buyer-form-b" onSubmit={handleSubmit}>
+                                <div className="user-details-b">
+                                    <div className="input-box-b">
+                                        <span className="details-b">Description</span>
+                                    <input type="textarea" onChange={(e) => {
+                                        setDescription(e.target.value);
+
+                                    }}/>
+                                    </div>
+                                    <div className="input-box-b">
+                                        <span className="details-b">Address</span>
+                                    <input type="text" onChange={(e) => {
+                                        setAddress(e.target.value);
+                                    }}/>
+                                </div>
+                                    <div className="input-box-b">
+                                        <span className="details-b">Contact No</span>
+                                    <input type="text" onChange={(e) => {
+                                        setContact(e.target.value);
+                                    }} />
+                                    <input type="submit" value="Add Contact" onClick={(e) => {
+                                        e.preventDefault();
+                                        setContactList(buyerContact => [...buyerContact, contact]);
+                                    }} />
+                                </div>
+                                    <div className="input-box-b">
+                                        <span className="details-b">Favourite Areas:</span>
+                                    <input type="text" onChange={(e) => {
+                                        setArea(e.target.value);
+                                     //   setFavouriteAreas(favouriteAreas => [...favouriteAreas, e.target.value]);
+                                     //   console.log(favouriteAreas);
+                                    } } />
+                                    <input type="submit" value="Add Area" onClick={(e) => {
+                                        e.preventDefault();
+                                         setFavouriteAreas(favouriteAreas => [...favouriteAreas, area]);
+                                    }} />
+
+                                </div>
+                                    <div className="input-box-b">
+                                        <span className="details-b">Favourite Waste Types:</span>
+                                    <input type="text" onChange={(e) => {
+                                        setType(e.target.value);
+                                    }} />
+                                    <input type="submit" value="Add Waste Types" onClick={(e) => {
+                                        e.preventDefault();
+                                        setFavouriteTypes(favouriteWasteTypes => [...favouriteWasteTypes, type]);
+                                    }} />
+                                </div>
+                                    <div className="input-box-b">
+                                        <span className="details-b">Favorite Waste Items:</span>
+                                    <input type="text" onChange={(e) => {
+                                        setItem(e.target.value);
+                                    }} />
+                                    <input type="submit" value="Add Waste Items" onClick={(e) => {
+                                        e.preventDefault();
+                                        setFavouriteItems(favouriteWasteItems => [...favouriteWasteItems, item]);
+                                    }} />
+                                </div>
+                                    <div className="input-box-b">
+                                        <span className="details-b">Images: </span>
+                                    <input type="file"
+                                        accept="image/**"
+                                        onChange={
+                                            (e) => {
+                                                const file = e.target.files[0];
+                                                const fileReader = new FileReader();
+                                                fileReader.readAsDataURL(file);
+                                                fileReader.onload = () => {
+                                                 //     console.log(fileReader.result);
+                                                    let base64 = fileReader.result;
+                                                    setImages(buyerImages => [...buyerImages, base64]);
+                                                }
+                                            }
+                                        }/>
+                                </div>
+                                </div>
+                                <div className="button-b">
+                                    <input type="submit" value="Save Details"></input>
+                                </div>
+                            </form>
+                    </div>
                 </div>
-                <div>
-                    <label for="address">Address:</label>
-                    <input type="text" onChange={(e) => {
-                        setAddress(e.target.value);
-                    }}/>
-                </div>
-                <div>
-                    <label for="contact">Contact No: </label>
-                    
-                    <input type="text" onChange={(e) => {
-                        setContact(e.target.value);
-                    }} />
-                    <input type="submit" value="add" onClick={(e) => {
-                        e.preventDefault();
-                        setContactList(buyerContact => [...buyerContact, contact]);
-                    }} />
-                </div>
-                <div>
-                    <label for="areas">Favourite Areas: </label>                                     
-                    <input type="text" onChange={(e) => {
-                        setArea(e.target.value);
-                     //   setFavouriteAreas(favouriteAreas => [...favouriteAreas, e.target.value]);
-                     //   console.log(favouriteAreas);
-                    } } />
-                    <input type="submit" value="add" onClick={(e) => {
-                        e.preventDefault();
-                         setFavouriteAreas(favouriteAreas => [...favouriteAreas, area]);
-                    }} />
-                   
-                </div>
-                <div>
-                    <label for="types">Favourite Waste Types: </label>
-                    <input type="text" onChange={(e) => {
-                        setType(e.target.value);
-                    }} />
-                    <input type="submit" value="add" onClick={(e) => {
-                        e.preventDefault();
-                        setFavouriteTypes(favouriteWasteTypes => [...favouriteWasteTypes, type]);
-                    }} />
-                </div>
-                <div>
-                    <label for="items">Favourite Waste Items: </label>
-                    <input type="text" onChange={(e) => {
-                        setItem(e.target.value);
-                    }} />
-                    <input type="submit" value="add" onClick={(e) => {
-                        e.preventDefault();
-                        setFavouriteItems(favouriteWasteItems => [...favouriteWasteItems, item]);
-                    }} />
-                </div>
-                <div>
-                    <label for="image">Images : </label>
-                    <input type="file"
-                        accept="image/**"
-                        onChange={
-                            (e) => {
-                                const file = e.target.files[0];
-                                const fileReader = new FileReader();
-                                fileReader.readAsDataURL(file);
-                                fileReader.onload = () => {
-                                 //     console.log(fileReader.result);
-                                    let base64 = fileReader.result;
-                                    setImages(buyerImages => [...buyerImages, base64]);
-                                }
-                            }
-                        }/>
-                </div>
-                <button type="submit" >Submit</button>
-            </form>
+            </div>
         </div>
     );
 }

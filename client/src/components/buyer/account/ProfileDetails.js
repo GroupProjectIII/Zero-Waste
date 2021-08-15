@@ -1,6 +1,5 @@
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
-import AccountSidebar from "./AccountSidebar";
 import ProfileDetailsPage from "./ProfileDetailsPage";
 import React, {useState} from "react";
 import { useHistory } from "react-router";
@@ -18,7 +17,6 @@ export default function ProfileDetails() {
         <>
             <Navbar />
             <ProfileDetailsPage currentId={currentId} setCurrentId={setCurrentId} />
-            <AccountSidebar />
             <Footer/>
         </>
     );
