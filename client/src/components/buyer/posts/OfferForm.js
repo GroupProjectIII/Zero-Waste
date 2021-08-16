@@ -3,6 +3,7 @@ import Forms from './Form';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import Sidebar from './Sidebar';
 
 function OfferForm() {
 
@@ -15,6 +16,7 @@ function OfferForm() {
     return (
         <>
             <Navbar/>
+            <Sidebar/>
             <Forms/>
             <Footer/>
         </>

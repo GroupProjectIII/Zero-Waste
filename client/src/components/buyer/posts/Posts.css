@@ -38,6 +38,12 @@
     width: 100%;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    height: 300px;
+}
+
+.grid-b > article img:hover{
+    transform: scale(1.1);
+    transition: transform .3s;
 }
 
 .text-b{

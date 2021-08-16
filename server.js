@@ -4,13 +4,21 @@ const app = express();
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 const bodyParser = require('body-parser')
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:'true'}))
 
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
+
 const AuserRoute = require('./routes/adminUser')
 const cors = require("cors");
+
 app.use(cors());
 connectDB();
+
+
 
 app.use(express.json());
 
@@ -21,28 +29,35 @@ app.get("/", (req, res, next) => {
 // Connecting Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
-app.use("/", require('./routes/Company_Post'))
-
-
-app.use(bodyParser.json({ limit: '30mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
-app.use(cors());
-
-
-
-const buyerPosts = require("./routes/buyerPosts");
-const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
-app.use(buyerPosts);
-app.use(buyerOffersForSeller);
-
 app.use('/api/adminuser' , AuserRoute);
 
 const postRoutes = require("./routes/posts.js");
+app.use(cors());
+const buyerPosts = require("./routes/buyerPosts");
+const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
 
-app.use(bodyParser.json({ limit: '30mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+const buyerOffersForCompany = require("./routes/buyerOffersForCompany");
+app.use(buyerPosts);
+app.use(buyerOffersForSeller);
+app.use(buyerOffersForCompany);
+
+const buyerProfile = require("./routes/buyerProfile");
+app.use(buyerProfile);
+
+
+
+const companyPosts = require("./routes/companyPosts");
+app.use(companyPosts);
+
+
+app.use('/api/adminuser' , AuserRoute);
+
 
 app.use('/posts', postRoutes);
+//seller
+
+const sellerPostRoutes = require("./routes/sellerPosts");
+app.use(sellerPostRoutes);
 
 // Error Handler Middleware
 app.use(errorHandler);

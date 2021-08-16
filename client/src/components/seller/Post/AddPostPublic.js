@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 
 export default function PostHome() {
     const [currentId, setCurrentId] = useState(0);
-    const dispatch = useDispatch();
+   
     
     const history = useHistory();
 

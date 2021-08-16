@@ -7,13 +7,15 @@ import moment from 'moment';
 
 function EditOfferForms() {
 
-    const { id } = useParams();
-    console.log(id);
+    const { postId } = useParams();
+    console.log(postId);
 
     const initialValues = {
         value: '',
         expiryDate: '',
-        quantity: ''
+        collectingDate: '',
+        collectingTime: '',
+        quantity: '',
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -22,7 +24,7 @@ function EditOfferForms() {
 
     useEffect(() => {
         const GetData = async () => {
-            const result = await axios.get(`/buyerGetOneSellerOffer/${id}`);
+            const result = await axios.get(`/buyerGetOneSellerOffer/${postId}`);
             setFormValues(result.data.oneOffer);
         };
         GetData();
@@ -31,8 +33,14 @@ function EditOfferForms() {
     console.log(formValues);
 
     const submitForm = () => {
-        const data = {value:formValues.value, expiryDate:formValues.expiryDate, quantity:formValues.quantity};
-        axios.patch(`/editPendingSellerOffer/${id}`, data)
+        const data = {
+            value:formValues.value,
+            expiryDate:formValues.expiryDate,
+            collectingDate:formValues.collectingDate,
+            collectingTime:formValues.collectingTime,
+            quantity:formValues.quantity,
+        };
+        axios.patch(`/editPendingSellerOffer/${postId}`, data)
             .then((result) => {
                 clear();
                 toastNotification();
@@ -52,7 +60,7 @@ function EditOfferForms() {
     };
 
     const date = new Date();
-    date.setDate(date.getDate() + 8);
+    date.setDate(date.getDate() + 28);
 
     const date2 = new Date();
     date2.setDate(date2.getDate());
@@ -61,6 +69,7 @@ function EditOfferForms() {
         let errors = {};
         const regex = /^[0-9]+$/;
         const d1 = new Date(values.expiryDate);
+        const d3 = new Date(values.collectingDate);
         console.log(d1);
         if (!values.value) {
             errors.value = "Cannot be blank";
@@ -72,9 +81,17 @@ function EditOfferForms() {
         if (!values.expiryDate) {
             errors.expiryDate = "Cannot be blank";
         }else if (date<=d1) {
-            errors.expiryDate = "Expiry date should not be longer than a week.";
+            errors.expiryDate = "Expiry date should not be longer than a month.";
         }else if (d1<=date2) {
             errors.expiryDate = "Expiry date should not be a past date.";
+        }
+        if (!values.collectingDate) {
+            errors.collectingDate = "Cannot be blank";
+        }else if (d3<=date2) {
+            errors.collectingDate = "Collecting date should not be a past date.";
+        }
+        if (!values.collectingTime) {
+            errors.collectingTime = "Cannot be blank";
         }
         if (!values.quantity) {
             errors.quantity = "Cannot be blank";
@@ -96,12 +113,16 @@ function EditOfferForms() {
     console.log(d1);
     const d2 = moment(d1).format('YYYY-MM-DD');
     console.log(d2);
+    const d3 = new Date(formValues.collectingDate);
+    const d4 = moment(d3).format('YYYY-MM-DD');
 
     const clear = () => {
         setFormValues({
             value: '',
             expiryDate: '',
-            quantity: ''
+            collectingDate: '',
+            collectingTime: '',
+            quantity: '',
         });
     };
 
@@ -120,7 +141,7 @@ function EditOfferForms() {
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
                                 <div className="input-box-b">
-                                    <span className="details-b">Offer Value</span>
+                                    <span className="details-b">Offer Value (Rs)</span>
                                     <input type="text" placeholder="Enter value" name="value" id="value" value={formValues.value}
                                            onChange={handleChange}
                                            className={formErrors.value && "input-error"} ></input>
@@ -138,7 +159,25 @@ function EditOfferForms() {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Quantity</span>
+                                    <span className="details-b">Waste Items Collecting Date</span>
+                                    <input type="date" name="collectingDate" id="collectingDate" placeholder="Enter date" value={d4}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingDate && "input-error"}></input>
+                                    {formErrors.collectingDate && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingDate}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Waste Items Collecting Approximate Time</span>
+                                    <input type="time" name="collectingTime" id="collectingTime" placeholder="Enter time" value={formValues.collectingTime}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingTime && "input-error"}></input>
+                                    {formErrors.collectingTime && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingTime}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Quantity (Kg)</span>
                                     <input type="text" placeholder="Enter quantity" name="quantity" id="quantity" value={formValues.quantity}
                                            onChange={handleChange}
                                            className={formErrors.quantity && "input-error"}></input>

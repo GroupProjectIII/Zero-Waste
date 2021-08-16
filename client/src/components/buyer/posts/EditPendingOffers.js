@@ -3,6 +3,7 @@ import EditOfferForms from './EditPendingOffersForm';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import Sidebar from './Sidebar';
 
 function EditPendingOffers() {
 
@@ -15,6 +16,7 @@ function EditPendingOffers() {
     return (
         <>
             <Navbar/>
+            <Sidebar/>
             <EditOfferForms/>
             <Footer/>
         </>

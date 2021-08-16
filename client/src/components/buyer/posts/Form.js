@@ -4,21 +4,29 @@ import {useParams, useHistory} from "react-router-dom";
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import emailjs from 'emailjs-com';
 
 function Forms() {
 
-    const { id } = useParams();
-    console.log(id);
+    const { postId, sellerId } = useParams();
+    console.log(postId);
+    console.log(sellerId);
+
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
 
     const apiUrl = '/addSellerOffer';
     const initialValues = {
         value: '',
         expiryDate: '',
+        collectingDate: '',
+        collectingTime: '',
         quantity: '',
-        buyerName: '',
-        buyerEmail:'',
+        status:'',
+        buyerId: '',
         postId:'',
-        location:''
+        wasteItemsListId:'',
+        sellerId:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -29,18 +37,19 @@ function Forms() {
         const data = {
             value:formValues.value,
             expiryDate:formValues.expiryDate,
+            collectingDate:formValues.collectingDate,
+            collectingTime:formValues.collectingTime,
             quantity:formValues.quantity,
-            buyerName:name,
-            buyerEmail:email,
-            postId:id,
-            location:{
-                latitude:lat,
-                longitude:long
-            }
+            status:'pending',
+            buyerId:buyerId,
+            postId:postId,
+            wasteItemsListId:'completePost',
+            sellerId:posts.sellerId
         };
         axios.post(apiUrl, data)
             .then((result) => {
                 clear();
+                //sendEmail();
                 toastNotification();
                 //history.push(`/buyer/viewpostdetails/${id}`);
             });
@@ -58,7 +67,7 @@ function Forms() {
     };
 
     const date = new Date();
-    date.setDate(date.getDate() + 8);
+    date.setDate(date.getDate() + 28);
 
     const date2 = new Date();
     date2.setDate(date2.getDate());
@@ -67,6 +76,7 @@ function Forms() {
         let errors = {};
         const regex = /^[0-9]+$/;
         const d1 = new Date(values.expiryDate);
+        const d3 = new Date(values.collectingDate);
         console.log(d1);
         if (!values.value) {
             errors.value = "Cannot be blank";
@@ -78,9 +88,17 @@ function Forms() {
         if (!values.expiryDate) {
             errors.expiryDate = "Cannot be blank";
         }else if (date<=d1) {
-            errors.expiryDate = "Expiry date should not be longer than a week.";
+            errors.expiryDate = "Expiry date should not be longer than a month.";
         }else if (d1<=date2) {
             errors.expiryDate = "Expiry date should not be a past date.";
+        }
+        if (!values.collectingDate) {
+            errors.collectingDate = "Cannot be blank";
+        }else if (d3<=date2) {
+            errors.collectingDate = "Collecting date should not be a past date.";
+        }
+        if (!values.collectingTime) {
+            errors.collectingTime = "Cannot be blank";
         }
         if (!values.quantity) {
             errors.quantity = "Cannot be blank";
@@ -102,11 +120,14 @@ function Forms() {
         setFormValues({
             value: '',
             expiryDate: '',
+            collectingDate: '',
+            collectingTime: '',
             quantity: '',
-            buyerName: '',
-            buyerEmail:'',
+            status:'',
+            buyerId: '',
             postId:'',
-            location:''
+            wasteItemsListId:'',
+            sellerId:''
         });
     };
 
@@ -118,10 +139,10 @@ function Forms() {
 
     const [posts, setPosts] = useState({});
 
-    const name=(localStorage.getItem("username"));
-    const email=(localStorage.getItem("email"));
-    console.log(name);
-    console.log(email);
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
 
     useEffect(()=>{
         getOnePost();
@@ -137,7 +158,7 @@ function Forms() {
 
     const getOnePost = async () => {
         try {
-            const response = await axios.get(`/buyerGetOnePost/${id}`)
+            const response = await axios.get(`/buyerGetOnePost/${postId}`)
             console.log(response);
             const allPost=response.data.onePost;
             setPosts(allPost);
@@ -151,6 +172,47 @@ function Forms() {
     console.log(long);
     const lat=posts?.location?.latitude;
     console.log(lat);
+    console.log(posts?.location?._id);
+
+    const [seller, setSeller] = useState({});
+
+    useEffect(()=>{
+        getOneSellerOrCompany();
+    }, []);
+
+    const getOneSellerOrCompany = async () => {
+        try {
+            const response = await axios.get(`/getOneSellerOrCompany/${sellerId}`)
+            console.log(response);
+            const oneSellerOrCompany=response.data.oneSellerOrCompany;
+            setSeller(oneSellerOrCompany);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(seller);
+    const sellerEmail=seller.email;
+    const sellerName=seller.username;
+    console.log(sellerEmail);
+    console.log(sellerName);
+
+    const templateParams = {
+        from_name: 'Zero-Waste',
+        to_name: sellerName,
+        message: 'Your post has been given an offer by a buyer! Please visit our site for more details.',
+        reply_to: 'zerowasteproject3@gmail.com',
+        user_email:sellerEmail,
+        project_email:'zerowasteproject3@gmail.com'
+    };
+
+    const sendEmail = () => {
+        emailjs.send('service_34ny3hp', 'template_91bru6e', templateParams, 'user_pzyBOo0Td3FLgOvuNU4mq')
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    };
 
     return(
         <div className="forms-b">
@@ -163,7 +225,7 @@ function Forms() {
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
                                 <div className="input-box-b">
-                                    <span className="details-b">Offer Value</span>
+                                    <span className="details-b">Offer Value (Rs)</span>
                                     <input type="text" name="value" id="value" placeholder="Enter value" value={formValues.value}
                                            onChange={handleChange}
                                            className={formErrors.value && "input-error"}></input>
@@ -172,7 +234,7 @@ function Forms() {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Expiry Date</span>
+                                    <span className="details-b">Offer Expiry Date</span>
                                     <input type="date" name="expiryDate" id="expiryDate" placeholder="Enter date" value={formValues.expiryDate}
                                            onChange={handleChange}
                                            className={formErrors.expiryDate && "input-error"}></input>
@@ -181,7 +243,25 @@ function Forms() {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Quantity</span>
+                                    <span className="details-b">Waste Items Collecting Date</span>
+                                    <input type="date" name="collectingDate" id="collectingDate" placeholder="Enter date" value={formValues.collectingDate}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingDate && "input-error"}></input>
+                                    {formErrors.collectingDate && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingDate}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Waste Items Collecting Approximate Time</span>
+                                    <input type="time" name="collectingTime" id="collectingTime" placeholder="Enter time" value={formValues.collectingTime}
+                                           onChange={handleChange}
+                                           className={formErrors.collectingTime && "input-error"}></input>
+                                    {formErrors.collectingTime && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.collectingTime}</span>
+                                    )}
+                                </div>
+                                <div className="input-box-b">
+                                    <span className="details-b">Quantity (Kg)</span>
                                     <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
                                            onChange={handleChange}
                                            className={formErrors.quantity && "input-error"}></input>

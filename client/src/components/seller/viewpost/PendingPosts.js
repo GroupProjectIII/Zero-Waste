@@ -1,7 +1,40 @@
 import './PendingPosts.css';
 import Bottles from './postPics/bottles.jpg';
+import { useHistory } from "react-router-dom";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+
 
 export default function PendingPosts() {
+
+    const history = useHistory();
+    
+    if((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype")==="seller")){
+        history.push("/");
+    }
+    
+    const sellerId=(localStorage.getItem("id"));
+    console.log(sellerId);
+    
+    const [sellerPosts, setSellerPosts] = useState([]);
+
+    useEffect(() => {
+        getSellerPosts();
+    }, []);
+
+    const getSellerPosts = async () => {
+        try {
+            const responce = await axios.get(`/sellerViewPosts/${sellerId}`)
+            console.log(responce);
+            setSellerPosts(responce.data);
+        } catch (error) {
+            console.error(`Error: ${error}`);
+        }
+
+    }
+
+    console.log(sellerPosts);
+
     return (
 
         <div className="seller-post-list-background">

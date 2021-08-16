@@ -3,6 +3,7 @@ import PendingOffers from './PendingOffers';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import Sidebar from './Sidebar';
 
 function POffers() {
 
@@ -15,6 +16,7 @@ function POffers() {
     return (
         <>
             <Navbar/>
+            <Sidebar/>
             <PendingOffers/>
             <Footer/>
         </>

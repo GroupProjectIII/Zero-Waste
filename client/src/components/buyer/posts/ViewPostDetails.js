@@ -3,6 +3,7 @@ import ViewPost from './ViewPost';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import Sidebar from './Sidebar';
 
 function ViewPostDetails() {
 
@@ -15,6 +16,7 @@ function ViewPostDetails() {
     return (
         <>
             <Navbar/>
+            <Sidebar/>
             <ViewPost/>
             <Footer/>
         </>

@@ -46,17 +46,19 @@ const RegisterScreen = ({ history }) => {
 
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("usertype", data.usertype);
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("email", data.email);
+      localStorage.setItem("userName", data.username);
+      localStorage.setItem("userEmail", data.email);
       localStorage.setItem("registeredAt", data.registeredAt);
+      localStorage.setItem("userId", data.id);
+
       console.log(data.usertype);
       if(data.usertype==="buyer"){
-        history.push("/buyer/home");
+        history.push("/buyer/profileDetails");
       }else if(data.usertype==="seller"){
         history.push("/seller");
       }
       else if(data.usertype==="company"){
-        history.push("/company");
+        history.push("/company/getcompanydetails");
       }
       else if(data.usertype==="admin"){
         history.push("/admin");

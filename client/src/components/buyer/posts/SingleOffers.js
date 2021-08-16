@@ -3,6 +3,7 @@ import SingleOfferForm from "./SingleOfferForm";
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import Sidebar from './Sidebar';
 
 function SingleOffers() {
 
@@ -15,6 +16,7 @@ function SingleOffers() {
     return (
         <>
             <Navbar/>
+            <Sidebar/>
             <SingleOfferForm/>
             <Footer/>
         </>
