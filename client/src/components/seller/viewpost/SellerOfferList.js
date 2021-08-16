@@ -1,13 +1,35 @@
 import { useHistory } from 'react-router';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './SellerOfferList.css';
 
 export default function SellerOfferList() {
-
+    if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "seller")) {
+        history.push("/");
+    }
+   
+    const sellerId = (localStorage.getItem("id"));
+    console.log("offers page");
     const history = useHistory()
     const viewBuyer = () => {
         history.push('/seller/buyer')
     }
+    
+    const [buyerOffers, getBuyerOffers] = useState([]);
+    useEffect(() => {
+        getAllBuyerOffers();
+    }, []);
 
+    const getAllBuyerOffers = async () => {
+        await axios.get(`/sellerViewOffers/${sellerId}`)
+            .then((response) => {
+                const allNotes = response.data.existingOffers;
+                getBuyerOffers(allNotes);
+            })
+            .catch(error => console.error(`Error:${error}`));
+    }
+
+    console.log(buyerOffers);
     
     return (
         <>
