@@ -34,6 +34,9 @@ const LoginScreen = ({ history }) => {
 
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("usertype", data.usertype);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("registeredAt", data.registeredAt);
 
       if(data.usertype==="buyer"){
         history.push("/buyer/home");

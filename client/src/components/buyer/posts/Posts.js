@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './Posts.css';
-import { useHistory } from "react-router-dom";
+import {Link} from "react-router-dom";
+import axios from 'axios';
 
 function Posts() {
 
-    const history = useHistory();
+    const [notes, getNotes] = useState([]);
 
-    const handleRoute = () =>{
-        history.push("/buyer/viewpostdetails");
+    useEffect(()=>{
+        getAllNotes();
+    }, []);
+
+    const getAllNotes = async () => {
+        await axios.get(`/buyerPosts`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                getNotes(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
     }
+    console.log(notes);
 
     return(
         <div className="posts-b">
@@ -71,77 +82,23 @@ function Posts() {
                     </div>
                 </div>
                 <main className="grid-b">
-                    <article>
-                        <img src="../images/polythene.jpg" alt=""></img>
+                    {notes.map((note,index)=>(
+                        <article>
                             <div className="text-b">
-                                <h3>Post ID: 1</h3>
-                                <p>Waste Type: Polythene - පොලිතින්, Plastic - ප්ලාස්ටික්</p>
-                                <p>Location: Buthpitiya</p>
-                                <p>Quantity: 1 kg</p>
-                                <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
+                                <h3>Post ID: {index+1}</h3>
+                                <p>Location: {note.address}</p>
+                                <p>Post Type: {note.postType}</p>
+                                <p>Address: {note.address}</p>
+                                <p>Telephone No: {note.contact}</p>
+                                <div className="buyerlink-b">
+                                    <Link style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/viewpostdetails/${note._id}`}>View Post <i className="fas fa-angle-double-right"></i></Link>
+                                </div>
                             </div>
-                    </article>
-
-                    <article>
-                        <img src="../images/plastic.jpg" alt=""></img>
-                            <div className="text-b">
-                                <h3>Post ID: 2</h3>
-                                <p>Waste Type: Plastic - ප්ලාස්ටික්</p>
-                                <p>Location: Miriswatta</p>
-                                <p>Quantity: 2 kg</p>
-                                <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
-                            </div>
-                    </article>
-
-                    <article>
-                        <img src="../images/paper.jpg" alt=""></img>
-                            <div className="text-b">
-                                <h3>Post ID: 3</h3>
-                                <p>Waste Type: Plastic - ප්ලාස්ටික්, Paper - කඩදාසි</p>
-                                <p>Location: Gampaha</p>
-                                <p>Quantity: 1 kg</p>
-                                <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
-                            </div>
-                    </article>
-
-                    <article>
-                        <img src="../images/paper.jpg" alt=""></img>
-                        <div className="text-b">
-                            <h3>Post ID: 4</h3>
-                            <p>Waste Type: Paper - කඩදාසි</p>
-                            <p>Location: Yagoda</p>
-                            <p>Quantity: 1 kg</p>
-                            <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <img src="../images/plastic.jpg" alt=""></img>
-                        <div className="text-b">
-                            <h3>Post ID: 5</h3>
-                            <p>Waste Type: Paper - කඩදාසි, Plastic - ප්ලාස්ටික්</p>
-                            <p>Location: Yakkala</p>
-                            <p>Quantity: 5 kg</p>
-                            <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <img src="../images/polythene.jpg" alt=""></img>
-                        <div className="text-b">
-                            <h3>Post ID: 6</h3>
-                            <p>Waste Type: Paper - කඩදාසි, Plastic - ප්ලාස්ටික්</p>
-                            <p>Location: Kadawatha</p>
-                            <p>Quantity: 4 kg</p>
-                            <button onClick={handleRoute}>View Post <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
+                        </article>
+                    ))}
                 </main>
             </div>
         </div>
-
-
     );
 }
 

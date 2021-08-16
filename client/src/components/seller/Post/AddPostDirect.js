@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Nav/Navbar";
 import Footer from "../Nav/Footer";
-import PostFrom from "./PostForm";
+import PostFrom from "./PostFormNew";
 import { useHistory } from "react-router";
 
 export default function DirectPost() {

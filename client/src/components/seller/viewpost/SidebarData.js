@@ -3,7 +3,10 @@ import * as IoIcons from 'react-icons/io';
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md';
 
-export const SidebarData = [
+
+export const SellerSidebarData = [
+
+
     {
         title: 'Available Posts',
         path: '/seller/viewposts',
@@ -17,9 +20,16 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Previous Posts',
-        path: '/seller/pendingoffers',
+        title: 'Accepted Offers',
+        path: '/seller/acceptedoffers',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },
+    {
+        title: 'Previous Posts',
+        path: '/seller/previousposts',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'nav-text'
+    },
+    
 ];
