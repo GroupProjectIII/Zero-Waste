@@ -6,7 +6,7 @@ function UserProfile() {
     const history = useHistory();
 
     const handleRoute = () =>{
-        history.push("/editprofile");
+        history.push("/company/editprofile");
     }
 
     return(
@@ -29,10 +29,12 @@ function UserProfile() {
                     <p>Zero-waste is a web based waste bying and selling platform for sellers to sell their recyclable  and non recyclable waste, and buyers to find waste items to buy.Anyone can make your works easier through zero-waste.Come and join with us..</p>       
                 </div>
                <div className="buttons-c" id="buttons-c">
-                    <span className="action_btn-c">
-                        <a href="#" onClick={handleRoute}>Edit</a>
-                        <a href="#">Delete</a>
-                    </span>
+               <div className="buttons" id="buttons">
+                <span className="action_btn-b">
+                    <a href="#" onClick={handleRoute}>Edit</a>
+                    <a href="#">Remove</a>
+                </span>
+            </div>    
                 </div>        
             </div>
 

@@ -48,6 +48,7 @@ import CompanyPreviousP from './components/company/pages/PreviousP';
 import CompanyAcceptedP from './components/company/pages/AcceptedP';
 import CompanyBuyersInfo from './components/company/pages/BuyersInfo';
 import CompanyBuyersContact from './components/company/pages/BuyersContact';
+import CompanyAddPost from './components/company/components/company/posts/AddPost';
 
 
 function App() {
@@ -102,6 +103,7 @@ function App() {
                     <Route path='/company/acceptedp' component={CompanyAcceptedP} />
                     <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
                     <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
+                    <Route path='/company/addpost' component={CompanyAddPost} />
                 </Switch>
             </Router>
         </>
