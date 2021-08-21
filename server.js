@@ -49,6 +49,9 @@ app.use(buyerProfile);
 const companyPosts = require("./routes/companyPosts");
 app.use(companyPosts);
 
+const contactBuyer = require("./routes/contactBuyer");
+app.use(contactBuyer);
+
 
 app.use('/api/adminuser' , AuserRoute);
 
