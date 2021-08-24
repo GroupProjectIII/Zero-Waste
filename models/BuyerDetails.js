@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const BuyerDetailsSchema = new mongoose.Schema({
     buyerId: String,
+    buyerName: String,
     buyerDescription: String,
     buyerAddress: String,
     buyerContact: [Number],

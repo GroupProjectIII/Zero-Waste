@@ -102,7 +102,7 @@ function App() {
                     <Route path='/buyer/notifyaboutwaste/:detailId/:companyId' component={BuyerCompanyNotify} />
                     <Route path='/buyer/location/:offerId' component={BuyerPostsLocation} />
                     <Route path='/buyer/viewpostdetails/:postId' component={BuyerViewPostDetails} />
-                    <Route path='/buyer/editprofile' component={BuyerEditProfile} />
+                    <Route path='/buyer/editprofile/:detailId' component={BuyerEditProfile} />
                     <Route path='/buyer/singleoffers/:postId/:arrayId/:sellerId' component={BuyerSingleOffers} />
                     <Route path='/buyer/viewofferdetails/:offerId/' component={BuyerViewOfferDetails} />
                     <Route path='/buyer/directposts' component={BuyerDirectPosts} />

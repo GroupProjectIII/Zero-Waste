@@ -151,9 +151,10 @@ function Posts() {
                         if(wasteItem.find(o=>o.postId === note._id) === undefined && note.postType==='public')
                             return (
                             <article>
+                                <img src={note.thumbnail} alt=""></img>
                                 <div className="text-b">
                                     <h3>Post ID: {index + 1}</h3>
-                                    <p>Location: {note.address}</p>
+                                    <p>District: {note.sellerDistrict}</p>
                                     <p>Post Type: {note.postType}</p>
                                     <p>Address: {note.address}</p>
                                     <p>Telephone No: {note.contact}</p>

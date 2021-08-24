@@ -7,7 +7,10 @@ import '../posts/Form.css';
 export default function ProfileDetailsPage ({ currentId, setCurrentId }) {
     
     const history = useHistory();
-    const buyerId = (localStorage.getItem("id"));
+    const buyerId = (localStorage.getItem("userId"));
+    console.log(buyerId);
+    const buyerName = (localStorage.getItem("userName"));
+    console.log(buyerName);
 
     const [buyerDescription, setDescription] = useState("");
 
@@ -45,6 +48,7 @@ export default function ProfileDetailsPage ({ currentId, setCurrentId }) {
         console.log("form submit");
         const newBuyerDetails = {
             buyerId,
+            buyerName,
             buyerDescription,
             buyerAddress,
             buyerContact,
