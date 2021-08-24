@@ -23,7 +23,7 @@ function CompanyForms() {
         status:'',
         buyerId: '',
         postId:'',
-        sellerId:''
+        companyId:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -40,7 +40,7 @@ function CompanyForms() {
             status:'pending',
             buyerId:buyerId,
             postId:postId,
-            sellerId:posts.sellerId
+            companyId:posts.companyId
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -125,7 +125,7 @@ function CompanyForms() {
             status:'',
             buyerId: '',
             postId:'',
-            sellerId:''
+            companyId:''
         });
     };
 
