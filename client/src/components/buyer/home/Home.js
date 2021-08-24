@@ -13,8 +13,8 @@ function BuyerHome() {
         history.push("/");
     }
     const type=(localStorage.getItem("usertype"));
-    const name=(localStorage.getItem("username"));
-    const email=(localStorage.getItem("email"));
+    const name=(localStorage.getItem("userName"));
+    const email=(localStorage.getItem("userEmail"));
     const date=(localStorage.getItem("registeredAt"));
     const buyerId=(localStorage.getItem("userId"));
     console.log(type);
