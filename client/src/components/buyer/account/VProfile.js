@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import '../posts/Posts.css';
 import axios from 'axios';
+import {Link, useHistory} from "react-router-dom";
+import emailjs from "emailjs-com";
 
 function VProfile() {
 
@@ -43,6 +45,46 @@ function VProfile() {
     const oneBuyer = buyerDetails.filter(oneBuyer => oneBuyer.buyerId === buyerId);
     console.log(oneBuyer);
 
+    const history = useHistory();
+
+    const logoutHandler = () =>{
+        localStorage.removeItem("authToken");
+        history.push("/");
+    };
+
+    const deleteBuyer = (id) => {
+        axios.delete(`/deleteBuyer/${id}`)
+            .then((result) => {
+                logoutHandler();
+            });
+    };
+
+    const deleteBuyerDetails = (id) => {
+        axios.delete(`/deleteBuyerDetails/${id}`)
+            .then((result) => {
+                //sendEmail();
+                deleteBuyer(buyerId);
+            });
+    };
+
+    const templateParams = {
+        from_name: 'Zero-Waste',
+        to_name: buyerName,
+        message: 'Your account deleted successfully! Thank you.',
+        reply_to: 'zerowasteproject3@gmail.com',
+        user_email:buyerEmail,
+        project_email:'zerowasteproject3@gmail.com'
+    };
+
+    const sendEmail = () => {
+        emailjs.send('service_34ny3hp', 'template_91bru6e', templateParams, 'user_pzyBOo0Td3FLgOvuNU4mq')
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    };
+
     return(
         <div className="posts-b">
             <div className="posts__container-b">
@@ -61,12 +103,52 @@ function VProfile() {
                     ))}
                 </div>
                 <div className="all-items-button-b">
-                    <button >Edit Profile<i className="fas fa-angle-double-right"></i></button>
-                    <button >Delete Profile<i className="fas fa-angle-double-right"></i></button>
+                    {oneBuyer.map((post,index)=> (
+                        <main className="grid-b" >
+                            <article>
+                                <img src={post.buyerImages} alt=""></img>
+                                <div className="text-b">
+                                    <h3>Image No: {index + 1}</h3>
+                                </div>
+                            </article>
+                        </main>
+                    ))}
+                </div>
+                <div className="all-items-button-b">
+                    {oneBuyer.map((post,index)=> (
+                    <main className="grid-b">
+                        <article>
+                            <div className="text-b">
+                                <div className="buyerlink-b">
+                                    <Link style={{color: '#fff', textDecoration: 'none'}}
+                                          to={`/buyer/vprofile`}
+                                    >View Profile <i className="fas fa-angle-double-right"></i></Link>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div className="text-b">
+                                <div className="buyerlink-b">
+                                    <Link style={{color: '#fff', textDecoration: 'none'}}
+                                          to={`/buyer/editprofile/${post._id}`}
+                                    >Edit Profile <i className="fas fa-edit"></i></Link>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div className="text-b">
+                                <div className="delete-button-b">
+                                    <button onClick={() => {
+                                        deleteBuyerDetails(post._id)
+                                    }}>Delete Profile <i className="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </article>
+                    </main>
+                    ))}
                 </div>
             </div>
         </div>
-
     );
 }
 

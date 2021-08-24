@@ -105,3 +105,23 @@ exports.getBuyerDetails= async (req,res)=>{
     });
 }
 
+exports.deleteBuyer = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    await User.findByIdAndRemove(id);
+
+    res.json({ message: "Post deleted successfully." });
+}
+
+exports.deleteBuyerDetails = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    await BuyerDetails.findByIdAndRemove(id);
+
+    res.json({ message: "Post deleted successfully." });
+}
+

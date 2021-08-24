@@ -5,6 +5,7 @@ const BuyerDetails = require("../models/BuyerDetails");
 
 exports.buyerAddDetails = async (req, res) => {
     const buyerId = req.body.buyerId;
+    const buyerName = req.body.buyerName;
     const buyerDescription = req.body.buyerDescription;
     const buyerAddress = req.body.buyerAddress;
     const buyerContact = req.body.buyerContact;
@@ -15,6 +16,7 @@ exports.buyerAddDetails = async (req, res) => {
 
     const newBuyer = new BuyerDetails({
         buyerId,
+        buyerName,
         buyerDescription,
         buyerAddress,
         buyerContact,
