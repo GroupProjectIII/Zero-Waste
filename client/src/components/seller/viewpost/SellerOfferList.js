@@ -8,8 +8,9 @@ export default function SellerOfferList() {
         history.push("/");
     }
    
-    const sellerId = (localStorage.getItem("id"));
+    const sellerId = (localStorage.getItem("userId"));
     console.log("offers page");
+    console.log(sellerId)
     const history = useHistory()
     const viewBuyer = () => {
         history.push('/seller/buyer')

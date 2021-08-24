@@ -15,7 +15,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
         history.push("/");
     }
    
-    const sellerId = (localStorage.getItem("id"));
+    const sellerId = (localStorage.getItem("userId"));
    
 
     const postType = "public";
