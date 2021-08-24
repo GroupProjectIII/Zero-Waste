@@ -1,66 +1,207 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../posts/AcceptedOffers.css';
-
+import axios from 'axios';
+import moment from 'moment';
 
 function VNotifications() {
 
+    const buyerId=(localStorage.getItem("userId"));
+    console.log(buyerId);
+
+    const [offers, setOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllOffers();
+    }, []);
+
+    const getAllOffers = async () => {
+        await axios.get(`/viewPendingSellerOffers`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                setOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(offers);
+
+    const wasteItem1 = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.buyerId===buyerId);
+    console.log(wasteItem1);
+
+    const [notes, setNotes] = useState([]);
+
+    useEffect(()=>{
+        getAllNotes();
+    }, []);
+
+    const getAllNotes = async () => {
+        await axios.get(`/buyerPosts`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                setNotes(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(notes);
+
+    const sellerDirectPosts = notes?.filter(wasteItem => wasteItem.postType==='direct' && wasteItem.buyer===buyerId);
+    console.log(sellerDirectPosts);
+
+    const [companyOffers, setCompanyOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllCompanyOffers();
+    }, []);
+
+    const getAllCompanyOffers = async () => {
+        await axios.get(`/viewPendingCompanyOffers`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                setCompanyOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(companyOffers);
+
+    const wasteItem3 = companyOffers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.buyerId===buyerId);
+    console.log(wasteItem3);
+
+    const [companyNotes, setCompanyNotes] = useState([]);
+
+    useEffect(()=>{
+        getAllCompanyNotes();
+    }, []);
+
+    const getAllCompanyNotes = async () => {
+        await axios.get(`/buyerGetCompanyPosts`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                setCompanyNotes(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(companyNotes);
+
+    const companyDirectPosts = companyNotes?.filter(wasteItem => wasteItem.postType==='direct' && wasteItem.buyer===buyerId);
+    console.log(companyDirectPosts);
+
     return(
         <div className="tables-b">
-        <div className="tables__container-b">
-            <h1>Notifications</h1>
-            <table className="table-b">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Seller/Company</th>
-                    <th>Notification</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td data-label="Date">7/7/2021</td>
-                    <td data-label="Time">6.42 a.m</td>
-                    <td data-label="Seller/Company">Seller</td>
-                    <td data-label="Notification">🚮Piyum Udayanga accepted the offer you requested.</td>
-                </tr>
-
-                <tr>
-                    <td data-label="Date">6/7/2021</td>
-                    <td data-label="Time">9.03 a.m</td>
-                    <td data-label="Seller/Company">Company</td>
-                    <td data-label="Notification">♻️Clean Collect accepted the offer you requested.</td>
-                </tr>
-
-                <tr>
-                    <td data-label="Date">6/7/2021</td>
-                    <td data-label="Time">1.45 p.m</td>
-                    <td data-label="Seller/Company">Seller</td>
-                    <td data-label="Notification">🚮Tharushi Perera has rate your service.</td>
-                </tr>
-
-                <tr>
-                    <td data-label="Date">5/7/2021</td>
-                    <td data-label="Time">7.30 a.m</td>
-                    <td data-label="Seller/Company">Company</td>
-                    <td data-label="Notification">♻️Solid Waste Management has commented on your service.</td>
-                </tr>
-
-                <tr>
-                    <td data-label="Date">5/7/2021</td>
-                    <td data-label="Time">6.30 a.m</td>
-                    <td data-label="Seller/Company">Company</td>
-                    <td data-label="Notification">♻️Clean collect has rated on your service.</td>
-                </tr>
-                <tr>
-                    <td data-label="Date">4/7/2021</td>
-                    <td data-label="Time">5.30 p.m</td>
-                    <td data-label="Seller/Company">Seller</td>
-                    <td data-label="Notification">🚮Sachin Hasaral has request to collect waste.</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            <div className="tables__container-b">
+                <h1>Notifications of Seller Offers</h1>
+                <table className="table-b">
+                    <thead>
+                    <tr>
+                        <th>Offer Id</th>
+                        <th>Offer Created At</th>
+                        <th>Offer Expiry Date</th>
+                        <th>Collecting Date</th>
+                        <th>Seller Name</th>
+                        <th>Unit Price (Rs)</th>
+                        <th>Notification</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {wasteItem1.map((note,index)=> (
+                    <tr>
+                        <td data-label="Offer Id">{index + 1}</td>
+                        <td data-label="Offer Created At">{moment(note.offerCreatedAt).fromNow()}</td>
+                        <td data-label="Offer Expiry Date">{moment(note.expiryDate).fromNow()}</td>
+                        <td data-label="Collecting Date">{moment(note.collectingDate).fromNow()}</td>
+                        <td data-label="Seller Name">{note.sellerName}</td>
+                        <td data-label="Unit Price (Rs)">{note.value}</td>
+                        <td data-label="Notification">🚮 Your offer accepted</td>
+                    </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="tables__container-b">
+                <h1>Notifications of Seller Direct Posts</h1>
+                <table className="table-b">
+                    <thead>
+                    <tr>
+                        <th>Post Id</th>
+                        <th>Post Created At</th>
+                        <th>Seller Name</th>
+                        <th>District</th>
+                        <th>Contact No</th>
+                        <th>Notification</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {sellerDirectPosts.map((note,index)=> (
+                    <tr>
+                        <td data-label="Post Id">{index + 1}</td>
+                        <td data-label="Post Created At">{moment(note.createdAt).fromNow()}</td>
+                        <td data-label="Seller Name">{note.sellerName}</td>
+                        <td data-label="District">{note.sellerDistrict}</td>
+                        <td data-label="Contact No">{note.contact}</td>
+                        <td data-label="Notification">♻️You have a direct post</td>
+                    </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="tables__container-b">
+                <h1>Notifications of Company Offers</h1>
+                <table className="table-b">
+                    <thead>
+                    <tr>
+                        <th>Offer Id</th>
+                        <th>Offer Created At</th>
+                        <th>Offer Expiry Date</th>
+                        <th>Collecting Date</th>
+                        <th>Unit Price (Rs)</th>
+                        <th>Quantity (Kg)</th>
+                        <th>Company Name</th>
+                        <th>Notification</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {wasteItem3.map((note,index)=> (
+                        <tr>
+                            <td data-label="Offer Id">{index + 1}</td>
+                            <td data-label="Offer Created At">{moment(note.offerCreatedAt).fromNow()}</td>
+                            <td data-label="Offer Expiry Date">{moment(note.expiryDate).fromNow()}</td>
+                            <td data-label="Collecting Date">{moment(note.collectingDate).fromNow()}</td>
+                            <td data-label="Unit Price (Rs)">{note.value}</td>
+                            <td data-label="Quantity (Kg)">{note.quantity}</td>
+                            <td data-label="Company Name">{note.companyName}</td>
+                            <td data-label="Notification">🚮 Your offer accepted</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="tables__container-b">
+                <h1>Notifications of Company Direct Posts</h1>
+                <table className="table-b">
+                    <thead>
+                    <tr>
+                        <th>Post Id</th>
+                        <th>Post Created At</th>
+                        <th>Company Name</th>
+                        <th>Waste Type</th>
+                        <th>Waste Item</th>
+                        <th>Contact No</th>
+                        <th>Notification</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {companyDirectPosts.map((note,index)=> (
+                        <tr>
+                            <td data-label="Post Id">{index + 1}</td>
+                            <td data-label="Post Created At">{moment(note.createdAt).fromNow()}</td>
+                            <td data-label="Company Name">{note.companyName}</td>
+                            <td data-label="Waste Type">{note.wasteType}</td>
+                            <td data-label="Waste Item">{note.item}</td>
+                            <td data-label="Contact No">{note.contact}</td>
+                            <td data-label="Notification">♻️You have a direct post</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
     </div>
     );
 }
