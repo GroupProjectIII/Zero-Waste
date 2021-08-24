@@ -21,7 +21,6 @@ function Forms() {
         expiryDate: '',
         collectingDate: '',
         collectingTime: '',
-        quantity: '',
         status:'',
         buyerId: '',
         postId:'',
@@ -39,7 +38,6 @@ function Forms() {
             expiryDate:formValues.expiryDate,
             collectingDate:formValues.collectingDate,
             collectingTime:formValues.collectingTime,
-            quantity:formValues.quantity,
             status:'pending',
             buyerId:buyerId,
             postId:postId,
@@ -100,13 +98,6 @@ function Forms() {
         if (!values.collectingTime) {
             errors.collectingTime = "Cannot be blank";
         }
-        if (!values.quantity) {
-            errors.quantity = "Cannot be blank";
-        }else if (!regex.test(values.quantity)) {
-            errors.quantity = "Invalid quantity format";
-        }else if (values.quantity<=0) {
-            errors.quantity = "Invalid quantity format";
-        }
         return errors;
     };
 
@@ -122,7 +113,6 @@ function Forms() {
             expiryDate: '',
             collectingDate: '',
             collectingTime: '',
-            quantity: '',
             status:'',
             buyerId: '',
             postId:'',
@@ -258,15 +248,6 @@ function Forms() {
                                            className={formErrors.collectingTime && "input-error"}></input>
                                     {formErrors.collectingTime && (
                                         <span className="error" style={{color:'red'}}>{formErrors.collectingTime}</span>
-                                    )}
-                                </div>
-                                <div className="input-box-b">
-                                    <span className="details-b">Quantity (Kg)</span>
-                                    <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
-                                           onChange={handleChange}
-                                           className={formErrors.quantity && "input-error"}></input>
-                                    {formErrors.quantity && (
-                                        <span className="error" style={{color:'red'}} >{formErrors.quantity}</span>
                                     )}
                                 </div>
                             </div>

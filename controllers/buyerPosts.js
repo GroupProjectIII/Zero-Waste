@@ -5,6 +5,7 @@ const SellerPost = require("../models/SellerPost");
 const CompanyPost = require("../models/CompanyPost");
 const CompanyDetails = require("../models/CompanyDetail");
 const User = require("../models/User");
+const BuyerDetails = require("../models/BuyerDetails");
 
 exports.getPosts= async (req,res)=>{
     SellerPost.find().exec((err,posts)=>{
@@ -88,5 +89,19 @@ exports.getOneSellerOrCompany= async (req,res)=>{
             oneSellerOrCompany:sellerOrCompany
         })
     })
+}
+
+exports.getBuyerDetails= async (req,res)=>{
+    BuyerDetails.find().exec((err,buyers)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingBuyers:buyers
+        });
+    });
 }
 
