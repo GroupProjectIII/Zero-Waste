@@ -26,7 +26,7 @@ function Help() {
         submitForm(searchKey);
     };
 
-    const submitForm = () => {
+    const submitForm = (searchKey) => {
         const data = {
             choice:searchKey,
             description:formValues.description,
@@ -134,7 +134,7 @@ function Help() {
         <div className="forms__container-c" >
             <div className="container-c">
                 <div className="content-c">
-                    <div className="title-c">Add New Post</div>
+                    <div className="title-c">Help Desk</div>
                     <form onSubmit={handleSubmit} noValidate>
                         <div className="user-details-c">
                             <div className="input-box-c">
@@ -159,7 +159,7 @@ function Help() {
                             </div>
                         </div>
                         <div className="button-c">
-                            <input type="submit" value="Add Post"></input>
+                            <input type="submit" value="Send"></input>
                         </div>
                     </form>
                 </div>
