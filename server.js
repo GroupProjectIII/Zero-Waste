@@ -37,13 +37,27 @@ const postRoutes = require("./routes/posts.js");
 app.use(cors());
 const buyerPosts = require("./routes/buyerPosts");
 const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
+const buyerOffersForCompany = require("./routes/buyerOffersForCompany");
+const complaint = require("./routes/complaint");
+const getHelp = require("./routes/getHelp");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
+app.use(buyerOffersForCompany);
+app.use(complaint);
+app.use(getHelp);
+
+const buyerProfile = require("./routes/buyerProfile");
+app.use(buyerProfile);
 
 
+const companyPosts = require("./routes/companyPosts");
+app.use(companyPosts);
+
+const contactBuyer = require("./routes/contactBuyer");
+app.use(contactBuyer);
 
 
-
+app.use('/api/adminuser' , AuserRoute);
 
 
 app.use('/posts', postRoutes);

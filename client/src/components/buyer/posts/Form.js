@@ -4,11 +4,13 @@ import {useParams, useHistory} from "react-router-dom";
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import emailjs from 'emailjs-com';
 
 function Forms() {
 
-    const { postId } = useParams();
+    const { postId, sellerId } = useParams();
     console.log(postId);
+    console.log(sellerId);
 
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
@@ -19,7 +21,6 @@ function Forms() {
         expiryDate: '',
         collectingDate: '',
         collectingTime: '',
-        quantity: '',
         status:'',
         buyerId: '',
         postId:'',
@@ -37,7 +38,6 @@ function Forms() {
             expiryDate:formValues.expiryDate,
             collectingDate:formValues.collectingDate,
             collectingTime:formValues.collectingTime,
-            quantity:formValues.quantity,
             status:'pending',
             buyerId:buyerId,
             postId:postId,
@@ -47,6 +47,7 @@ function Forms() {
         axios.post(apiUrl, data)
             .then((result) => {
                 clear();
+                //sendEmail();
                 toastNotification();
                 //history.push(`/buyer/viewpostdetails/${id}`);
             });
@@ -97,13 +98,6 @@ function Forms() {
         if (!values.collectingTime) {
             errors.collectingTime = "Cannot be blank";
         }
-        if (!values.quantity) {
-            errors.quantity = "Cannot be blank";
-        }else if (!regex.test(values.quantity)) {
-            errors.quantity = "Invalid quantity format";
-        }else if (values.quantity<=0) {
-            errors.quantity = "Invalid quantity format";
-        }
         return errors;
     };
 
@@ -119,7 +113,6 @@ function Forms() {
             expiryDate: '',
             collectingDate: '',
             collectingTime: '',
-            quantity: '',
             status:'',
             buyerId: '',
             postId:'',
@@ -136,10 +129,10 @@ function Forms() {
 
     const [posts, setPosts] = useState({});
 
-    const name=(localStorage.getItem("username"));
-    const email=(localStorage.getItem("email"));
-    console.log(name);
-    console.log(email);
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
 
     useEffect(()=>{
         getOnePost();
@@ -171,6 +164,46 @@ function Forms() {
     console.log(lat);
     console.log(posts?.location?._id);
 
+    const [seller, setSeller] = useState({});
+
+    useEffect(()=>{
+        getOneSellerOrCompany();
+    }, []);
+
+    const getOneSellerOrCompany = async () => {
+        try {
+            const response = await axios.get(`/getOneSellerOrCompany/${sellerId}`)
+            console.log(response);
+            const oneSellerOrCompany=response.data.oneSellerOrCompany;
+            setSeller(oneSellerOrCompany);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(seller);
+    const sellerEmail=seller.email;
+    const sellerName=seller.username;
+    console.log(sellerEmail);
+    console.log(sellerName);
+
+    const templateParams = {
+        from_name: 'Zero-Waste',
+        to_name: sellerName,
+        message: 'Your post has been given an offer by a buyer! Please visit our site for more details.',
+        reply_to: 'zerowasteproject3@gmail.com',
+        user_email:sellerEmail,
+        project_email:'zerowasteproject3@gmail.com'
+    };
+
+    const sendEmail = () => {
+        emailjs.send('service_34ny3hp', 'template_91bru6e', templateParams, 'user_pzyBOo0Td3FLgOvuNU4mq')
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    };
+
     return(
         <div className="forms-b">
             <div className="forms__container-b" >
@@ -191,7 +224,7 @@ function Forms() {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Expiry Date</span>
+                                    <span className="details-b">Offer Expiry Date</span>
                                     <input type="date" name="expiryDate" id="expiryDate" placeholder="Enter date" value={formValues.expiryDate}
                                            onChange={handleChange}
                                            className={formErrors.expiryDate && "input-error"}></input>
@@ -215,15 +248,6 @@ function Forms() {
                                            className={formErrors.collectingTime && "input-error"}></input>
                                     {formErrors.collectingTime && (
                                         <span className="error" style={{color:'red'}}>{formErrors.collectingTime}</span>
-                                    )}
-                                </div>
-                                <div className="input-box-b">
-                                    <span className="details-b">Quantity (Kg)</span>
-                                    <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
-                                           onChange={handleChange}
-                                           className={formErrors.quantity && "input-error"}></input>
-                                    {formErrors.quantity && (
-                                        <span className="error" style={{color:'red'}} >{formErrors.quantity}</span>
                                     )}
                                 </div>
                             </div>

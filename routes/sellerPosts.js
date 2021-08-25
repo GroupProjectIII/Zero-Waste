@@ -8,6 +8,6 @@ const { sellerAddPost, sellerViewPosts, sellerViewOffers, sellerViewAcceptedOffe
 
 router.post('/sellerAddPost', sellerAddPost);
 router.get('/sellerViewPosts/:id', sellerViewPosts);
-router.get('/sellerViewOffers', sellerViewOffers);
+router.get('/sellerViewOffers/:id', sellerViewOffers);
 router.get('/sellerViewAcceptedOffers', sellerViewAcceptedOffers);
 module.exports = router;

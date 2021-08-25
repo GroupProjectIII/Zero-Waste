@@ -1,8 +1,23 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import './Posts.css';
 
 function OngoingPost() {
+    const [notes, setNotes] = useState([{
+        type: '',
+        item: '',
+        quantity: '',
+        date: '',
+        description: ''
+    }])
+
+    useEffect(() => {
+        fetch("/company/ongoingpost").then(res => {
+            if(res.ok) {
+                return res.json()
+            }
+        }).then(jsonRes => setNotes(jsonRes));
+    })
     
     const history = useHistory();
 
@@ -16,69 +31,16 @@ function OngoingPost() {
                 <div className="title-c"><h1>Ongoing Post</h1></div>
                 <main className="grid-c">
                     <article>
-                        <div className="text-c">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 1 kg</p>
-                            <p>Date: 12 Jun 2020</p>
-                            <p>Only shopping bags are required</p>
-                            <button onClick={handleRoute}>View Offers <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 2 kg</p>
-                            <p>Date: 12 Jun 2020</p>
-                            <p>C;ear plastic bottles are prefered</p>
-                            <button onClick={handleRoute}>View Offers <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 1 kg</p>
-                            <p>Date: 12 Jun 2020</p>
-                            <p>Good quality is a plus</p>
-                            <button onClick={handleRoute}>View Offers <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 1 kg</p>
-                            <p>Date: 12 Jun 2020</p>
-                            <p>Only white paper are required</p>
-                            <button onClick={handleRoute}>View Offers <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 5 kg</p>
-                            <p>Date: 12 Jun 2020</p>
-                            <p>nklfe  gnlegnl egknrkl</p>
-                            <button onClick={handleRoute}>View Offers <i className="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 4 kg</p>
-                            <p>Date: 12 Jun 2020</p>
-                            <p>bejk ioivt ijegio</p>
-                            <button onClick={handleRoute}>View Offers <i className="fas fa-angle-double-right"></i></button>
-                        </div>
+                        {notes.map(note => 
+                            <div className="text-c">
+                                <h3>{note.type}</h3>
+                                <p>Waste Type: {note.item}</p>
+                                <p>Quantity: {note.quantity}</p>
+                                <p>Date: {note.date}</p>
+                                <p>{note.description}</p>
+                                <button onClick={handleRoute}>View Offers <i className="fas fa-angle-double-right"></i></button>
+                            </div>
+                        )}
                     </article>
                 </main>
             </div>

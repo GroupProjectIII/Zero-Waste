@@ -3,6 +3,7 @@ import ViewCompany from './ViewCompany';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import CompanySidebar from './CompanySidebar';
 
 function ViewCompanyDetails() {
 
@@ -15,6 +16,7 @@ function ViewCompanyDetails() {
     return (
         <>
             <Navbar/>
+            <CompanySidebar/>
             <ViewCompany/>
             <Footer/>
         </>

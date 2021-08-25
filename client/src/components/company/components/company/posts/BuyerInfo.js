@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import './AcceptedOffers.css';
 import {useHistory} from "react-router-dom";
+import axios from "axios";
 
 function BuyerInfo() {
     const history = useHistory();
@@ -8,6 +9,44 @@ function BuyerInfo() {
     const handleRoute = () =>{
         history.push("/company/buyerscontact");
     }
+
+    const [notes, setNotes] = useState([]);
+
+    useEffect(()=>{
+        getAllNotes();
+    }, []);
+
+    const getAllNotes = async () => {
+        await axios.get(`/buyerViewDetails`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                setNotes(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(notes);
+
+    const filterData = (postsPara, searchKey) => {
+        const result = postsPara.filter(
+            (notes) =>
+                notes?.buyer.toLowerCase().includes(searchKey) ||
+                notes?.wasteType.toLowerCase().includes(searchKey) ||
+                notes?.wasteItem.toLowerCase().includes(searchKey) ||
+                notes?.date.toLowerCase().includes(searchKey) ||
+                notes?.quantity.toString().toLowerCase().includes(searchKey)                 
+        );
+        setNotes(result);
+    };
+
+    const handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+
+        axios.get(`/buyerViewDetails`).then((res) => {
+            if (res?.data?.success) {
+                filterData(res?.data?.existingPosts, searchKey);
+            }
+        });
+    };
 
     return(
         <>
@@ -31,75 +70,21 @@ function BuyerInfo() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="Offer ID">01</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-label="Offer ID">02</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-label="Offer ID">03</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/paper.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-label="Offer ID">04</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-label="Offer ID">05</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
+                        {notes.map((note,index)=> (
+                            <tr>
+                                <td data-label="Offer ID">{index + 1}</td>
+                                <td data-label="Buyer">{note.buyerId}</td>
+                                <td data-label="Image"><img src="../../images/{note.buyerImages}.jpg" alt=""></img></td>
+                                <td data-label="Waste Type">{note.favouriteWasteTypes}</td>
+                                <td data-label="Waste Item">{note.favouriteWasteItems}</td>
+                                <td data-label="Area">{note.favouriteAreas}</td>
+                                <td data-label="Action">
+                                    <span className="action_btn-c">
+                                        <a href="#" onClick={handleRoute}>Contact</a>
+                                    </span>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

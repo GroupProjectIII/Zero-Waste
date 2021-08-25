@@ -17,10 +17,6 @@ const sellerOfferSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    quantity:{
-        type:Number,
-        required:true
-    },
     offerCreatedAt: {
         type: Date,
         default: new Date(),
@@ -34,7 +30,7 @@ const sellerOfferSchema = new mongoose.Schema({
         required:true
     },
     postId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId, ref:'SellerPost',
         required:true
     },
     wasteItemsListId: {

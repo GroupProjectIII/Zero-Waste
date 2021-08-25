@@ -4,6 +4,7 @@ import CompanyPendingOffers from './CompanyPendingOffers';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import CompanySidebar from "./CompanySidebar";
 
 function CompanyPOffers() {
 
@@ -16,6 +17,7 @@ function CompanyPOffers() {
     return (
         <>
             <Navbar/>
+            <CompanySidebar/>
             <CompanyPendingOffers/>
             <Footer/>
         </>

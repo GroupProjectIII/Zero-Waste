@@ -10,7 +10,7 @@ function PendingOffers() {
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
 
-    const [offers, getOffers] = useState([]);
+    const [offers, setOffers] = useState([]);
 
     useEffect(()=>{
         getAllOffers();
@@ -20,7 +20,7 @@ function PendingOffers() {
         await axios.get(`/viewPendingSellerOffers`)
             .then ((response)=>{
                 const allNotes=response.data.existingOffers;
-                getOffers(allNotes);
+                setOffers(allNotes);
             })
             .catch(error=>console.error(`Error: ${error}`));
     }
@@ -40,12 +40,31 @@ function PendingOffers() {
         })
     };
 
+    const filterData = (offersPara, searchKey) => {
+        const result = offersPara.filter(
+            (offers) =>
+                offers?.value.toString().toLowerCase().includes(searchKey) ||
+                offers?.quantity.toString().toLowerCase().includes(searchKey)
+        );
+        setOffers(result);
+    };
+
+    const handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+
+        axios.get(`/viewPendingSellerOffers`).then((res) => {
+            if (res?.data?.success) {
+                filterData(res?.data?.existingOffers, searchKey);
+            }
+        });
+    };
+
     return(
         <div className="posts-b">
             <div className="posts__container-b">
                 <h1>Pending Offers</h1>
                 <div className="search_box-b">
-                    <input type="text" placeholder="What are you looking for?" ></input>
+                    <input type="text" placeholder="What are you looking for?" onChange={handleSearchArea}></input>
                     <i className="fas fa-search"></i>
                 </div>
                 <main className="grid-b">
@@ -55,7 +74,6 @@ function PendingOffers() {
                             <article>
                                 <div className="text-b">
                                     <h3>Post ID: {index + 1}</h3>
-                                    <p>Quantity (Kg): {offer.quantity}</p>
                                     <p>Unit Price (Rs): {offer.value}</p>
                                     <p>Expiry Date: {moment(offer.expiryDate).fromNow()}</p>
                                     <p>Collecting Date: {moment(offer.collectingDate).fromNow()}</p>

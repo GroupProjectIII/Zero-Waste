@@ -8,18 +8,22 @@ exports.sellerAddPost = async (req, res) => {
     const sellerId = req.body.sellerId;
     const postType = req.body.postType;
     const buyer = req.body.buyer;
+    const district = req.body.district;
     const address = req.body.address;
     const location = req.body.location;
     const contact = Number(req.body.contact);
+    const thumbnail = req.body.thumbnail;
     const wasteItemList = req.body.wasteItemList;
 
     const newSellerPost = new SellerPost({
         sellerId,
         postType,
         buyer,
+        district,
         address,
         location,
         contact,
+        thumbnail,
         wasteItemList
     })
     try {
@@ -34,16 +38,16 @@ exports.sellerAddPost = async (req, res) => {
 
 exports.sellerViewPosts = async (req, res) => {
 
-    let sellerId = req.params.sellerId;
+    let sellerIdd = req.params.id;
 
-    SellerPost.find({ sellerId:sellerId }).exec((err, posts) => {
+    SellerPost.find({ "sellerId": sellerIdd }).exec((err, posts) => {
         if (err) {
             return res.status(400).json({
                 error: err
             });
         }
         return res.status(200).json({
-            sucess: true,
+            success: true,
             existingPosts: posts
         });
     });
@@ -52,16 +56,17 @@ exports.sellerViewPosts = async (req, res) => {
 }
 
 exports.sellerViewOffers = async (req, res) => {
-
-    BuyerOffersForSeller.find({ buyerName: "harshana" , status:"pending" }).exec((err, posts) => {
+    let seller = req.params.id;
+    BuyerOffersForSeller.find({ "sellerId": seller }).exec((err, posts) => {
+        
         if (err) {
             return res.status(400).json({
                 error: err
             });
         }
         return res.status(200).json({
-            sucess: true,
-            existingPosts: posts
+            success: true,
+            existingOffers: posts
         });
     });
 

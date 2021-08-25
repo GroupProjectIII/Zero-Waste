@@ -2,6 +2,7 @@ import React from 'react';
 import * as IoIcons from 'react-icons/io';
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md';
+import { GiArrowsShield } from "react-icons/gi";
 
 export const CompanySidebarData = [
     {
@@ -20,6 +21,12 @@ export const CompanySidebarData = [
         title: 'Pending Offers',
         path: '/buyer/companypendingoffers',
         icon: <IoIcons.IoIosPaper />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Company Direct Posts',
+        path: '/buyer/companydirectposts',
+        icon: <GiArrowsShield />,
         cName: 'nav-text'
     },
     {
