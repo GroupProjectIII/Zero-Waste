@@ -26,6 +26,7 @@ function AddPost() {
         item:'',
         avbDate:'',
         quantity:''
+
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -53,6 +54,7 @@ function AddPost() {
             .then((result) => {
                 toastNotification();
                 clear();
+
             });
     };
 

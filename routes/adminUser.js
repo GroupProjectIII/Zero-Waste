@@ -1,7 +1,6 @@
 const express = require('express');
 const Arouter = express.Router()
 const mongoose = require('mongoose');
-const { findOneAndDelete } = require('../models/User');
 
 const schema = mongoose.Schema
 
