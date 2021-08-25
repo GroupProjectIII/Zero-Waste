@@ -13,6 +13,7 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 
 const AuserRoute = require('./routes/adminUser')
+const ABSRoute = require('./routes/adminBS')
 const cors = require("cors");
 
 app.use(cors());
@@ -30,6 +31,7 @@ app.get("/", (req, res, next) => {
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 app.use('/api/adminuser' , AuserRoute);
+app.use('/api/adminBS' , ABSRoute);
 
 const postRoutes = require("./routes/posts.js");
 app.use(cors());
@@ -38,7 +40,8 @@ const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
 
-app.use('/api/adminuser' , AuserRoute);
+
+
 
 
 
