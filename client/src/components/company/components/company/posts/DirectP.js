@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import "./Modal.css";
 import './AcceptedOffers.css';
+import axios from "axios";
+import {Link} from "react-router-dom";
 
 function DirectP() {
   const [modal, setModal] = useState(false);
@@ -15,13 +17,51 @@ function DirectP() {
     document.body.classList.remove('active-modal')
   }
 
-  {return(
+  const [notes, setNotes] = useState([]);
+
+    useEffect(()=>{
+        getAllNotes();
+    }, []);
+
+    const getAllNotes = async () => {
+        await axios.get(`/getdirectPFromBuyer`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                setNotes(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(notes);
+
+    const filterData = (postsPara, searchKey) => {
+        const result = postsPara.filter(
+            (notes) =>
+                notes?.buyer.toLowerCase().includes(searchKey) ||
+                notes?.wasteType.toLowerCase().includes(searchKey) ||
+                notes?.wasteItem.toLowerCase().includes(searchKey) ||
+                notes?.date.toLowerCase().includes(searchKey) ||
+                notes?.quantity.toString().toLowerCase().includes(searchKey)                 
+        );
+        setNotes(result);
+    };
+
+    const handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+
+        axios.get(`/getdirectPFromBuyer`).then((res) => {
+            if (res?.data?.success) {
+                filterData(res?.data?.existingPosts, searchKey);
+            }
+        });
+    };
+
+  return(
     <>
       <div className="tables-c">
         <div className="tables__container-c">
           <h1>Direct Offers</h1>
             <div className="search_box-c">
-                <input type="text" placeholder="What are you looking for?"></input>
+                <input type="text" placeholder="What are you looking for?" onChange={handleSearchArea}></input>
                 <i className="fas fa-search"></i>
             </div>
             <table className="table-c">
@@ -38,85 +78,23 @@ function DirectP() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td data-label="Offer ID">01</td>
-                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                  <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                  <td data-label="Waste Type">Plastic</td>
-                  <td data-label="Waste Item">Bucket</td>
-                  <td data-label="Date">2020 July 07</td>
-                  <td data-label="Quantity">2 kg</td>
-                  <td data-label="Action">
-                    <span className="action_btn-c">
-                      <a href="#" >Accept</a>
-                      <a href="#">Reject</a>
-                    </span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td data-label="Offer ID">02</td>
-                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                  <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                  <td data-label="Waste Type">Plastic</td>
-                  <td data-label="Waste Item">Bucket</td>
-                  <td data-label="Date">2020 July 07</td>
-                  <td data-label="Quantity">2 kg</td>
-                  <td data-label="Action">
-                    <span className="action_btn-c">
-                      <a href="#" >Accept</a>
-                      <a href="#">Reject</a>
-                    </span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td data-label="Offer ID">03</td>
-                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                  <td data-label="Image"><img src="../../images/paper.jpg" alt=""></img></td>
-                  <td data-label="Waste Type">Paper</td>
-                  <td data-label="Waste Item">News Papers</td>
-                  <td data-label="Date">2020 July 07</td>
-                  <td data-label="Quantity">5 kg</td>
-                  <td data-label="Action">
-                    <span className="action_btn-c">
-                      <a href="#" >Accept</a>
-                      <a href="#">Reject</a>
-                    </span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td data-label="Offer ID">04</td>
-                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                  <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                  <td data-label="Waste Type">Polythene</td>
-                  <td data-label="Waste Item">Bags</td>
-                  <td data-label="Date">2020 July 07</td>
-                  <td data-label="Quantity">3 kg</td>
-                  <td data-label="Action">
-                    <span className="action_btn-c">
-                      <a href="#" >Accept</a>
-                      <a href="#">Reject</a>
-                    </span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td data-label="Offer ID">05</td>
-                  <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                  <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                  <td data-label="Waste Type">Polythene</td>
-                  <td data-label="Waste Item">Bags</td>
-                  <td data-label="Date">2020 July 07</td>
-                  <td data-label="Quantity">3 kg</td>
-                  <td data-label="Action">
-                    <span className="action_btn-c">
-                      <a href="#" >Accept</a>
-                      <a href="#">Reject</a>
-                    </span>
-                  </td>
-                </tr>
+                {notes.map((note,index)=> (
+                  <tr>
+                    <td data-label="Offer ID">{index + 1}</td>
+                    <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">{note.buyerId}</button></u></td>
+                    <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
+                    <td data-label="Waste Type">{note.wasteType}</td>
+                    <td data-label="Waste Item">{note.wasteItem}</td>
+                    <td data-label="Date">{note.date}</td>
+                    <td data-label="Quantity">{note.quantity}</td>
+                    <td data-label="Action">
+                      <span className="action_btn-c">
+                        <a href="#" >Accept</a>
+                        <a href="#">Reject</a>
+                      </span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -146,6 +124,6 @@ function DirectP() {
         )}
     </>
   );
-}}
+}
 
 export default DirectP;
