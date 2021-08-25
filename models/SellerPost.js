@@ -16,8 +16,10 @@ const postSchema = new mongoose.Schema({
     sellerId: String,
     postType: String,
     buyer: String,
+    district: String,
     address: String,
     contact: Number,
+    thumbnail: String,
     location: Location,
     createdAt: {
         type: Date,

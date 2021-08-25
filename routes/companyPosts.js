@@ -1,9 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const { addCompanyPost, addCompanyDetails } = require("../controllers/companyPosts");
+const { addCompanyPost,
+    getCompanyPostsForCompany,
+    viewPendingCompanyOffersForCompany,
+    getBuyerDetailsForCompany
+} = require("../controllers/companyPosts");
 
 router.post('/addCompanyPost', addCompanyPost);
-router.post('/addCompanyDetails', addCompanyDetails);
+router.get('/getCompanyPostsForCompany', getCompanyPostsForCompany);
+router.get('/viewPendingCompanyOffersForCompany', viewPendingCompanyOffersForCompany);
+router.get('/getBuyerDetailsForCompany', getBuyerDetailsForCompany);
 
 module.exports = router;

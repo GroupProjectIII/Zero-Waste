@@ -18,11 +18,13 @@ export default function PublicPost({ currentId, setCurrentId }) {
     const sellerId = (localStorage.getItem("id"));
    
 
-    const [postType, setPostType] = useState("");
-    const [buyer, setBuyer] = useState("");
+    const postType = "public";
+    const buyer = "all-buyers";
+    const [district, setDistrict] = useState("");
     const [address, setAddress] = useState("");
     const [location, setLocation] = useState([]);
     const [contact, setContact] = useState("");
+    const [thumbnail, setThumbnail] = useState("");
 
     const wasteItem = {
         wasteType: '',
@@ -70,9 +72,11 @@ export default function PublicPost({ currentId, setCurrentId }) {
             sellerId,
             postType,
             buyer,
+            district,
             address,
             location,
             contact,
+            thumbnail,
             wasteItemList
         }
 
@@ -122,25 +126,43 @@ export default function PublicPost({ currentId, setCurrentId }) {
                 <h2>Add New Post</h2>
             </div>
             <form className="seller-add-new-post-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
-                <label className="seller-add-post-label"></label>
-                    <select class="seller-add-post-select" name="option"
-                        onChange={(e) => {
-                            setPostType(e.target.value)
-                        }}>
-                        <option value="0" disabled selected>Select Post Type</option>
-                        <option value="public">Public</option>
-                        <option value="direct">Direct</option>
-                    </select>
+                    <div className="seller-add-post-row">
+                    <label className="seller-add-post-label">District</label>
                     <select className="seller-add-post-select" name="option"
                         onChange={(e) => {
-                         setBuyer(e.target.value)
+                         setDistrict(e.target.value)
                      }}>
-                        <option value="all" selected>All Buyers</option>
-                        <option value="bid1">Lk Collectors</option>
-                        <option value="bid2">Abc Industries</option>
+                        <option value="Colombo">Colombo</option>
+                        <option value="Gampaha">Gampaha</option>
+                        <option value="Kaluthara">Kaluthara</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Mathale">Mathale</option>
+                        <option value="Nuwara-eliya">Nuwara-Eliya</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Hambanthota">Hambanthota</option>
+                        <option value="Jaffna">Jaffna</option>
+                        <option value="Mannar">Mannar</option>
+                        <option value="Vauniya">Vauniya</option>
+                        <option value="Mulathivu">Mulathivu</option>
+                        <option value="Kilinochchi">Kilinochchi</option>
+                        <option value="Batticaloa">Batticaloa</option>
+                        <option value="Ampara">Apmara</option>
+                        <option value="Trincomalee">Trincomalee</option>
+                        <option value="Kurunegala">Kurunegala</option>
+                        <option value="Puttalam">Puttalam</option>
+                        <option value="Anuradhapura">Anuradhapura</option>
+                        <option value="Polonnaruwa">Polonnaruwa</option>
+                        <option value="Badulla">Badulla</option>
+                        <option value="Monaragala">Monaragala</option>
+                        <option value="Rathnapura">Rathnapura</option>
+                        <option value="Kegalle">Kegalle</option>
 
                     </select>
-                <div className="seller-add-post-row"> 
+                    </div>
+                   
+                
+                    <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlfor="address">Address</label>
                         <input className="address"
                             id="input"
@@ -151,6 +173,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                             }}
                         required></input>
                 </div>
+                    
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlfor="contact">Contact Nuber</label>
                         <input className="contact"
@@ -163,6 +186,27 @@ export default function PublicPost({ currentId, setCurrentId }) {
                 <div className="seller-add-post-row">
                     <label className="seller-add-post-label" for="location">Location</label>
                     <a href="#" onClick={(e) => { getlocation(e) }}>Get Location</a>
+                </div>
+                <div className="seller-add-post-row">
+                        <label className="seller-add-post-label" for="thumbnail_img">Add Thumbnail Image</label>
+                        <input className="Selected-file"
+                            type="file"
+                            accept="image/*"
+                            onChange={
+                                (e) => {
+                                   // console.log(e);
+                                    const file = e.target.files[0];
+                                    const fileReader = new FileReader();
+                                    fileReader.readAsDataURL(file);
+                                    fileReader.onload = () => {
+                                   //     console.log(fileReader.result);
+                                        let base64 = fileReader.result;
+                                        setThumbnail(base64);
+                                    }
+                                    
+                                }
+                            }
+                          ></input>
                 </div>
         {
           wasteItemList.map((val, idx) => {
@@ -177,8 +221,9 @@ export default function PublicPost({ currentId, setCurrentId }) {
                       <h3>{`Waste Item #${idx + 1}`}</h3>
                       <button className="seller-waste-item-delete-btn">Delete Item</button>
                   </div>
+                  <div className="seller-add-post-row">
+                      <label className="seller-add-post-label">Select Waste Type</label>
                   <select className="wasteType" name="wastetype" data-idx={idx} onChange={handleCatChange}>
-                    <option value="0"disabled selected>Select Waste Type</option>
                     <option value="plastic">Plastic</option>
                     <option value="glass">Glass</option>
                     <option value="paper">Paper</option>
@@ -188,6 +233,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                     <option value="other">Other</option>
 
                   </select>
+                  </div>
                   <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlFor={itemid}>Item</label>
                     <input className="item"

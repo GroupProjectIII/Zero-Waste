@@ -111,3 +111,27 @@
 [0m2021.08.10 11:52:45 WARN  Build server is not auto-connectable.[0m
 [0m2021.08.10 11:52:45 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
 [0m2021.08.10 18:42:55 INFO  shutting down Metals[0m
+[0m2021.08.11 18:13:37 INFO  Started: Metals version 0.10.5 in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste' for client Visual Studio Code 1.59.0.[0m
+[0m2021.08.11 18:13:38 INFO  time: initialize in 1.78s[0m
+[0m2021.08.11 18:13:42 WARN  Build server is not auto-connectable.[0m
+[0m2021.08.11 18:13:42 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.08.12 00:43:55 INFO  shutting down Metals[0m
+[0m2021.08.13 07:54:51 INFO  Started: Metals version 0.10.5 in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste' for client Visual Studio Code 1.59.0.[0m
+[0m2021.08.13 07:54:54 INFO  time: initialize in 3.12s[0m
+[0m2021.08.13 07:55:11 WARN  Build server is not auto-connectable.[0m
+[0m2021.08.13 07:55:11 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.08.13 08:33:55 INFO  shutting down Metals[0m
+[0m2021.08.16 10:31:17 INFO  Started: Metals version 0.10.5 in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste' for client Visual Studio Code 1.59.0.[0m
+[0m2021.08.16 10:31:20 INFO  time: initialize in 2.46s[0m
+[0m2021.08.16 10:31:24 WARN  Build server is not auto-connectable.[0m
+[0m2021.08.16 10:31:24 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.08.17 18:36:19 INFO  Started: Metals version 0.10.5 in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste' for client Visual Studio Code 1.59.0.[0m
+[0m2021.08.17 18:36:21 INFO  time: initialize in 2.41s[0m
+[0m2021.08.17 18:36:28 WARN  Build server is not auto-connectable.[0m
+[0m2021.08.17 18:36:28 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.08.17 19:51:32 INFO  shutting down Metals[0m
+[0m2021.08.23 12:12:58 INFO  Started: Metals version 0.10.5 in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste' for client Visual Studio Code 1.59.1.[0m
+[0m2021.08.23 12:13:01 INFO  time: initialize in 3.07s[0m
+[0m2021.08.23 12:13:06 WARN  Build server is not auto-connectable.[0m
+[0m2021.08.23 12:13:06 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.08.23 16:32:47 INFO  shutting down Metals[0m

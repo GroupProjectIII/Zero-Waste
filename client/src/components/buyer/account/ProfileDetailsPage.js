@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../posts/Form.css';
 
+
 export default function ProfileDetailsPage ({ currentId, setCurrentId }) {
     
     const history = useHistory();

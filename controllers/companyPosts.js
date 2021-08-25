@@ -2,12 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const CompanyPost = require("../models/CompanyPost");
-const CompanyDetails = require("../models/CompanyDetail");
+const BuyerOffersForCompany = require("../models/BuyerOffersForCompany");
+const BuyerDetails = require("../models/BuyerDetails");
 
 exports.addCompanyPost= async (req,res)=>{
-    const { companyId, postType, buyer, address, contact, wasteType, item, avbDate, quantity} = req.body;
+    const { companyId, companyName, postType, buyer, address, contact, wasteType, item, avbDate, quantity} = req.body;
 
-    const newCompanyPost = new CompanyPost({ companyId, postType, buyer, address, contact, wasteType, item, avbDate, quantity})
+    const newCompanyPost = new CompanyPost({ companyId, companyName, postType, buyer, address, contact, wasteType, item, avbDate, quantity})
 
     try {
         await newCompanyPost.save();
@@ -18,16 +19,44 @@ exports.addCompanyPost= async (req,res)=>{
     }
 };
 
-exports.addCompanyDetails= async (req,res)=>{
-    const { companyName, companyContact, address, wasteType, wasteItem, companyId, description} = req.body;
+exports.getCompanyPostsForCompany= async (req,res)=>{
+    CompanyPost.find().exec((err,posts)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingPosts:posts
+        });
+    });
+}
 
-    const newCompanyDetails = new CompanyDetails({ companyName, companyContact, address, wasteType, wasteItem, companyId, description})
+exports.viewPendingCompanyOffersForCompany= async (req,res)=>{
+    BuyerOffersForCompany.find().exec((err,offers)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingOffers:offers
+        });
+    });
+}
 
-    try {
-        await newCompanyDetails.save();
-
-        res.status(201).json(newCompanyDetails);
-    } catch (error) {
-        res.status(409).json({ message: error.message });
-    }
-};
+exports.getBuyerDetailsForCompany= async (req,res)=>{
+    BuyerDetails.find().exec((err,buyers)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingBuyers:buyers
+        });
+    });
+}
