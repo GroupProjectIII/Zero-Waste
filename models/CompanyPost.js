@@ -9,6 +9,7 @@ const Address = new mongoose.Schema({
 
 const companyPostSchema = new mongoose.Schema({
     companyId: String,
+    companyName: String,
     postType: String,
     buyer: String,
     address: Address,

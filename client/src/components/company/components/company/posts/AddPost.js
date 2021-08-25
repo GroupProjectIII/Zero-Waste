@@ -1,39 +1,60 @@
 import React, {useEffect,useState} from 'react';
 import axios from "axios";
 import './Form.css';
-import {useHistory} from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import {Slide, toast, ToastContainer} from "react-toastify";
 
 function AddPost() {
     const companyId=(localStorage.getItem("userId"));
-    console.log(companyId);
+    const companyName=(localStorage.getItem("userName"));
+    console.log(companyId, companyName);
 
     const apiUrl = '/addCompanyPost';
     const initialValues = {
-        wasteType: '',
-        wasteItem: '',
-        quantity: '',
-        requireddate: '',
-        description: '',
-        companyId:''
+        companyId:'',
+        companyName:'',
+        postType:'',
+        buyer:'',
+        address:{
+            number:'',
+            street:'',
+            city:'',
+            district:''
+        },
+        contact:'',
+        wasteType:'',
+        item:'',
+        avbDate:'',
+        quantity:''
+
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const history = useHistory();
 
     const submitForm = () => {
         const data = {
-            wasteType:formValues.wasteType,
-            wasteItem:formValues.wasteItem,
-            quentity:formValues.quentity,
-            requireddate:formValues.requireddate,
-            description:formValues.description,
             companyId:companyId,
+            companyName:companyName,
+            postType:'public',
+            buyer:'allBuyers',
+            address:{
+                number:formValues.number,
+                street:formValues.street,
+                city:formValues.city,
+                district:formValues.district
+            },
+            contact:formValues.contact,
+            wasteType:formValues.wasteType,
+            item:formValues.item,
+            avbDate:formValues.avbDate,
+            quantity:formValues.quantity
         };
         axios.post(apiUrl, data)
             .then((result) => {
+                toastNotification();
                 clear();
-                history.push('/company/ongoingp');
+
             });
     };
 
@@ -52,22 +73,37 @@ function AddPost() {
         let errors = {};
         const regex = /^[0-9]+$/;
 
+        if (!values.number) {
+            errors.number = "Cannot be blank";
+        }
+        if (!values.street) {
+            errors.street = "Cannot be blank";
+        }
+        if (!values.city) {
+            errors.city = "Cannot be blank";
+        }
+        if (!values.district) {
+            errors.district = "Cannot be blank";
+        }
+        if (!values.contact) {
+            errors.contact = "Cannot be blank";
+        }else if (!regex.test(values.contact)) {
+            errors.contact = "Invalid value format";
+        }
         if (!values.wasteType) {
             errors.wasteType = "Cannot be blank";
         }
-        if (!values.wasteItem) {
-            errors.wasteItem = "Cannot be blank";
+        if (!values.item) {
+            errors.item = "Cannot be blank";
         }
-        if (!values.description) {
-            errors.description = "Cannot be blank";
+        if (!values.avbDate) {
+            errors.avbDate = "Cannot be blank";
         }
         if (!values.quantity) {
             errors.quantity = "Cannot be blank";
+        }else if (!regex.test(values.quantity)) {
+            errors.quantity = "Invalid value format";
         }
-        if (!values.requireddate) {
-            errors.requireddate = "Cannot be blank";
-        }
-
         return errors;
     };
 
@@ -79,13 +115,26 @@ function AddPost() {
 
     const clear = () => {
         setFormValues({
-            wasteType: '',
-            wasteItem: '',
-            quantity: '',
-            requireddate: '',
-            description: '',
-            companyId:''
+            companyId:'',
+            companyName:'',
+            postType:'',
+            buyer:'',
+            number:'',
+            street:'',
+            city:'',
+            district:'',
+            contact:'',
+            wasteType:'',
+            item:'',
+            avbDate:'',
+            quantity:''
         });
+    };
+
+    const toastNotification = () => {
+        toast.info("You're added post successfully !", {
+            transition: Slide
+        })
     };
 
     return(
@@ -98,21 +147,75 @@ function AddPost() {
                             <form onSubmit={handleSubmit} noValidate>
                                 <div className="user-details-c">
                                     <div className="input-box-c">
+                                        <span className="details-c">Address Number</span>
+                                        <input type="text" name="number" id="number" placeholder="Enter number" value={formValues.number}
+                                           onChange={handleChange}
+                                           className={formErrors.number && "input-error"}></input>
+                                        {formErrors.number && (
+                                            <span className="error" style={{color:'red'}}>{formErrors.number}</span>
+                                        )}
+                                    </div>
+                                    <div className="input-box-c">
+                                        <span className="details-c">Street</span>
+                                        <input type="text" name="street" id="street" placeholder="Enter street" value={formValues.street}
+                                               onChange={handleChange}
+                                               className={formErrors.street && "input-error"}></input>
+                                        {formErrors.street && (
+                                            <span className="error" style={{color:'red'}}>{formErrors.street}</span>
+                                        )}
+                                    </div>
+                                    <div className="input-box-c">
+                                        <span className="details-c">City</span>
+                                        <input type="text" name="city" id="city" placeholder="Enter city" value={formValues.city}
+                                               onChange={handleChange}
+                                               className={formErrors.city && "input-error"}></input>
+                                        {formErrors.city && (
+                                            <span className="error" style={{color:'red'}}>{formErrors.city}</span>
+                                        )}
+                                    </div>
+                                    <div className="input-box-c">
+                                        <span className="details-c">District</span>
+                                        <input type="text" name="district" id="district" placeholder="Enter district" value={formValues.district}
+                                               onChange={handleChange}
+                                               className={formErrors.district && "input-error"}></input>
+                                        {formErrors.district && (
+                                            <span className="error" style={{color:'red'}}>{formErrors.district}</span>
+                                        )}
+                                    </div>
+                                    <div className="input-box-c">
+                                        <span className="details-c">Contact No</span>
+                                        <input type="text" name="contact" id="contact" placeholder="Enter contact" value={formValues.contact}
+                                           onChange={handleChange}
+                                           className={formErrors.contact && "input-error"}></input>
+                                        {formErrors.contact && (
+                                            <span className="error" style={{color:'red'}}>{formErrors.contact}</span>
+                                        )}
+                                    </div>
+                                    <div className="input-box-c">
                                         <span className="details-c">Waste Type</span>
                                         <input type="text" name="wasteType" id="wasteType" placeholder="Enter waste type" value={formValues.wasteType}
-                                           onChange={handleChange}
-                                           className={formErrors.wasteType && "input-error"}></input>
+                                               onChange={handleChange}
+                                               className={formErrors.wasteType && "input-error"}></input>
                                         {formErrors.wasteType && (
                                             <span className="error" style={{color:'red'}}>{formErrors.wasteType}</span>
                                         )}
                                     </div>
                                     <div className="input-box-c">
                                         <span className="details-c">Waste Item</span>
-                                        <input type="text" name="wasteItem" id="wasteItem" placeholder="Enter waste item" value={formValues.wasteItem}
-                                           onChange={handleChange}
-                                           className={formErrors.wasteItem && "input-error"}></input>
-                                        {formErrors.wasteItem && (
-                                            <span className="error" style={{color:'red'}}>{formErrors.wasteItem}</span>
+                                        <input type="text" name="item" id="item" placeholder="Enter item" value={formValues.item}
+                                               onChange={handleChange}
+                                               className={formErrors.item && "input-error"}></input>
+                                        {formErrors.item && (
+                                            <span className="error" style={{color:'red'}}>{formErrors.item}</span>
+                                        )}
+                                    </div>
+                                    <div className="input-box-c">
+                                        <span className="date-c">Available Date</span>
+                                        <input type="date" name="avbDate" id="avbDate" placeholder="Enter date" value={formValues.avbDate}
+                                               onChange={handleChange}
+                                               className={formErrors.avbDate && "input-error"}></input>
+                                        {formErrors.avbDate && (
+                                            <span className="error" style={{color:'red'}}>{formErrors.avbDate}</span>
                                         )}
                                     </div>
                                     <div className="input-box-c">
@@ -124,27 +227,10 @@ function AddPost() {
                                             <span className="error" style={{color:'red'}} >{formErrors.quantity}</span>
                                         )}
                                     </div>
-                                    <div className="input-box-c">
-                                        <span className="date-c">Date</span>
-                                        <input type="date" name="requireddate" id="requireddate" placeholder="Enter date" value={formValues.requireddate}
-                                           onChange={handleChange}
-                                           className={formErrors.requireddate && "input-error"}></input>
-                                        {formErrors.requireddate && (
-                                            <span className="error" style={{color:'red'}}>{formErrors.requireddate}</span>
-                                        )}
-                                    </div>
-                                    <div className="input-box-c">
-                                    <span className="details-b">Description</span>
-                                    <input type="text" name="description" id="description" placeholder="Enter description" value={formValues.description}
-                                           onChange={handleChange}
-                                           className={formErrors.description && "input-error"}></input>
-                                    {formErrors.description && (
-                                        <span className="error" style={{color:'red'}}>{formErrors.description}</span>
-                                    )}
-                                    </div>
                                 </div>
                                 <div className="button-c">
                                     <input type="submit" value="Add Post"></input>
+                                    <ToastContainer position="top-right" toastStyle={{ backgroundColor: "green" }} autoClose={3000} />
                                 </div>
                             </form>
                         </div>

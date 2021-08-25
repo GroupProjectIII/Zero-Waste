@@ -1,78 +1,68 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Form.css';
 import './Posts.css';
+import axios from "axios";
+import moment from "moment";
 
 function AcceptedPost() {
+
+    const companyId=(localStorage.getItem("userId"));
+    console.log(companyId);
+
+    const [notes, setNotes] = useState([]);
+
+    useEffect(()=>{
+        getAllNotes();
+    }, []);
+
+    const getAllNotes = async () => {
+        await axios.get(`/getCompanyPostsForCompany`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                setNotes(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(notes);
+
+    const [offers, setOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllOffers();
+    }, []);
+
+    const getAllOffers = async () => {
+        await axios.get(`/viewPendingCompanyOffersForCompany`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                setOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(offers);
+
+    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.companyId===companyId);
+    console.log(wasteItem);
+
     return(
         <div className="posts-c">
             <div className="posts__container-c">
                 <div className="title-c"><h1>Accepted Post</h1></div>
                 <main className="grid-c">
-                    <article>
-                        <div className="text-c">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 1 kg</p>
-                            <p>Price: Rs. 200.00</p>
-                            <p>Collector: Tom</p>  
-                            <p>Date: 12 Jun 2020</p>                               
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 2 kg</p>
-                            <p>Price: Rs. 200.00</p>
-                            <p>Collector: Sam</p>
-                            <p>Date: 12 Jun 2020</p>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 1 kg</p>
-                            <p>Price: Rs. 200.00</p>
-                            <p>Collector: Bob</p>
-                            <p>Date: 12 Jun 2020</p>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Paper - කඩදාසි</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 1 kg</p>
-                            <p>Price: Rs. 200.00</p>
-                            <p>Collector: Nick</p>
-                            <p>Date: 12 Jun 2020</p>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Plastic - ප්ලාස්ටික්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 5 kg</p>
-                            <p>Price: Rs. 200.00</p>
-                            <p>Collector: Sarah</p>
-                            <p>Date: 12 Jun 2020</p>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div className="text-c">
-                            <h3>Polythene - පොලිතින්</h3>
-                            <p>Waste Type: Bags</p>
-                            <p>Quantity: 4 kg</p>
-                            <p>Price: Rs. 200.00</p>
-                            <p>Collector: Tom</p>
-                            <p>Date: 12 Jun 2020</p>
-                        </div>
-                    </article>
+                    {notes.map((note,index)=> {
+                        if(wasteItem.find(o=>o.postId === note._id) !== undefined)
+                            return (
+                                <article>
+                                    <div className="text-c">
+                                        <h3>Post ID: {index + 1}</h3>
+                                        <p>Waste Type: {note.wasteType}</p>
+                                        <p>Waste Item: {note.item}</p>
+                                        <p>Quantity: {note.quantity}</p>
+                                        <p>Available Date: {moment(note.avbDate).fromNow()}</p>
+                                    </div>
+                                </article>
+                            );
+                    })}
                 </main>
             </div>
         </div>
