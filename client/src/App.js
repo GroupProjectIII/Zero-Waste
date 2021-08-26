@@ -21,6 +21,7 @@ import BuyerSingleOffers from "./components/buyer/posts/SingleOffers";
 import BuyerViewOfferDetails from "./components/buyer/posts/ViewOffers";
 import BuyerDirectPosts from "./components/buyer/posts/DirectPosts";
 import BuyerCompanyDirectPosts from "./components/buyer/company_posts/CompanyDirectPosts";
+import BuyerViewRatings from "./components/buyer/posts/ViewRatings";
 
 import BuyerProfileDetails from "./components/buyer/account/ProfileDetails";
 import BuyerViewProfile from './components/buyer/account/ViewProfile';
@@ -99,7 +100,7 @@ function App() {
                     <Route path='/buyer/companyofferforms/:postId/:companyId' component={BuyerCompanyOfferForm} />
                     <Route path='/buyer/companyacceptedoffers' component={BuyerCompanyAOffers} />
                     <Route path='/buyer/companypendingoffers' component={BuyerCompanyPOffers} />
-                    <Route path='/buyer/editcompanypendingoffers/:offerId' component={BuyerEditCompanyPendingOffers} />
+                    <Route path='/buyer/editcompanypendingoffers/:offerId/:companyId/:postId' component={BuyerEditCompanyPendingOffers} />
                     <Route path='/buyer/viewcompanydetails' component={BuyerViewCompanyDetails} />
                     <Route path='/buyer/notifyaboutwaste/:detailId/:companyId' component={BuyerCompanyNotify} />
                     <Route path='/buyer/location/:offerId' component={BuyerPostsLocation} />
@@ -109,11 +110,12 @@ function App() {
                     <Route path='/buyer/viewofferdetails/:offerId/' component={BuyerViewOfferDetails} />
                     <Route path='/buyer/directposts' component={BuyerDirectPosts} />
                     <Route path='/buyer/companydirectposts' component={BuyerCompanyDirectPosts} />
+                    <Route path='/buyer/viewratings/:sellerId' component={BuyerViewRatings} />
 
                     <Route path='/buyer/vprofile' component={BuyerViewProfile} />
                     <Route path='/buyer/rcomment' component={BuyerRateAndComment} />
                     <Route path='/buyer/vnotifications' component={BuyerViewNotifications} />
-                    <Route path='/buyer/addcomplaints' component={BuyerAddComplaints} />
+                    <Route path='/buyer/addcomplaints/:sellerOrCompanyId' component={BuyerAddComplaints} />
                     <Route path='/buyer/viewstats' component={BuyerViewStats} />
 
                     <Route path='/buyer/profileDetails' component={BuyerProfileDetails} />

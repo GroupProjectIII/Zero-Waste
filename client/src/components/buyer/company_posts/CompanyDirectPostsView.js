@@ -154,6 +154,7 @@ function CompanyDirectPostsView() {
                                 <article>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
+                                        <p>Company Name: {note.companyName}</p>
                                         <p>Post Type: {note.postType}</p>
                                         <p>Waste Type: {note.wasteType}</p>
                                         <p>Waste Item: {note.item}</p>

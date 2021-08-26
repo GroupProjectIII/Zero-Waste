@@ -4,6 +4,8 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Slide, toast, ToastContainer} from "react-toastify";
 import emailjs from "emailjs-com";
+import StarRating from "../posts/Ratings"
+import StartRating from "../posts/Ratings";
 
 function CompanyForms() {
 
@@ -44,6 +46,29 @@ function CompanyForms() {
 
     console.log(quantity);
 
+    const [posts, setPosts] = useState({});
+
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
+
+    useEffect(()=>{
+        getOnePost();
+    }, []);
+
+    const getOnePost = async () => {
+        try {
+            const response = await axios.get(`/buyerGetOneCompanyPost/${postId}`)
+            console.log(response);
+            const allPost=response.data.onePost;
+            setPosts(allPost);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(posts);
+
     const apiUrl = '/addCompanyOffer';
     const initialValues = {
         value: '',
@@ -55,6 +80,7 @@ function CompanyForms() {
         buyerId: '',
         postId:'',
         companyId:'',
+        companyName:'',
         buyerName:''
     };
     const [formValues, setFormValues] = useState(initialValues);
@@ -73,6 +99,7 @@ function CompanyForms() {
             buyerId:buyerId,
             postId:postId,
             companyId:posts.companyId,
+            companyName:posts.companyName,
             buyerName:buyerName
         };
         axios.post(apiUrl, data)
@@ -100,6 +127,9 @@ function CompanyForms() {
 
     const date2 = new Date();
     date2.setDate(date2.getDate());
+
+    const newQuantity= posts?.quantity - quantity;
+    console.log(newQuantity);
 
     const validate = (values) => {
         let errors = {};
@@ -136,7 +166,7 @@ function CompanyForms() {
             errors.quantity = "Invalid quantity format";
         }else if (values.quantity<=0) {
             errors.quantity = "Invalid quantity format";
-        }else if (posts?.quantity<values.quantity) {
+        }else if (newQuantity<values.quantity) {
             errors.quantity = "You can not add more than post's quantity";
         }
         return errors;
@@ -159,6 +189,7 @@ function CompanyForms() {
             buyerId: '',
             postId:'',
             companyId:'',
+            companyName:'',
             buyerName:''
         });
     };
@@ -168,29 +199,6 @@ function CompanyForms() {
             transition: Slide
         })
     };
-
-    const [posts, setPosts] = useState({});
-
-    const userName=(localStorage.getItem("userName"));
-    const userEmail=(localStorage.getItem("userEmail"));
-    console.log(userName);
-    console.log(userEmail);
-
-    useEffect(()=>{
-        getOnePost();
-    }, []);
-
-    const getOnePost = async () => {
-        try {
-            const response = await axios.get(`/buyerGetOneCompanyPost/${postId}`)
-            console.log(response);
-            const allPost=response.data.onePost;
-            setPosts(allPost);
-        } catch (error) {
-            console.error(`Error: ${error}`)
-        }
-    }
-    console.log(posts);
 
     const [seller, setSeller] = useState({});
 
@@ -232,10 +240,13 @@ function CompanyForms() {
             });
     };
 
+    const sellerId=companyId;
+    const selId = {sellerId};
+
     return(
         <div className="forms-b">
             <div className="forms__container-b" >
-                <div className="container-b">
+                <div className="container-b" style={{marginBottom:"150px"}}>
                     <div className="title-b">Make Offer for Company</div>
                     <div className="content-b">
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
@@ -293,6 +304,7 @@ function CompanyForms() {
                         </form>
                     </div>
                 </div>
+                <StartRating sId={selId}/>
             </div>
         </div>
     );
