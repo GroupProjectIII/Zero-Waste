@@ -30,7 +30,7 @@ const sellerOfferSchema = new mongoose.Schema({
         required:true
     },
     postId: {
-        type: mongoose.Schema.Types.ObjectId, ref:'SellerPost',
+        type: String,
         required:true
     },
     wasteItemsListId: {

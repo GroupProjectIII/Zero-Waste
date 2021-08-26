@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { addSellerOffer, viewOffer, addSellerOfferTest, viewPendingSellerOffers, deletePendingSellerOffer, editPendingSellerOffer, buyerGetOneSellerOffer } = require("../controllers/buyerOffersForSeller");
+const { addSellerOffer, viewPendingSellerOffers, deletePendingSellerOffer, editPendingSellerOffer, buyerGetOneSellerOffer } = require("../controllers/buyerOffersForSeller");
 
-router.post('/addSellerOffer', addSellerOfferTest);
-router.get('/viewOfferTest', viewOffer);
+router.post('/addSellerOffer', addSellerOffer);
 router.get('/viewPendingSellerOffers', viewPendingSellerOffers);
 router.delete('/deletePendingSellerOffer/:id', deletePendingSellerOffer);
 router.patch('/editPendingSellerOffer/:id', editPendingSellerOffer);

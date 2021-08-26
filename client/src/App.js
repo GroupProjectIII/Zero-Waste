@@ -42,6 +42,7 @@ import SellerMyPost from './components/seller/viewpost/Services';
 import SellerProfile from './components/seller/Profile/SellerProfile';
 import SellerBuyersHome from './components/seller/Buyers/SearchBuyerPage';
 import SellerViewPost from './components/seller/viewpost/ViewPosts';
+import SellerViewOnePost from './components/seller/viewpost/ViewPost';
 import SellerViewBuyer from './components/seller/Buyers/ViewBuyer';
 import SellerViewOffers from './components/seller/viewpost/ViewOffers';
 import SellerPreviousPosts from './components/seller/viewpost/ViewPreviousPosts';
@@ -135,6 +136,7 @@ function App() {
                     <Route path='/seller/directpost' exact component={SellerAddPostDirect} />
                     <Route path='/seller/myposts' exact component={SellerMyPost} />
                     <Route path='/seller/viewposts' exact component={SellerViewPost} />
+                    <Route path='/seller/viewpost/:postId' component={SellerViewOnePost}/>
                     <Route path='/seller/findbuyers' exact component={SellerBuyersHome} />
                     <Route path='/seller/buyer' exact component={SellerViewBuyer} />
                     <Route path='/seller/profile' exact component={SellerProfile} />

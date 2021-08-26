@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const BuyerOffersForSeller = require("../models/BuyerOffersForSeller");
-const BuyerOfferTest = require("../models/SellerOffersTest");
 
 exports.addSellerOffer= async (req,res)=>{
     const { value, expiryDate, collectingDate, collectingTime, status, buyerId, postId, wasteItemsListId, sellerId } = req.body;
@@ -17,33 +16,6 @@ exports.addSellerOffer= async (req,res)=>{
         res.status(409).json({ message: error.message });
     }
 };
-exports.addSellerOfferTest= async (req,res)=>{
-    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerId, postId, wasteItemsListId, sellerId } = req.body;
-
-    const newSellerOffer = new BuyerOfferTest({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerId, postId, wasteItemsListId, sellerId})
-
-    try {
-        await newSellerOffer.save();
-
-        res.status(201).json(newSellerOffer);
-    } catch (error) {
-        res.status(409).json({ message: error.message });
-    }
-};
-
-exports.viewOffer = async (req, res) => {
-    BuyerOfferTest.find().populate('postId').exec((err, offers) => {
-        if (err) {
-            return res.status(400).json({
-                error:err
-            }); 
-        }
-        return res.status(200).json({
-            success: true,
-            existingOffers:offers
-        })
-    })
-}
 
 exports.viewPendingSellerOffers= async (req,res)=>{
     BuyerOffersForSeller.find().exec((err,offers)=>{

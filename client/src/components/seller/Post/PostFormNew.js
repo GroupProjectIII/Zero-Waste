@@ -16,8 +16,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
     }
    
     const sellerId = (localStorage.getItem("userId"));
-   
-
+    const sellerName = (localStorage.getItem("userName"));
+    console.log(sellerName);
     const postType = "public";
     const buyer = "all-buyers";
     const [district, setDistrict] = useState("");
@@ -70,6 +70,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
         e.preventDefault();
         const newPostData = {
             sellerId,
+            sellerName,
             postType,
             buyer,
             district,
