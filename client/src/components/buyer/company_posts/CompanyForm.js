@@ -11,7 +11,38 @@ function CompanyForms() {
     console.log(postId, companyId);
 
     const buyerId=(localStorage.getItem("userId"));
-    console.log(buyerId);
+    const buyerName=(localStorage.getItem("userName"));
+    console.log(buyerId, buyerName);
+
+    const [offers, setOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllOffers();
+    }, []);
+
+    const getAllOffers = async () => {
+        await axios.get(`/viewPendingCompanyOffers`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                setOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(offers);
+
+    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.companyId===companyId);
+    console.log(wasteItem);
+
+    const wasteItemLength = wasteItem.length;
+    console.log(wasteItemLength);
+
+    let quantity=0;
+
+    for (let i = 0; i < wasteItemLength; i++) {
+        quantity += wasteItem[i].quantity
+    }
+
+    console.log(quantity);
 
     const apiUrl = '/addCompanyOffer';
     const initialValues = {
@@ -23,7 +54,8 @@ function CompanyForms() {
         status:'',
         buyerId: '',
         postId:'',
-        companyId:''
+        companyId:'',
+        buyerName:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -40,7 +72,8 @@ function CompanyForms() {
             status:'pending',
             buyerId:buyerId,
             postId:postId,
-            companyId:posts.companyId
+            companyId:posts.companyId,
+            buyerName:buyerName
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -125,7 +158,8 @@ function CompanyForms() {
             status:'',
             buyerId: '',
             postId:'',
-            companyId:''
+            companyId:'',
+            buyerName:''
         });
     };
 

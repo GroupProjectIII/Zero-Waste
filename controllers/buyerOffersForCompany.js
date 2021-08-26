@@ -5,9 +5,9 @@ const BuyerOffersForCompany = require("../models/BuyerOffersForCompany");
 const BuyerNotifyCompany = require("../models/BuyerNotifyCompany")
 
 exports.addCompanyOffer= async (req,res)=>{
-    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerId, postId, companyId } = req.body;
+    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerId, postId, companyId, buyerName } = req.body;
 
-    const newCompanyOffer = new BuyerOffersForCompany({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerId, postId, companyId})
+    const newCompanyOffer = new BuyerOffersForCompany({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerId, postId, companyId, buyerName})
 
     try {
         await newCompanyOffer.save();
@@ -70,9 +70,9 @@ exports.buyerGetOneCompanyOffer= async (req,res)=>{
 }
 
 exports.addBuyerNotifyCompany= async (req,res)=>{
-    const { value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId } = req.body;
+    const { value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId, buyerName } = req.body;
 
-    const newNotifyCompany = new BuyerNotifyCompany({ value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId})
+    const newNotifyCompany = new BuyerNotifyCompany({ value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId, buyerName})
 
     try {
         await newNotifyCompany.save();

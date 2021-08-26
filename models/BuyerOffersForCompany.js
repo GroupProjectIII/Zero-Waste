@@ -40,6 +40,10 @@ const buyerOfferForCompanySchema = new mongoose.Schema({
     companyId: {
         type: String,
         required:false
+    },
+    buyerName: {
+        type: String,
+        required:true
     }
 });
 

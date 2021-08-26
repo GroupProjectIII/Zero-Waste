@@ -12,6 +12,11 @@ function Forms() {
     console.log(postId);
     console.log(sellerId);
 
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
+
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
 
@@ -25,7 +30,9 @@ function Forms() {
         buyerId: '',
         postId:'',
         wasteItemsListId:'',
-        sellerId:''
+        sellerId:'',
+        offerThumbnail:'',
+        buyerName:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -42,7 +49,9 @@ function Forms() {
             buyerId:buyerId,
             postId:postId,
             wasteItemsListId:'completePost',
-            sellerId:posts.sellerId
+            sellerId:posts.sellerId,
+            offerThumbnail:posts.thumbnail,
+            buyerName:userName
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -117,7 +126,9 @@ function Forms() {
             buyerId: '',
             postId:'',
             wasteItemsListId:'',
-            sellerId:''
+            sellerId:'',
+            offerThumbnail:'',
+            buyerName:''
         });
     };
 
@@ -128,11 +139,6 @@ function Forms() {
     };
 
     const [posts, setPosts] = useState({});
-
-    const userName=(localStorage.getItem("userName"));
-    const userEmail=(localStorage.getItem("userEmail"));
-    console.log(userName);
-    console.log(userEmail);
 
     useEffect(()=>{
         getOnePost();
@@ -210,7 +216,7 @@ function Forms() {
                 <div className="container-b">
                     <div className="content-b">
                         <h3>Image of Waste Item</h3>
-                        <img src="../images/polythene.jpg" alt=""></img>
+                        <img src={posts.thumbnail} alt=""></img>
                         <div className="title-b">Make Offer</div>
                         <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                             <div className="user-details-b">
