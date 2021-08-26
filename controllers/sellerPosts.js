@@ -6,9 +6,10 @@ const BuyerOffersForSeller = require("../models/BuyerOffersForSeller");
 
 exports.sellerAddPost = async (req, res) => {
     const sellerId = req.body.sellerId;
+    const sellerName = req.body.sellerId;
     const postType = req.body.postType;
     const buyer = req.body.buyer;
-    const district = req.body.district;
+    const sellerDistrict = req.body.district;
     const address = req.body.address;
     const location = req.body.location;
     const contact = Number(req.body.contact);
@@ -17,9 +18,10 @@ exports.sellerAddPost = async (req, res) => {
 
     const newSellerPost = new SellerPost({
         sellerId,
+        sellerName,
         postType,
         buyer,
-        district,
+        sellerDistrict,
         address,
         location,
         contact,
@@ -57,7 +59,7 @@ exports.sellerViewPosts = async (req, res) => {
 
 exports.sellerViewOffers = async (req, res) => {
     let seller = req.params.id;
-    BuyerOffersForSeller.find({ "sellerId": seller }).exec((err, posts) => {
+    BuyerOffersForSeller.find({ "sellerId": seller, "status": "pending" }).exec((err, posts) => {
         
         if (err) {
             return res.status(400).json({
@@ -71,6 +73,45 @@ exports.sellerViewOffers = async (req, res) => {
     });
 
     
+}
+
+exports.sellerViewOnePostDetails = async (req, res) => {
+    let postId = req.params.id;
+    var post = {};
+    SellerPost.findOne({ "_id": postId }).exec((err, posts) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }   
+        post = posts;
+        BuyerOffersForSeller.find({ "postId": postId, "status": "pending", "wasteItemsListId":"completePost" }).exec((err2, offers) => {
+            if (err2) {
+                return res.status(400).json({
+                    error: err2
+                });
+            }
+            return res.status(200).json({
+                success: true,     
+                post: post,
+                offer: offers,
+            });
+        }); 
+    });
+    
+    
+}
+
+exports.sellerAcceptPostOffer = async (req, res) => {
+    const { id } = req.params;
+    const { status, postId } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    const updatedOffer = { status };
+    await BuyerOffersForSeller.updateMany({ "postId": postId, "_id": { $ne: id } }, { $set: { status: "Decline" } });
+    
+    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
+    
+    res.json("Offer Accepted");
 }
 
 exports.sellerViewAcceptedOffers = async (req, res) => {
