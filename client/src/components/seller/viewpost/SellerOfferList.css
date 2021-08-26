@@ -45,6 +45,7 @@
       border-radius: 5px;
       color: white;
       text-decoration: none;
+      cursor: pointer;
   }
   .offer-list-view-post:hover,
   .offer-list-view-buyer:hover,

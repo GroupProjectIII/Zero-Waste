@@ -38,8 +38,6 @@ function BuyerInfo() {
         });
     };
 
-
-
     return(
         <>
         <div className="tables-c">
