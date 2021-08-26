@@ -12,6 +12,11 @@ function SingleOfferForm() {
     console.log(postId,arrayId);
     console.log(sellerId);
 
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
+
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
 
@@ -25,7 +30,9 @@ function SingleOfferForm() {
         buyerId: '',
         postId:'',
         wasteItemsListId:'',
-        sellerId:''
+        sellerId:'',
+        offerThumbnail:'',
+        buyerName:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -42,7 +49,9 @@ function SingleOfferForm() {
             buyerId:buyerId,
             postId:postId,
             wasteItemsListId:wasteItem?._id,
-            sellerId:posts.sellerId
+            sellerId:posts.sellerId,
+            offerThumbnail:posts.thumbnail,
+            buyerName:userName
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -118,7 +127,9 @@ function SingleOfferForm() {
             buyerId: '',
             postId:'',
             wasteItemsListId:'',
-            sellerId:''
+            sellerId:'',
+            offerThumbnail:'',
+            buyerName:''
         });
     };
 
@@ -129,11 +140,6 @@ function SingleOfferForm() {
     };
 
     const [posts, setPosts] = useState({});
-
-    const userName=(localStorage.getItem("userName"));
-    const userEmail=(localStorage.getItem("userEmail"));
-    console.log(userName);
-    console.log(userEmail);
 
     useEffect(()=>{
         getOnePost();

@@ -11,7 +11,8 @@ function CompanyNotifyForms() {
     console.log(detailId, companyId);
 
     const buyerId=(localStorage.getItem("userId"));
-    console.log(buyerId);
+    const buyerName=(localStorage.getItem("userName"));
+    console.log(buyerId, buyerName);
 
     const apiUrl = '/addBuyerNotifyCompany';
     const initialValues = {
@@ -22,7 +23,8 @@ function CompanyNotifyForms() {
         quantity: '',
         deliveryDate:'',
         buyerId: '',
-        companyListId: ''
+        companyListId: '',
+        buyerName:''
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -39,6 +41,7 @@ function CompanyNotifyForms() {
             deliveryDate:formValues.deliveryDate,
             buyerId:buyerId,
             companyListId:detailId,
+            buyerName:buyerName
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -122,7 +125,8 @@ function CompanyNotifyForms() {
             quantity: '',
             deliveryDate:'',
             buyerId: '',
-            companyListId: ''
+            companyListId: '',
+            buyerName:''
         });
     };
 

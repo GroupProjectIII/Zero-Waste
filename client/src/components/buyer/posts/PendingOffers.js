@@ -72,6 +72,7 @@ function PendingOffers() {
                         if(offer.status==='pending' && offer.buyerId===buyerId)
                         return (
                             <article>
+                                <img src={offer.offerThumbnail} alt=""></img>
                                 <div className="text-b">
                                     <h3>Post ID: {index + 1}</h3>
                                     <p>Unit Price (Rs): {offer.value}</p>
