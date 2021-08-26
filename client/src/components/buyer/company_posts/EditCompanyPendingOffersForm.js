@@ -7,8 +7,61 @@ import {Slide, toast, ToastContainer} from "react-toastify";
 
 function EditCompanyOfferForms() {
 
-    const { offerId } = useParams();
-    console.log(offerId);
+    const { offerId, companyId, postId } = useParams();
+    console.log(offerId, companyId, postId);
+
+    const [offers, setOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllOffers();
+    }, []);
+
+    const getAllOffers = async () => {
+        await axios.get(`/viewPendingCompanyOffers`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                setOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(offers);
+
+    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.companyId===companyId);
+    console.log(wasteItem);
+
+    const wasteItemLength = wasteItem.length;
+    console.log(wasteItemLength);
+
+    let quantity=0;
+
+    for (let i = 0; i < wasteItemLength; i++) {
+        quantity += wasteItem[i].quantity
+    }
+
+    console.log(quantity);
+
+    const [posts, setPosts] = useState({});
+
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
+
+    useEffect(()=>{
+        getOnePost();
+    }, []);
+
+    const getOnePost = async () => {
+        try {
+            const response = await axios.get(`/buyerGetOneCompanyPost/${postId}`)
+            console.log(response);
+            const allPost=response.data.onePost;
+            setPosts(allPost);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(posts);
 
     const initialValues = {
         value: '',
@@ -65,6 +118,9 @@ function EditCompanyOfferForms() {
     const date2 = new Date();
     date2.setDate(date2.getDate());
 
+    const newQuantity= posts?.quantity - quantity;
+    console.log(newQuantity);
+
     const validate = (values) => {
         let errors = {};
         const regex = /^[0-9]+$/;
@@ -99,6 +155,8 @@ function EditCompanyOfferForms() {
             errors.quantity = "Invalid quantity format";
         }else if (values.quantity<=0) {
             errors.quantity = "Invalid quantity format";
+        }else if (newQuantity<values.quantity) {
+            errors.quantity = "You can not add more than post's quantity";
         }
         return errors;
     };

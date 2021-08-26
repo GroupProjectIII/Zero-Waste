@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 const Complaint = require("../models/Complaints");
 
 exports.addComplaint= async (req,res)=>{
-    const { complaintAbout, complaintDetails, userId, userName, userEmail} = req.body;
+    const { complaintAboutUserId, complaintAboutUserName, complaintAboutUserEmail, complaintDetails, userId, userName, userEmail} = req.body;
 
-    const newComplaint = new Complaint({ complaintAbout, complaintDetails, userId, userName, userEmail})
+    const newComplaint = new Complaint({ complaintAboutUserId, complaintAboutUserName, complaintAboutUserEmail, complaintDetails, userId, userName, userEmail})
 
     try {
         await newComplaint.save();

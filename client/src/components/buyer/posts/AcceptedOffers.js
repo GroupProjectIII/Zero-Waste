@@ -60,6 +60,7 @@ function AcceptedOffers() {
                                     <img src={offer.offerThumbnail} alt=""></img>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
+                                        <p>Seller Name: {offer.sellerName}</p>
                                         <p>Unit Price (Rs): {offer.value}</p>
                                         <p>Expiry Date: {moment(offer.expiryDate).fromNow()}</p>
                                         <p>Collecting Date: {moment(offer.collectingDate).fromNow()}</p>

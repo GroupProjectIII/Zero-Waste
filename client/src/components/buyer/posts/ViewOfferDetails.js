@@ -73,7 +73,7 @@ function ViewOfferDetails() {
                 <h1>Offer Details</h1>
                 <div className="seller-container-b">
                     <ol className="list">
-                        <li ><span>Seller Name: {offerPosts.address}</span></li>
+                        <li ><span>Seller Name: {offerPosts.sellerName}</span></li>
                         <li ><span>Seller Address: {offerPosts.address}</span></li>
                         <li ><span>Telephone No: {offerPosts.contact}</span></li>
                         <li ><span>Post Type: {offerPosts.postType}</span></li>

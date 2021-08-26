@@ -41,6 +41,10 @@ const sellerOfferSchema = new mongoose.Schema({
         type: String,
         required:false
     },
+    sellerName: {
+        type: String,
+        required:false
+    },
     offerThumbnail: {
         type: String,
         required:false

@@ -40,11 +40,13 @@ const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
 const buyerOffersForCompany = require("./routes/buyerOffersForCompany");
 const complaint = require("./routes/complaint");
 const getHelp = require("./routes/getHelp");
+const rateAndComment = require("./routes/rateAndComment");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
 app.use(buyerOffersForCompany);
 app.use(complaint);
 app.use(getHelp);
+app.use(rateAndComment);
 
 const buyerProfile = require("./routes/buyerProfile");
 app.use(buyerProfile);

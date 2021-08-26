@@ -13,7 +13,7 @@ export default function PendingPosts() {
         history.push("/");
     }
     
-    const sellerId=(localStorage.getItem("id"));
+    const sellerId=(localStorage.getItem("userId"));
     console.log(sellerId);
     
     const [sellerPosts, setSellerPosts] = useState([]);

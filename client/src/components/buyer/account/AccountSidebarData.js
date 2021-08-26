@@ -18,12 +18,6 @@ export const AccountSidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Add Complaints',
-        path: '/buyer/addcomplaints',
-        icon: <FaCheckSquare />,
-        cName: 'nav-text'
-    },
-    {
         title: 'View Stats',
         path: '/buyer/viewstats',
         icon: <FaChartBar />,

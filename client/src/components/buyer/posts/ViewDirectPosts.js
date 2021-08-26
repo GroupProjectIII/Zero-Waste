@@ -153,6 +153,7 @@ function ViewDirectPosts() {
                                     <img src={note.thumbnail} alt=""></img>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
+                                        <p>Seller Name: {note.sellerName}</p>
                                         <p>District: {note.sellerDistrict}</p>
                                         <p>Post Type: {note.postType}</p>
                                         <p>Address: {note.address}</p>

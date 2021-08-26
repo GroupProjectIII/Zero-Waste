@@ -31,6 +31,7 @@ function Forms() {
         postId:'',
         wasteItemsListId:'',
         sellerId:'',
+        sellerName:'',
         offerThumbnail:'',
         buyerName:''
     };
@@ -50,6 +51,7 @@ function Forms() {
             postId:postId,
             wasteItemsListId:'completePost',
             sellerId:posts.sellerId,
+            sellerName:posts.sellerName,
             offerThumbnail:posts.thumbnail,
             buyerName:userName
         };
@@ -127,6 +129,7 @@ function Forms() {
             postId:'',
             wasteItemsListId:'',
             sellerId:'',
+            sellerName:'',
             offerThumbnail:'',
             buyerName:''
         });

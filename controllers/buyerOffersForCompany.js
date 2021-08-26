@@ -5,9 +5,9 @@ const BuyerOffersForCompany = require("../models/BuyerOffersForCompany");
 const BuyerNotifyCompany = require("../models/BuyerNotifyCompany")
 
 exports.addCompanyOffer= async (req,res)=>{
-    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerId, postId, companyId, buyerName } = req.body;
+    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerId, postId, companyId, companyName, buyerName } = req.body;
 
-    const newCompanyOffer = new BuyerOffersForCompany({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerId, postId, companyId, buyerName})
+    const newCompanyOffer = new BuyerOffersForCompany({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerId, postId, companyId, companyName, buyerName})
 
     try {
         await newCompanyOffer.save();
