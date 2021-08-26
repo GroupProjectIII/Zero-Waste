@@ -5,6 +5,7 @@ const CompanyPost = require("../models/CompanyPost");
 const BuyerOffersForCompany = require("../models/BuyerOffersForCompany");
 const BuyerDetails = require("../models/BuyerDetails");
 
+
 exports.addCompanyPost= async (req,res)=>{
     const { companyId, companyName, postType, buyer, address, contact, wasteType, item, avbDate, quantity} = req.body;
 
@@ -60,3 +61,4 @@ exports.getBuyerDetailsForCompany= async (req,res)=>{
         });
     });
 }
+

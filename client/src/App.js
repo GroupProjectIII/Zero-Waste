@@ -78,6 +78,7 @@ import AdminUser from "./components/admin/pages/user/User";
 import AdminNewuser from './components/admin/pages/newuser/Newuser';
 import AdminReport from './components/admin/pages/report/Report';
 import AdminUserReport from './components/admin/pages/userreport/UserReport';
+import AdminSalesReport from './components/admin/pages/report/SalesReport';
 import AdminStatistics from './components/admin/pages/statistics/Statistics';
 
 
@@ -158,6 +159,7 @@ function App() {
                     <Route path='/admin/newuser' component={AdminNewuser} />
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />
+                    <Route path='/admin/salesreport' component={AdminSalesReport} />
 
 
 					<Route path='/company' exact component={CompanyHome} />
