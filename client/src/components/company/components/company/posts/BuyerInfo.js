@@ -38,44 +38,6 @@ function BuyerInfo() {
         });
     };
 
-    const [notes, setNotes] = useState([]);
-
-    useEffect(()=>{
-        getAllNotes();
-    }, []);
-
-    const getAllNotes = async () => {
-        await axios.get(`/buyerViewDetails`)
-            .then ((response)=>{
-                const allNotes=response.data.existingPosts;
-                setNotes(allNotes);
-            })
-            .catch(error=>console.error(`Error: ${error}`));
-    }
-    console.log(notes);
-
-    const filterData = (postsPara, searchKey) => {
-        const result = postsPara.filter(
-            (notes) =>
-                notes?.buyer.toLowerCase().includes(searchKey) ||
-                notes?.wasteType.toLowerCase().includes(searchKey) ||
-                notes?.wasteItem.toLowerCase().includes(searchKey) ||
-                notes?.date.toLowerCase().includes(searchKey) ||
-                notes?.quantity.toString().toLowerCase().includes(searchKey)                 
-        );
-        setNotes(result);
-    };
-
-    const handleSearchArea = (e) => {
-        const searchKey = e.currentTarget.value;
-
-        axios.get(`/buyerViewDetails`).then((res) => {
-            if (res?.data?.success) {
-                filterData(res?.data?.existingPosts, searchKey);
-            }
-        });
-    };
-
     return(
         <>
         <div className="tables-c">

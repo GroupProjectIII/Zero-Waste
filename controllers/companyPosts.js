@@ -61,4 +61,3 @@ exports.getBuyerDetailsForCompany= async (req,res)=>{
         });
     });
 }
-
