@@ -13,9 +13,9 @@ function Home() {
         history.push("/");
     }
     const type=(localStorage.getItem("usertype"));
-    const name=(localStorage.getItem("username"));
-    const email=(localStorage.getItem("email"));
-    const id=(localStorage.getItem("id"));
+    const name=(localStorage.getItem("userName"));
+    const email=(localStorage.getItem("userEmail"));
+    const id=(localStorage.getItem("userId"));
     const date=(localStorage.getItem("registeredAt"));
     console.log(type);
     console.log(name);

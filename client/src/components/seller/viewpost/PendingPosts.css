@@ -14,6 +14,7 @@
     box-sizing: border-box;
 }
 .seller-post-card{
+   
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 16px;
     text-align: left;
@@ -27,7 +28,8 @@
     clear: both;
 }
 .seller-post-card-item{
-    float: left;
+    display:inline-block;
+    
     width: 30%;
     padding: 0 10px;
     border: 1px solid;
@@ -72,7 +74,8 @@
 }
 
 .seller-post-card-item-details img{
-    width: 100%;
+    max-width: 250px;
+    height: auto;
 }
 
 

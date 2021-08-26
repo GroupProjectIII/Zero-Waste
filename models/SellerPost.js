@@ -14,9 +14,10 @@ const Location = new mongoose.Schema({
 })
 const postSchema = new mongoose.Schema({
     sellerId: String,
+    sellerName: String,
     postType: String,
     buyer: String,
-    district: String,
+    sellerDistrict: String,
     address: String,
     contact: Number,
     thumbnail: String,
