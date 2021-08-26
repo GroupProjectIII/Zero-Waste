@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './Posts.css';
 import axios from "axios";
 import moment from "moment";
+import {Link} from "react-router-dom";
 
 function OngoingPost() {
 
@@ -58,7 +59,12 @@ function OngoingPost() {
                                         <p>Waste Item: {note.item}</p>
                                         <p>Quantity: {note.quantity}</p>
                                         <p>Available Date: {moment(note.avbDate).fromNow()}</p>
-                                        <button >View Offers <i className="fas fa-angle-double-right"></i></button>
+                                        <button >
+                                            <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                  to={`/company/viewoffers/${note._id}`}>View Offers <i
+                                                className="fas fa-angle-double-right"></i>
+                                            </Link>
+                                        </button>
                                     </div>
                             </article>
                     );

@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const BuyerNotifyCompany = require("../models/BuyerNotifyCompany")
+const BuyerOffersForCompany = require("../models/BuyerOffersForCompany");
 
-exports.getDirectBuyerOffers= async (req,res)=>{
-    BuyerNotifyCompany.find().exec((err,posts)=>{
+exports.viewOffersForCompany= async (req,res)=>{
+    BuyerOffersForCompany.find().exec((err,offers)=>{
         if(err){
             return res.status(400).json({
                 error:err
@@ -12,7 +12,7 @@ exports.getDirectBuyerOffers= async (req,res)=>{
         }
         return res.status(200).json({
             success:true,
-            existingPosts:posts
+            existingOffers:offers
         });
     });
 }

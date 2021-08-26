@@ -1,11 +1,12 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Modal.css";
 import './AcceptedOffers.css';
-import axios from "axios";
-import moment from "moment";
-import {Link} from "react-router-dom";
+import axios from 'axios';
+import {useParams} from "react-router-dom";
+import moment from 'moment';
+import {Slide, toast, ToastContainer} from "react-toastify";
 
-function DirectP() {
+function ViewOffers() {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -19,34 +20,37 @@ function DirectP() {
   }
 
   const companyId=(localStorage.getItem("userId"));
-    console.log(companyId);
+  console.log(companyId);
 
-    const [notes, setNotes] = useState([]);
+  const { postId } = useParams();
+    console.log(postId);
+    
+
+  const [offers, setOffers] = useState([]);
 
     useEffect(()=>{
-        getAllNotes();
+        getAllOffers();
     }, []);
 
-    const getAllNotes = async () => {
-        await axios.get(`/getDirectBuyerOffers`)
+    const getAllOffers = async () => {
+        await axios.get(`/viewOffersForCompany`)
             .then ((response)=>{
-                const allNotes=response.data.existingPosts;
-                setNotes(allNotes);
+                const allNotes=response.data.existingOffers;
+                setOffers(allNotes);
             })
             .catch(error=>console.error(`Error: ${error}`));
     }
-    console.log(notes);
+    console.log(offers);
 
-    const wasteItem = notes?.filter(wasteItem => wasteItem.companyId===companyId);
-    console.log(wasteItem);
+    
 
-  
+    
 
   return(
     <>
       <div className="tables-c">
         <div className="tables__container-c">
-          <h1>Direct Offers</h1>
+          <h1>Offers</h1>
             <div className="search_box-c">
                 <input type="text" placeholder="What are you looking for?"></input>
                 <i className="fas fa-search"></i>
@@ -56,30 +60,31 @@ function DirectP() {
                 <tr>
                     <th>Offer ID</th>
                     <th>Buyer</th>
-                    <th>Waste Type</th>
-                    <th>Waste Item</th>
-                    <th>Date</th>
+                    <th>Collecting Time</th>
+                    <th>Collecting Date</th>
                     <th>Quantity</th>
                     <th>Action</th>
                 </tr>
-              </thead>
-              <tbody>
-              {wasteItem.map((note,index)=> (
-                  <tr>
-                    <td data-label="Offer ID">{index + 1}</td>
-                    <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">{note.buyerName}</button></u></td>
-                    <td data-label="Waste Type">{note.wasteType}</td>
-                    <td data-label="Waste Item">{note.wasteItem}</td>
-                    <td data-label="Date">{note.deliveryDate}</td>
-                    <td data-label="Quantity">{note.quantity}</td>
-                    <td data-label="Action">
-                      <span className="action_btn-c">
-                        <a href="#" >Accept</a>
-                        <a href="#">Reject</a>
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                </thead>
+                <tbody>
+                {offers.map((offer,index)=> {
+                    if(offer.status==='pending' && offer.companyId===companyId && offer.postId===postId)
+                        return (
+                                <tr>
+                                <td data-label="Offer ID">{index + 1}</td>
+                                <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">{offer.buyerId}</button></u></td>
+                                <td data-label="Collecting Time">{offer.collectingTime}</td>
+                                <td data-label="Collecting Date">{offer.collectingDate}</td>
+                                <td data-label="Quantity">{offer.quantity}</td>
+                                <td data-label="Action">
+                                    <span className="action_btn-c">
+                                    <a href="#" >Accept</a>
+                                    <a href="#">Reject</a>
+                                    </span>
+                                </td>
+                                </tr>
+                                );
+                })}
               </tbody>
             </table>
           </div>
@@ -111,4 +116,4 @@ function DirectP() {
   );
 }
 
-export default DirectP;
+export default ViewOffers;
