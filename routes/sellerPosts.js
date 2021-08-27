@@ -9,9 +9,7 @@ const { sellerAddPost,
     sellerViewOffers,
     sellerViewAcceptedOffers,
     sellerViewOnePostDetails,
-    sellerAcceptPostOffer,
-    sellerDeclineOffer,
-    sellerAcceptWasteItemOffer
+    sellerAcceptPostOffer
 } = require("../controllers/sellerPosts.js");
 
 router.post('/sellerAddPost', sellerAddPost);
@@ -19,8 +17,5 @@ router.get('/sellerViewPosts/:id', sellerViewPosts);
 router.get('/sellerViewOffers/:id', sellerViewOffers);
 router.get('/sellerViewOnePost/:id', sellerViewOnePostDetails);
 router.patch('/sellerAcceptPostOffer/:id', sellerAcceptPostOffer);
-router.patch('/sellerDeclineOffer/:id', sellerDeclineOffer);
-router.patch('/sellerAcceptWasteItemOffer/"id', sellerAcceptWasteItemOffer);
-router.get('/sellerViewAcceptedOffers/:id', sellerViewAcceptedOffers);
-
+router.get('/sellerViewAcceptedOffers', sellerViewAcceptedOffers);
 module.exports = router;

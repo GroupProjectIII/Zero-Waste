@@ -3,6 +3,7 @@ import './Form.css';
 import './Posts.css';
 import axios from "axios";
 import moment from "moment";
+import {Link} from "react-router-dom";
 
 function AcceptedPost() {
 
@@ -59,6 +60,10 @@ function AcceptedPost() {
                                         <p>Waste Item: {note.item}</p>
                                         <p>Quantity: {note.quantity}</p>
                                         <p>Available Date: {moment(note.avbDate).fromNow()}</p>
+                                        <div className="companylink-c">
+                                            <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                  to={`/company/offersforacceptedposts/${note._id}`}>View Offer<i className="fas fa-angle-double-right"></i></Link>
+                                        </div>
                                     </div>
                                 </article>
                             );

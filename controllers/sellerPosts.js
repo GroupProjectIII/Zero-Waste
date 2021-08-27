@@ -6,7 +6,7 @@ const BuyerOffersForSeller = require("../models/BuyerOffersForSeller");
 
 exports.sellerAddPost = async (req, res) => {
     const sellerId = req.body.sellerId;
-    const sellerName = req.body.sellerName;
+    const sellerName = req.body.sellerId;
     const postType = req.body.postType;
     const buyer = req.body.buyer;
     const sellerDistrict = req.body.district;
@@ -107,45 +107,23 @@ exports.sellerAcceptPostOffer = async (req, res) => {
     const { status, postId } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
     const updatedOffer = { status };
-    await BuyerOffersForSeller.updateMany({ "postId": postId, "_id": { $ne: id } }, { $set: { status: "decline" } });
+    await BuyerOffersForSeller.updateMany({ "postId": postId, "_id": { $ne: id } }, { $set: { status: "Decline" } });
     
-    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
-    
-    res.json("Offer Accepted");
-}
-
-exports.sellerAcceptWasteItemOffer = async(req, res) => {
-    const { id } = req.params;
-    const { status, wasteItemsListId } = req.body;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    const updatedOffer = { status };
-    await BuyerOffersForSeller.updateMany({ "wasteItemsListId": wasteItemsListId, "_id": { $ne: id } }, { $set: { status: "decline" } });
-   
-    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
-
-}
-
-exports.sellerDeclineOffer = async (req, res) => {
-    const { id } = req.params;
-    const { status } = req.body;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    const updatedOffer = { status };
     await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
     
     res.json("Offer Accepted");
 }
 
 exports.sellerViewAcceptedOffers = async (req, res) => {
-    let seller = req.params.id;
-    BuyerOffersForSeller.find({  "sellerId": seller, "status": "accepted"}).exec((err, offers) => {
+    BuyerOffersForSeller.find({ buyerName: "harshana" , status:"accepted" }).exec((err, posts) => {
         if (err) {
             return res.status(400).json({
                 error: err
             });
         }
         return res.status(200).json({
-            success: true,
-            acceptedOffers: offers
+            sucess: true,
+            existingPosts: posts
         });
     });
 
