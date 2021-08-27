@@ -2,6 +2,9 @@ import React, {useEffect, useState} from "react";
 import './Posts.css';
 import axios from "axios";
 import moment from "moment";
+import {Link} from "react-router-dom";
+import {Slide, toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function PreviousPost() {
 
@@ -27,6 +30,20 @@ function PreviousPost() {
     const wasteItem = notes?.filter(wasteItem => wasteItem.companyId===companyId);
     console.log(wasteItem);
 
+    const toastNotification = () => {
+        toast.info("Deleted successfully !", {
+            transition: Slide
+        })
+    };
+
+    const deletePost = (id) => {
+        axios.delete(`/deleteCompanyPost/${id}`)
+            .then((result) => {
+                toastNotification();
+                getAllNotes();
+            });
+    };
+
     return(
         <div className="posts-c">
             <div className="posts__container-c">
@@ -40,11 +57,21 @@ function PreviousPost() {
                                 <p>Waste Item: {note.item}</p>
                                 <p>Quantity: {note.quantity}</p>
                                 <p>Available Date: {moment(note.avbDate).fromNow()}</p>
+                                <div className="companylink-c">
+                                    <Link style={{color: '#fff', textDecoration: 'none'}}
+                                          to={`/company/companyeditpost/${note._id}`}>Edit Post <i className="fas fa-edit"></i></Link>
+                                </div>
+                                <div className="delete-button-c">
+                                    <button onClick={() => {
+                                        deletePost(note._id)
+                                    }}>Delete Post <i className="fas fa-trash-alt"></i></button>
+                                </div>
                             </div>
                         </article>
                     ))}
                 </main>
             </div>
+            <ToastContainer position="top-right" toastStyle={{ backgroundColor: "orange" }} autoClose={3000} />
         </div>
     );
 }

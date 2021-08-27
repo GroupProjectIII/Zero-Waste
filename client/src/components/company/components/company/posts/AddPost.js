@@ -69,9 +69,14 @@ function AddPost() {
         setIsSubmitting(true);
     };
 
+    const date2 = new Date();
+    date2.setDate(date2.getDate());
+
     const validate = (values) => {
         let errors = {};
         const regex = /^[0-9]+$/;
+
+        const d1 = new Date(values.avbDate);
 
         if (!values.number) {
             errors.number = "Cannot be blank";
@@ -98,6 +103,8 @@ function AddPost() {
         }
         if (!values.avbDate) {
             errors.avbDate = "Cannot be blank";
+        }else if (d1<=date2) {
+            errors.avbDate = "Available date should not be a past date.";
         }
         if (!values.quantity) {
             errors.quantity = "Cannot be blank";

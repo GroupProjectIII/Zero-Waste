@@ -69,7 +69,9 @@ import CompanyAcceptedP from './components/company/pages/AcceptedP';
 import CompanyBuyersInfo from './components/company/pages/BuyersInfo';
 import CompanyBuyersContact from './components/company/pages/BuyersContact';
 import CompanyGetCompanyDetails from "./components/company/components/company/home/GetCompanyDetails";
-
+import CompanyBuyerDirectPost from "./components/company/pages/BuyerDirectPost";
+import CompanyEditPost from "./components/company/pages/EditPost";
+import CompanyViewAcceptedOffer from "./components/company/pages/ViewAcceptedOffer";
 
 import AdminHome from "./components/admin/components/home/Home";
 import AdminUserlist from "./components/admin/pages/userlist/Userlist";
@@ -171,7 +173,7 @@ function App() {
                     <Route path='/company/dashboard' component={CompanyDashboard} />
                     <Route path='/company/helpdesk' component={CompanyHelpdesk} />
                     <Route path='/company/companypost' component={CompanyPost} />
-                    <Route path='/company/offersforposts' component={CompanyOffersForPosts} />
+                    <Route path='/company/offersforposts/:postId' component={CompanyOffersForPosts} />
                     <Route path='/company/editprofile' component={CompanyEditProfile} />
                     <Route path='/company/DirectPosts' component={CompanyDirectPosts} />
                     <Route path='/company/notification' component={CompanyNotification} />
@@ -181,6 +183,9 @@ function App() {
                     <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
                     <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
                     <Route path='/company/getcompanydetails' component={CompanyGetCompanyDetails} />
+                    <Route path='/company/buyerdirectpost/:buyerId' component={CompanyBuyerDirectPost} />
+                    <Route path='/company/companyeditpost/:postId' component={CompanyEditPost} />
+                    <Route path='/company/offersforacceptedposts/:postId' component={CompanyViewAcceptedOffer} />
                 </Switch>
             </Router>
         </>

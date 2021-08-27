@@ -24,6 +24,7 @@ function CompanyNotifyForms() {
         deliveryDate:'',
         buyerId: '',
         companyListId: '',
+        companyId: '',
         buyerName:''
     };
     const [formValues, setFormValues] = useState(initialValues);
@@ -41,6 +42,7 @@ function CompanyNotifyForms() {
             deliveryDate:formValues.deliveryDate,
             buyerId:buyerId,
             companyListId:detailId,
+            companyId:companyId,
             buyerName:buyerName
         };
         axios.post(apiUrl, data)
@@ -126,6 +128,7 @@ function CompanyNotifyForms() {
             deliveryDate:'',
             buyerId: '',
             companyListId: '',
+            companyId: '',
             buyerName:''
         });
     };

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 import moment from 'moment';
 import {Slide, toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function PendingOffers() {
 
