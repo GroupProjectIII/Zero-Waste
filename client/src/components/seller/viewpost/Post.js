@@ -41,7 +41,7 @@ export default function Post() {
     const sellerAcceptOffer = (offerId) => {
         console.log("asp")
         const data = {
-            status: "Accepted",
+            status: "accepted",
             postId: postId
         };
         axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)

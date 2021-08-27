@@ -1,6 +1,43 @@
 import './AcceptedOffersList.css';
+import { useHistory } from 'react-router';
+import React, { useState, useEffect } from 'react';
+import {Link} from "react-router-dom";
+import axios from 'axios';
+import './SellerOfferList.css';
+import moment from 'moment';
 
 export default function AcceptedOffersList() {
+
+    const history = useHistory()
+    if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "seller")) {
+        history.push("/");
+    }
+
+    const sellerId = (localStorage.getItem("userId"));
+    console.log(sellerId)
+    useEffect(() => {
+        getAcceptedOffers()
+    }, [])
+    
+    const [acceptedOffers, setAcceptedOffers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
+   
+    const getAcceptedOffers = async () => {
+        setIsLoading(true)
+        try {
+            const response = await axios.get(`/sellerViewAcceptedOffers/${sellerId}`);
+          //  console.log(response);
+            const acceptedOffers = response.data.acceptedOffers;
+            setAcceptedOffers(acceptedOffers);
+            setIsLoading(false)
+        } catch (error) {
+            console.error(`Error: ${error}`)
+            setHasError(true)
+        }
+    }
+    console.log("accepyted offers")
+    console.log(acceptedOffers)
     return (
         <div className="seller-accepted-offer-list-background">
             <div className="seller-accepted-offers">
@@ -13,17 +50,39 @@ export default function AcceptedOffersList() {
                         <th>Item Id</th>
                         <th>Buyer</th>
                         <th>Collecting Date</th>
+                        <th>Collecting Time</th>
                         <th>Offer Value(Rs)</th>
                         <th>Buyer transaction Code</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>3</td>
-                        <td>Lk Collectors</td>
-                        <td>2021-08-23</td>
-                        <td>200.00</td>
-                        <td><input type="text"></input><a className="item-collected-btn" href="#">Submit</a></td>
-                    </tr>
+                    {acceptedOffers.map((offer) => {
+                        if (offer.wasteItemsListId === "completePost") {
+                            return (
+                                <tr>
+                                    <td>View Post</td>
+                                    <td>Complete Post</td>
+                                    <td>{offer.buyerName}</td>
+                                    <td>{moment(offer.collectingDate).format("LL")}</td>
+                                    <td>{offer.collectingTime}</td>
+                                    <td>{offer.value}</td>
+                                    <td><input type="text"></input><a className="item-collected-btn" href="#">Submit</a></td>
+                                </tr>
+                            )
+                        } else {
+                            return (
+                                <tr>
+                                    <td>View Post</td>
+                                    <td>view Item</td>
+                                    <td>{offer.buyerName}</td>
+                                    <td>{moment(offer.collectingDate).format("LLL")}</td>
+                                    <td>{offer.collectingTime}</td>
+                                    <td>{offer.value}</td>
+                                    <td><input type="text"></input><a className="item-collected-btn" href="#">Submit</a></td>
+                                </tr>
+                            )
+                        }
+                        
+                    })}
+                    
 
                 </table>
             </div>

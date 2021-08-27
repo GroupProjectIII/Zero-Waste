@@ -37,7 +37,7 @@ export default function SellerOfferList() {
     const sellerAcceptCompletePostOffer = (offerId,postId) => {
         console.log("asp")
         const data = {
-            status: "Accepted",
+            status: "accepted",
             postId: postId
         };
         axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)
@@ -48,6 +48,28 @@ export default function SellerOfferList() {
               //  history.push(`/seller/home`);
         });
     }
+    const sellerDeclineOffer = (offerId) => {
+        const data = {
+            status:"declined"
+        }
+        axios.patch(`/sellerDeclineOffer/${offerId}`, data)
+            .then((result) => {
+                console.log("offer Rejected")
+            });
+    }
+
+    const sellerAcceptWasteItemOffer = (offerId, itemId) => {
+        const data = {
+            status: "accepted",
+            wasteItemsListId:itemId,
+        }
+        axios.patch(`/sellerAceptWasteItemOffer/${offerId}`, data)
+            .then((result) => {
+                console.log("offer accepted")
+            });
+
+    }
+
     
     return (
         <>
@@ -60,13 +82,13 @@ export default function SellerOfferList() {
                         <th>Collecting Date</th>
                         <th>Collecting Time (Aprox:)</th>
                         <th>Buyer</th>
-                        <th>Buyer Name</th>
+                        
                         <th>Offer(Rs)</th>
                         <th>Offer Exp: Date</th>
                         <th>Action</th>
                     </tr>
                         {buyerOffers.map((offer) => {
-                            if(offer.wasteItemsListId === "completePost")
+                            if(offer.wasteItemsListId === "completePost" && offer.status === "pending")
                                 return (
                                     <tr>
                                         <td><Link style={{ textDecoration: 'none'}}
@@ -75,8 +97,9 @@ export default function SellerOfferList() {
                                        
                                         <td>{ moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
                                         <td>{offer.collectingTime}</td>
-                                        <td><a className="offer-list-view-buyer" href="#" onClick={viewBuyer}>View Buyer</a></td>
-                                        <td>Lk Collectors</td>
+                                        <td><Link style={{ textDecoration: 'none'}}
+                                              to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
+                                    
                                         <td>{offer.value}</td>
                                         <td>{moment(offer.expiryDate).fromNow()}</td>
                                         <td>
@@ -86,12 +109,15 @@ export default function SellerOfferList() {
                                                 console.log(offerId);
                                                 sellerAcceptCompletePostOffer(offerId,postId);
                                             }}>Accept</a>
-                                            <a className="offer-list-decline" href="#">Decline</a>
+                                            <a className="offer-list-decline" href="#" onClick={() => {
+                                                let offerId = offer._id;
+                                                sellerDeclineOffer(offerId);
+                                            }}>Decline</a>
                                         </td>
                                     </tr>
                                     
                                 );
-                            else
+                            else if(offer.status === "pending")
                             return (
                                 <tr>
                                     <td><Link style={{ textDecoration: 'none'}}
@@ -101,13 +127,20 @@ export default function SellerOfferList() {
                                    
                                     <td>{ moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
                                     <td>{offer.collectingTime}</td>
-                                    <td><a className="offer-list-view-buyer" href="#" onClick={viewBuyer}>View Buyer</a></td>
-                                    <td>Lk Collectors</td>
+                                    <td><Link style={{ textDecoration: 'none'}}
+                                              to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
                                     <td>{offer.value}</td>
                                     <td>{moment(offer.expiryDate).fromNow()}</td>
                                     <td>
-                                        <a className="offer-list-accept" href="#" >Accept</a>
-                                        <a className="offer-list-decline" href="#">Decline</a>
+                                        <a className="offer-list-accept" href="#" onClick={() => {
+                                            let offerId = offer._id;
+                                            let itemId = offer.wasteItemsListId;
+                                            sellerAcceptWasteItemOffer(offerId, itemId);
+                                        }}>Accept</a>
+                                        <a className="offer-list-decline" href="#"onClick={() => {
+                                                let offerId = offer._id;
+                                                sellerDeclineOffer(offerId);
+                                            }}>Decline</a>
                                     </td>
                                 </tr>
                                 
