@@ -147,6 +147,11 @@
     color: #fff;
 }
 
+.company-rating-c{
+    margin-top: 150px;
+    margin-left: 450px;
+}
+
 
 /*responsive*/
 @media(max-width: 768px){
@@ -191,6 +196,10 @@
 
     .btn-modal-c{
         margin-left: 40%;
+    }
+    .company-rating-c{
+        margin-top: 150px;
+        margin-left: 0px;
     }
 }
 

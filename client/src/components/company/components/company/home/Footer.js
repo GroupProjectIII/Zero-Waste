@@ -1,9 +1,80 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Footer.css';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+import {Slide, toast, ToastContainer} from "react-toastify";
 
 function Footer() {
+
+    const userName=(localStorage.getItem("userName"));
+    const userEmail=(localStorage.getItem("userEmail"));
+    console.log(userName);
+    console.log(userEmail);
+
+    const apiUrl = '/getHelp';
+    const initialValues = {
+        message: '',
+        userName: '',
+        userEmail: ''
+    };
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const submitForm = () => {
+        const data = {
+            message:formValues.message,
+            userName:userName,
+            userEmail:userEmail
+        };
+        axios.post(apiUrl, data)
+            .then((result) => {
+                clear();
+                toastNotification();
+            });
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormErrors(validate(formValues));
+        setIsSubmitting(true);
+    };
+
+    const validate = (values) => {
+        let errors = {};
+
+        if (!values.message) {
+            errors.message = "Cannot be blank";
+        }
+        return errors;
+    };
+
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmitting) {
+            submitForm();
+        }
+    }, [formErrors]);
+
+    const clear = () => {
+        setFormValues({
+            message: '',
+            userName: '',
+            userEmail: ''
+        });
+    };
+
+    const toastNotification = () => {
+        toast.info("You're added help successfully, you will be replied soon!", {
+            transition: Slide
+        })
+    };
+
     return (
         <div className='footer-container'>
             <section className='footer-subscription'>
@@ -14,14 +85,20 @@ function Footer() {
                     Leave us a message.
                 </p>
                 <div className='input-areas'>
-                    <form>
+                    <form onSubmit={handleSubmit} noValidate>
                         <input
                             className='footer-input'
-                            name='email'
-                            type='email'
+                            name='message'
+                            id='message'
+                            type='text'
                             placeholder='Your Message'
+                            value={formValues.message}
+                            onChange={handleChange}
                         />
-                        <Button buttonStyle='btn-b-outline'>Send</Button>
+                        <div className="footer-button-b">
+                            <input type="submit" value="Send"></input>
+                            <ToastContainer position="top-right" toastStyle={{ backgroundColor: "green" }} autoClose={3000} />
+                        </div>
                     </form>
                 </div>
             </section>
