@@ -4,6 +4,7 @@ import "./Modal.css";
 import axios from "axios";
 import moment from "moment";
 import {useParams} from "react-router-dom";
+import StartRating from "../../../../buyer/posts/Ratings";
 
 function ViewAcceptedOfferPage() {
 
@@ -36,8 +37,6 @@ function ViewAcceptedOfferPage() {
     );
     console.log(wasteItem);
 
-    const selId = {companyId};
-
     return(
         <>
             <div className="tables-c">
@@ -68,6 +67,18 @@ function ViewAcceptedOfferPage() {
                         </tbody>
                     </table>
                 </div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
             </div>
         </>
     );

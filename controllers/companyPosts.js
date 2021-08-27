@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const CompanyPost = require("../models/CompanyPost");
 const BuyerOffersForCompany = require("../models/BuyerOffersForCompany");
 const BuyerDetails = require("../models/BuyerDetails");
-const BuyerNotifyCompany = require("../models/BuyerNotifyCompany")
+const BuyerNotifyCompany = require("../models/BuyerNotifyCompany");
+const CompanyDetail = require("../models/CompanyDetail");
+const User = require("../models/User");
 
 exports.addCompanyPost= async (req,res)=>{
     const { companyId, companyName, postType, buyer, address, contact, wasteType, item, avbDate, quantity} = req.body;
@@ -124,6 +126,40 @@ exports.getNotifyDetailsForCompany= async (req,res)=>{
             existingPosts:posts
         });
     });
+}
+
+exports.getCompanyDetailsForCompany= async (req,res)=>{
+    CompanyDetail.find().exec((err,company)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingCompany:company
+        });
+    });
+}
+
+exports.deleteCompany = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    await User.findByIdAndRemove(id);
+
+    res.json({ message: "Post deleted successfully." });
+}
+
+exports.deleteCompanyDetails = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    await CompanyDetail.findByIdAndRemove(id);
+
+    res.json({ message: "Post deleted successfully." });
 }
 
 

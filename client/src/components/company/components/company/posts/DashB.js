@@ -1,7 +1,48 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Dashboard.css';
+import axios from "axios";
+import moment from "moment";
 
 function DashB() {
+
+    const companyId=(localStorage.getItem("userId"));
+    console.log(companyId);
+
+    const [notes, setNotes] = useState([]);
+
+    useEffect(()=>{
+        getAllNotes();
+    }, []);
+
+    const getAllNotes = async () => {
+        await axios.get(`/getCompanyPostsForCompany`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                setNotes(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(notes);
+
+    const [offers, setOffers] = useState([]);
+
+    useEffect(()=>{
+        getAllOffers();
+    }, []);
+
+    const getAllOffers = async () => {
+        await axios.get(`/viewPendingCompanyOffersForCompany`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                setOffers(allNotes);
+            })
+            .catch(error=>console.error(`Error: ${error}`));
+    }
+    console.log(offers);
+
+    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.companyId===companyId);
+    console.log(wasteItem);
+
     return(
         <div className="dashboard_body-c">
             <div className="tables-c">
@@ -13,51 +54,34 @@ function DashB() {
                             <tr>
                                 <th>ID</th>
                                 <th>Date</th>
-                                <th>Amount</th>
-                                <th>Type</th>
-                                <th>Price</th>
+                                <th>Amount (Kg)</th>
+                                <th>Waste Type</th>
+                                <th>Waste Item</th>
+                                <th>Price (Rs)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td data-label="Offer ID">01</td>
-                                <td data-label="Date">01 Jun 2020</td>
-                                <td data-label="Amount">20kg</td>
-                                <td data-label="Type">Plastic</td>
-                                <td data-label="Price">Rs.100</td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="Offer ID">01</td>
-                                <td data-label="Date">01 Jun 2020</td>
-                                <td data-label="Amount">20kg</td>
-                                <td data-label="Type">Plastic</td>
-                                <td data-label="Price">Rs.100</td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="Offer ID">01</td>
-                                <td data-label="Date">01 Jun 2020</td>
-                                <td data-label="Amount">20kg</td>
-                                <td data-label="Type">Plastic</td>
-                                <td data-label="Price">Rs.100</td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="Offer ID">01</td>
-                                <td data-label="Date">01 Jun 2020</td>
-                                <td data-label="Amount">20kg</td>
-                                <td data-label="Type">Plastic</td>
-                                <td data-label="Price">Rs.100</td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="Offer ID">01</td>
-                                <td data-label="Date">01 Jun 2020</td>
-                                <td data-label="Amount">20kg</td>
-                                <td data-label="Type">Plastic</td>
-                                <td data-label="Price">Rs.100</td>
-                            </tr>
+                        {notes.map((note,index)=> {
+                            if(wasteItem.find(o=>o.postId === note._id) !== undefined)
+                                return (
+                                <tr>
+                                    <td data-label="Offer ID">{index + 1}</td>
+                                    <td data-label="Date">{moment(note.avbDate).fromNow()}</td>
+                                    <td data-label="Amount (Kg)">
+                                    {wasteItem.map((q)=>(
+                                        <span>{q.quantity}</span>
+                                    ))}
+                                    </td>
+                                    <td data-label="Waste Type">{note.wasteType}</td>
+                                    <td data-label="Waste Item">{note.item}</td>
+                                    <td data-label="Price (Rs)">
+                                    {wasteItem.map((p)=>(
+                                        <span>{p.value}</span>
+                                    ))}
+                                    </td>
+                                </tr>
+                                );
+                        })}
                         </tbody>
                     </table>
                 </div>

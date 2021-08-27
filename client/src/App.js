@@ -174,7 +174,7 @@ function App() {
                     <Route path='/company/helpdesk' component={CompanyHelpdesk} />
                     <Route path='/company/companypost' component={CompanyPost} />
                     <Route path='/company/offersforposts/:postId' component={CompanyOffersForPosts} />
-                    <Route path='/company/editprofile' component={CompanyEditProfile} />
+                    <Route path='/company/editprofile/:detailId' component={CompanyEditProfile} />
                     <Route path='/company/DirectPosts' component={CompanyDirectPosts} />
                     <Route path='/company/notification' component={CompanyNotification} />
                     <Route path='/company/ongoingp' component={CompanyOngoingP} />

@@ -9,7 +9,10 @@ const { addCompanyPost,
     editCompanyPost,
     companyGetOneCompanyPost,
     editCompanyOfferStatus,
-    getNotifyDetailsForCompany
+    getNotifyDetailsForCompany,
+    getCompanyDetailsForCompany,
+    deleteCompanyDetails,
+    deleteCompany
 } = require("../controllers/companyPosts");
 
 router.post('/addCompanyPost', addCompanyPost);
@@ -21,5 +24,8 @@ router.patch('/editCompanyPost/:id', editCompanyPost);
 router.get('/companyGetOneCompanyPost/:id', companyGetOneCompanyPost);
 router.patch('/editCompanyOfferStatus/:id', editCompanyOfferStatus);
 router.get('/getNotifyDetailsForCompany', getNotifyDetailsForCompany);
+router.get('/getCompanyDetailsForCompany', getCompanyDetailsForCompany);
+router.delete('/deleteCompany/:id', deleteCompany);
+router.delete('/deleteCompanyDetails/:id', deleteCompanyDetails);
 
 module.exports = router;
