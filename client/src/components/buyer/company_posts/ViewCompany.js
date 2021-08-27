@@ -81,6 +81,14 @@ function ViewCompany() {
                                   <Link style={{color: '#000', textDecoration: 'none'}}
                                         to={`/buyer/notifyaboutwaste/${note._id}/${note.companyId}`}>Notify</Link>
                               </span>
+                                <span className="action_btn-b">
+                                  <Link style={{color: '#000', textDecoration: 'none'}}
+                                        to={`/buyer/addcomplaints/${note.companyId}`}>Complain</Link>
+                              </span>
+                                <span className="action_btn-b">
+                                  <Link style={{color: '#000', textDecoration: 'none'}}
+                                        to={`/buyer/viewratings/${note.companyId}`}>Ratings</Link>
+                              </span>
                             </td>
                         </tr>
                     ))}

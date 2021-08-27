@@ -59,6 +59,7 @@ function CompanyAcceptedOffers() {
                                 <article>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
+                                        <p>Company Name: {offer.companyName}</p>
                                         <p>Quantity (Kg): {offer.quantity}</p>
                                         <p>Unit Price (Rs): {offer.value}</p>
                                         <p>Expiry Date: {moment(offer.expiryDate).fromNow()}</p>

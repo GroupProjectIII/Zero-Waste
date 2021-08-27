@@ -74,6 +74,7 @@ function CompanyPendingOffers() {
                                 <article>
                                     <div className="text-b">
                                         <h3>Post ID: {index + 1}</h3>
+                                        <p>Company Name: {offer.companyName}</p>
                                         <p>Quantity (Kg): {offer.quantity}</p>
                                         <p>Unit Price (Rs): {offer.value}</p>
                                         <p>Expiry Date: {moment(offer.expiryDate).fromNow()}</p>
@@ -81,7 +82,7 @@ function CompanyPendingOffers() {
                                         <p>Offer Gave: {moment(offer.offerCreatedAt).fromNow()}</p>
                                         <div className="buyerlink-b">
                                             <Link style={{color: '#fff', textDecoration: 'none'}}
-                                                  to={`/buyer/editcompanypendingoffers/${offer._id}`}>Edit Offer <i className="fas fa-edit"></i></Link>
+                                                  to={`/buyer/editcompanypendingoffers/${offer._id}/${offer.companyId}/${offer.postId}`}>Edit Offer <i className="fas fa-edit"></i></Link>
                                         </div>
                                         <div className="delete-button-b">
                                             <button onClick={() => {

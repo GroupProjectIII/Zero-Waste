@@ -95,10 +95,50 @@ function VProfile() {
                         <li ><span>Buyer Name: {buyerName}</span></li>
                         <li ><span>Address: {post.buyerAddress}</span></li>
                         <li ><span>Email: {buyerEmail}</span></li>
-                        <li ><span>Mobile No: 0711409911</span></li>
-                        <li ><span>Favourite Areas: {post.favouriteAreas}</span></li>
-                        <li ><span>Favourite Waste Types: {post.favouriteWasteTypes}</span></li>
-                        <li ><span>Favourite Waste Items: {post.favouriteWasteItems}</span></li>
+
+                        <li >
+                            <span>
+                            Contact No:
+                                {post.buyerContact.map((contact,index)=>(
+                            <span>
+                                {index + 1} : {contact}
+                            </span>
+                        ))}
+                        </span>
+                        </li>
+
+                        <li >
+                            <span>
+                            Favourite Areas:
+                                {post.favouriteAreas.map((area,index)=>(
+                            <span>
+                                {index + 1} : {area}
+                            </span>
+                        ))}
+                        </span>
+                        </li>
+
+                        <li >
+                            <span>
+                            Favourite Waste Types:
+                                {post.favouriteWasteTypes.map((types,index)=>(
+                                    <span>
+                                {index + 1} : {types}
+                            </span>
+                                ))}
+                        </span>
+                        </li>
+
+                        <li >
+                            <span>
+                            Favourite Waste Items:
+                                {post.favouriteWasteItems.map((items,index)=>(
+                                    <span>
+                                {index + 1} : {items}
+                            </span>
+                                ))}
+                        </span>
+                        </li>
                     </ol>
                     ))}
                 </div>

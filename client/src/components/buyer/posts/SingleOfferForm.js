@@ -31,6 +31,7 @@ function SingleOfferForm() {
         postId:'',
         wasteItemsListId:'',
         sellerId:'',
+        sellerName:'',
         offerThumbnail:'',
         buyerName:''
     };
@@ -50,6 +51,7 @@ function SingleOfferForm() {
             postId:postId,
             wasteItemsListId:wasteItem?._id,
             sellerId:posts.sellerId,
+            sellerName:posts.sellerName,
             offerThumbnail:posts.thumbnail,
             buyerName:userName
         };
@@ -128,6 +130,7 @@ function SingleOfferForm() {
             postId:'',
             wasteItemsListId:'',
             sellerId:'',
+            sellerName:'',
             offerThumbnail:'',
             buyerName:''
         });
