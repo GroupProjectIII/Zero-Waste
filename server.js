@@ -66,8 +66,6 @@ app.use('/posts', postRoutes);
 //seller
 
 const sellerPostRoutes = require("./routes/sellerPosts");
-const sellerViewBuyerRoutes = require("./routes/SellerViewBuyers");
-app.use(sellerViewBuyerRoutes);
 app.use(sellerPostRoutes);
 
 // Error Handler Middleware

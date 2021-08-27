@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import './AcceptedOffers.css';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 function BuyerInfo() {
 
@@ -65,16 +66,41 @@ function BuyerInfo() {
                         {buyerDetails.map((note,index)=> (
                             <tr>
                                 <td data-label="Offer ID">{index + 1}</td>
-                                <td data-label="Waste Type">{note.favouriteWasteTypes}</td>
-                                <td data-label="Waste Item">{note.favouriteWasteItems}</td>
-                                <td data-label="Collecting Area">{note.favouriteAreas}</td>
-                                <td data-label="Contact No">{note.buyerContact}</td>
+                                <td data-label="Waste Type">
+                                {note.favouriteWasteTypes.map((wasteTypes)=>(
+                                    <span>
+                                    {wasteTypes}
+                                    </span>
+                                ))}
+                                </td>
+                                <td data-label="Waste Item">
+                                    {note.favouriteWasteItems.map((wasteItems)=>(
+                                        <span>
+                                    {wasteItems}
+                                    </span>
+                                    ))}
+                                </td>
+                                <td data-label="Collecting Area">
+                                    {note.favouriteAreas.map((wasteAreas)=>(
+                                        <span>
+                                    {wasteAreas}
+                                    </span>
+                                    ))}
+                                </td>
+                                <td data-label="Contact No">
+                                    {note.buyerContact.map((wasteContact)=>(
+                                        <span>
+                                    {wasteContact}
+                                    </span>
+                                    ))}
+                                </td>
                                 <td data-label="Description">{note.buyerDescription}</td>
                                 <td data-label="Address">{note.buyerAddress}</td>
                                 <td data-label="Buyer Images"><img src={note.buyerImages}></img></td>
                                 <td data-label="Action">
-                                    <span className="action_btn-c">
-                                        <a href="#">Contact</a>
+                                    <span className="action_btn-b">
+                                  <Link style={{color: '#000', textDecoration: 'none'}}
+                                        to={`/company/buyerdirectpost/${note.buyerId}`}>Contact</Link>
                                     </span>
                                 </td>
                             </tr>

@@ -212,10 +212,10 @@ export default function PublicPost({ currentId, setCurrentId }) {
         {
           wasteItemList.map((val, idx) => {
             const wasteTypeid = `wasteType-${idx}`;
-            const itemid = `item-${idx}`;
-            const avbDateid = `avbDate-${idx}`;
-            const quantityid = `quantity-${idx}`;
-            const selectedFileid = `selectedFile-${idx}`;
+              const itemid = `item-${idx}`;
+              const avbDateid = `avbDate-${idx}`;
+              const quantityid = `quantity-${idx}`;
+              const selectedFileid = `selectedFile-${idx}`;
           return (
               <div key={`Waste Item-${idx}`} className="seller-post-item">
                 <div className="seller-add-post-item-header">

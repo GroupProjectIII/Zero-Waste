@@ -70,9 +70,9 @@ exports.buyerGetOneCompanyOffer= async (req,res)=>{
 }
 
 exports.addBuyerNotifyCompany= async (req,res)=>{
-    const { value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId, buyerName } = req.body;
+    const { value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId , companyId, buyerName } = req.body;
 
-    const newNotifyCompany = new BuyerNotifyCompany({ value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId, buyerName})
+    const newNotifyCompany = new BuyerNotifyCompany({ value, expiryDate, wasteType, wasteItem, quantity, deliveryDate, buyerId, companyListId, companyId, buyerName})
 
     try {
         await newNotifyCompany.save();
