@@ -41,17 +41,29 @@ exports.sellerAddPost = async (req, res) => {
 exports.sellerViewPosts = async (req, res) => {
 
     let sellerIdd = req.params.id;
-
+    var posts = [{}];
     SellerPost.find({ "sellerId": sellerIdd }).exec((err, posts) => {
         if (err) {
             return res.status(400).json({
                 error: err
             });
         }
-        return res.status(200).json({
-            success: true,
-            existingPosts: posts
-        });
+        posts = posts;
+        BuyerOffersForSeller.find({ "sellerId": sellerIdd }).exec((err2, offer) => {
+            if (err2) {
+                return res.status(400).json({
+                    error: err2
+                });
+            }
+            return res.status(200).json({
+                success: true,
+                existingOffers: offer,
+                existingPosts: posts,
+                
+            });
+
+        })
+        
     });
 
     
