@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import './SellerOfferList.css';
+import './PendingPosts.css';
 import moment from 'moment';
 
 export default function SellerOfferList() {
@@ -90,110 +91,117 @@ export default function SellerOfferList() {
                             <h1>Error occured.</h1>
                         </div> :
                         <div className="seller-offer-list-background">
-                            <div className="seller-offer-list">
-                                <table className="seller-offer-table">
-                                    <tr>
-                  
-                                        <th>Post</th>
-                                        <th>Item</th>
-                                        <th>Collecting Date</th>
-                                        <th>Collecting Time (Aprox:)</th>
-                                        <th>Buyer</th>
-                        
-                                        <th>Offer(Rs)</th>
-                                        <th>Offer Exp: Date</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    {buyerOffers.map((offer) => {
-                                        if (offer.wasteItemsListId === "completePost" && offer.status === "pending")
-                                            return (
-                                                <tr>
-                                        
-                                                    <td><Link style={{ textDecoration: 'none' }}
-                                                            to={`/seller/viewpost/${offer.postId}`}>
-                                                            <img classNane="seller-offer-image"
-                                                                src={offer?.postId?.thumbnail}
-                                                                alt=""></img>
-                                                        </Link>
-                                                    </td>
-                                                    <td>Complete Post</td>
-                                       
-                                                    <td>{moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
-                                                    <td>{offer.collectingTime}</td>
-                                                    <td><Link style={{ textDecoration: 'none' }}
-                                                        to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
-                                    
-                                                    <td>{offer.value}</td>
-                                                    <td>{moment(offer.expiryDate).fromNow()}</td>
-                                                    <td>
-                                                        <a className="offer-list-accept" href="#" onClick={() => {
+
+                            <div className="seller-post-list">
+                                {buyerOffers.map((offer) => {
+                                    if (offer.wasteItemsListId === "completePost" && offer.status === "pending")
+                                        return (
+                                            <div className="seller-post-card">
+                                                <h2>Offer For Complete Post</h2>
+                                                <img src={offer?.postId?.thumbnail} alt=""></img>
+                                                <p>Post Created At: {moment(offer?.postId?.ceratedAt).format("LLLL") }</p>
+                                                <div className="seller-post-offer-details">
+                                                    <h3>Buyer : {offer.buyerName}</h3>
+                                                    <h3>Value: {offer.value}</h3>
+                                                    <h3>Collecting Date: {moment(offer.collectingDate).format("LL")}</h3>
+                                                    <h3>Collecting Time:{offer.collectingTime}</h3>
+                                                    <h3>Offer Expire In: {moment(offer.expiryDate).fromNow()}</h3>
+                                                    <a className="offer-list-accept"
+                                                        href="#"
+                                                        onClick={() => {
+
                                                             let offerId = offer._id;
                                                             let postId = offer.postId;
                                                             console.log(offerId);
                                                             sellerAcceptCompletePostOffer(offerId, postId);
-                                                        }}>Accept</a>
-                                                        <a className="offer-list-decline" href="#" onClick={() => {
+
+                                                        }}
+                                                    >Accept</a>
+                                                    <a className="offer-list-decline"
+                                                        href="#"
+                                                        onClick={() => {
                                                             let offerId = offer._id;
                                                             sellerDeclineOffer(offerId);
-                                                        }}>Decline</a>
-                                                    </td>
-                                                </tr>
-                                    
-                                            );
-                                        else if (offer.status === "pending")
-                                            var item = offer.postId.wasteItemList.find(element => element._id === offer.wasteItemsListId);
-                            
+                                                        }}
+                                                    >Decline</a>
+                                                </div>
+                                                <div className="seller-post-card-item-row">
+                                                    
+                                                        {offer && offer?.postId && offer?.postId?.wasteItemList.map((item) => {
+                                                            return (
+                                                                <div className="seller-post-card-item">
+                                                                    <div className="seller-post-card-item-header">
+                                                                        <h3>Item: 1</h3>
+                                                                    </div>
+                                                                    <div className="seller-post-card-item-details">
+                                                                        <h4>{item.wasteType} | {item.item}</h4>
+                                                                        <img src={item.selectedFile} alt="img" />
+                                                                        <p>Quantity: {item.quantity}</p>
+                                                                        <p>Available In:{moment(item.avbDate).format("LL")}</p>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                        
+                                                   
+                                                </div>
+                                            </div>
+                                        )
+                                    else if (offer.status === "pending") {
+                                        var item = offer.postId.wasteItemList.find(element => element._id === offer.wasteItemsListId);
                                         return (
-                                            <tr>
-                                                <td>
-                                                    <Link style={{ textDecoration: 'none' }}
-                                                        to={`/seller/viewpost/${offer.postId}`}>
-                                                        <img classNane="seller-offer-image"
-                                                            src={offer?.postId?.thumbnail}
-                                                            alt="">
-                                                        </img>
-                                                    </Link>
-                                                </td>
-                                                <td>
-                                                    <Link style={{ textDecoration: 'none' }}
-                                                        to={`/seller/viewpost/${offer.postId}/${offer.wasteItemsListId}`}>
-                                                        <img classNane="seller-offer-image"
-                                                            src={item.selectedFile} alt="">
-                                                        </img>
-                                                    </Link>
-                                                </td>
-                                            
-                                                <td>{moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
-                                                <td>{offer.collectingTime}</td>
-                                                <td><Link style={{ textDecoration: 'none' }}
-                                                    to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
-                                                <td>{offer.value}</td>
-                                                <td>{moment(offer.expiryDate).fromNow()}</td>
-                                                <td>
-                                                    <a className="offer-list-accept" href="#" onClick={() => {
-                                                        let offerId = offer._id;
-                                                        let itemId = offer.wasteItemsListId;
-                                                        sellerAcceptWasteItemOffer(offerId, itemId);
-                                                    }}>Accept</a>
-                                                    <a className="offer-list-decline" href="#" onClick={() => {
-                                                        let offerId = offer._id;
-                                                        sellerDeclineOffer(offerId);
-                                                    }}>Decline</a>
-                                                </td>
-                                            </tr>
-                                        );
-                             
-        
-                                    
+                                            <div className="seller-post-card">
+                                                <h2>Offer For Post Item</h2>
+                                                <img src={offer?.postId?.thumbnail} alt=""></img>
+                                                <p>Post Created At: {moment(offer?.postId?.ceratedAt).format("LLLL") }</p>
+                                                <div className="seller-post-offer-details">
+                                                    <h3>Buyer : {offer.buyerName}</h3>
+                                                    <h3>Value: {offer.value}</h3>
+                                                    <h3>Collecting Date: {moment(offer.collectingDate).format("LL")}</h3>
+                                                    <h3>Collecting Time:{offer.collectingTime}</h3>
+                                                    <h3>Offer Expire In: {moment(offer.expiryDate).fromNow()}</h3>
+                                                    <a className="offer-list-accept"
+                                                        href="#"
+                                                        onClick={() => {
+                                                            let offerId = offer._id;
+                                                            let postId = offer.postId;
+                                                            console.log(offerId);
+                                                            sellerAcceptCompletePostOffer(offerId, postId);
+                                                        }}
+                                                    >Accept</a>
+                                                    <a className="offer-list-decline"
+                                                        href="#"
+                                                        onClick={() => {
+                                                            let offerId = offer._id;
+                                                            sellerDeclineOffer(offerId);
+                                                        }}
+                                                    >Decline</a>
+                                                </div>
+                                                <div className="seller-post-card-item-row">
+
+                                                    <div className="seller-post-card-item">
+                                                        <div className="seller-post-card-item-header">
+                                                            <h3>Item: 1</h3>
+                                                        </div>
+                                                        <div className="seller-post-card-item-details">
+                                                            <h4>{item.wasteType} | {item.item}</h4>
+                                                            <img src={item.selectedFile} alt="img" />
+                                                            <p>Quantity: {item.quantity}</p>
+                                                            <p>Available In:{moment(item.avbDate).format("LL")}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                       
+                                            </div>
+                                        )
+                                        
+                                    }
+                            })}
                                 
-                     
-                               
-                               
-                                    })}
-                
-                    
-                                </table>
                             </div>
+                            
+
                         </div>
             }
 

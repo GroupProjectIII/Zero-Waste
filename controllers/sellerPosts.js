@@ -41,17 +41,29 @@ exports.sellerAddPost = async (req, res) => {
 exports.sellerViewPosts = async (req, res) => {
 
     let sellerIdd = req.params.id;
-
+    var posts = [{}];
     SellerPost.find({ "sellerId": sellerIdd }).exec((err, posts) => {
         if (err) {
             return res.status(400).json({
                 error: err
             });
         }
-        return res.status(200).json({
-            success: true,
-            existingPosts: posts
-        });
+        posts = posts;
+        BuyerOffersForSeller.find({ "sellerId": sellerIdd }).exec((err2, offer) => {
+            if (err2) {
+                return res.status(400).json({
+                    error: err2
+                });
+            }
+            return res.status(200).json({
+                success: true,
+                existingOffers: offer,
+                existingPosts: posts,
+                
+            });
+
+        })
+        
     });
 
     
@@ -108,7 +120,30 @@ exports.sellerAcceptPostOffer = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
     const updatedOffer = { status };
     await BuyerOffersForSeller.updateMany({ "postId": postId, "_id": { $ne: id } }, { $set: { status: "decline" } });
+
     
+    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
+
+    
+    res.json("Offer Accepted");
+}
+
+exports.sellerAcceptWasteItemOffer = async(req, res) => {
+    const { id } = req.params;
+    const { status, wasteItemsListId } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    const updatedOffer = { status };
+    await BuyerOffersForSeller.updateMany({ "wasteItemsListId": wasteItemsListId, "_id": { $ne: id } }, { $set: { status: "decline" } });
+   
+    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
+
+}
+
+exports.sellerDeclineOffer = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    const updatedOffer = { status };
     await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
     
     res.json("Offer Accepted");
