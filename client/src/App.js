@@ -141,6 +141,7 @@ function App() {
                     <Route path='/seller/directpost' exact component={SellerAddPostDirect} />
                     <Route path='/seller/myposts' exact component={SellerMyPost} />
                     <Route path='/seller/viewposts' exact component={SellerViewPost} />
+                    <Route path='/seller/buyer/:buyerId' exact component={SellerViewBuyer} />
                     <Route path='/seller/viewpost/:postId' component={SellerViewOnePost}/>
                     <Route path='/seller/findbuyers' exact component={SellerBuyersHome} />
                     <Route path='/seller/buyer' exact component={SellerViewBuyer} />

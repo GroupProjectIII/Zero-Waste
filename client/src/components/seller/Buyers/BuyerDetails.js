@@ -1,7 +1,39 @@
+import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router';
+import axios from 'axios';
 import ProPIc from './BuyerImages/images.jpg';
 import "./BuyerReviews.css";
 
 export default function BuyerDetails() {
+
+    const { buyerId } = useParams();
+    console.log("buyer");
+    console.log(buyerId);
+
+    const [buyerDetails, setBuyerDetails] = useState({});
+    const [offerList, setOfferList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false)
+
+    useEffect(() => {
+        getBuyerDetails();
+    },[])
+
+    const getBuyerDetails = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.get(`/sellerViewBuyerDetails/${buyerId}`)
+            console.log(response);
+            const buyerData = response.data.buyer;
+            console.log(buyerData);
+            setBuyerDetails(buyerData);
+            setIsLoading(false)
+        } catch (error) {
+            console.error(`Error: ${error}`)
+            setHasError(true)
+        }
+    }
     return (
         <div className="Buyer-details-background">
         <div className="seller-buyer-details-card">
