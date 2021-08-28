@@ -43,11 +43,6 @@ function Navbar() {
                             Offers
                         </Link>
                     </li>   
-                    <li className='nav-item-b'>
-                        <Link to='/company/notification' className='nav-links-b' onClick={closeMobileMenu}>
-                            Notifications
-                        </Link>
-                    </li> 
                     <li>
                         <Link to='/' className='nav-links-mobile-b'  onClick={logoutHandler}>
                             Sign Out <i className="fas fa-sign-out-alt"></i>

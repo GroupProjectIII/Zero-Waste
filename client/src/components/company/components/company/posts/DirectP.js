@@ -2,7 +2,6 @@ import React, { useEffect,useState } from "react";
 import "./Modal.css";
 import './AcceptedOffers.css';
 import axios from "axios";
-import moment from "moment";
 import {Link} from "react-router-dom";
 
 function DirectP() {
@@ -28,7 +27,7 @@ function DirectP() {
     }, []);
 
     const getAllNotes = async () => {
-        await axios.get(`/getDirectBuyerOffers`)
+        await axios.get(`/getCompanyPostsForCompany`)
             .then ((response)=>{
                 const allNotes=response.data.existingPosts;
                 setNotes(allNotes);
@@ -39,8 +38,6 @@ function DirectP() {
 
     const wasteItem = notes?.filter(wasteItem => wasteItem.companyId===companyId);
     console.log(wasteItem);
-
-  
 
   return(
     <>
@@ -64,13 +61,13 @@ function DirectP() {
                 </tr>
               </thead>
               <tbody>
-              {wasteItem.map((note,index)=> (
+                {wasteItem.map((note,index)=> (
                   <tr>
                     <td data-label="Offer ID">{index + 1}</td>
-                    <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">{note.buyerName}</button></u></td>
+                    <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">{note.buyerId}</button></u></td>
                     <td data-label="Waste Type">{note.wasteType}</td>
                     <td data-label="Waste Item">{note.wasteItem}</td>
-                    <td data-label="Date">{note.deliveryDate}</td>
+                    <td data-label="Date">{note.date}</td>
                     <td data-label="Quantity">{note.quantity}</td>
                     <td data-label="Action">
                       <span className="action_btn-c">
