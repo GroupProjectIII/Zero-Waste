@@ -154,3 +154,4 @@
 [0m2021.08.27 10:10:21 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
 Aug 27, 2021 10:22:54 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
+[0m2021.08.27 18:42:22 INFO  shutting down Metals[0m

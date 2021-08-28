@@ -9,6 +9,9 @@ export default function SellerOfferList() {
     if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "seller")) {
         history.push("/");
     }
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
    
     const sellerId = (localStorage.getItem("userId"));
     console.log("offers page");
@@ -24,12 +27,17 @@ export default function SellerOfferList() {
     }, []);
 
     const getAllBuyerOffers = async () => {
-        await axios.get(`/sellerViewOffers/${sellerId}`)
-            .then((response) => {
-                const allNotes = response.data.existingOffers;
-                getBuyerOffers(allNotes);
-            })
-            .catch(error => console.error(`Error:${error}`));
+            setIsLoading(true)
+            try {
+                const response = await axios.get(`/sellerViewOffers/${sellerId}`);
+              //  console.log(response);
+                const allOffers = response.data.existingOffers;
+                getBuyerOffers(allOffers);
+                setIsLoading(false)
+            } catch (error) {
+                console.error(`Error: ${error}`)
+                setHasError(true)
+            }
     }
 
     console.log(buyerOffers);
@@ -73,89 +81,122 @@ export default function SellerOfferList() {
     
     return (
         <>
-            <div className="seller-offer-list-background">
-            <div className="seller-offer-list">
-                <table className="seller-offer-table">
-                    <tr>
-                        <th>Post</th>
-                        <th>Item</th>
-                        <th>Collecting Date</th>
-                        <th>Collecting Time (Aprox:)</th>
-                        <th>Buyer</th>
-                        
-                        <th>Offer(Rs)</th>
-                        <th>Offer Exp: Date</th>
-                        <th>Action</th>
-                    </tr>
-                        {buyerOffers.map((offer) => {
-                            if(offer.wasteItemsListId === "completePost" && offer.status === "pending")
-                                return (
+            {
+                isLoading ?
+                    <div className="seller-post-list-background">
+                        <h1>Loading....</h1>
+                    </div> : hasError ?
+                        <div className="seller-post-list-background">
+                            <h1>Error occured.</h1>
+                        </div> :
+                        <div className="seller-offer-list-background">
+                            <div className="seller-offer-list">
+                                <table className="seller-offer-table">
                                     <tr>
-                                        <td><Link style={{ textDecoration: 'none'}}
-                                              to={`/seller/viewpost/${offer.postId}`}>View Post</Link></td>
-                                        <td>Complete Post</td>
-                                       
-                                        <td>{ moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
-                                        <td>{offer.collectingTime}</td>
-                                        <td><Link style={{ textDecoration: 'none'}}
-                                              to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
-                                    
-                                        <td>{offer.value}</td>
-                                        <td>{moment(offer.expiryDate).fromNow()}</td>
-                                        <td>
-                                            <a className="offer-list-accept" href="#" onClick={() => {
-                                                let offerId = offer._id;
-                                                let postId = offer.postId;
-                                                console.log(offerId);
-                                                sellerAcceptCompletePostOffer(offerId,postId);
-                                            }}>Accept</a>
-                                            <a className="offer-list-decline" href="#" onClick={() => {
-                                                let offerId = offer._id;
-                                                sellerDeclineOffer(offerId);
-                                            }}>Decline</a>
-                                        </td>
+                  
+                                        <th>Post</th>
+                                        <th>Item</th>
+                                        <th>Collecting Date</th>
+                                        <th>Collecting Time (Aprox:)</th>
+                                        <th>Buyer</th>
+                        
+                                        <th>Offer(Rs)</th>
+                                        <th>Offer Exp: Date</th>
+                                        <th>Action</th>
                                     </tr>
+                                    {buyerOffers.map((offer) => {
+                                        if (offer.wasteItemsListId === "completePost" && offer.status === "pending")
+                                            return (
+                                                <tr>
+                                        
+                                                    <td><Link style={{ textDecoration: 'none' }}
+                                                            to={`/seller/viewpost/${offer.postId}`}>
+                                                            <img classNane="seller-offer-image"
+                                                                src={offer?.postId?.thumbnail}
+                                                                alt=""></img>
+                                                        </Link>
+                                                    </td>
+                                                    <td>Complete Post</td>
+                                       
+                                                    <td>{moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
+                                                    <td>{offer.collectingTime}</td>
+                                                    <td><Link style={{ textDecoration: 'none' }}
+                                                        to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
                                     
-                                );
-                            else if(offer.status === "pending")
-                            return (
-                                <tr>
-                                    <td><Link style={{ textDecoration: 'none'}}
-                                          to={`/seller/viewpost/${offer.postId}`}>View Post</Link></td>
-                                    <td><Link style={{ textDecoration: 'none'}}
-                                          to={`/seller/viewpost/${offer.postId}/${offer.wasteItemsListId}`}>View Item</Link></td>
-                                   
-                                    <td>{ moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
-                                    <td>{offer.collectingTime}</td>
-                                    <td><Link style={{ textDecoration: 'none'}}
-                                              to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
-                                    <td>{offer.value}</td>
-                                    <td>{moment(offer.expiryDate).fromNow()}</td>
-                                    <td>
-                                        <a className="offer-list-accept" href="#" onClick={() => {
-                                            let offerId = offer._id;
-                                            let itemId = offer.wasteItemsListId;
-                                            sellerAcceptWasteItemOffer(offerId, itemId);
-                                        }}>Accept</a>
-                                        <a className="offer-list-decline" href="#"onClick={() => {
-                                                let offerId = offer._id;
-                                                sellerDeclineOffer(offerId);
-                                            }}>Decline</a>
-                                    </td>
-                                </tr>
-                                
-                            );
+                                                    <td>{offer.value}</td>
+                                                    <td>{moment(offer.expiryDate).fromNow()}</td>
+                                                    <td>
+                                                        <a className="offer-list-accept" href="#" onClick={() => {
+                                                            let offerId = offer._id;
+                                                            let postId = offer.postId;
+                                                            console.log(offerId);
+                                                            sellerAcceptCompletePostOffer(offerId, postId);
+                                                        }}>Accept</a>
+                                                        <a className="offer-list-decline" href="#" onClick={() => {
+                                                            let offerId = offer._id;
+                                                            sellerDeclineOffer(offerId);
+                                                        }}>Decline</a>
+                                                    </td>
+                                                </tr>
+                                    
+                                            );
+                                        else if (offer.status === "pending")
+                                            var item = offer.postId.wasteItemList.find(element => element._id === offer.wasteItemsListId);
+                            
+                                        return (
+                                            <tr>
+                                                <td>
+                                                    <Link style={{ textDecoration: 'none' }}
+                                                        to={`/seller/viewpost/${offer.postId}`}>
+                                                        <img classNane="seller-offer-image"
+                                                            src={offer?.postId?.thumbnail}
+                                                            alt="">
+                                                        </img>
+                                                    </Link>
+                                                </td>
+                                                <td>
+                                                    <Link style={{ textDecoration: 'none' }}
+                                                        to={`/seller/viewpost/${offer.postId}/${offer.wasteItemsListId}`}>
+                                                        <img classNane="seller-offer-image"
+                                                            src={item.selectedFile} alt="">
+                                                        </img>
+                                                    </Link>
+                                                </td>
+                                            
+                                                <td>{moment(offer.collectingDate).format("MMMM Do YYYY")}</td>
+                                                <td>{offer.collectingTime}</td>
+                                                <td><Link style={{ textDecoration: 'none' }}
+                                                    to={`/seller/buyer/${offer.buyerId}`}>{offer.buyerName}</Link></td>
+                                                <td>{offer.value}</td>
+                                                <td>{moment(offer.expiryDate).fromNow()}</td>
+                                                <td>
+                                                    <a className="offer-list-accept" href="#" onClick={() => {
+                                                        let offerId = offer._id;
+                                                        let itemId = offer.wasteItemsListId;
+                                                        sellerAcceptWasteItemOffer(offerId, itemId);
+                                                    }}>Accept</a>
+                                                    <a className="offer-list-decline" href="#" onClick={() => {
+                                                        let offerId = offer._id;
+                                                        sellerDeclineOffer(offerId);
+                                                    }}>Decline</a>
+                                                </td>
+                                            </tr>
+                                        );
+                             
+        
                                     
                                 
                      
                                
                                
-                    })}    
+                                    })}
                 
                     
-                </table>
-                </div>
-                </div>
+                                </table>
+                            </div>
+                        </div>
+            }
+
         </>
     )
     

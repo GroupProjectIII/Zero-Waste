@@ -59,7 +59,7 @@ exports.sellerViewPosts = async (req, res) => {
 
 exports.sellerViewOffers = async (req, res) => {
     let seller = req.params.id;
-    BuyerOffersForSeller.find({ "sellerId": seller, "status": "pending" }).exec((err, posts) => {
+    BuyerOffersForSeller.find({ "sellerId": seller, "status": "pending" }).populate('postId').exec((err, posts) => {
         
         if (err) {
             return res.status(400).json({
@@ -137,7 +137,7 @@ exports.sellerDeclineOffer = async (req, res) => {
 
 exports.sellerViewAcceptedOffers = async (req, res) => {
     let seller = req.params.id;
-    BuyerOffersForSeller.find({  "sellerId": seller, "status": "accepted"}).exec((err, offers) => {
+    BuyerOffersForSeller.find({  "sellerId": seller, "status": "accepted"}).populate('postId').exec((err, offers) => {
         if (err) {
             return res.status(400).json({
                 error: err
