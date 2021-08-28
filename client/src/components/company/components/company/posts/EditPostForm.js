@@ -3,24 +3,19 @@ import axios from "axios";
 import './Form.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {Slide, toast, ToastContainer} from "react-toastify";
+import {useParams} from "react-router-dom";
+import moment from "moment";
 
-function AddPost() {
+function DirectPostForm() {
+
+    const { postId } = useParams();
+    console.log(postId);
+
     const companyId=(localStorage.getItem("userId"));
     const companyName=(localStorage.getItem("userName"));
     console.log(companyId, companyName);
 
-    const apiUrl = '/addCompanyPost';
     const initialValues = {
-        companyId:'',
-        companyName:'',
-        postType:'',
-        buyer:'',
-        address:{
-            number:'',
-            street:'',
-            city:'',
-            district:''
-        },
         contact:'',
         wasteType:'',
         item:'',
@@ -32,29 +27,28 @@ function AddPost() {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    useEffect(() => {
+        const GetData = async () => {
+            const result = await axios.get(`/companyGetOneCompanyPost/${postId}`);
+            setFormValues(result.data.onePost);
+        };
+        GetData();
+    }, []);
+
+    console.log(formValues);
+
     const submitForm = () => {
         const data = {
-            companyId:companyId,
-            companyName:companyName,
-            postType:'public',
-            buyer:'allBuyers',
-            address:{
-                number:formValues.number,
-                street:formValues.street,
-                city:formValues.city,
-                district:formValues.district
-            },
             contact:formValues.contact,
             wasteType:formValues.wasteType,
             item:formValues.item,
             avbDate:formValues.avbDate,
             quantity:formValues.quantity
         };
-        axios.post(apiUrl, data)
+        axios.patch(`/editCompanyPost/${postId}`, data)
             .then((result) => {
-                toastNotification();
                 clear();
-
+                toastNotification();
             });
     };
 
@@ -78,18 +72,6 @@ function AddPost() {
 
         const d1 = new Date(values.avbDate);
 
-        if (!values.number) {
-            errors.number = "Cannot be blank";
-        }
-        if (!values.street) {
-            errors.street = "Cannot be blank";
-        }
-        if (!values.city) {
-            errors.city = "Cannot be blank";
-        }
-        if (!values.district) {
-            errors.district = "Cannot be blank";
-        }
         if (!values.contact) {
             errors.contact = "Cannot be blank";
         }else if (!regex.test(values.contact)) {
@@ -122,14 +104,6 @@ function AddPost() {
 
     const clear = () => {
         setFormValues({
-            companyId:'',
-            companyName:'',
-            postType:'',
-            buyer:'',
-            number:'',
-            street:'',
-            city:'',
-            district:'',
             contact:'',
             wasteType:'',
             item:'',
@@ -139,10 +113,15 @@ function AddPost() {
     };
 
     const toastNotification = () => {
-        toast.info("You're added post successfully !", {
+        toast.info("You're edited post successfully !", {
             transition: Slide
         })
     };
+
+    const d1 = new Date(formValues.avbDate);
+    console.log(d1);
+    const d2 = moment(d1).format('YYYY-MM-DD');
+    console.log(d2);
 
     return(
         <div className="addpost_container-c">
@@ -154,46 +133,10 @@ function AddPost() {
                             <form onSubmit={handleSubmit} noValidate>
                                 <div className="user-details-c">
                                     <div className="input-box-c">
-                                        <span className="details-c">Address Number</span>
-                                        <input type="text" name="number" id="number" placeholder="Enter number" value={formValues.number}
-                                           onChange={handleChange}
-                                           className={formErrors.number && "input-error"}></input>
-                                        {formErrors.number && (
-                                            <span className="error" style={{color:'red'}}>{formErrors.number}</span>
-                                        )}
-                                    </div>
-                                    <div className="input-box-c">
-                                        <span className="details-c">Street</span>
-                                        <input type="text" name="street" id="street" placeholder="Enter street" value={formValues.street}
-                                               onChange={handleChange}
-                                               className={formErrors.street && "input-error"}></input>
-                                        {formErrors.street && (
-                                            <span className="error" style={{color:'red'}}>{formErrors.street}</span>
-                                        )}
-                                    </div>
-                                    <div className="input-box-c">
-                                        <span className="details-c">City</span>
-                                        <input type="text" name="city" id="city" placeholder="Enter city" value={formValues.city}
-                                               onChange={handleChange}
-                                               className={formErrors.city && "input-error"}></input>
-                                        {formErrors.city && (
-                                            <span className="error" style={{color:'red'}}>{formErrors.city}</span>
-                                        )}
-                                    </div>
-                                    <div className="input-box-c">
-                                        <span className="details-c">District</span>
-                                        <input type="text" name="district" id="district" placeholder="Enter district" value={formValues.district}
-                                               onChange={handleChange}
-                                               className={formErrors.district && "input-error"}></input>
-                                        {formErrors.district && (
-                                            <span className="error" style={{color:'red'}}>{formErrors.district}</span>
-                                        )}
-                                    </div>
-                                    <div className="input-box-c">
                                         <span className="details-c">Contact No</span>
                                         <input type="text" name="contact" id="contact" placeholder="Enter contact" value={formValues.contact}
-                                           onChange={handleChange}
-                                           className={formErrors.contact && "input-error"}></input>
+                                               onChange={handleChange}
+                                               className={formErrors.contact && "input-error"}></input>
                                         {formErrors.contact && (
                                             <span className="error" style={{color:'red'}}>{formErrors.contact}</span>
                                         )}
@@ -218,7 +161,7 @@ function AddPost() {
                                     </div>
                                     <div className="input-box-c">
                                         <span className="date-c">Available Date</span>
-                                        <input type="date" name="avbDate" id="avbDate" placeholder="Enter date" value={formValues.avbDate}
+                                        <input type="date" name="avbDate" id="avbDate" placeholder="Enter date" value={d2}
                                                onChange={handleChange}
                                                className={formErrors.avbDate && "input-error"}></input>
                                         {formErrors.avbDate && (
@@ -226,10 +169,10 @@ function AddPost() {
                                         )}
                                     </div>
                                     <div className="input-box-c">
-                                    <span className="details-c">Quantity (Kg)</span>
-                                    <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
-                                           onChange={handleChange}
-                                           className={formErrors.quantity && "input-error"}></input>
+                                        <span className="details-c">Quantity (Kg)</span>
+                                        <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
+                                               onChange={handleChange}
+                                               className={formErrors.quantity && "input-error"}></input>
                                         {formErrors.quantity && (
                                             <span className="error" style={{color:'red'}} >{formErrors.quantity}</span>
                                         )}
@@ -244,8 +187,8 @@ function AddPost() {
                     </div>
                 </div>
             </div>
-        </div>       
+        </div>
     );
 }
 
-export default AddPost;
+export default DirectPostForm;

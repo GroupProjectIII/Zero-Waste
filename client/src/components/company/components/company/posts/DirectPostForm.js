@@ -3,8 +3,37 @@ import axios from "axios";
 import './Form.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {Slide, toast, ToastContainer} from "react-toastify";
+import {useParams} from "react-router-dom";
+import emailjs from "emailjs-com";
+import StartRating from "../../../../buyer/posts/Ratings";
 
-function AddPost() {
+function DirectPostForm() {
+
+    const { buyerId } = useParams();
+    console.log(buyerId);
+
+    const [buyer, setBuyer] = useState({});
+
+    useEffect(()=>{
+        getOneSellerOrCompany();
+    }, []);
+
+    const getOneSellerOrCompany = async () => {
+        try {
+            const response = await axios.get(`/getOneSellerOrCompany/${buyerId}`)
+            console.log(response);
+            const oneSellerOrCompany=response.data.oneSellerOrCompany;
+            setBuyer(oneSellerOrCompany);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(buyer);
+    const buyerEmail=buyer.email;
+    const buyerName=buyer.username;
+    console.log(buyerEmail);
+    console.log(buyerName);
+
     const companyId=(localStorage.getItem("userId"));
     const companyName=(localStorage.getItem("userName"));
     console.log(companyId, companyName);
@@ -36,8 +65,8 @@ function AddPost() {
         const data = {
             companyId:companyId,
             companyName:companyName,
-            postType:'public',
-            buyer:'allBuyers',
+            postType:'direct',
+            buyer:buyerId,
             address:{
                 number:formValues.number,
                 street:formValues.street,
@@ -52,9 +81,9 @@ function AddPost() {
         };
         axios.post(apiUrl, data)
             .then((result) => {
+                //sendEmail();
                 toastNotification();
                 clear();
-
             });
     };
 
@@ -144,20 +173,41 @@ function AddPost() {
         })
     };
 
+    const templateParams = {
+        from_name: 'Zero-Waste',
+        to_name: buyerName,
+        message: 'Your have a direct post from a company! Please visit our site for more details.',
+        reply_to: 'zerowasteproject3@gmail.com',
+        user_email:buyerEmail,
+        project_email:'zerowasteproject3@gmail.com'
+    };
+
+    const sendEmail = () => {
+        emailjs.send('service_34ny3hp', 'template_91bru6e', templateParams, 'user_pzyBOo0Td3FLgOvuNU4mq')
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    };
+
+    const sellerId=buyerId;
+    const selId = {sellerId};
+
     return(
         <div className="addpost_container-c">
             <div className="forms-c">
                 <div className="forms__container-c" >
                     <div className="container-c">
                         <div className="content-c">
-                            <div className="title-c">Add New Post</div>
+                            <div className="title-c">Add Direct Post</div>
                             <form onSubmit={handleSubmit} noValidate>
                                 <div className="user-details-c">
                                     <div className="input-box-c">
                                         <span className="details-c">Address Number</span>
                                         <input type="text" name="number" id="number" placeholder="Enter number" value={formValues.number}
-                                           onChange={handleChange}
-                                           className={formErrors.number && "input-error"}></input>
+                                               onChange={handleChange}
+                                               className={formErrors.number && "input-error"}></input>
                                         {formErrors.number && (
                                             <span className="error" style={{color:'red'}}>{formErrors.number}</span>
                                         )}
@@ -192,8 +242,8 @@ function AddPost() {
                                     <div className="input-box-c">
                                         <span className="details-c">Contact No</span>
                                         <input type="text" name="contact" id="contact" placeholder="Enter contact" value={formValues.contact}
-                                           onChange={handleChange}
-                                           className={formErrors.contact && "input-error"}></input>
+                                               onChange={handleChange}
+                                               className={formErrors.contact && "input-error"}></input>
                                         {formErrors.contact && (
                                             <span className="error" style={{color:'red'}}>{formErrors.contact}</span>
                                         )}
@@ -226,10 +276,10 @@ function AddPost() {
                                         )}
                                     </div>
                                     <div className="input-box-c">
-                                    <span className="details-c">Quantity (Kg)</span>
-                                    <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
-                                           onChange={handleChange}
-                                           className={formErrors.quantity && "input-error"}></input>
+                                        <span className="details-c">Quantity (Kg)</span>
+                                        <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" value={formValues.quantity}
+                                               onChange={handleChange}
+                                               className={formErrors.quantity && "input-error"}></input>
                                         {formErrors.quantity && (
                                             <span className="error" style={{color:'red'}} >{formErrors.quantity}</span>
                                         )}
@@ -243,9 +293,12 @@ function AddPost() {
                         </div>
                     </div>
                 </div>
+                <div className="company-rating-c">
+                    <StartRating sId={selId}/>
+                </div>
             </div>
-        </div>       
+        </div>
     );
 }
 
-export default AddPost;
+export default DirectPostForm;

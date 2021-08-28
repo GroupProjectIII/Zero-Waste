@@ -23,4 +23,5 @@ router.patch('/sellerDeclineOffer/:id', sellerDeclineOffer);
 router.patch('/sellerAcceptWasteItemOffer/"id', sellerAcceptWasteItemOffer);
 router.get('/sellerViewAcceptedOffers/:id', sellerViewAcceptedOffers);
 
+
 module.exports = router;

@@ -7,26 +7,27 @@ import buypic from './BuyerImages/images.jpg';
 export default function Buyer() {
 
     useEffect(() => {
-       getAllSellers() 
-    }, [])
-    const [buyers, setBuyers] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [hasError, setHasError] = useState(false);
+        getAllSellers() 
+     }, [])
+     const [buyers, setBuyers] = useState([]);
+     const [isLoading, setIsLoading] = useState(false);
+     const [hasError, setHasError] = useState(false);
+ 
+     const getAllSellers = async () => {
+         setIsLoading(true)
+         try {
+             const response = await axios.get(`/viewAllBuyers`)
+          //   console.log(response);
+             const allBuyers = response.data.buyer;
+             setBuyers(allBuyers);
+             setIsLoading(false)
+         } catch (error) {
+             console.error(`Error: ${error}`)
+             setHasError(true)
+         }
+     }
+     console.log(buyers);
 
-    const getAllSellers = async () => {
-        setIsLoading(true)
-        try {
-            const response = await axios.get(`/viewAllBuyers`)
-         //   console.log(response);
-            const allBuyers = response.data.buyer;
-            setBuyers(allBuyers);
-            setIsLoading(false)
-        } catch (error) {
-            console.error(`Error: ${error}`)
-            setHasError(true)
-        }
-    }
-    console.log(buyers);
     const history = useHistory();
 
     const viewdirectpost = () => {
@@ -36,8 +37,6 @@ export default function Buyer() {
     const viewbuyer = () => {
         history.push("/seller/buyer")
     }
-
-
     return (
         <>
             {
@@ -93,64 +92,64 @@ export default function Buyer() {
                                             <button className="view-more-btn" onClick={viewbuyer}>View More</button>
                                             <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
                                         </div>
-                        
-                                    </div>
-                                    <div className="buyer-column">
-                                        <div className="buyer-card">
-                                            <img src={buypic} alt="logo" />
-                                            <h1>Lk Collectors</h1>
-                                            <p>We are collecting plastic and plastic related items.</p>
-                                            <h4>Rathings</h4>
-                                            <div className="ratings-star">
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                            </div>
-                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
-                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
-                                        </div>
-                        
-                                    </div>
-                                    <div className="buyer-column">
-                                        <div className="buyer-card">
-                                            <img src={buypic} alt="logo" />
-                                            <h1>Lk Collectors</h1>
-                                            <p>We are collecting plastic and plastic related items.</p>
-                                            <h4>Rathings</h4>
-                                            <div className="ratings-star">
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                            </div>
-                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
-                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
-                                        </div>
-                        
-                                    </div>
-                                    <div className="buyer-column">
-                                        <div className="buyer-card">
-                                            <img src={buypic} alt="logo" />
-                                            <h1>Lk Collectors</h1>
-                                            <p>We are collecting plastic and plastic related items.</p>
-                                            <h4>Rathings</h4>
-                                            <div className="ratings-star">
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                            </div>
-                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
-                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
-                                        </div>
-                        
-                                    </div>
                     
+                                    </div>
+                                    <div className="buyer-column">
+                                        <div className="buyer-card">
+                                            <img src={buypic} alt="logo" />
+                                            <h1>Lk Collectors</h1>
+                                            <p>We are collecting plastic and plastic related items.</p>
+                                            <h4>Rathings</h4>
+                                            <div className="ratings-star">
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                            </div>
+                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
+                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
+                                        </div>
                     
+                                    </div>
+                                    <div className="buyer-column">
+                                        <div className="buyer-card">
+                                            <img src={buypic} alt="logo" />
+                                            <h1>Lk Collectors</h1>
+                                            <p>We are collecting plastic and plastic related items.</p>
+                                            <h4>Rathings</h4>
+                                            <div className="ratings-star">
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                            </div>
+                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
+                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
+                                        </div>
+                    
+                                    </div>
+                                    <div className="buyer-column">
+                                        <div className="buyer-card">
+                                            <img src={buypic} alt="logo" />
+                                            <h1>Lk Collectors</h1>
+                                            <p>We are collecting plastic and plastic related items.</p>
+                                            <h4>Rathings</h4>
+                                            <div className="ratings-star">
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                                <span className="fa fa-star checked"></span>
+                                            </div>
+                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
+                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
+                                        </div>
+                    
+                                    </div>
+                
+                
                                 </div>
                             </div>
                             <div className="buyer-list">
@@ -203,6 +202,6 @@ export default function Buyer() {
                             </div>
                         </div>
             }
-    </>
+            </>
     )
 }

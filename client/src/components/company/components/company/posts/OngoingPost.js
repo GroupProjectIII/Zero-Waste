@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './Posts.css';
 import axios from "axios";
 import moment from "moment";
+import {Link} from "react-router-dom";
 
 function OngoingPost() {
 
@@ -40,7 +41,14 @@ function OngoingPost() {
     }
     console.log(offers);
 
-    const wasteItem = offers?.filter(wasteItem => wasteItem.status==='pending' && wasteItem.companyId===companyId);
+    const date2 = new Date();
+    date2.setDate(date2.getDate());
+
+    const wasteItem = offers?.filter(wasteItem =>
+        wasteItem.status==='pending' &&
+        wasteItem.companyId===companyId &&
+        new Date(wasteItem.expiryDate)>=date2
+    );
     console.log(wasteItem);
 
     return(
@@ -58,7 +66,10 @@ function OngoingPost() {
                                         <p>Waste Item: {note.item}</p>
                                         <p>Quantity: {note.quantity}</p>
                                         <p>Available Date: {moment(note.avbDate).fromNow()}</p>
-                                        <button >View Offers <i className="fas fa-angle-double-right"></i></button>
+                                        <div className="companylink-c">
+                                            <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                  to={`/company/offersforposts/${note._id}`}>View Offers <i className="fas fa-angle-double-right"></i></Link>
+                                        </div>
                                     </div>
                             </article>
                     );

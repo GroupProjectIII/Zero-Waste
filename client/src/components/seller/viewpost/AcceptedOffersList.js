@@ -7,7 +7,6 @@ import './SellerOfferList.css';
 import moment from 'moment';
 
 export default function AcceptedOffersList() {
-
     const history = useHistory()
     if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "seller")) {
         history.push("/");
