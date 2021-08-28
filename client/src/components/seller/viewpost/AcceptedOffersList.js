@@ -69,7 +69,7 @@ export default function AcceptedOffersList() {
                                                 <tr>
                                                     <td>
                                                         <Link style={{ textDecoration: 'none' }}
-                                                        to={`/seller/viewpost/${offer.postId}`}>
+                                                        to={`/seller/viewpost/${offer.postId._id}`}>
                                                         <img classNane="seller-offer-image"
                                                             src={offer?.postId?.thumbnail}
                                                             alt="">
