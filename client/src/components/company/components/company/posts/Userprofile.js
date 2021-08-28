@@ -1,11 +1,17 @@
 import React, { useEffect,useState } from "react";
-import './Userprofile.css';
+import '../../../../buyer/posts/Posts.css';
 import axios from "axios";
 import moment from "moment";
 import {Link, useHistory} from "react-router-dom";
 import emailjs from "emailjs-com";
+import '../../../../buyer/posts/LoadingRing.css';
+import './Userprofile.css';
+import './Posts.css';
 
 function UserProfile() {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     const companyId=(localStorage.getItem("userId"));
     console.log(companyId);
@@ -17,12 +23,18 @@ function UserProfile() {
     }, []);
 
     const getAllComments = async () => {
+        setIsLoading(true)
+        try{
         await axios.get(`/viewRateAndComment`)
             .then ((response)=>{
                 const allNotes=response.data.existingComments;
                 setComments(allNotes);
+                setIsLoading(false)
             })
-            .catch(error=>console.error(`Error: ${error}`));
+        }catch (error) {
+            console.error(`Error: ${error}`)
+            setHasError(true)
+        }
     }
     console.log(comments);
 
@@ -106,54 +118,93 @@ function UserProfile() {
     };
 
     return(
-        <div className="profile_body-c">
-            <div id="profile_content2-c">
-                {oneCompany.map((com, index) => (
-                <div className="description-c" id="description-c">
-                    <h3 className="company_name-c">Company Name : {com.companyName}</h3><br></br>
-                    <h4 className="company_email-c">Company Email : {companyEmail}</h4><br></br>
-                    <h4 className="company_mobile-c">Company Contact No : {com.companyContact}</h4><br></br>
-                    <h4 className="company_address-c">Company Address : {com.address}</h4><br></br>
-                    <h4 className="company_collecting_area-c" >Waste Type: {com.wasteType}</h4><br></br>
-                    <h4 className="company_collecting_area-c" >Waste Item: {com.wasteItem}</h4><br></br>
-                    <h4 className="company_collecting_area-c" >Registered Date: {moment(com.CreatedAt).fromNow()}</h4><br></br>
-                    <div className="buttons-c" >
-                        <div className="buttons" >
-                            <span className="action_btn-b">
-                                <Link style={{color: '#fff', textDecoration: 'none'}}
-                                      to={`/company/editprofile/${com._id}`}
-                                >Edit Profile <i className="fas fa-edit"></i></Link>
-                                <button onClick={() => {
-                                    deleteCompanyDetails(com._id)
-                                }}>Delete Profile <i className="fas fa-trash-alt"></i></button>
-                            </span>
+        <>
+            {
+                isLoading ?
+                    <div className="posts-b">
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
                         </div>
-                    </div>
-                </div>
-                ))}
-            </div>
-
-            <div id="profile_content3-c">
-                <h1>Comments and Reviews</h1>
-                {sellerComment.map((post, index) => (
-                    <div className="profile_reviews_c">
-                        <div className="profile_reviews_body_c">
-                            <div className="profile_review_body_header_c">
-                                <div className="profile_div_star-c">
-                                    <i className="fas fa-star"></i> {post.rating}/5
+                    </div> : hasError ?
+                        <div className="posts-b">
+                            <h1>Error Occurred</h1>
+                        </div> :
+                        <div className="posts-b">
+                            <div className="posts__container-b">
+                                <h1>Profile Details</h1>
+                                <div className="seller-container-b">
+                                    {oneCompany.map((com,index)=> (
+                                        <ol className="list">
+                                            <li ><span>Company Name: {com.companyName}</span></li>
+                                            <li ><span>Company Address : {com.address}</span></li>
+                                            <li ><span>Company Email : {companyEmail}</span></li>
+                                            <li ><span>Waste Type: {com.wasteType}</span></li>
+                                            <li ><span>Waste Item: {com.wasteItem}</span></li>
+                                            <li ><span>Registered Date: {moment(com.CreatedAt).fromNow()}</span></li>
+                                        </ol>
+                                    ))}
                                 </div>
-                                <h3>by {post.commenterName} at {moment(post.CreatedAt).fromNow()}</h3>
+                                <div className="all-items-button-b">
+                                    {oneCompany.map((com,index)=> (
+                                        <main className="grid-b">
+                                            <article>
+                                                <div className="text-c">
+                                                    <div className="companylink-c">
+                                                        <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                              to={`/company/profile`}
+                                                        >View Profile <i className="fas fa-angle-double-right"></i></Link>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                            <article>
+                                                <div className="text-c">
+                                                    <div className="companylink-c">
+                                                        <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                              to={`/company/editprofile/${com._id}`}
+                                                        >Edit Profile <i className="fas fa-edit"></i></Link>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                            <article>
+                                                <div className="text-c">
+                                                    <div className="delete-button-c">
+                                                        <button onClick={() => {
+                                                            deleteCompanyDetails(com._id)
+                                                        }}>Delete Profile <i className="fas fa-trash-alt"></i></button>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </main>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="profile_review_body-c">
-                                <h4>{post.comment}</h4>
-                                <br></br>
-                                <hr></hr>
+                            <div id="profile_content3-c">
+                                <h1 style={{color:'#164A41'}}>Comments and Reviews</h1>
+                                {sellerComment.map((post, index) => (
+                                    <div className="profile_reviews_c">
+                                        <div className="profile_reviews_body_c">
+                                            <div className="profile_review_body_header_c">
+                                                <div className="profile_div_star-c">
+                                                    <i className="fas fa-star"></i> {post.rating}/5
+                                                </div>
+                                                <h3>by {post.commenterName} at {moment(post.CreatedAt).fromNow()}</h3>
+                                            </div>
+                                            <div className="profile_review_body-c">
+                                                <h4>{post.comment}</h4>
+                                                <br></br>
+                                                <hr></hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-        </div>
+            }
+
+        </>
     );
 }
 

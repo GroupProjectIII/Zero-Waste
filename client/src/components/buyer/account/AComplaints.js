@@ -113,6 +113,13 @@ function AComplaints() {
     return(
     <div className="forms-b">
         <div className="forms__container-b" >
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <div className="container-b">
                 <div className="title-b">Add Complaints</div>
                 <div className="content-b">
@@ -135,6 +142,13 @@ function AComplaints() {
                     </form>
                 </div>
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     </div>
     );

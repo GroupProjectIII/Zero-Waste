@@ -91,6 +91,7 @@ export default function SellerOfferList() {
                             <h1>Error occured.</h1>
                         </div> :
                         <div className="seller-offer-list-background">
+
                             <div className="seller-post-list">
                                 {buyerOffers.map((offer) => {
                                     if (offer.wasteItemsListId === "completePost" && offer.status === "pending")
@@ -108,10 +109,12 @@ export default function SellerOfferList() {
                                                     <a className="offer-list-accept"
                                                         href="#"
                                                         onClick={() => {
+
                                                             let offerId = offer._id;
                                                             let postId = offer.postId;
                                                             console.log(offerId);
                                                             sellerAcceptCompletePostOffer(offerId, postId);
+
                                                         }}
                                                     >Accept</a>
                                                     <a className="offer-list-decline"
@@ -198,6 +201,7 @@ export default function SellerOfferList() {
                                 
                             </div>
                             
+
                         </div>
             }
 

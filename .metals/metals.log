@@ -159,5 +159,7 @@ INFO: Unsupported notification method: $/setTrace
 [0m2021.08.28 08:29:02 INFO  time: initialize in 2.94s[0m
 [0m2021.08.28 08:29:14 WARN  Build server is not auto-connectable.[0m
 [0m2021.08.28 08:29:14 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+
 Aug 28, 2021 12:00:37 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
+

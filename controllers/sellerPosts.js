@@ -120,7 +120,30 @@ exports.sellerAcceptPostOffer = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
     const updatedOffer = { status };
     await BuyerOffersForSeller.updateMany({ "postId": postId, "_id": { $ne: id } }, { $set: { status: "decline" } });
+
     
+    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
+
+    
+    res.json("Offer Accepted");
+}
+
+exports.sellerAcceptWasteItemOffer = async(req, res) => {
+    const { id } = req.params;
+    const { status, wasteItemsListId } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    const updatedOffer = { status };
+    await BuyerOffersForSeller.updateMany({ "wasteItemsListId": wasteItemsListId, "_id": { $ne: id } }, { $set: { status: "decline" } });
+   
+    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
+
+}
+
+exports.sellerDeclineOffer = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    const updatedOffer = { status };
     await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
     
     res.json("Offer Accepted");
