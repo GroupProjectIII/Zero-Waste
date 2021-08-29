@@ -134,7 +134,7 @@ exports.sellerAcceptWasteItemOffer = async(req, res) => {
     await BuyerOffersForSeller.updateMany({ "wasteItemsListId": wasteItemsListId, "_id": { $ne: id } }, { $set: { status: "decline" } });
    
     await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
-
+    res.json(updatedOffer);
 }
 
 exports.sellerDeclineOffer = async (req, res) => {
