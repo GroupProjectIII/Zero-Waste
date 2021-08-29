@@ -53,7 +53,9 @@ app.use(buyerProfile);
 
 
 const companyPosts = require("./routes/companyPosts");
+const companyDetail = require("./routes/companyDetail");
 app.use(companyPosts);
+app.use(companyDetail );
 
 const contactBuyer = require("./routes/contactBuyer");
 app.use(contactBuyer);

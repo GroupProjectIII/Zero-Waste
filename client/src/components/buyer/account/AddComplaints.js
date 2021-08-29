@@ -2,7 +2,6 @@ import React from 'react';
 import AComplaints from './AComplaints';
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
-import AccountSidebar from "./AccountSidebar";
 import {useHistory} from "react-router-dom";
 
 function AddComplaints() {
@@ -16,7 +15,6 @@ function AddComplaints() {
     return (
         <>
             <Navbar/>
-            <AccountSidebar/>
             <AComplaints/>
             <Footer/>
         </>

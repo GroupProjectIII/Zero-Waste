@@ -83,6 +83,7 @@ export default function SellerOfferList() {
                           
                             </div>
                             
+
                         </div>
             }
 

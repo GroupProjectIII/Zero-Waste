@@ -182,6 +182,9 @@ function CompanyNotifyForms() {
     return(
         <div className="forms-b">
             <div className="forms__container-b" >
+                <br></br>
+                <br></br>
+                <br></br>
                 <div className="container-b">
                     <div className="title-b">Notify Company</div>
                     <div className="content-b">
@@ -249,6 +252,9 @@ function CompanyNotifyForms() {
                         </form>
                     </div>
                 </div>
+                <br></br>
+                <br></br>
+                <br></br>
             </div>
         </div>
     );

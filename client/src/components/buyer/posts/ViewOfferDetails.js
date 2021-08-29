@@ -3,8 +3,12 @@ import './Posts.css';
 import {useParams} from "react-router-dom";
 import axios from 'axios';
 import moment from 'moment';
+import './LoadingRing.css';
 
 function ViewOfferDetails() {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     const { offerId } = useParams();
     console.log(offerId);
@@ -45,14 +49,17 @@ function ViewOfferDetails() {
     }, [offerPosts]);
 
     const getOneOfferPost = async () => {
+        setIsLoading(true)
         if(PostId2 !== undefined) {
             try {
                 const response = await axios.get(`/buyerGetOnePost/${PostId2}`)
                 console.log(response);
                 const allOfferPost=response.data.onePost;
                 setOfferPosts(allOfferPost);
+                setIsLoading(false)
             } catch (error) {
                 console.error(`Error: ${error}`)
+                setHasError(true)
             }
         }
     }
@@ -68,50 +75,67 @@ function ViewOfferDetails() {
     console.log(wasteItemsListId);
 
     return(
-        <div className="posts-b">
-            <div className="posts__container-b">
-                <h1>Offer Details</h1>
-                <div className="seller-container-b">
-                    <ol className="list">
-                        <li ><span>Seller Name: {offerPosts.sellerName}</span></li>
-                        <li ><span>Seller Address: {offerPosts.address}</span></li>
-                        <li ><span>Telephone No: {offerPosts.contact}</span></li>
-                        <li ><span>Post Type: {offerPosts.postType}</span></li>
-                    </ol>
-                </div>
-                <main className="grid-b">
-                    {offerPosts && offerPosts.wasteItemList && offerPosts.wasteItemList.map((post,index)=> {
-                        if(post._id === wasteItemsListId){
-                            return (
-                                <article>
-                                    <img src={post.selectedFile} alt=""></img>
-                                    <div className="text-b">
-                                        <h3>Post ID: {index + 1}</h3>
-                                        <p>Waste Type: {post.wasteType}</p>
-                                        <p>Waste Item: {post.item}</p>
-                                        <p>Quantity: {post.quantity} kg</p>
-                                        <p>Can Collect Items: {moment(post.avbDate).fromNow()}</p>
-                                    </div>
-                                </article>
-                            );
-                        }else if(wasteItemsListId === 'completePost'){
-                            return (
-                                <article>
-                                    <img src={post.selectedFile} alt=""></img>
-                                    <div className="text-b">
-                                        <h3>Post ID: {index + 1}</h3>
-                                        <p>Waste Type: {post.wasteType}</p>
-                                        <p>Waste Item: {post.item}</p>
-                                        <p>Quantity: {post.quantity} kg</p>
-                                        <p>Can Collect Items: {moment(post.avbDate).fromNow()}</p>
-                                    </div>
-                                </article>
-                            );
-                        }
-                    })}
-                </main>
-            </div>
-        </div>
+        <>
+            {
+                isLoading ?
+                    <div className="posts-b">
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> : hasError ?
+                        <div className="posts-b">
+                            <h1>Error Occurred</h1>
+                        </div> :
+                        <div className="posts-b">
+                            <div className="posts__container-b">
+                                <h1>Offer Details</h1>
+                                <div className="seller-container-b">
+                                    <ol className="list">
+                                        <li ><span>Seller Name: {offerPosts.sellerName}</span></li>
+                                        <li ><span>Seller Address: {offerPosts.address}</span></li>
+                                        <li ><span>Telephone No: {offerPosts.contact}</span></li>
+                                        <li ><span>Post Type: {offerPosts.postType}</span></li>
+                                    </ol>
+                                </div>
+                                <main className="grid-b">
+                                    {offerPosts && offerPosts.wasteItemList && offerPosts.wasteItemList.map((post,index)=> {
+                                        if(post._id === wasteItemsListId){
+                                            return (
+                                                <article>
+                                                    <img src={post.selectedFile} alt=""></img>
+                                                    <div className="text-b">
+                                                        <h3>Post ID: {index + 1}</h3>
+                                                        <p>Waste Type: {post.wasteType}</p>
+                                                        <p>Waste Item: {post.item}</p>
+                                                        <p>Quantity: {post.quantity} kg</p>
+                                                        <p>Can Collect Items: {moment(post.avbDate).fromNow()}</p>
+                                                    </div>
+                                                </article>
+                                            );
+                                        }else if(wasteItemsListId === 'completePost'){
+                                            return (
+                                                <article>
+                                                    <img src={post.selectedFile} alt=""></img>
+                                                    <div className="text-b">
+                                                        <h3>Post ID: {index + 1}</h3>
+                                                        <p>Waste Type: {post.wasteType}</p>
+                                                        <p>Waste Item: {post.item}</p>
+                                                        <p>Quantity: {post.quantity} kg</p>
+                                                        <p>Can Collect Items: {moment(post.avbDate).fromNow()}</p>
+                                                    </div>
+                                                </article>
+                                            );
+                                        }
+                                    })}
+                                </main>
+                            </div>
+                        </div>
+            }
+
+        </>
     );
 }
 

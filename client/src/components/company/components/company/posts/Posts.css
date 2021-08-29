@@ -1,6 +1,10 @@
 .posts-c {
     padding: 4rem;
     background: url('../home/images/background1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .posts__container-c {
@@ -65,8 +69,7 @@
 }
 
 .text-c button:hover {
-    background: #CFF4D2;
-    color: #000;
+    opacity: 0.8;
     transition: .3s;
 }
 
@@ -190,7 +193,7 @@
     background-color: #1a83ff;
 }
 
-.companylink-c{
+.text-c .companylink-c{
     background: #309103;
     border-radius: 20px;
     border: none;
@@ -203,9 +206,8 @@
     margin-top: 10px;
 }
 
-.companylink-c:hover{
-    background: #CFF4D2;
-    color: #000;
+.text-c .companylink-c:hover{
+    opacity: 0.8;
     transition: .3s;
 }
 
