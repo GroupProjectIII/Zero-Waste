@@ -61,7 +61,7 @@ export default function AcceptedOffersList() {
                                         } else {
                                             var item = offer.postId.wasteItemList.find(element => element._id === offer.wasteItemsListId);
                                             return (
-                                                <AcceptedOffer offer={offer} post={""} item={item} />
+                                                <AcceptedOffer offer={offer} post={"Post Item"} item={item} />
                                             )
                                         }
                         

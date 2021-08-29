@@ -31,6 +31,7 @@ const AcceptedOffer = (props) => {
                     <p>Buyer Name: {offer.buyerName}</p>
                     <p>Offer For {post}</p>
                     <p>{offer.status}</p>
+                    <p>{offer.verificationCode}</p>
                 <p>Value: {offer.value}</p>
                     <p>Collecting Date: {offer.collectingDate} At: {offer.collectingTime}</p>
                 <p>Offer Expiery Date: {offer.expiryDate}</p>

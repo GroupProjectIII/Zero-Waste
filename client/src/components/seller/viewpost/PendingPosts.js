@@ -5,7 +5,8 @@ import {Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import PostList from "./PostList";
-
+import {Slide, toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PendingPosts() {
 
@@ -42,6 +43,20 @@ export default function PendingPosts() {
 
     }
 
+    const deletePost = (id) => {
+        axios.delete(`/deletePendingSellerPost/${id}`)
+            .then((result) => {
+                toastNotification();
+                getSellerPosts();
+            });
+    };
+
+    const toastNotification = () => {
+        toast.info("Deleted successfully !", {
+            transition: Slide
+        })
+    };
+
     console.log("SELLERPOSTS",sellerPosts);
     console.log("SelleroFFERS",sellerOffers);
 
@@ -65,7 +80,33 @@ export default function PendingPosts() {
                                     {sellerPosts.map((note, index) => {
                                         if (wasteItem.find(o => o.postId === note._id) === undefined)
                                             return (
-                                                <PostList note={note}/>
+                                                <article>
+                                                    <img src={note.thumbnail} alt=""></img>
+                                                    <div className="text-b">
+         
+                                                        <p>Seller Name: {note.sellerName}</p>
+                                                        <p>District: {note.sellerDistrict}</p>
+                                                        <p>Post Type: {note.postType}</p>
+                                                        <p>Address: {note.address}</p>
+                                                        <p>Telephone No: {note.contact}</p>
+                                                        <div className="buyerlink-b">
+                                                            <Link style={{ color: '#fff', textDecoration: 'none' }}
+                                                                to={`/seller/viewpost/${note._id}`}>View Post <i
+                                                                    className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
+                                                        <div className="buyerlink-b">
+                                                            <Link style={{ color: '#fff', textDecoration: 'none' }}
+                                                                to={`/seller/viewpost/${note._id}`}>Edit Post <i
+                                                                    className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
+                                                        <div className="buyerlink-b">
+                                                            <button onClick={() => {
+                                                                deletePost(note._id);
+                                                            }}>Delete Post</button>
+                                                        </div>
+                
+                                                    </div>
+                                                </article>
                                                
                                             );
                                     

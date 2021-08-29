@@ -20,7 +20,7 @@ exports.sellerViewBuyerDetails = async (req, res) => {
 
 exports.sellerViewAllBuyers = async (req, res) => {
 
-    BuyerDetails.find({"buyerId":{$ne: null}},{ buyerId: 1, buyerName: 1, buyerDescription: 1, buyerAddress: 1, buyerContact: 1 }).exec((err, buyers) => {
+    BuyerDetails.find({"buyerId":{$ne: null}}).exec((err, buyers) => {
         if (err) {
             return res.status(400).json({
                 error: err

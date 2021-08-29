@@ -1,5 +1,7 @@
 import '../../buyer/posts/Posts.css';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from 'axios';
+
 const PostList = (props) => {
     const note = props.note;
 
@@ -23,6 +25,12 @@ const PostList = (props) => {
                     to={`/seller/viewpost/${note._id}`}>Edit Post <i
                         className="fas fa-angle-double-right"></i></Link>
             </div>
+            <div className="buyerlink-b">
+                    <button onClick={() => {
+                        
+                }}>Delete Post</button>
+            </div>
+                
         </div>
     </article>
     )
