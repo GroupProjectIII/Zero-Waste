@@ -47,12 +47,14 @@ const Offer = (props) => {
     }
 
     const sellerAcceptOffer = () => {
-        console.log("accept",itemId);
+        console.log("accept", itemId);
+        var vfCode = Math.floor(100000 + Math.random() * 900000);
         if (item) {
             console.log("item",itemId)
             const data = {
                 status: "accepted",
                 wasteItemsListId: itemId,
+                verificationCode: vfCode,
             };
             axios.patch(`/sellerAcceptWasteItemOffer/${offerId}`, data)
                 .then((result) => {
@@ -62,6 +64,7 @@ const Offer = (props) => {
             const data = {
                 status: "accepted",
                 postId: offer.postId._id,
+                verificationCode: vfCode,
             };
             axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)
                 .then((result) => {
@@ -74,6 +77,7 @@ const Offer = (props) => {
         
 
     }
+    
     return (
         <article>
             <img src={thumbnail} alt=""></img>

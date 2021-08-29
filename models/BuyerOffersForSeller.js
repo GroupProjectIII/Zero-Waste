@@ -52,7 +52,11 @@ const sellerOfferSchema = new mongoose.Schema({
     buyerName: {
         type: String,
         required:true
-    }
+    },
+    collectedStatus: String,
+    verificationCode: Number
+
+
 });
 
 module.exports = mongoose.model('BuyerOffersForSeller', sellerOfferSchema);

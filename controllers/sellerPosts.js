@@ -116,9 +116,9 @@ exports.sellerViewOnePostDetails = async (req, res) => {
 
 exports.sellerAcceptPostOffer = async (req, res) => {
     const { id } = req.params;
-    const { status, postId } = req.body;
+    const { status, postId, vfCode } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    const updatedOffer = { status };
+    const updatedOffer = { status,vfCode };
     await BuyerOffersForSeller.updateMany({ "postId": postId, "_id": { $ne: id } }, { $set: { status: "decline" } });
 
     
@@ -130,9 +130,9 @@ exports.sellerAcceptPostOffer = async (req, res) => {
 
 exports.sellerAcceptWasteItemOffer = async(req, res) => {
     const { id } = req.params;
-    const { status, wasteItemsListId } = req.body;
+    const { status, wasteItemsListId, vfCode } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    const updatedOffer = { status };
+    const updatedOffer = { status, vfCode };
     await BuyerOffersForSeller.updateMany({ "wasteItemsListId": wasteItemsListId, "_id": { $ne: id } }, { $set: { status: "decline" } });
    
     await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
@@ -184,4 +184,13 @@ exports.sellerViewAcceptedOffers = async (req, res) => {
         });
     });
 
+}
+
+exports.deletePendingSellerPost = async (req, res) => {
+    let postId = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    await SellerPost.findByIdAndRemove(id);
+
+    res.json({ message: "Post deleted successfully." });
 }
