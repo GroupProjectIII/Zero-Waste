@@ -5,6 +5,7 @@ import axios from 'axios';
 import SimpleMap from "./Location";
 import moment from 'moment';
 import StartRating from "./Ratings";
+import './LoadingRing.css';
 
 function ViewPost() {
 

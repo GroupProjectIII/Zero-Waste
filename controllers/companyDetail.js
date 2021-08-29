@@ -6,7 +6,7 @@ const CompanyDetail = require("../models/CompanyDetail");
 exports.addCompanyDetails= async (req,res)=>{
     const { companyName, companyContact, address, wasteType, wasteItem, companyId, description} = req.body;
 
-    const newCompanyDetails = new CompanyDetails({ companyName, companyContact, address, wasteType, wasteItem, companyId, description})
+    const newCompanyDetails = new CompanyDetail({ companyName, companyContact, address, wasteType, wasteItem, companyId, description})
 
     try {
         await newCompanyDetails.save();
@@ -31,3 +31,30 @@ exports.viewCompanyDetails = async (req, res) => {
         });
     });
 };
+
+exports.editCompanyDetails = async (req, res) => {
+    const { id } = req.params;
+    const { companyName, companyContact, address, wasteType, wasteItem, description} = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedPost = { companyName, companyContact, address, wasteType, wasteItem, description, _id: id };
+
+    await CompanyDetail.findByIdAndUpdate(id, updatedPost, { new: true });
+
+    res.json(updatedPost);
+}
+
+exports.companyGetOneCompanyDetail= async (req,res)=>{
+    let postId = req.params.id;
+
+    CompanyDetail.findById(postId,(err,post)=>{
+        if(err){
+            return res.status(400).json({success:false, err});
+        }
+        return res.status(200).json({
+            success:true,
+            onePost:post
+        })
+    })
+}

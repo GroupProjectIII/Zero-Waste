@@ -30,10 +30,6 @@ const sellerOfferSchema = new mongoose.Schema({
         required:true
     },
     postId: {
-        type: String,
-        required:true  
-    },
-    post: {
         type: mongoose.Schema.Types.ObjectId, ref:'SellerPost',
         required:true
     },
@@ -56,7 +52,11 @@ const sellerOfferSchema = new mongoose.Schema({
     buyerName: {
         type: String,
         required:true
-    }
+    },
+    collectedStatus: String,
+    verificationCode: Number
+
+
 });
 
 module.exports = mongoose.model('BuyerOffersForSeller', sellerOfferSchema);

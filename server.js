@@ -53,7 +53,9 @@ app.use(buyerProfile);
 
 
 const companyPosts = require("./routes/companyPosts");
+const companyDetail = require("./routes/companyDetail");
 app.use(companyPosts);
+app.use(companyDetail );
 
 const contactBuyer = require("./routes/contactBuyer");
 app.use(contactBuyer);
@@ -67,6 +69,7 @@ app.use('/posts', postRoutes);
 
 const sellerPostRoutes = require("./routes/sellerPosts");
 const sellerViewBuyerRoutes = require("./routes/SellerViewBuyers");
+const sellerRateAndComment = require("./routes/sellerViewBuyerComments");
 app.use(sellerViewBuyerRoutes);
 app.use(sellerPostRoutes);
 
