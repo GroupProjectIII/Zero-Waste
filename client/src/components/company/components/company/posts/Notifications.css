@@ -35,6 +35,11 @@
     width: 100%;
 }
 
+.n_header-c h2{
+    margin-left: 20px;
+    text-transform: capitalize;
+}
+
 #n_image-c {
     border-radius: 50%;
     height: 60px;

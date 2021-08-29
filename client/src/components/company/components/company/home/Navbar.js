@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from "react";
 import { Button } from './NavButton';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -10,12 +11,39 @@ function Navbar() {
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
+    const companyId=(localStorage.getItem("userId"));
+    console.log(companyId);
+
+ 
+
+    
+
+    const [companyDetails, setCompanyDetails] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`/getCompanyDetailsForCompany`)
+            .then((response) => setCompanyDetails(response.data.existingCompany))
+            .catch((err) => console.error(err));
+    }, []);
+
+    console.log(companyDetails);
+
+    const oneCompany = companyDetails.filter(oneBuyer => oneBuyer.companyId === companyId);
+    console.log(oneCompany);
+
     const history = useHistory();
 
     const logoutHandler = () =>{
         localStorage.removeItem("authToken");
         history.push("/");
     };
+
+    
+
+    
+
+   
 
     return (
         <>
@@ -27,12 +55,14 @@ function Navbar() {
                 <div className='menu-icon-b' onClick={handleClick}>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                 </div>
-                <ul className={click ? 'nav-menu-b active' : 'nav-menu-b'}>                   
-                    <li className='nav-item-b'>
+                <ul className={click ? 'nav-menu-b active' : 'nav-menu-b'}>   
+                {oneCompany.map((com, index) => (                
+                    <li className='nav-item-b' id="company_Name_c">
                         <Link to='/company/profile' className='nav-links-b' onClick={closeMobileMenu}>
-                            WCP Compnay
+                        {com.companyName}
                         </Link>
-                    </li>                     
+                    </li> 
+                 ))}                  
                     <li className='nav-item-b'>
                         <Link to='/company/companypost' className='nav-links-b' onClick={closeMobileMenu}>
                             Posts

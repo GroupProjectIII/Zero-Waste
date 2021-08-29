@@ -16,11 +16,4 @@ export const SidebarData = [
         icon: <FaIcons.FaTasks />,
         cName: 'nav-text-c'
     },
-    
-    {
-        title: 'Helpdesk',
-        path: '/company/helpdesk',
-        icon: <FaIcons.FaQuestion />,
-        cName: 'nav-text-c'
-    },
 ];

@@ -107,7 +107,7 @@ function UserProfile() {
 
     return(
         <div className="profile_body-c">
-            <div id="profile_content2-c">
+            <div id="profile_content1-c">
                 {oneCompany.map((com, index) => (
                 <div className="description-c" id="description-c">
                     <h3 className="company_name-c">Company Name : {com.companyName}</h3><br></br>
