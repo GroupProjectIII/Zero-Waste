@@ -12,10 +12,14 @@
   font-size: 12px;
   color: #004d40;
   text-align: center;
-  padding: 3rem;
   position: relative;
   z-index: -1;
+  padding: 4rem;
   background: url('../home/images/background1.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #profile_content1-c {
@@ -88,7 +92,7 @@
   display: inline;
 }
 
-#profile_content3-c .profile_reviews_header_c { 
+#profile_content3-c .profile_reviews_header_c {
   color: orange;
 }
 
@@ -183,28 +187,27 @@
     grid-template-rows: 0.3fr 0.4fr 1fr;
     grid-template-areas:
       "content1-c"
-      "content2-c"
       "content3-c";
   }
 }
 
 @media only screen and (min-width:768px) {
   .profile_body-c {   
-    grid-template-columns: 0.6fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 0.3fr 0.7fr;
     grid-template-areas:
-      "content1-c content2-c"
-      "content3-c content3-c";
+      "content1-c"
+      "content3-c";
   }
 }
 
 @media only screen and (min-width:992px) {
   .profile_body-c {
-    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 0.2fr 0.8fr;
     grid-template-areas:
-      "content1-c content2-c"
-      "content3-c  content3-c";
+      "content1-c"
+      "content3-c";
   }
 }
 

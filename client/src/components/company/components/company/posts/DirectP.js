@@ -3,19 +3,16 @@ import "./Modal.css";
 import './AcceptedOffers.css';
 import axios from "axios";
 import {Link} from "react-router-dom";
+import moment from "moment";
+import '../../../../buyer/posts/LoadingRing.css';
 
 function DirectP() {
-  const [modal, setModal] = useState(false);
 
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
-  if(modal) {
-    document.body.classList.add('active-modal')
-  } else {
-    document.body.classList.remove('active-modal')
-  }
+    const companyId=(localStorage.getItem("userId"));
+    console.log(companyId);
 
   const companyId=(localStorage.getItem("userId"));
     console.log(companyId);
@@ -27,84 +24,107 @@ function DirectP() {
     }, []);
 
     const getAllNotes = async () => {
-        await axios.get(`/getCompanyPostsForCompany`)
+        setIsLoading(true)
+        try{
+        await axios.get(`/getNotifyDetailsForCompany`)
             .then ((response)=>{
                 const allNotes=response.data.existingPosts;
                 setNotes(allNotes);
+                setIsLoading(false)
             })
-            .catch(error=>console.error(`Error: ${error}`));
+        }catch (error) {
+            console.error(`Error: ${error}`)
+            setHasError(true)
+        }
     }
     console.log(notes);
 
-    const wasteItem = notes?.filter(wasteItem => wasteItem.companyId===companyId);
+    const wasteItem = notes?.filter(wasteItem => wasteItem.companyId === companyId);
     console.log(wasteItem);
 
-  return(
-    <>
-      <div className="tables-c">
-        <div className="tables__container-c">
-          <h1>Direct Offers</h1>
-            <div className="search_box-c">
-                <input type="text" placeholder="What are you looking for?"></input>
-                <i className="fas fa-search"></i>
-            </div>
-            <table className="table-c">
-              <thead>
-                <tr>
-                    <th>Offer ID</th>
-                    <th>Buyer</th>
-                    <th>Waste Type</th>
-                    <th>Waste Item</th>
-                    <th>Date</th>
-                    <th>Quantity</th>
-                    <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {wasteItem.map((note,index)=> (
-                  <tr>
-                    <td data-label="Offer ID">{index + 1}</td>
-                    <td data-label="Buyer"><u><button onClick={toggleModal} className="btn-modal-c">{note.buyerId}</button></u></td>
-                    <td data-label="Waste Type">{note.wasteType}</td>
-                    <td data-label="Waste Item">{note.wasteItem}</td>
-                    <td data-label="Date">{note.date}</td>
-                    <td data-label="Quantity">{note.quantity}</td>
-                    <td data-label="Action">
-                      <span className="action_btn-c">
-                        <a href="#" >Accept</a>
-                        <a href="#">Reject</a>
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+    const filterData = (postsPara, searchKey) => {
+        const result = postsPara.filter(
+            (notes) =>
+                notes?.buyerName.toLowerCase().includes(searchKey) ||
+                notes?.wasteType.toLowerCase().includes(searchKey) ||
+                notes?.wasteItem.toLowerCase().includes(searchKey) ||
+                notes?.value.toString().toLowerCase().includes(searchKey)  ||
+                notes?.quantity.toString().toLowerCase().includes(searchKey)
+        );
+        setNotes(result);
+    };
 
-        {modal && (
-          <div className="modal">
-            <div onClick={toggleModal} className="overlay-c"></div>
-            <div className="modal-content-c">
-              <div className="contact-c">
-                <img src="../../images/polythene.jpg" alt="" className="profileimage-c"></img>
-                <h1>Tom Harrison</h1><br></br>
-                <h2 >Email: th@gmail.com</h2><br></br>
-                <h2>Contact: 011-1111111</h2>
-              </div>
-              <div className="detail-c">
-                <label>Collecting Area: </label><h2>Colombo</h2><br></br>
-                <label>Address: </label><h2> Reid Aveneu, Colombo 07</h2><br></br>
-                <label>Working Hours: </label><h2> 8.00 a.m - 5.00 p.m</h2><br></br>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Providentperferendis suscipit officia recusandae.</p>
-              </div>
-              <button className="close-modal-c" onClick={toggleModal}>
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
-        )}
-    </>
+    const handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+        axios.get(`/getNotifyDetailsForCompany`).then((res) => {
+            if (res?.data?.success) {
+                filterData(res?.data?.existingPosts, searchKey);
+            }
+        });
+    };
+
+  return(
+      <>
+          {
+              isLoading ?
+                  <div className="tables-c">
+                      <div className="lds-ring">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                      </div>
+                  </div> : hasError ?
+                      <div className="tables-c">
+                          <h1>Error Occurred</h1>
+                      </div> :
+                  <div className="tables-c">
+                    <div className="tables__container-c">
+                      <h1>Direct Offers</h1>
+                        <div className="search_box-c">
+                            <input type="text" placeholder="What are you looking for?" onChange={handleSearchArea}></input>
+                            <i className="fas fa-search"></i>
+                        </div>
+                        <table className="table-c">
+                          <thead>
+                            <tr>
+                                <th>Offer ID</th>
+                                <th>Buyer Name</th>
+                                <th>Waste Type</th>
+                                <th>Waste Item</th>
+                                <th>Quantity (Kg)</th>
+                                <th>Value (Rs)</th>
+                                <th>Delivery Date</th>
+                                <th>Expiry Date</th>
+                                <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {wasteItem.map((note,index)=> (
+                              <tr>
+                                <td data-label="Offer ID">{index + 1}</td>
+                                <td data-label="Buyer Name">{note.buyerName}</td>
+                                <td data-label="Waste Type">{note.wasteType}</td>
+                                <td data-label="Waste Type">{note.wasteItem}</td>
+                                <td data-label="Quantity (Kg)">{note.quantity}</td>
+                                  <td data-label="Value (Rs)">{note.value}</td>
+                                  <td data-label="Delivery Date">{moment(note.deliveryDate).fromNow()}</td>
+                                  <td data-label="Expiry Date">{moment(note.expiryDate).fromNow()}</td>
+                                <td data-label="Action">
+                                <span className="action_btn-b">
+                                  <Link style={{color: '#000', textDecoration: 'none'}}
+                                        to={`/company/buyerdirectpost/${note.buyerId}`}>Accept</Link>
+                              </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                      }
+
+      </>
   );
 }
 

@@ -64,3 +64,9 @@
   .offer-list-view-post{
       background-color: green;
   }
+  
+  .seller-post-offer-details{
+      
+      display: inline-table;
+
+  }

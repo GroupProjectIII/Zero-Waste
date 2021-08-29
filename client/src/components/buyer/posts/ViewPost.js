@@ -4,6 +4,8 @@ import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import SimpleMap from "./Location";
 import moment from 'moment';
+import StartRating from "./Ratings";
+import './LoadingRing.css';
 
 function ViewPost() {
 
@@ -66,13 +68,15 @@ function ViewPost() {
     const wasteItem = offers?.filter(wasteItems => wasteItems.status==='accepted' && wasteItems.postId===postId);
     console.log(wasteItem);
 
+    const selId = {sellerId};
+
     return(
         <div className="posts-b">
             <div className="posts__container-b">
                 <h1>Post Details</h1>
                 <div className="seller-container-b">
                     <ol className="list">
-                        <li ><span>Seller Name: {posts.address}</span></li>
+                        <li ><span>Seller Name: {posts.sellerName}</span></li>
                         <li ><span>Seller Address: {posts.address}</span></li>
                         <li ><span>Telephone No: {posts.contact}</span></li>
                         <li ><span>Post Type: {posts.postType}</span></li>
@@ -104,9 +108,20 @@ function ViewPost() {
                         <p>Do you want to make an offer for all these items at once?</p>
                         <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/offerforms/${postId}/${sellerId}`}>Make Offer for All Items <i className="fas fa-angle-double-right"></i></Link>
                     </div>
+                    <div className="all-items-button-b">
+                        <p>Do you want to see seller ratings before make an offer?</p>
+                        <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/viewratings/${sellerId}`}>View Seller Ratings <i className="fas fa-angle-double-right"></i></Link>
+                    </div>
                 <h1>Seller's Location</h1>
             </div>
             <SimpleMap loc={location}/>
+            <div className="buyer-view-post-b">
+                <div className="all-items-button-b" style={{marginTop:'100px'}}>
+                    <p>Do you want to make a complaint about this seller?</p>
+                    <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/addcomplaints/${sellerId}`}>Make a Complaint <i className="fas fa-angle-double-right"></i></Link>
+                </div>
+                <StartRating sId={selId}/>
+            </div>
         </div>
     );
 }

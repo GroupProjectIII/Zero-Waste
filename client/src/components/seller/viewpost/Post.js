@@ -5,6 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import './PendingPosts.css';
 import Bottles from './postPics/bottles.jpg';
+import SimpleMap from "../../buyer/posts/Location";
 
 export default function Post() {
 
@@ -52,7 +53,13 @@ export default function Post() {
               //  history.push(`/seller/home`);
         });
     }
-    
+    const long = postData?.location?.longitude;
+    console.log(long);
+    const lat = postData.location?.latitude;
+    console.log(lat);
+
+    const location={lat,long};
+    console.log(location)
 
   //  console.log(postData);
    // console.log(offerList);
@@ -135,7 +142,13 @@ export default function Post() {
 
                                     </div>  
                         </div>
-                    </div>
+                            </div>
+                            <div>
+                                <SimpleMap loc={location} />
+                                
+                            </div>
+                            
+                            
       
                 </div> 
             }

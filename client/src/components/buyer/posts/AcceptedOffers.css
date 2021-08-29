@@ -50,11 +50,10 @@
     background: #fff;
     border: 1px solid;
     display: inline-block;
-    padding: 7px 20px;
+    padding: 7px 10px;
     font-weight: bold;
     border-radius: 3px;
     transition: 0.1s ease-in-out;
-    margin-left: 5px;
 }
 
 .action_btn-b a:nth-child(1) {

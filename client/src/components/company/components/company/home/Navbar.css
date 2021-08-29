@@ -66,6 +66,10 @@
     display: none;
 }
 
+#company_Name_c{
+    text-transform: capitalize;
+}
+
 @media screen and (max-width: 960px) {
     .NavbarItems {
         position: relative;

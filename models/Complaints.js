@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 const complaintSchema = new mongoose.Schema({
-    complaintAbout:{
+    complaintAboutUserId:{
+        type:String,
+        required:true
+    },
+    complaintAboutUserName:{
+        type:String,
+        required:true
+    },
+    complaintAboutUserEmail:{
         type:String,
         required:true
     },

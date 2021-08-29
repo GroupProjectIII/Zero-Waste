@@ -1,16 +1,17 @@
-import React, { useEffect,useState } from "react";
-import './Userprofile.css';
-import {useHistory} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import './Notifications.css';
 import axios from "axios";
+import moment from "moment";
+import '../../../../buyer/posts/LoadingRing.css';
 
-function UserProfile() {
-    const history = useHistory();
+function NotificationTable() {
 
-    const handleRoute = () =>{
-        history.push("/company/editprofile");
-    }
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
-    //view
+    const companyId=(localStorage.getItem("userId"));
+    console.log(companyId);
+
     const [notes, setNotes] = useState([]);
 
     useEffect(()=>{
@@ -18,126 +19,59 @@ function UserProfile() {
     }, []);
 
     const getAllNotes = async () => {
-        await axios.get(`/viewCompanyDetails`)
+        setIsLoading(true)
+        try{
+        await axios.get(`/getNotifyDetailsForCompany`)
             .then ((response)=>{
                 const allNotes=response.data.existingPosts;
                 setNotes(allNotes);
+                setIsLoading(false)
             })
-            .catch(error=>console.error(`Error: ${error}`));
+        }catch (error) {
+            console.error(`Error: ${error}`)
+            setHasError(true)
+        }
     }
     console.log(notes);
 
-    
+    const wasteItem = notes?.filter(wasteItem => wasteItem.companyId === companyId);
+    console.log(wasteItem);
 
     return(
-        <div class="profile_body-c">
-            {notes.map((note,index)=> (
-            <div id="profile_content1-c">
-                <div className="image-c" id="image-c">
-                    <img src="../../images/polythene.png" alt="" />
-                </div> 
-                <div className="profile_contact-c" id="profile_contact-c">
-                    <h3 className="company_name-c">{note.companyName}</h3><br></br>
-                    <h4 className="company_email-c">{note.buyerId}</h4><br></br>
-                    <h4 className="company_mobile-c">{note.companyContact}</h4><br></br>
-                    <h4 className="company_address-c">{note.address}</h4><br></br>
-                    <h4 className="company_collecting_area-c" >{note.wasteType}</h4>
-                </div>
-            </div>
-            ))}
+        <>
+            {
+                isLoading ?
+                    <div className="n_content-c">
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> : hasError ?
+                        <div className="n_content-c">
+                            <h1>Error Occurred</h1>
+                        </div> :
+                        <div className="n_content-c">
+                            <h1>Notifications</h1>
+                            {wasteItem.map((note,index)=> (
+                                <div className="n_wraper-c">
+                                    <div className="notify_card-c">
+                                        <div className="n_header-c">
+                                            <h2>{index + 1} - {note.buyerName}</h2>
+                                            <h3 id="timestamp-c">Notification Created : {moment(note.notificationCreatedAt).fromNow()}</h3>
+                                        </div>
+                                        <div className="massage-c">
+                                            <p>You have a notification from a buyer that says he want to make offer for {note.wasteType} waste type and {note.wasteItem} waste item. The quantity of offer is {note.quantity} Kg and value is Rs. {note.value}.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+            }
 
-            <div id="profile_content2-c">
-                <div className="description-c" id="description-c">
-                    <p>Zero-waste is a web based waste bying and selling platform for sellers to sell their recyclable  and non recyclable waste, and buyers to find waste items to buy.Anyone can make your works easier through zero-waste.Come and join with us..</p>       
-                </div>
-               <div className="buttons-c" id="buttons-c">
-               <div className="buttons" id="buttons">
-                <span className="action_btn-b">
-                    <a href="#" onClick={handleRoute}>Edit</a>
-                    <a href="#">Remove</a>
-                </span>
-            </div>    
-                </div>        
-            </div>
-
-            <div id="profile_content3-c">
-                <h1>Reviews</h1>
-                <div className="profile_reviews_c">
-                    <div className="profile_reviews_header_c">
-                        <h2>5.0/5.0</h2>
-                        <div className="profile_reviews_star_c">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            <h3> | 1 review</h3><br></br>
-                        </div>
-                    </div>
-                    <div className="profile_reviews_body_c">
-                        <div className="profile_review_body_header_c">
-                            <div className="profile_review_body_header_image_c">
-                                <img src="../../images/polythene.jpg" alt="" classsName="profile_review_image_c"></img>
-                            </div>
-                            <div className="profile_div_star-c">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <h3>by John Smith  on 20/07/2020</h3>
-                        </div>
-                        <div className="profile_review_body-c">
-                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quas repellendus excepturi obcaecati sed et veritatis perferendis, ea, aspernatur dolore, minima quasi eligendi deserunt atque eum libero temporibus modi. Ex?</h4>
-                            <br></br>
-                            <hr></hr>
-                        </div>
-                    </div>
-                    <div className="profile_reviews_body_c">
-                        <div className="profile_review_body_header_c">
-                            <div className="profile_review_body_header_image_c">
-                                <img src="../../images/polythene.jpg" alt="" classsName="profile_review_image_c"></img>
-                            </div>
-                            <div className="profile_div_star-c">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <h3>by John Smith  on 20/07/2020</h3>
-                        </div>
-                        <div className="profile_review_body-c">
-                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quas repellendus excepturi obcaecati sed et veritatis perferendis, ea, aspernatur dolore, minima quasi eligendi deserunt atque eum libero temporibus modi. Ex?</h4>
-                            <br></br>
-                            <hr></hr>
-                        </div>
-                    </div>
-                    <div className="profile_reviews_body_c">
-                        <div className="profile_review_body_header_c">
-                            <div className="profile_review_body_header_image_c">
-                                <img src="../../images/polythene.jpg" alt="" classsName="profile_review_image_c"></img>
-                            </div>
-                            <div className="profile_div_star-c">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <h3>by John Smith  on 20/07/2020</h3>
-                        </div>
-                        <div className="profile_review_body-c">
-                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quas repellendus excepturi obcaecati sed et veritatis perferendis, ea, aspernatur dolore, minima quasi eligendi deserunt atque eum libero temporibus modi. Ex?</h4>
-                            <br></br>
-                            <hr></hr>
-                        </div>
-                    </div>
-                    <div className="profile_reviews_body_c">
-                        <div className="profile_review_body_header_c">
-                            <div className="profile_review_body_header_image_c">
-                                <img src="../../images/polythene.jpg" alt="" classsName="profile_review_image_c"></img>
-                            </div>
-                            <div className="profile_div_star-c">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <h3>by John Smith  on 20/07/2020</h3>
-                        </div>
-                        <div className="profile_review_body-c">
-                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quas repellendus excepturi obcaecati sed et veritatis perferendis, ea, aspernatur dolore, minima quasi eligendi deserunt atque eum libero temporibus modi. Ex?</h4>
-                            <br></br>
-                            <hr></hr>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </>
     );
 }
 
-export default UserProfile;
+export default NotificationTable;

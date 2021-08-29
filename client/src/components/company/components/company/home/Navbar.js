@@ -27,12 +27,7 @@ function Navbar() {
                 <div className='menu-icon-b' onClick={handleClick}>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                 </div>
-                <ul className={click ? 'nav-menu-b active' : 'nav-menu-b'}>                   
-                    <li className='nav-item-b'>
-                        <Link to='/company/profile' className='nav-links-b' onClick={closeMobileMenu}>
-                            WCP Compnay
-                        </Link>
-                    </li>                     
+                <ul className={click ? 'nav-menu-b active' : 'nav-menu-b'}>
                     <li className='nav-item-b'>
                         <Link to='/company/companypost' className='nav-links-b' onClick={closeMobileMenu}>
                             Posts
@@ -43,6 +38,16 @@ function Navbar() {
                             Offers
                         </Link>
                     </li>   
+                    <li className='nav-item-b'>
+                        <Link to='/company/notification' className='nav-links-b' onClick={closeMobileMenu}>
+                            Notifications
+                        </Link>
+                    </li>
+                    <li className='nav-item-b'>
+                        <Link to='/company/profile' className='nav-links-b' onClick={closeMobileMenu}>
+                            Account
+                        </Link>
+                    </li>
                     <li>
                         <Link to='/' className='nav-links-mobile-b'  onClick={logoutHandler}>
                             Sign Out <i className="fas fa-sign-out-alt"></i>

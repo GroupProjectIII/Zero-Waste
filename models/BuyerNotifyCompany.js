@@ -37,6 +37,10 @@ const buyerNotifyCompanySchema = new mongoose.Schema({
         type: String,
         required:true
     },
+    companyId: {
+        type: String,
+        required:true
+    },
     buyerName: {
         type: String,
         required:true

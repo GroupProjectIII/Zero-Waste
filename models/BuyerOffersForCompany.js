@@ -41,6 +41,10 @@ const buyerOfferForCompanySchema = new mongoose.Schema({
         type: String,
         required:false
     },
+    companyName: {
+        type: String,
+        required:false
+    },
     buyerName: {
         type: String,
         required:true

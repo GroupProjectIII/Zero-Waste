@@ -3,8 +3,32 @@ import '../posts/Form.css';
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useParams} from "react-router-dom";
 
 function AComplaints() {
+
+    const { sellerOrCompanyId } = useParams();
+    console.log(sellerOrCompanyId);
+
+    const [seller, setSeller] = useState({});
+
+    useEffect(()=>{
+        getOneSellerOrCompany();
+    }, []);
+
+    const getOneSellerOrCompany = async () => {
+        try {
+            const response = await axios.get(`/getOneSellerOrCompany/${sellerOrCompanyId}`)
+            console.log(response);
+            const oneSellerOrCompany=response.data.oneSellerOrCompany;
+            setSeller(oneSellerOrCompany);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+        }
+    }
+    console.log(seller);
+    console.log(seller.username);
+    console.log(seller.email);
 
     const buyerId=(localStorage.getItem("userId"));
     const buyerName=(localStorage.getItem("userName"));
@@ -13,7 +37,9 @@ function AComplaints() {
 
     const apiUrl = '/addComplaint';
     const initialValues = {
-        complaintAbout: '',
+        complaintAboutUserId: '',
+        complaintAboutUserName: '',
+        complaintAboutUserEmail: '',
         complaintDetails: '',
         userId: '',
         userName: '',
@@ -25,7 +51,9 @@ function AComplaints() {
 
     const submitForm = () => {
         const data = {
-            complaintAbout:formValues.complaintAbout,
+            complaintAboutUserId: sellerOrCompanyId,
+            complaintAboutUserName: seller.username,
+            complaintAboutUserEmail: seller.email,
             complaintDetails:formValues.complaintDetails,
             userId:buyerId,
             userName:buyerName,
@@ -52,9 +80,6 @@ function AComplaints() {
     const validate = (values) => {
         let errors = {};
 
-        if (!values.complaintAbout) {
-            errors.complaintAbout = "Cannot be blank";
-        }
         if (!values.complaintDetails) {
             errors.complaintDetails = "Cannot be blank";
         }
@@ -69,7 +94,9 @@ function AComplaints() {
 
     const clear = () => {
         setFormValues({
-            complaintAbout: '',
+            complaintAboutUserId: '',
+            complaintAboutUserName: '',
+            complaintAboutUserEmail: '',
             complaintDetails: '',
             userId: '',
             userName: '',
@@ -86,20 +113,18 @@ function AComplaints() {
     return(
     <div className="forms-b">
         <div className="forms__container-b" >
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <div className="container-b">
                 <div className="title-b">Add Complaints</div>
                 <div className="content-b">
                     <form className="buyer-form-b" onSubmit={handleSubmit} noValidate>
                         <div className="user-details-b">
-                            <div className="input-box-b">
-                                <span className="details-b">Name of the company/person to complain</span>
-                                <input type="text" name="complaintAbout" id="complaintAbout" placeholder="Enter name" value={formValues.complaintAbout}
-                                       onChange={handleChange}
-                                       className={formErrors.complaintAbout && "input-error"}></input>
-                                {formErrors.complaintAbout && (
-                                    <span className="error" style={{color:'red'}}>{formErrors.complaintAbout}</span>
-                                )}
-                            </div>
                             <div className="input-box-b">
                                 <span className="details-b">Complaint Details</span>
                                 <input type="text" name="complaintDetails" id="complaintDetails" placeholder="Enter details" value={formValues.complaintDetails}
@@ -117,6 +142,13 @@ function AComplaints() {
                     </form>
                 </div>
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     </div>
     );

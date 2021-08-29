@@ -3,8 +3,12 @@ import '../posts/Posts.css';
 import axios from 'axios';
 import {Link, useHistory} from "react-router-dom";
 import emailjs from "emailjs-com";
+import '../posts/LoadingRing.css'
 
 function VProfile() {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     const buyerId=(localStorage.getItem("userId"));
     console.log(buyerId);
@@ -16,13 +20,16 @@ function VProfile() {
     }, []);
 
     const getOneSellerOrCompany = async () => {
+        setIsLoading(true)
         try {
             const response = await axios.get(`/getOneSellerOrCompany/${buyerId}`)
             console.log(response);
             const oneSellerOrCompany=response.data.oneSellerOrCompany;
             setBuyer(oneSellerOrCompany);
+            setIsLoading(false)
         } catch (error) {
             console.error(`Error: ${error}`)
+            setHasError(true)
         }
     }
     console.log(buyer);
@@ -86,69 +93,126 @@ function VProfile() {
     };
 
     return(
-        <div className="posts-b">
-            <div className="posts__container-b">
-                <h1>Profile Details</h1>
-                <div className="seller-container-b">
-                    {oneBuyer.map((post,index)=> (
-                    <ol className="list">
-                        <li ><span>Buyer Name: {buyerName}</span></li>
-                        <li ><span>Address: {post.buyerAddress}</span></li>
-                        <li ><span>Email: {buyerEmail}</span></li>
-                        <li ><span>Mobile No: 0711409911</span></li>
-                        <li ><span>Favourite Areas: {post.favouriteAreas}</span></li>
-                        <li ><span>Favourite Waste Types: {post.favouriteWasteTypes}</span></li>
-                        <li ><span>Favourite Waste Items: {post.favouriteWasteItems}</span></li>
-                    </ol>
-                    ))}
-                </div>
-                <div className="all-items-button-b">
-                    {oneBuyer.map((post,index)=> (
-                        <main className="grid-b" >
-                            <article>
-                                <img src={post.buyerImages} alt=""></img>
-                                <div className="text-b">
-                                    <h3>Image No: {index + 1}</h3>
+        <>
+            {
+                isLoading ?
+                    <div className="posts-b">
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> : hasError ?
+                        <div className="posts-b">
+                            <h1>Error Occurred</h1>
+                        </div> :
+                        <div className="posts-b">
+                            <div className="posts__container-b">
+                                <h1>Profile Details</h1>
+                                <div className="seller-container-b">
+                                    {oneBuyer.map((post,index)=> (
+                                    <ol className="list">
+                                        <li ><span>Buyer Name: {buyerName}</span></li>
+                                        <li ><span>Address: {post.buyerAddress}</span></li>
+                                        <li ><span>Email: {buyerEmail}</span></li>
+
+                                        <li >
+                                            <span>
+                                            Contact No:
+                                                {post.buyerContact.map((contact,index)=>(
+                                            <span>
+                                                {index + 1} : {contact}
+                                            </span>
+                                        ))}
+                                        </span>
+                                        </li>
+
+                                        <li >
+                                            <span>
+                                            Favourite Areas:
+                                                {post.favouriteAreas.map((area,index)=>(
+                                            <span>
+                                                {index + 1} : {area}
+                                            </span>
+                                        ))}
+                                        </span>
+                                        </li>
+
+                                        <li >
+                                            <span>
+                                            Favourite Waste Types:
+                                                {post.favouriteWasteTypes.map((types,index)=>(
+                                                    <span>
+                                                {index + 1} : {types}
+                                            </span>
+                                                ))}
+                                        </span>
+                                        </li>
+
+                                        <li >
+                                            <span>
+                                            Favourite Waste Items:
+                                                {post.favouriteWasteItems.map((items,index)=>(
+                                                    <span>
+                                                {index + 1} : {items}
+                                            </span>
+                                                ))}
+                                        </span>
+                                        </li>
+                                    </ol>
+                                    ))}
                                 </div>
-                            </article>
-                        </main>
-                    ))}
-                </div>
-                <div className="all-items-button-b">
-                    {oneBuyer.map((post,index)=> (
-                    <main className="grid-b">
-                        <article>
-                            <div className="text-b">
-                                <div className="buyerlink-b">
-                                    <Link style={{color: '#fff', textDecoration: 'none'}}
-                                          to={`/buyer/vprofile`}
-                                    >View Profile <i className="fas fa-angle-double-right"></i></Link>
+                                <div className="all-items-button-b">
+                                    {oneBuyer.map((post,index)=> (
+                                        <main className="grid-b" >
+                                            <article>
+                                                <img src={post.buyerImages} alt=""></img>
+                                                <div className="text-b">
+                                                    <h3>Image No: {index + 1}</h3>
+                                                </div>
+                                            </article>
+                                        </main>
+                                    ))}
+                                </div>
+                                <div className="all-items-button-b">
+                                    {oneBuyer.map((post,index)=> (
+                                    <main className="grid-b">
+                                        <article>
+                                            <div className="text-b">
+                                                <div className="buyerlink-b">
+                                                    <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                          to={`/buyer/viewratings/${buyerId}`}
+                                                    >View Ratings <i className="fas fa-angle-double-right"></i></Link>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article>
+                                            <div className="text-b">
+                                                <div className="buyerlink-b">
+                                                    <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                          to={`/buyer/editprofile/${post._id}`}
+                                                    >Edit Profile <i className="fas fa-edit"></i></Link>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article>
+                                            <div className="text-b">
+                                                <div className="delete-button-b">
+                                                    <button onClick={() => {
+                                                        deleteBuyerDetails(post._id)
+                                                    }}>Delete Profile <i className="fas fa-trash-alt"></i></button>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </main>
+                                    ))}
                                 </div>
                             </div>
-                        </article>
-                        <article>
-                            <div className="text-b">
-                                <div className="buyerlink-b">
-                                    <Link style={{color: '#fff', textDecoration: 'none'}}
-                                          to={`/buyer/editprofile/${post._id}`}
-                                    >Edit Profile <i className="fas fa-edit"></i></Link>
-                                </div>
-                            </div>
-                        </article>
-                        <article>
-                            <div className="text-b">
-                                <div className="delete-button-b">
-                                    <button onClick={() => {
-                                        deleteBuyerDetails(post._id)
-                                    }}>Delete Profile <i className="fas fa-trash-alt"></i></button>
-                                </div>
-                            </div>
-                        </article>
-                    </main>
-                    ))}
-                </div>
-            </div>
-        </div>
+                        </div>
+            }
+
+        </>
     );
 }
 
