@@ -89,6 +89,10 @@ function CompanyAcceptedOffers() {
                                                         <p>Expiry Date: {moment(offer.expiryDate).fromNow()}</p>
                                                         <p>Collecting Date: {moment(offer.collectingDate).fromNow()}</p>
                                                         <p>Offer Gives: {moment(offer.offerCreatedAt).fromNow()}</p>
+                                                        <div className="buyerlink-b">
+                                                            <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                                  to={`/buyer/viewcompanyofferdetails/${offer._id}/${offer.companyId}`}>View Details <i className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
                                                     </div>
                                                 </article>
                                             );

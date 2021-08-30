@@ -2,7 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const BuyerOffersForCompany = require("../models/BuyerOffersForCompany");
-const BuyerNotifyCompany = require("../models/BuyerNotifyCompany")
+const BuyerNotifyCompany = require("../models/BuyerNotifyCompany");
+const CompanyDetail = require("../models/CompanyDetail");
+const CompanyPost = require("../models/CompanyPost");
 
 exports.addCompanyOffer= async (req,res)=>{
     const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerId, postId, companyId, companyName, buyerName } = req.body;
@@ -82,3 +84,31 @@ exports.addBuyerNotifyCompany= async (req,res)=>{
         res.status(409).json({ message: error.message });
     }
 };
+
+exports.companyViewDetailsForBuyer= async (req,res)=>{
+    CompanyDetail.find().exec((err,buyers)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingBuyers:buyers
+        });
+    });
+}
+
+exports.buyerGetOneCompanyPost= async (req,res)=>{
+    let postId = req.params.id;
+
+    CompanyPost.findById(postId,(err,post)=>{
+        if(err){
+            return res.status(400).json({success:false, err});
+        }
+        return res.status(200).json({
+            success:true,
+            onePost:post
+        })
+    })
+}

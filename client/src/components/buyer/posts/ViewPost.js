@@ -68,6 +68,9 @@ function ViewPost() {
     const wasteItem = offers?.filter(wasteItems => wasteItems.status==='accepted' && wasteItems.postId===postId);
     console.log(wasteItem);
 
+    const wasteItemLength = wasteItem.length;
+    console.log(wasteItemLength);
+
     const selId = {sellerId};
 
     return(
@@ -104,14 +107,24 @@ function ViewPost() {
                             );
                     })}
                 </main>
-                    <div className="all-items-button-b">
-                        <p>Do you want to make an offer for all these items at once?</p>
-                        <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/offerforms/${postId}/${sellerId}`}>Make Offer for All Items <i className="fas fa-angle-double-right"></i></Link>
-                    </div>
+                {wasteItemLength === 0 ?
+                    (
+                        <div>
+                            <div className="all-items-button-b">
+                                <p>Do you want to make an offer for all these items at once?</p>
+                                <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/offerforms/${postId}/${sellerId}`}>Make Offer for All Items <i className="fas fa-angle-double-right"></i></Link>
+                            </div>
+                            <div className="all-items-button-b">
+                                <p>Do you want to see seller ratings before make an offer?</p>
+                                <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/viewratings/${sellerId}`}>View Seller Ratings <i className="fas fa-angle-double-right"></i></Link>
+                            </div>
+                        </div>
+                    ) :
                     <div className="all-items-button-b">
                         <p>Do you want to see seller ratings before make an offer?</p>
                         <Link className="link-button-b" style={{color: '#fff', textDecoration: 'none'}} to ={`/buyer/viewratings/${sellerId}`}>View Seller Ratings <i className="fas fa-angle-double-right"></i></Link>
                     </div>
+                }
                 <h1>Seller's Location</h1>
             </div>
             <SimpleMap loc={location}/>
