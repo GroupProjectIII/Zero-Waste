@@ -2,8 +2,9 @@ import '../../buyer/posts/Posts.css';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
-
+import { useHistory } from "react-router";
 const Offer = (props) => {
+    const history = useHistory();
     const offer = props.offer;
     const post = props.post;
     const item = props.item;
@@ -42,8 +43,10 @@ const Offer = (props) => {
         }
         axios.patch(`/sellerDeclineOffer/${offerId}`, data)
             .then((result) => {
-                console.log("offer Rejected")
+                console.log("offer Rejected");
+                
             });
+        
     }
 
     const sellerAcceptOffer = () => {
@@ -74,7 +77,7 @@ const Offer = (props) => {
                   //  history.push(`/seller/home`);
             });
         }
-        
+        history.push(`/seller/offers`);
 
     }
     

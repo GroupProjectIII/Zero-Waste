@@ -149,7 +149,9 @@ export default function BuyerDetails() {
                                             </ul>
                         
                                             <div className="seller-sell-now">
-                                                <button>Sell Now</button>
+                                                <Link style={{ textDecoration: 'none' }}
+                                                    to={`/seller/directpost/${buyer.buyerId}`}>Sell Now <i
+                                                        className="fas fa-angle-double-right"></i></Link>
                                             </div>
                         
                                         </div>

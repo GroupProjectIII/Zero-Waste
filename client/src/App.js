@@ -140,7 +140,7 @@ function App() {
                     <Route path='/admin/statistics' component={AdminStatistics} />
 
                     <Route path='/seller/publicpost' exact component={SellerAddPostPublic} />
-                    <Route path='/seller/directpost' exact component={SellerAddPostDirect} />
+                    <Route path='/seller/directpost/:buyerId' exact component={SellerAddPostDirect} />
                     <Route path='/seller/myposts' exact component={SellerMyPost} />
                     <Route path='/seller/viewposts' exact component={SellerViewPost} />
                     <Route path='/seller/buyer/:buyerId' exact component={SellerViewBuyer} />
