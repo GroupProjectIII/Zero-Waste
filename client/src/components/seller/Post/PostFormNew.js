@@ -220,7 +220,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
                                     
                                 }
                             }
-                          ></input>
+                        ></input>
+                      <img src={thumbnail}></img> 
                 </div>
         {
           wasteItemList.map((val, idx) => {
@@ -310,7 +311,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
                                   
                               }
                           }
-                        ></input>
+                      ></input>
+                      <img src={val.selectedFile}></img>
                 </div>
              
              
