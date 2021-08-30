@@ -69,6 +69,7 @@ app.use('/posts', postRoutes);
 
 const sellerPostRoutes = require("./routes/sellerPosts");
 const sellerViewBuyerRoutes = require("./routes/SellerViewBuyers");
+const sellerRateAndComment = require("./routes/sellerViewBuyerComments");
 app.use(sellerViewBuyerRoutes);
 app.use(sellerPostRoutes);
 

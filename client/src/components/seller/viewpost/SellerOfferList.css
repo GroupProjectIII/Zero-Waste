@@ -64,7 +64,9 @@
   .offer-list-view-post{
       background-color: green;
   }
-  .seller-offer-list img{
-      max-width: 150px;
-      height: auto;
+  
+  .seller-post-offer-details{
+      
+      display: inline-table;
+
   }
