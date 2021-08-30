@@ -56,6 +56,7 @@ function Posts() {
         const result = postsPara.filter(
             (notes) =>
                 notes?.address.toLowerCase().includes(searchKey) ||
+                notes?.sellerDistrict.toLowerCase().includes(searchKey) ||
                 notes?.contact.toString().toLowerCase().includes(searchKey) ||
                 notes?.wasteItemList?.map(wasteItem => wasteItem.wasteType).join(' ').toLowerCase().includes(searchKey) ||
                 notes?.wasteItemList?.map(wasteItem => wasteItem.item).join(' ').toLowerCase().includes(searchKey) ||
