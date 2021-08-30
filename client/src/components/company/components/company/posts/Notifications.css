@@ -1,3 +1,4 @@
+
 .n_content-c h1 {
     text-align: center;
     padding: 15px;
@@ -37,11 +38,6 @@
     display: flex;
     border-bottom-style: outset;
     width: 100%;
-}
-
-.n_header-c h2{
-    margin-left: 20px;
-    text-transform: capitalize;
 }
 
 #n_image-c {
@@ -91,6 +87,7 @@
         margin-left: 50%;
     }  
 }
+
 
 
 

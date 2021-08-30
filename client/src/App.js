@@ -52,7 +52,7 @@ import SellerEditProfile from './components/seller/Profile/SellerEditProfile';
 import SellerViewNotifications from './components/seller/Profile/SellerViewNotifications';
 import SellerAddComplaint from './components/seller/Profile/AddComplaints';
 import SellerViewStats from './components/seller/Profile/SellerViewStats';
-
+import SellerEditPost from './components/seller/Post/EditPost';
 
 import CompanyHome from './components/company/pages/Home';
 import CompanyProfile from './components/company/pages/Profile';
@@ -141,7 +141,7 @@ function App() {
                     <Route path='/admin/statistics' component={AdminStatistics} />
 
                     <Route path='/seller/publicpost' exact component={SellerAddPostPublic} />
-                    <Route path='/seller/directpost' exact component={SellerAddPostDirect} />
+                    <Route path='/seller/directpost/:buyerId' exact component={SellerAddPostDirect} />
                     <Route path='/seller/myposts' exact component={SellerMyPost} />
                     <Route path='/seller/viewposts' exact component={SellerViewPost} />
                     <Route path='/seller/buyer/:buyerId' exact component={SellerViewBuyer} />
@@ -157,7 +157,8 @@ function App() {
                     <Route path='/seller/notification' component={SellerViewNotifications} />
                     <Route path='/seller/complaint' component={SellerAddComplaint} />
                     <Route path='/seller/stats' component={SellerViewStats} />
-
+                    <Route path='/seller/editpost/:postId' component={SellerEditPost} />
+                    
 
                     <Route path='/admin' exact component={AdminHome} />
                     <Route path='/admin/users' component={AdminUserlist} />

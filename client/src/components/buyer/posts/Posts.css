@@ -331,6 +331,8 @@ ol li:before {
     margin-left: 450px;
 }
 
+
+
 @media (max-width: 768px){
     .grid-b{
         grid-template-columns: repeat(2, 1fr);

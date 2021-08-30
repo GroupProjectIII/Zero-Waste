@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './Buyer.css';
 import buypic from './BuyerImages/images.jpg';
+import '../../buyer/posts/LoadingRing.css';
 
 export default function Buyer() {
 
@@ -67,7 +68,12 @@ export default function Buyer() {
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                         <div className="seller-post-list-background">
                             <h1>Error occured.</h1>
@@ -113,12 +119,18 @@ export default function Buyer() {
                                                             <span className="fa fa-star checked"></span>
                                                         </div>
                                                         <div>
-                                                        <Link style={{ color: '#fff', textDecoration: 'none' }}
+                                                        <Link style={{ textDecoration: 'none' }}
                                                                 to={`/seller/buyer/${buyer.buyerId}`}>View Buyer <i
                                                                     className="fas fa-angle-double-right"></i></Link>
                                                         </div>
+                                                        <div>
+                                                        <Link style={{textDecoration: 'none' }}
+                                                                to={`/seller/directpost/${buyer.buyerId}`}>Sell Now <i
+                                                                    className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
 
-                                                        <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
+
+                                                       
                                                     </div>
                     
                                                 </div>

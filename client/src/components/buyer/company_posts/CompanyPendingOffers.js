@@ -106,6 +106,10 @@ function CompanyPendingOffers() {
                                                         <p>Offer Gave: {moment(offer.offerCreatedAt).fromNow()}</p>
                                                         <div className="buyerlink-b">
                                                             <Link style={{color: '#fff', textDecoration: 'none'}}
+                                                                  to={`/buyer/viewcompanyofferdetails/${offer._id}/${offer.companyId}`}>View Details <i className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
+                                                        <div className="buyerlink-b">
+                                                            <Link style={{color: '#fff', textDecoration: 'none'}}
                                                                   to={`/buyer/editcompanypendingoffers/${offer._id}/${offer.companyId}/${offer.postId}`}>Edit Offer <i className="fas fa-edit"></i></Link>
                                                         </div>
                                                         <div className="delete-button-b">

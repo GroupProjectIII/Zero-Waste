@@ -1,3 +1,4 @@
+
 .navbar-b {
     background: #164A41;
     height: 80px;
@@ -64,10 +65,6 @@
 
 .menu-icon-b {
     display: none;
-}
-
-#company_Name_c{
-    text-transform: capitalize;
 }
 
 @media screen and (max-width: 960px) {
@@ -152,3 +149,4 @@
         display: none;
     }
 }
+

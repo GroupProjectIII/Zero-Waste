@@ -26,7 +26,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
     const [contact, setContact] = useState("");
     const [thumbnail, setThumbnail] = useState("");
 
-    const wasteItem = {
+    var wasteItem = {
         wasteType: '',
         item: '',
         avbDate: null,
@@ -37,12 +37,13 @@ export default function PublicPost({ currentId, setCurrentId }) {
     //catstste = wasteItemList
     //blankcat= wasteitem
 
-    const [wasteItemList, setWasteItemList] = useState([
+    var [wasteItemList, setWasteItemList] = useState([
         { ...wasteItem }
     ]);
     
     const addWasteItem = () => {
         setWasteItemList([...wasteItemList, { ...wasteItem }]);
+        console.log(wasteItemList);
     };
 
     const handleCatChange = (e,base64) => {
@@ -116,7 +117,19 @@ export default function PublicPost({ currentId, setCurrentId }) {
         }
     }
 
-    
+    const deleteWasteItem = (idx) => {
+        console.log(wasteItemList);
+        console.log(idx);
+        if (wasteItemList.length === 1) {
+            console.log("error")
+            alert("Waste Item List cannot be empty")
+        } else {
+            wasteItemList = wasteItemList.splice(idx, 1);
+            console.log(wasteItemList);
+        }
+     //   console.log(wasteItemList[idx]);
+        
+    }
     
     
     return (
@@ -133,7 +146,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                         onChange={(e) => {
                          setDistrict(e.target.value)
                      }}>
-                        <option value="Colombo">Colombo</option>
+                        <option value="Colombo" selected>Colombo</option>
                         <option value="Gampaha">Gampaha</option>
                         <option value="Kaluthara">Kaluthara</option>
                         <option value="Kandy">Kandy</option>
@@ -207,7 +220,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
                                     
                                 }
                             }
-                          ></input>
+                        ></input>
+                      <img src={thumbnail}></img> 
                 </div>
         {
           wasteItemList.map((val, idx) => {
@@ -220,11 +234,14 @@ export default function PublicPost({ currentId, setCurrentId }) {
               <div key={`Waste Item-${idx}`} className="seller-post-item">
                 <div className="seller-add-post-item-header">
                       <h3>{`Waste Item #${idx + 1}`}</h3>
-                      <button className="seller-waste-item-delete-btn">Delete Item</button>
+                      <a href="#" className="seller-waste-item-delete-btn" onClick={() => {
+                          deleteWasteItem(idx);
+                      }}>Delete Item #{idx + 1}</a>
+                      
                   </div>
                   <div className="seller-add-post-row">
                       <label className="seller-add-post-label">Select Waste Type</label>
-                  <select className="wasteType" name="wastetype" data-idx={idx} onChange={handleCatChange}>
+                      <select className="wasteType" name="wastetype" value={val.wasteType} data-idx={idx} onChange={handleCatChange}>
                     <option value="plastic">Plastic</option>
                     <option value="glass">Glass</option>
                     <option value="paper">Paper</option>
@@ -294,7 +311,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
                                   
                               }
                           }
-                        ></input>
+                      ></input>
+                      <img src={val.selectedFile}></img>
                 </div>
              
              
