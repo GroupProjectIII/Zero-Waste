@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import PostList from "./PostList";
 import {Slide, toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import '../../buyer/posts/LoadingRing.css';
 export default function PendingPosts() {
 
     const history = useHistory();
@@ -67,7 +67,12 @@ export default function PendingPosts() {
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                       <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                         <div className="seller-post-list-background">
                             <h1>Error occured.</h1>

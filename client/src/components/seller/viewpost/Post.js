@@ -6,7 +6,7 @@ import moment from 'moment';
 import './PendingPosts.css';
 import Bottles from './postPics/bottles.jpg';
 import SimpleMap from "../../buyer/posts/Location";
-
+import '../../buyer/posts/LoadingRing.css';
 export default function Post() {
 
     const { postId } = useParams();
@@ -68,7 +68,12 @@ export default function Post() {
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                     <div className="seller-post-list-background">
                         <h1>Error occured.</h1>

@@ -2,7 +2,7 @@ import { useHistory } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
-
+import '../../buyer/posts/LoadingRing.css';
 import moment from 'moment';
 import Offer from "./Offer";
 
@@ -55,7 +55,12 @@ export default function SellerOfferList() {
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                         <div className="seller-post-list-background">
                             <h1>Error occured.</h1>

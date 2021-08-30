@@ -72,6 +72,7 @@ const sellerViewBuyerRoutes = require("./routes/SellerViewBuyers");
 const sellerRateAndComment = require("./routes/sellerViewBuyerComments");
 app.use(sellerViewBuyerRoutes);
 app.use(sellerPostRoutes);
+app.use(sellerRateAndComment);
 
 // Error Handler Middleware
 app.use(errorHandler);
