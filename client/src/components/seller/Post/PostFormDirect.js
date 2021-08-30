@@ -118,6 +118,19 @@ export default function PublicPost({ currentId, setCurrentId }) {
         }
     }
 
+    const deleteWasteItem = (idx) => {
+        console.log(wasteItemList);
+        console.log(idx);
+        if (wasteItemList.length === 1) {
+            console.log("error")
+            alert("Waste Item List cannot be empty")
+        } else {
+            wasteItemList = wasteItemList.splice(idx, 1);
+            console.log(wasteItemList);
+        }
+     //   console.log(wasteItemList[idx]);
+        
+    }
     
     
     
@@ -222,7 +235,9 @@ export default function PublicPost({ currentId, setCurrentId }) {
               <div key={`Waste Item-${idx}`} className="seller-post-item">
                 <div className="seller-add-post-item-header">
                       <h3>{`Waste Item #${idx + 1}`}</h3>
-                      <button className="seller-waste-item-delete-btn">Delete Item</button>
+                      <a href="#" className="seller-waste-item-delete-btn" onClick={() => {
+                          deleteWasteItem(idx);
+                      }}>Delete Item #{idx + 1}</a>
                   </div>
                   <div className="seller-add-post-row">
                       <label className="seller-add-post-label">Select Waste Type</label>
