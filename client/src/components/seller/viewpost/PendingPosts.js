@@ -102,7 +102,7 @@ export default function PendingPosts() {
                                                         </div>
                                                         <div className="buyerlink-b">
                                                             <Link style={{ color: '#fff', textDecoration: 'none' }}
-                                                                to={`/seller/viewpost/${note._id}`}>Edit Post <i
+                                                                to={`/seller/editpost/${note._id}`}>Edit Post <i
                                                                     className="fas fa-angle-double-right"></i></Link>
                                                         </div>
                                                         <div className="buyerlink-b">

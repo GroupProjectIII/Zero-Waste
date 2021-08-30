@@ -222,7 +222,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
                                     
                                 }
                             }
-                          ></input>
+                        ></input>
+                        <img src={thumbnail}></img>
                 </div>
         {
           wasteItemList.map((val, idx) => {
@@ -241,7 +242,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                   </div>
                   <div className="seller-add-post-row">
                       <label className="seller-add-post-label">Select Waste Type</label>
-                  <select className="wasteType" name="wastetype" data-idx={idx} onChange={handleCatChange}>
+                  <select className="wasteType" name="wastetype"  value={val.wasteType} data-idx={idx} onChange={handleCatChange}>
                     <option value="plastic" selected>Plastic</option>
                     <option value="glass">Glass</option>
                     <option value="paper">Paper</option>
@@ -311,7 +312,9 @@ export default function PublicPost({ currentId, setCurrentId }) {
                                   
                               }
                           }
-                        ></input>
+                      ></input>
+                      <img src={val.selectedFile}></img>
+                       
                 </div>
              
              
