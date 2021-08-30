@@ -116,9 +116,9 @@ exports.sellerViewOnePostDetails = async (req, res) => {
 
 exports.sellerAcceptPostOffer = async (req, res) => {
     const { id } = req.params;
-    const { status, postId, vfCode } = req.body;
+    const { status, postId, verificationCode } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    const updatedOffer = { status,vfCode };
+    const updatedOffer = { status, verificationCode,  _id: id};
     await BuyerOffersForSeller.updateMany({ "postId": postId, "_id": { $ne: id } }, { $set: { status: "decline" } });
 
     
@@ -130,9 +130,9 @@ exports.sellerAcceptPostOffer = async (req, res) => {
 
 exports.sellerAcceptWasteItemOffer = async(req, res) => {
     const { id } = req.params;
-    const { status, wasteItemsListId, vfCode } = req.body;
+    const { status, wasteItemsListId, verificationCode } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    const updatedOffer = { status, vfCode };
+    const updatedOffer = { status, verificationCode, _id: id};
     await BuyerOffersForSeller.updateMany({ "wasteItemsListId": wasteItemsListId, "_id": { $ne: id } }, { $set: { status: "decline" } });
    
     await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
@@ -149,16 +149,7 @@ exports.sellerDeclineOffer = async (req, res) => {
     res.json("Offer Accepted");
 }
 
-exports.sellerAcceptWasteItemOffer = async(req, res) => {
-    const { id } = req.params;
-    const { status, wasteItemsListId } = req.body;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    const updatedOffer = { status };
-    await BuyerOffersForSeller.updateMany({ "wasteItemsListId": wasteItemsListId, "_id": { $ne: id } }, { $set: { status: "decline" } });
-   
-    await BuyerOffersForSeller.findByIdAndUpdate(id, updatedOffer, { new: true });
-    res.json(updatedOffer);
-}
+
 
 exports.sellerDeclineOffer = async (req, res) => {
     const { id } = req.params;
@@ -187,7 +178,7 @@ exports.sellerViewAcceptedOffers = async (req, res) => {
 }
 
 exports.deletePendingSellerPost = async (req, res) => {
-    let postId = req.params.id;
+    let id = req.params.id;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
     await SellerPost.findByIdAndRemove(id);

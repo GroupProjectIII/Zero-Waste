@@ -119,12 +119,18 @@ export default function Buyer() {
                                                             <span className="fa fa-star checked"></span>
                                                         </div>
                                                         <div>
-                                                        <Link style={{ color: '#fff', textDecoration: 'none' }}
+                                                        <Link style={{ textDecoration: 'none' }}
                                                                 to={`/seller/buyer/${buyer.buyerId}`}>View Buyer <i
                                                                     className="fas fa-angle-double-right"></i></Link>
                                                         </div>
+                                                        <div>
+                                                        <Link style={{textDecoration: 'none' }}
+                                                                to={`/seller/directpost/${buyer.buyerId}`}>Sell Now <i
+                                                                    className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
 
-                                                        <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
+
+                                                       
                                                     </div>
                     
                                                 </div>

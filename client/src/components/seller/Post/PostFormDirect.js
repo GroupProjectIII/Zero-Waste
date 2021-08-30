@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory , useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { createPost, updatePost } from '../../../actions/posts';
@@ -14,12 +14,14 @@ export default function PublicPost({ currentId, setCurrentId }) {
     if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "seller")) {
         history.push("/");
     }
-   
+    const { buyerId } = useParams();
+    console.log(buyerId);
     const sellerId = (localStorage.getItem("userId"));
     const sellerName = (localStorage.getItem("userName"));
     console.log(sellerName);
-    const postType = "public";
-    const buyer = "all-buyers";
+    console.log(sellerId);
+    const postType = "direct";
+    const buyer = buyerId;
     const [district, setDistrict] = useState("");
     const [address, setAddress] = useState("");
     const [location, setLocation] = useState([]);
@@ -133,7 +135,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                         onChange={(e) => {
                          setDistrict(e.target.value)
                      }}>
-                        <option value="Colombo" selected>Colombo</option>
+                        <option value="Colombo"selected>Colombo</option>
                         <option value="Gampaha">Gampaha</option>
                         <option value="Kaluthara">Kaluthara</option>
                         <option value="Kandy">Kandy</option>

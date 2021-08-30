@@ -53,8 +53,14 @@ const sellerOfferSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    collectedStatus: String,
-    verificationCode: Number
+    collectedStatus: {
+        type: String,
+        default: "pending"
+    },
+    verificationCode: {
+        type: Number,
+        default: null
+    }
 
 
 });
