@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './Buyer.css';
 import buypic from './BuyerImages/images.jpg';
+import '../../buyer/posts/LoadingRing.css';
 
 export default function Buyer() {
 
@@ -67,7 +68,12 @@ export default function Buyer() {
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                         <div className="seller-post-list-background">
                             <h1>Error occured.</h1>
