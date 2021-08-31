@@ -22,6 +22,7 @@ import BuyerViewOfferDetails from "./components/buyer/posts/ViewOffers";
 import BuyerDirectPosts from "./components/buyer/posts/DirectPosts";
 import BuyerCompanyDirectPosts from "./components/buyer/company_posts/CompanyDirectPosts";
 import BuyerViewRatings from "./components/buyer/posts/ViewRatings";
+import BuyerViewCompanyOffer from "./components/buyer/company_posts/ViewCompanyOffer";
 
 import BuyerProfileDetails from "./components/buyer/account/ProfileDetails";
 import BuyerViewProfile from './components/buyer/account/ViewProfile';
@@ -115,6 +116,7 @@ function App() {
                     <Route path='/buyer/directposts' component={BuyerDirectPosts} />
                     <Route path='/buyer/companydirectposts' component={BuyerCompanyDirectPosts} />
                     <Route path='/buyer/viewratings/:sellerId' component={BuyerViewRatings} />
+                    <Route path='/buyer/viewcompanyofferdetails/:offerId/:companyId' component={BuyerViewCompanyOffer} />
 
                     <Route path='/buyer/vprofile' component={BuyerViewProfile} />
                     <Route path='/buyer/rcomment' component={BuyerRateAndComment} />
