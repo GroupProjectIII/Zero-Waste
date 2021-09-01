@@ -160,7 +160,10 @@ export default function BuyerDetails() {
                                     </div>
                                 </div>
                             </div>
-                            <RateAndCommentArea userId={buyerId} userName={buyer.buyerName} />
+                            <div>
+                                <RateAndCommentArea userId={buyerId} userName={buyer.buyerName} />
+                            </div>
+                            
                             <div className="buyer-comments-area">
                                 <h1>Comments</h1>
                                 {
