@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 import '../../buyer/posts/LoadingRing.css';
 import moment from 'moment';
+import e from 'cors';
 
 
 export default function SellerOfferList() {
@@ -22,9 +23,19 @@ export default function SellerOfferList() {
    
     
     const [buyerOffers, getBuyerOffers] = useState([]);
+    const WAIT_TIME = 1000;
+
     useEffect(() => {
-        getAllBuyerOffers();
-    },[]);
+        const id = setInterval(() => {
+            axios.get(`/sellerViewOffers/${sellerId}`)
+                .then(res => {
+                    getBuyerOffers(res.data.existingOffers);
+                })
+                .catch(err => {
+                    console.log(err);
+            })
+       },WAIT_TIME)
+    },[buyerOffers]);
 
     const getAllBuyerOffers = async () => {
             setIsLoading(true)
@@ -49,16 +60,17 @@ export default function SellerOfferList() {
     console.log(buyerOffers);
     
 
-    const sellerDeclineOffer = (offerId) => {
+    const sellerDeclineOffer = (offerId, e) => {
+        e.preventDefault();
         const data = {
             status:"declined"
         }
         axios.patch(`/sellerDeclineOffer/${offerId}`, data)
             .then((result) => {
                 console.log("offer Rejected");
-                
+                alert("Offer Rejected");
             });
-        window.location.reload();
+    //   window.location.reload();
     }
     const sellerAcceptCompletePostOffer = (offerId, postId) => {
         var vfCode = Math.floor(100000 + Math.random() * 900000);
@@ -71,11 +83,12 @@ export default function SellerOfferList() {
         axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)
             .then((result) => {
                 console.log("ACCPTED")
+                alert("Offer Accepted");
            //     clear();
               //  toastNotification();
               //  history.push(`/seller/home`);
             });
-        window.location.reload();
+    //    window.location.reload();
         
     }
 
@@ -92,8 +105,9 @@ export default function SellerOfferList() {
             axios.patch(`/sellerAcceptWasteItemOffer/${offerId}`, data)
                 .then((result) => {
                     console.log("offer accepted")
+                    alert("Offer Accepted");
                 });
-        window.location.reload();
+     //   window.location.reload();
         
         }
       
@@ -143,8 +157,8 @@ export default function SellerOfferList() {
                                                         }}>Accept</button>
                                                     </div>
                                                     <div className="buyerlink-b">
-                                                        <button className="accept-btn" onClick={() => {
-                                                            sellerDeclineOffer(offer._id);
+                                                        <button className="accept-btn" onClick={(e) => {
+                                                            sellerDeclineOffer(offer._id,e);
                                                         }}>Decline</button>
                                                     </div>
                                                 </div>
@@ -174,8 +188,8 @@ export default function SellerOfferList() {
                                                         }}>Accept</button>
                                                     </div>
                                                     <div className="buyerlink-b">
-                                                        <button className="accept-btn" onClick={() => {
-                                                            sellerDeclineOffer(offer._id);
+                                                        <button className="accept-btn" onClick={(e) => {
+                                                            sellerDeclineOffer(offer._id,e);
                                                         }}>Decline</button>
                                                     </div>
                                                 </div>
