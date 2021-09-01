@@ -23,10 +23,11 @@ export default function PendingPosts() {
     const [sellerOffers, setSellerOffers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
+    const WAIT_TIME = 5000;
 
     useEffect(() => {
         getSellerPosts();
-    }, []);
+    },[]);
 
     const getSellerPosts = async () => {
         setIsLoading(true)

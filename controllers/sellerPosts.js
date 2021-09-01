@@ -69,6 +69,27 @@ exports.sellerViewPosts = async (req, res) => {
     
 }
 
+exports.sellerUpdatePost = async (req, res) => {
+    const { id } = req.params;
+    const sellerDistrict = req.body.district;
+    const address = req.body.address;
+    const location = req.body.location;
+    const contact = Number(req.body.contact);
+    const thumbnail = req.body.thumbnail;
+    const wasteItemList = req.body.wasteItemList;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    const updatedPost = { sellerDistrict, address, location, contact, thumbnail, wasteItemList,  _id: id};
+    await BuyerOffersForSeller.updateMany({ "postId": id }, { $set: { status: "decline" } });
+
+    
+    await SellerPost.findByIdAndUpdate(id, updatedPost, { new: true });
+
+    
+    res.json("Post Updated");
+
+}
+
 exports.sellerViewOffers = async (req, res) => {
     let seller = req.params.id;
     BuyerOffersForSeller.find({ "sellerId": seller, "status": "pending" }).populate('postId').exec((err, posts) => {
