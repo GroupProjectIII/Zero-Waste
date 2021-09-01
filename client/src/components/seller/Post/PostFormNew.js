@@ -6,6 +6,8 @@ import { createPost, updatePost } from '../../../actions/posts';
 import './PostForm.css';
 import axios from 'axios';
 import e from 'cors';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PublicPost({ currentId, setCurrentId }) {
 
@@ -25,6 +27,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
     const [location, setLocation] = useState([]);
     const [contact, setContact] = useState("");
     const [thumbnail, setThumbnail] = useState("");
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     var wasteItem = {
         wasteType: '',
@@ -67,8 +71,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
  
   
   
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const formSubmit = async () => {
+       // e.preventDefault();
         const newPostData = {
             sellerId,
             sellerName,
@@ -84,20 +88,64 @@ export default function PublicPost({ currentId, setCurrentId }) {
 
         if (currentId === 0) {
             console.log(newPostData);
-            axios.post('/sellerAddPost', newPostData).then((res) => {
-                console.log(res);
-                alert("Post Added Sucessfully!");
-            }
-            ).catch((err) => {
-                alert(err)
-            })
+        //    axios.post('/sellerAddPost', newPostData).then((res) => {
+          //      console.log(res);
+            //    alert("Post Added Sucessfully!");
+           // }
+           // ).catch((err) => {
+            //    alert(err)
+           // })
+           toastNotification();
       
         } else {
         
         
         }
     };
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormErrors(validate());
+        setIsSubmitting(true);
+    };
+    const toastNotification = () => {
+        toast.info("Post added successfully !", {
+            transition: Slide
+        })
+    };
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmitting) {
+            formSubmit();
+        }
+    }, [formErrors]);
+
+    const date = new Date();
+    date.setDate(date.getDate() + 28);
+
+    const date2 = new Date();
+    date2.setDate(date2.getDate());
+
+    const validate = () => {
+        let errors = {};
+        const regex = /^[0-9]+$/;
+        if (district === "" || district === null) {
+            errors.district = "Please select district";
+        }
+        if (address === "" || address === null) {
+            errors.address = "Please add your address";
+        }
+        if (contact === "" || contact === null) {
+            errors.contact = "Please add your contact number";
+        } else if (!regex.test(contact)) {
+            errors.contact = "invalid format";
+        } else if (contact.length !== 10) {
+            errors.contact = "invalid format";
+        }
+        if (location.length === 0) {
+            errors.location = "Please add Location";
+        }
+        
+        return errors;
+    };
 
     const getlocation = (e) => {
         e.preventDefault();
@@ -111,6 +159,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                     longitude: position.coords.longitude
                 }
                 setLocation(locationTp)
+                alert("location added");
             });
         } else {
             console.log("Not Available");
@@ -130,7 +179,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
      //   console.log(wasteItemList[idx]);
         
     }
-    
+    // form validation
+
     
     return (
                  
@@ -143,10 +193,14 @@ export default function PublicPost({ currentId, setCurrentId }) {
                     <div className="seller-add-post-row">
                     <label className="seller-add-post-label">District</label>
                     <select className="seller-add-post-select" name="option"
-                        onChange={(e) => {
-                         setDistrict(e.target.value)
-                     }}>
-                        <option value="Colombo" selected>Colombo</option>
+                            onChange={(e) => {
+                                console.log(e);
+                                    setDistrict(e.target.value) 
+                            
+                        
+                            }}>
+                        <option value="" selected>Choose District</option>    
+                        <option value="Colombo">Colombo</option>
                         <option value="Gampaha">Gampaha</option>
                         <option value="Kaluthara">Kaluthara</option>
                         <option value="Kandy">Kandy</option>
@@ -172,7 +226,10 @@ export default function PublicPost({ currentId, setCurrentId }) {
                         <option value="Rathnapura">Rathnapura</option>
                         <option value="Kegalle">Kegalle</option>
 
-                    </select>
+                        </select>
+                        {formErrors.district && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.district}</span>
+                                    )}
                     </div>
                    
                 
@@ -183,9 +240,15 @@ export default function PublicPost({ currentId, setCurrentId }) {
                             name="address"
                             type="text"
                             onChange={(e) => {
-                                setAddress(e.target.value)
+                               
+                                    setAddress(e.target.value)
+                                
                             }}
-                        required></input>
+                            required></input>
+                        {formErrors.address && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.address}</span>
+                                    )}
+                    
                 </div>
                     
                 <div className="seller-add-post-row"> 
@@ -195,11 +258,17 @@ export default function PublicPost({ currentId, setCurrentId }) {
                             name="contact"
                             type="tel"
                            onChange={(e) => setContact(e.target.value)}
-                        required></input>
+                            required></input>
+                        {formErrors.contact && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.contact}</span>
+                                    )}
                 </div>
                 <div className="seller-add-post-row">
                     <label className="seller-add-post-label" for="location">Location</label>
-                    <a href="#" onClick={(e) => { getlocation(e) }}>Get Location</a>
+                        <a href="#" onClick={(e) => { getlocation(e) }}>Get Location</a>
+                        {formErrors.location && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.location}</span>
+                                    )}
                 </div>
                 <div className="seller-add-post-row">
                         <label className="seller-add-post-label" for="thumbnail_img">Add Thumbnail Image</label>
