@@ -134,6 +134,23 @@ exports.sellerViewOnePostDetails = async (req, res) => {
     
     
 }
+exports.sellerViewPrvPost = async (req, res) => {
+    let postId = req.params.id;
+
+    SellerPost.findOne({ "_id": postId }).exec((err, post) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        } else {
+            return res.status(200).json({
+                success: true,     
+                post: post,
+                
+            });
+        }
+    })
+}
 
 exports.sellerAcceptPostOffer = async (req, res) => {
     const { id } = req.params;
