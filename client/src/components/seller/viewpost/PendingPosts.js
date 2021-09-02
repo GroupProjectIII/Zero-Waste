@@ -49,7 +49,7 @@ export default function PendingPosts() {
             .then((result) => {
                 toastNotification();
                 getSellerPosts();
-                getSellerPosts();
+                
             });
     };
 

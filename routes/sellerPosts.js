@@ -13,7 +13,8 @@ const { sellerAddPost,
     sellerDeclineOffer,
     sellerAcceptWasteItemOffer,
     deletePendingSellerPost,
-    sellerUpdatePost
+    sellerUpdatePost,
+    sellerViewPrvPost
 } = require("../controllers/sellerPosts.js");
 
 router.post('/sellerAddPost', sellerAddPost);
@@ -26,6 +27,7 @@ router.patch('/sellerAcceptWasteItemOffer/:id', sellerAcceptWasteItemOffer);
 router.get('/sellerViewAcceptedOffers/:id', sellerViewAcceptedOffers);
 router.delete('/deletePendingSellerPost/:id', deletePendingSellerPost);
 router.patch('/sellerUpdatePost/:id', sellerUpdatePost);
+router.get('/sellerViewPrvPost/:id', sellerViewPrvPost);
 
 
 module.exports = router;

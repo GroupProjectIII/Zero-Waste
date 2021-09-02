@@ -54,6 +54,7 @@ import SellerViewNotifications from './components/seller/Profile/SellerViewNotif
 import SellerAddComplaint from './components/seller/Profile/AddComplaints';
 import SellerViewStats from './components/seller/Profile/SellerViewStats';
 import SellerEditPost from './components/seller/Post/EditPost';
+import SellerViewPrvPost from './components/seller/viewpost/ViewPrvPost';
 
 import CompanyHome from './components/company/pages/Home';
 import CompanyProfile from './components/company/pages/Profile';
@@ -159,6 +160,8 @@ function App() {
                     <Route path='/seller/complaint' component={SellerAddComplaint} />
                     <Route path='/seller/stats' component={SellerViewStats} />
                     <Route path='/seller/editpost/:postId' component={SellerEditPost} />
+                    <Route path='/seller/viewprvpost/:postId' component={SellerViewPrvPost} />
+                    
                     
 
                     <Route path='/admin' exact component={AdminHome} />
