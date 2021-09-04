@@ -98,11 +98,13 @@ export default function PublicPost({ currentId, setCurrentId }) {
             axios.post('/sellerAddPost', newPostData).then((res) => {
                 console.log(res);
                 alert("Post Added Sucessfully!");
+                toastNotification();
+                clear();
             }
             ).catch((err) => {
                 alert(err)
             })
-           toastNotification();
+          
       
         } else {
         
@@ -111,7 +113,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFormErrors(validate());
+       setFormErrors(validate());
         setIsSubmitting(true);
     };
     const toastNotification = () => {
@@ -191,6 +193,18 @@ export default function PublicPost({ currentId, setCurrentId }) {
     // form validation
 
     const [wasteTypeError, setWasteTypeError] = useState([]);
+
+    const clear = () => {
+        console.log("clear");
+        setDistrict('');
+        setAddress('');
+        setContact();
+        setThumbnail('');
+        setLocation([]);
+        setWasteItemList([{ ...wasteItem }]);
+            
+            
+    }
     return (
                  
         <div className="seller-add-post-background">
@@ -201,7 +215,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
             <form className="seller-add-new-post-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
                     <div className="seller-add-post-row">
                     <label className="seller-add-post-label">District</label>
-                    <select className="seller-add-post-select" name="option"
+                    <select className="seller-add-post-select" name="option" value={district}
                             onChange={(e) => {
                                 console.log(e);
                                     setDistrict(e.target.value) 
@@ -249,12 +263,13 @@ export default function PublicPost({ currentId, setCurrentId }) {
                             id="input"
                             name="address"
                             type="text"
+                            value={address}
                             onChange={(e) => {
                                
                                     setAddress(e.target.value)
                                 
                             }}
-                            required></input>
+                            ></input>
                         {formErrors.address && (
                                         <span className="error" style={{color:'red'}}>{formErrors.address}</span>
                                     )}
@@ -267,6 +282,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                             id="input"
                             name="contact"
                             type="tel"
+                            value={contact}
                            onChange={(e) => setContact(e.target.value)}
                             required></input>
                         {formErrors.contact && (
@@ -285,6 +301,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                         <input className="Selected-file"
                             type="file"
                             accept="image/*"
+                          
                             onChange={
                                 (e) => {
                                    // console.log(e);
