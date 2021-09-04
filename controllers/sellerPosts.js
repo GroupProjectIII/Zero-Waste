@@ -37,7 +37,53 @@ exports.sellerAddPost = async (req, res) => {
     }
 
 };
+exports.sellerViewAllPosts = async (req, res) => {
+    let sellerId = req.params.id;
+    SellerPost.find({ "sellerId": sellerId }).exec((err, posts) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            existingPosts: posts,
+            
+        });
+    
+    })
+}
+exports.sellerViewAllOffers = async (req, res) => {
+    let sellerId = req.params.id;
+    BuyerOffersForSeller.find({ "sellerId": sellerId }).exec((err, offers) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            existingOffers: offers,
+         
+        });
+    })
+}
 
+exports.viewItemOffers = async (req, res) => {
+    let itemId = req.params.id;
+    BuyerOffersForSeller.find({"wasteItemsListId": itemId}).exec((err, offers) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            existingOffers: offers,
+         
+        });
+    })
+}
 exports.sellerViewPosts = async (req, res) => {
 
     let sellerIdd = req.params.id;
@@ -49,7 +95,7 @@ exports.sellerViewPosts = async (req, res) => {
             });
         }
         posts = posts;
-        BuyerOffersForSeller.find({ "sellerId": sellerIdd }).exec((err2, offer) => {
+        BuyerOffersForSeller.find({ "sellerId": sellerIdd }).exec((err2, offers) => {
             if (err2) {
                 return res.status(400).json({
                     error: err2
@@ -57,9 +103,8 @@ exports.sellerViewPosts = async (req, res) => {
             }
             return res.status(200).json({
                 success: true,
-                existingOffers: offer,
                 existingPosts: posts,
-                
+                existingOffers: offers
             });
 
         })
@@ -150,6 +195,22 @@ exports.sellerViewPrvPost = async (req, res) => {
             });
         }
     })
+}
+
+exports.sellerViewPrvOffers = async (req, res) => {
+    let postId = req.params.id;
+    BuyerOffersForSeller.find({ "postId": postId, "status": "accepted" }).exec((err, offer) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
+        return res.status(200).json({
+            success: true,  
+            offers: offer,
+        });
+    })
+
 }
 
 exports.sellerAcceptPostOffer = async (req, res) => {

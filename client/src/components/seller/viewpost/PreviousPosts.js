@@ -25,10 +25,39 @@ export default function PreviousPosts() {
 
     //const WAIT_TIME = 1000;
     useEffect(() => {
-        getPosts()
+        getAllPosts()
     }, [])
 
+    useEffect(() => {
+        getAllOffers()
+    }, [])
     
+    const getAllOffers = async () => {
+        setIsLoading(true)
+        await axios.get(`/viewAllOffers/${sellerId}`)
+            .then ((response)=>{
+                const allNotes=response.data.existingOffers;
+                setOffers(allNotes);
+                setIsLoading(false)
+            })
+            .catch(error => {
+                console.error(`Error: ${error}`)
+                setHasError(true);
+            });
+    }
+    const getAllPosts = async () => {
+        setIsLoading(true)
+        await axios.get(`/viewAllPosts/${sellerId}`)
+            .then ((response)=>{
+                const allNotes=response.data.existingPosts;
+                setPosts(allNotes);
+                setIsLoading(false)
+            })
+            .catch(error => {
+                console.error(`Error: ${error}`)
+                setHasError(true);
+            });
+    }
     const getPosts = async () => {
         setIsLoading(true)
         try {

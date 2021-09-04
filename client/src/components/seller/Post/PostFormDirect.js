@@ -100,6 +100,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
             axios.post('/sellerAddPost', newPostData).then((res) => {
                 console.log(res);
                 alert("Post Added Sucessfully!");
+                toastNotification();
+                clear();
             }
             ).catch((err) => {
                 alert(err)
@@ -189,7 +191,17 @@ export default function PublicPost({ currentId, setCurrentId }) {
      //   console.log(wasteItemList[idx]);
         
     }
-    
+    const clear = () => {
+        console.log("clear");
+        setDistrict('');
+        setAddress('');
+        setContact();
+        setThumbnail('');
+        setLocation([]);
+        setWasteItemList([{ ...wasteItem }]);
+            
+            
+    }
     
     
     return (

@@ -13,9 +13,11 @@ export default function Post() {
     console.log(postId);
 
     const [postData, setPostData] = useState({});
-    const [offerList, setOfferList] = useState([]);
+    const [offers, setOffers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [hasError, setHasError] = useState(false)
+    const [hasError, setHasError] = useState(false);
+    const [buyer, setBuyer] = useState("");
+    const [value, setValue] = useState(null);
 
     useEffect(() => {
         getpost()
@@ -37,24 +39,49 @@ export default function Post() {
       
     }
 
-    const sellerAcceptOffer = (offerId) => {
-        console.log("asp")
-        const data = {
-            status: "Accepted",
-            postId: postId
-        };
-        axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)
-            .then((result) => {
-                console.log("ACCPTED")
-           //     clear();
-              //  toastNotification();
-              //  history.push(`/seller/home`);
-        });
+    useEffect(() => {
+        getAcceptedOffers()
+    }, [])
+    
+    const getAcceptedOffers = async () => {
+        try {
+            const response = await axios.get(`/sellerViewPrvOffers/${postId}`)
+            console.log(response);
+            const allPost = response.data.offers;
+            setOffers(allPost);
+        } catch (error) {
+            console.error(`Error: ${error}`)
+            setHasError(true)
+        }
     }
    
 
   //  console.log(postData);
-   // console.log(offerList);
+    console.log("offers",offers);
+
+    var compOffer = offers.filter(o => o.wasteItemsListId === "completePost")
+    if (compOffer.length === 1) {
+        setBuyer(compOffer.buyerName);
+        setValue(compOffer.value);
+        var total = compOffer.value;
+    }
+    else {
+        var itemOffers = offers.filter(o => o.wasteItemsListId !== "completePost");
+        var total = itemOffers.reduce((prev, next) => prev + next.value, 0)
+       
+        console.log(total);
+        console.log("itOffers",itemOffers);
+        /*
+        var totalValue = 0;
+        {
+            itemOffers && itemOffers.map((offer, index) => {
+                totalValue = totalValue + offer.value;
+            })
+        }
+        setValue(totalValue);
+        */
+    }
+    
     return (
         <>
             {
@@ -74,7 +101,8 @@ export default function Post() {
                             <div className="seller-post-list">
                                 <div className="seller-post-card">
                                     <h2>Post Type : {postData.postType}</h2>
-                                    <h2>Buyer : {postData.buyer}</h2>
+                                    <h2>Buyer : {buyer}</h2>
+                                    <h2>Value: {total}</h2>
                                     <h2>District : {postData.district}</h2>
                                     <h2>Address : {postData.address}</h2>
                                     <h2>Contact No : {postData.contact}</h2>

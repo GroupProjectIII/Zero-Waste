@@ -55,6 +55,8 @@ import SellerAddComplaint from './components/seller/Profile/AddComplaints';
 import SellerViewStats from './components/seller/Profile/SellerViewStats';
 import SellerEditPost from './components/seller/Post/EditPost';
 import SellerViewPrvPost from './components/seller/viewpost/ViewPrvPost';
+import SellerViewItemOffers from './components/seller/viewpost/ViewItemOffers';
+import SellerAddComplaintPage from './components/seller/Buyers/AddComplaintPage';
 
 import CompanyHome from './components/company/pages/Home';
 import CompanyProfile from './components/company/pages/Profile';
@@ -161,6 +163,9 @@ function App() {
                     <Route path='/seller/stats' component={SellerViewStats} />
                     <Route path='/seller/editpost/:postId' component={SellerEditPost} />
                     <Route path='/seller/viewprvpost/:postId' component={SellerViewPrvPost} />
+                    <Route path='/seller/viewitem/:itemId' component={SellerViewItemOffers} />
+                    <Route path='/seller/addcomplaint/:buyerId' component={SellerAddComplaintPage} />
+                    
                     
                     
 
