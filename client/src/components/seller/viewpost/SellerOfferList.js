@@ -22,21 +22,28 @@ export default function SellerOfferList() {
     const history = useHistory()
    
     
-    const [buyerOffers, getBuyerOffers] = useState([]);
+   // const [buyerOffers, getBuyerOffers] = useState([]);
+    const [buyerOffersList, getBuyerOffersList] = useState([]);
+
     const WAIT_TIME = 1000;
 
     useEffect(() => {
         const id = setInterval(() => {
             axios.get(`/sellerViewOffers/${sellerId}`)
                 .then(res => {
-                    getBuyerOffers(res.data.existingOffers);
+                    getBuyerOffersList(res.data.existingOffers);
                 })
                 .catch(err => {
                     console.log(err);
             })
        },WAIT_TIME)
-    },[buyerOffers]);
-
+    }, [buyerOffersList]);
+    const date = new Date();
+    date.setDate(date.getDate());
+    
+    var buyerOffers = buyerOffersList.filter(o => o.expieryDate >= date);
+    console.log(buyerOffers);
+    console.log(buyerOffersList);
     const getAllBuyerOffers = async () => {
             setIsLoading(true)
             try {
@@ -46,7 +53,7 @@ export default function SellerOfferList() {
                 if (allOffers.length === 0) {
                     setIsEmpty(true)
                 } else {
-                    getBuyerOffers(allOffers);
+                    getBuyerOffersList(allOffers);
                     setIsLoading(false);
                     setIsEmpty(false);
                 }
@@ -72,31 +79,38 @@ export default function SellerOfferList() {
             });
     //   window.location.reload();
     }
-    const sellerAcceptCompletePostOffer = (offerId, postId) => {
-        var vfCode = Math.floor(100000 + Math.random() * 900000);
-        console.log("asp")
-        const data = {
-            status: "accepted",
-            postId: postId,
-            verificationCode: vfCode,
-        };
-        axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)
-            .then((result) => {
-                console.log("ACCPTED")
-                alert("Offer Accepted");
-           //     clear();
-              //  toastNotification();
-              //  history.push(`/seller/home`);
-            });
-    //    window.location.reload();
-        
+    const sellerAcceptCompletePostOffer = (offerId, postId, expDate) => {
+        if (expDate <= date) {
+            alert("Expired Offer")
+        } else {
+            var vfCode = Math.floor(100000 + Math.random() * 900000);
+            console.log("asp")
+            const data = {
+                status: "accepted",
+                postId: postId,
+                verificationCode: vfCode,
+            };
+            axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)
+                .then((result) => {
+                    console.log("ACCPTED")
+                    alert("Offer Accepted");
+                    //     clear();
+                    //  toastNotification();
+                    //  history.push(`/seller/home`);
+                });
+            //    window.location.reload();
+        }
     }
 
-    const sellerAcceptWasteItemOffer = (itemId, offerId) => {
-        console.log("accept", itemId);
-        var vfCode = Math.floor(100000 + Math.random() * 900000);
+    const sellerAcceptWasteItemOffer = (itemId, offerId, expDate) => {
+        if (expDate <= date) {
+            alert("Expired Offer")
+            
+        } else {
+            console.log("accept", itemId);
+            var vfCode = Math.floor(100000 + Math.random() * 900000);
      
-            console.log("item",itemId)
+            console.log("item", itemId)
             const data = {
                 status: "accepted",
                 wasteItemsListId: itemId,
@@ -107,8 +121,8 @@ export default function SellerOfferList() {
                     console.log("offer accepted")
                     alert("Offer Accepted");
                 });
-     //   window.location.reload();
-        
+            //   window.location.reload();
+        }
         }
       
     return (
@@ -143,8 +157,8 @@ export default function SellerOfferList() {
                                                     <p>Offer For Complete Post</p>
                                                     <p>{offer.status}</p>
                                                     <p>Value: {offer.value}</p>
-                                                    <p>Collecting Date: {offer.collectingDate} At: {offer.collectingTime}</p>
-                                                    <p>Offer Expiery Date: {offer.expiryDate}</p>
+                                                    <p>Collecting Date: {moment(offer.collectingDate).format("LL")} At: {offer.collectingTime}</p>
+                                                    <p>Offer Expiery Date: {moment(offer.expiryDate).format("LL")}</p>
                                                     <div className="buyerlink-b">
                                                         <Link style={{ color: '#fff', textDecoration: 'none' }}
                                                             to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
@@ -153,7 +167,7 @@ export default function SellerOfferList() {
                                                     <div className="buyerlink-b">
                                                         <button className="accept-btn" onClick={() => {
 
-                                                            sellerAcceptCompletePostOffer(offer._id, offer.postId._id);
+                                                            sellerAcceptCompletePostOffer(offer._id, offer.postId._id, offer.expiryDate);
                                                         }}>Accept</button>
                                                     </div>
                                                     <div className="buyerlink-b">
@@ -175,8 +189,8 @@ export default function SellerOfferList() {
                                                     <p>Offer For Waste Item</p>
                                                     <p>{offer.status}</p>
                                                     <p>Value: {offer.value}</p>
-                                                    <p>Collecting Date: {offer.collectingDate} At: {offer.collectingTime}</p>
-                                                    <p>Offer Expiery Date: {offer.expiryDate}</p>
+                                                    <p>Collecting Date: {moment(offer.collectingDate).format("LL")} At: {offer.collectingTime}</p>
+                                                    <p>Offer Expiery Date: {moment(offer.expiryDate).format("LL")}</p>
                                                     <div className="buyerlink-b">
                                                         <Link style={{ color: '#fff', textDecoration: 'none' }}
                                                             to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
@@ -184,7 +198,7 @@ export default function SellerOfferList() {
                                                     </div>
                                                     <div className="buyerlink-b">
                                                         <button className="accept-btn" onClick={() => {
-                                                           sellerAcceptWasteItemOffer(item._id, offer._id) 
+                                                           sellerAcceptWasteItemOffer(item._id, offer._id, offer.expieryDate) 
                                                         }}>Accept</button>
                                                     </div>
                                                     <div className="buyerlink-b">
