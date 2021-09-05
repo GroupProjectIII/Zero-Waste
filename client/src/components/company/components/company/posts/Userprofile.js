@@ -1,3 +1,4 @@
+
 import React, { useEffect,useState } from "react";
 import '../../../../buyer/posts/Posts.css';
 import axios from "axios";
@@ -209,3 +210,4 @@ function UserProfile() {
 }
 
 export default UserProfile;
+
