@@ -1,5 +1,5 @@
 import '../posts/Form.css';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsFillXCircleFill , BsFillPlusCircleFill} from "react-icons/bs";
@@ -7,10 +7,7 @@ import { BsFillXCircleFill , BsFillPlusCircleFill} from "react-icons/bs";
 function EditProfileForms() {
 
     const history = useHistory()
-    if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "buyer")) {
-        history.push("/");
-    }
-   
+
     const buyerId = (localStorage.getItem("userId"));
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
@@ -85,8 +82,8 @@ function EditProfileForms() {
         } else {
             axios.patch(`/buyerUpdateDetails/${buyer._id}`, data).then((res) => {
                 console.log(res);
-                alert("Post Updated Sucessfully!");
-                history.push('/buyer/home');
+                history.push('/buyer/vprofile');
+
             }
             ).catch((err) => {
                 alert(err)
@@ -94,7 +91,7 @@ function EditProfileForms() {
         }
     }
 
-    
+
     return(
         <div className="forms-b">
             <div className="forms__container-b" >

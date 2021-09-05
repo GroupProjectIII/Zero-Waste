@@ -69,13 +69,17 @@ export default function ItemOffers() {
             <div className="seller-post-list-background">
                 <div className="seller-post-list">
                     <div className="seller-post-offers">
-                        <div><h4>Available Offer List</h4></div>
+
+                        <h2>Available Offer List</h2>
+
                         <table className="seller-accepted-offers-table">
                             <tr>
                                 <th>Offer Id</th>
                                 <th>Buyer</th>
                                 <th>Collecting Date</th>
-                                <th>Collecting Time (Aprox:)</th>
+
+                                <th>Collecting Time (Approx:)</th>
+
                                 <th>Offer(Rs)</th>
                                 <th>Offer Exp: Date</th>
                                 <th>Action</th>
@@ -83,7 +87,9 @@ export default function ItemOffers() {
                             {avbOffers && avbOffers.map((offer, index) => {
                                 if (avbOffers.length === 0) {
                                     return (
-                                        <div><p>No Avilable Offers</p></div>
+
+                                        <div><p>No Available Offers</p></div>
+
                                     )
                                 } else {
                                     return (
@@ -94,15 +100,17 @@ export default function ItemOffers() {
                                             <td>{offer.collectingTime}</td>
                                             <td>{offer.value}</td>
                                             <td>{moment(offer.expiryDate).format("LLL")}</td>
-                                            <td><a hreff="#" className="item-edit-button" onClick={() => {
+
+                                            <td><button className="item-edit-button" onClick={() => {
                                                 let offerId = offer._id;
                                                 console.log(offerId);
                                                 sellerAcceptWasteItemOffer(offerId);
-                                            }}>Accept</a>
-                                                <a className="item-remove-button" hreff="#" onClick={(e) => {
+                                            }}>Accept</button>
+                                                <button className="item-remove-button" onClick={(e) => {
                                                     let offerId = offer._id;
                                                     sellerDeclineOffer(offerId,e)
-                                                }}>Decline</a> </td>
+                                                }}>Decline</button> </td>
+
                                         </tr>
                                     );
                                    
@@ -114,7 +122,9 @@ export default function ItemOffers() {
                       
                     </div>
                     <div className="seller-post-offers">
-                        <div><h4>Declined Offer List</h4></div>
+
+                        <h2>Declined Offer List</h2>
+
                         <table className="seller-accepted-offers-table">
                             <tr>
                                 <th>Offer Id</th>

@@ -103,9 +103,13 @@ export default function Post() {
                                                     <img src={item.selectedFile} alt="img" />
                                                     <p>Quantity : { item.quantity}</p>
                                                     <p>Available On :{moment(item.avbDate).format("LLL")}</p>
-                                                    <Link style={{ textDecoration: 'none' }}
+
+                                                    <div className="seller-view-offer-button">
+                                                    <Link style={{ textDecoration: 'none', color:"#ffffff"}}
                                                                 to={`/seller/viewitem/${item._id}`}>View Item Offers <i
                                                                     className="fas fa-angle-double-right"></i></Link>
+                                                    </div>
+
                                                 </div>
                                                 
                                             </div>
@@ -116,7 +120,7 @@ export default function Post() {
                                     })}
                         </div>
                                 <div className="seller-post-offers">
-                                    <h1>Offers For Colmplete Post</h1>
+                                    <div style={{marginBottom:"30px"}}><h1>Offers For Complete Post</h1></div>
                                     <div>
                                         <table className="seller-accepted-offers-table">
                                         <tr>
@@ -134,16 +138,16 @@ export default function Post() {
                                             return (
                                                 <tr>
                                                     <td>{offerindex + 1}</td>
-                                                    <td>{offer.buyer}</td>
+                                                    <td>{offer.buyerName}</td>
                                                     <td>{moment(offer.collectingDate).format("LLL")}</td>
                                                     <td>{offer.collectingTime}</td>
                                                     <td>{offer.value}</td>
                                                     <td>{moment(offer.expiryDate).format("LLL")}</td>
-                                                    <td><a hreff="#" className="offer-list-accept" onClick={() => {
+                                                    <td><button className="item-edit-button" onClick={() => {
                                                         let offerId = offer._id;
                                                         console.log(offerId);
                                                         sellerAcceptOffer(offerId);
-                                                    }}>Accept</a><a className="offer-list-decline" hreff="#">Decline</a> </td>
+                                                    }}>Accept</button><button className="item-remove-button" >Decline</button> </td>
                                                 </tr>
                                                     
                                                                                                       
