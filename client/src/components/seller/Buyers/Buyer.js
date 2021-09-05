@@ -3,17 +3,18 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './Buyer.css';
 import buypic from './BuyerImages/images.jpg';
+import '../../buyer/posts/LoadingRing.css';
 
 export default function Buyer() {
 
     useEffect(() => {
-        getAllSellers() 
+        getAllBuyers() 
      }, [])
      const [buyers, setBuyers] = useState([]);
      const [isLoading, setIsLoading] = useState(false);
      const [hasError, setHasError] = useState(false);
  
-     const getAllSellers = async () => {
+     const getAllBuyers = async () => {
          setIsLoading(true)
          try {
              const response = await axios.get(`/viewAllBuyers`)
@@ -34,15 +35,45 @@ export default function Buyer() {
 
         history.push("/seller/directpost")
     }
-    const viewbuyer = () => {
-        history.push("/seller/buyer")
+   
+
+    const filterData = (postsPara, searchKey) => {
+        const result = postsPara.filter(
+            (notes) =>
+                notes?.buyerAddress.toLowerCase().includes(searchKey) ||
+                notes?.favouriteAreas?.map(area => area.toLowerCase()).includes(searchKey) ||
+                notes?.favouriteWasteTypes?.map(type => type.toLowerCase()).includes(searchKey) ||
+                notes?.favouriteWasteItems?.map(item => item.toLowerCase()).includes(searchKey)                    
+               // notes?.contact.toString().toLowerCase().includes(searchKey) ||
+              //  notes?.favouriteAreas?.map(areas).join(' ').toLowerCase().includes(searchKey) ||
+               // notes?.wasteItemList?.map(wasteItem => wasteItem.item).join(' ').toLowerCase().includes(searchKey) ||
+               // notes?.wasteItemList?.map(wasteItem => wasteItem.quantity).join(' ').toString().toLowerCase().includes(searchKey)
+        );
+        setBuyers(result);
+    };
+
+    const handleSearchArea = (e) => {
+        setIsLoading(true)
+        const searchKey = e.currentTarget.value;
+
+        axios.get(`/viewAllBuyers`).then((res) => {
+            if (res?.data?.success) {
+                filterData(res?.data?.buyer, searchKey);
+                setIsLoading(false)
+            }
+        });
     }
     return (
         <>
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                         <div className="seller-post-list-background">
                             <h1>Error occured.</h1>
@@ -54,18 +85,12 @@ export default function Buyer() {
                                 <div class="seller-buyer-search-container">
                                     <form className="seller-search-buyer">
                                         <label className="serch-buyer-lable">Waste Type</label>
-                                        <input type="text" placeholder="Search.." name="search" id="serchinput" />
+                                        <input type="text" placeholder="Search.." name="search" onChange={handleSearchArea} id="serchinput"></input>
                                         <label className="serch-buyer-lable">Waste Item</label>
-                                        <input type="text" placeholder="Search.." name="search" id="serchinput" />
+                                        <input type="text" placeholder="Search.." name="search" id="serchinput"></input>
                                         <label className="serch-buyer-lable">Area</label>
-                                        <select>
-                                            <option selected>All</option>
-                                            <option>Colombo</option>
-                                            <option>Gampala</option>
-                                            <option>Kaluthara</option>
-                                            <option>Yakkala</option>
-                                        </select>
-                                        <button className="seller-search-buyer-btn" type="submit">Search</button>
+                                        <input type="text" placeholder="Search.." name="search" id="serchinput"></input>
+                                        <button className="seller-search-buyer-btn" type="submit" value="Search"></button>
                                     </form>
                                 </div>
            
@@ -73,134 +98,48 @@ export default function Buyer() {
            
                             <div className="buyer-list">
                                 <div className="buyer-list-header">
-                                    <h2>Top Rated Buyers</h2>
+                                    <h2>Buyers</h2>
                                 </div>
                                 <div className="buyer-row">
-                                    <div className="buyer-column">
-                                        <div className="buyer-card">
-                                            <img src={buypic} alt="logo" />
-                                            <h1>Lk Collectors</h1>
-                                            <p>We are collecting plastic and plastic related items.</p>
-                                            <h4>Rathings</h4>
-                                            <div className="ratings-star">
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                            </div>
-                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
-                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
-                                        </div>
+                                    
+                                        {buyers.map((buyer) => {
+                                            return (
+                                                <div className="buyer-column">
+                                                    <div className="buyer-card">
+                                                        <img src={buypic} alt="logo" />
+                                                        <h1>{buyer.buyerName}</h1>
+                                                        <p>{buyer.buyerAddress}</p>
+                                                        <h4>Rathings</h4>
+                                                        <div className="ratings-star">
+                                                            <span className="fa fa-star checked"></span>
+                                                            <span className="fa fa-star checked"></span>
+                                                            <span className="fa fa-star checked"></span>
+                                                            <span className="fa fa-star checked"></span>
+                                                            <span className="fa fa-star checked"></span>
+                                                        </div>
+                                                        <div>
+                                                        <Link style={{ textDecoration: 'none' }}
+                                                                to={`/seller/buyer/${buyer.buyerId}`}>View Buyer <i
+                                                                    className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
+                                                        <div>
+                                                        <Link style={{textDecoration: 'none' }}
+                                                                to={`/seller/directpost/${buyer.buyerId}`}>Sell Now <i
+                                                                    className="fas fa-angle-double-right"></i></Link>
+                                                        </div>
+
+
+                                                       
+                                                    </div>
                     
-                                    </div>
-                                    <div className="buyer-column">
-                                        <div className="buyer-card">
-                                            <img src={buypic} alt="logo" />
-                                            <h1>Lk Collectors</h1>
-                                            <p>We are collecting plastic and plastic related items.</p>
-                                            <h4>Rathings</h4>
-                                            <div className="ratings-star">
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                            </div>
-                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
-                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
-                                        </div>
-                    
-                                    </div>
-                                    <div className="buyer-column">
-                                        <div className="buyer-card">
-                                            <img src={buypic} alt="logo" />
-                                            <h1>Lk Collectors</h1>
-                                            <p>We are collecting plastic and plastic related items.</p>
-                                            <h4>Rathings</h4>
-                                            <div className="ratings-star">
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                            </div>
-                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
-                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
-                                        </div>
-                    
-                                    </div>
-                                    <div className="buyer-column">
-                                        <div className="buyer-card">
-                                            <img src={buypic} alt="logo" />
-                                            <h1>Lk Collectors</h1>
-                                            <p>We are collecting plastic and plastic related items.</p>
-                                            <h4>Rathings</h4>
-                                            <div className="ratings-star">
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                                <span className="fa fa-star checked"></span>
-                                            </div>
-                                            <button className="view-more-btn" onClick={viewbuyer}>View More</button>
-                                            <button className="sell-now-btn" onClick={viewdirectpost}>Sell Now</button>
-                                        </div>
-                    
-                                    </div>
-                
-                
-                                </div>
-                            </div>
-                            <div className="buyer-list">
-                                <div className="buyer-list-header">
-                                    <h2>All Buyers List</h2>
-                                </div>
-                                <div className="all-buyers-list-area">
-                                    <table className="seller-offer-table">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Buyer</th>
-                                            <th>Description</th>
-                                            <th>Address</th>
-                                            <th>contact</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        {buyers.map((buyer, index) => {
-                                            if (buyer.buyerId)
-                                                return (
-                                                    <tr>
-                                                        <td>{index + 1}</td>
-                                                        <td>{buyer.buyerName}</td>
-                                                        <td>{buyer.buyerDescription}</td>
-                                                        <td>{buyer.buyerAddress}</td>
-                                                        <td>
-                                                            <ul>
-                                                                {buyer && buyer.buyerContact && buyer.buyerContact.map((contact) => {
-                                                                    return (
-                                                                        <li>{contact}</li>
-                                                                    )
-                                                                    
-                                                                })}
-                                                                
-                                                            </ul>
-                                                        </td>
-                                                        <td>
-                                                            <Link style={{ textDecoration: 'none'}}
-                                                                to={`selelr/directpost`}>Sell Now</Link>
-                                                        
-                                                                <Link style={{ textDecoration: 'none'}}
-                                                                to={`/seller/buyer/${buyer.buyerId}`}>View More</Link>
-                                                            
-                                                            
-                                                        </td>
-                                                    </tr>
-                                                )
+                                                </div>
+                                            );
                                         })}
-                                    </table>
+                                        
                                 </div>
                             </div>
                         </div>
+                
             }
             </>
     )

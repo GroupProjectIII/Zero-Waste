@@ -1,10 +1,11 @@
-import './AcceptedOffersList.css';
+import './PendingPosts.css';
 import { useHistory } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
-import './SellerOfferList.css';
+import '../../buyer/posts/LoadingRing.css';
 import moment from 'moment';
+import AcceptedOffer from "./AcceptedOffer"
 
 export default function AcceptedOffersList() {
     const history = useHistory()
@@ -42,85 +43,41 @@ export default function AcceptedOffersList() {
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                         <div className="seller-post-list-background">
                             <h1>Error occured.</h1>
                         </div> :
-                        <div className="seller-accepted-offer-list-background">
+                        <div className="seller-post-list-background">
                             <div className="seller-accepted-offers">
-                                <div className="seller-accepted-offers-header">
-                                    <h3>Not Collected</h3>
-                                </div>
+                                
                                 <div className="seller-offer-list">
-                                <table className="seller-accepted-offers-table">
-                                    <tr>
-                                        <th>Post Id</th>
-                                        <th>Item Id</th>
-                                        <th>Buyer</th>
-                                        <th>Collecting Date</th>
-                                        <th>Collecting Time</th>
-                                        <th>Offer Value(Rs)</th>
-                                        <th>Buyer transaction Code</th>
-                                    </tr>
+                                <main className="grid-b">
                                     {acceptedOffers.map((offer) => {
                                         if (offer.wasteItemsListId === "completePost") {
                                             return (
-                                                <tr>
-                                                    <td>
-                                                        <Link style={{ textDecoration: 'none' }}
-                                                        to={`/seller/viewpost/${offer.postId}`}>
-                                                        <img classNane="seller-offer-image"
-                                                            src={offer?.postId?.thumbnail}
-                                                            alt="">
-                                                        </img>
-                                                        </Link>
-                                                    </td>
-                                                    <td>Complete Post</td>
-                                                    <td>{offer.buyerName}</td>
-                                                    <td>{moment(offer.collectingDate).format("LL")}</td>
-                                                    <td>{offer.collectingTime}</td>
-                                                    <td>{offer.value}</td>
-                                                    <td><input type="text"></input><a className="item-collected-btn" href="#">Submit</a></td>
-                                                </tr>
+                                                <AcceptedOffer offer={offer} post={"Complete Post"}/>
                                             )
                                         } else {
                                             var item = offer.postId.wasteItemList.find(element => element._id === offer.wasteItemsListId);
                                             return (
-                                                <tr>
-                                                    <td>
-                                                        <Link style={{ textDecoration: 'none' }}
-                                                            to={`/seller/viewpost/${offer.postId}`}>
-                                                            <img classNane="seller-offer-image"
-                                                                src={offer?.postId?.thumbnail}
-                                                                alt="">
-                                                            </img>
-                                                        </Link>
-                                                    </td>
-                                                    <td>
-                                                        <Link style={{ textDecoration: 'none' }}
-                                                            to={`/seller/viewpost/${offer.postId}/${offer.wasteItemsListId}`}>
-                                                            <img classNane="seller-offer-image"
-                                                                src={item.selectedFile} alt="">
-                                                            </img>
-                                                        </Link>
-                                                    </td>
-                                                    <td>{offer.buyerName}</td>
-                                                    <td>{moment(offer.collectingDate).format("LLL")}</td>
-                                                    <td>{offer.collectingTime}</td>
-                                                    <td>{offer.value}</td>
-                                                    <td><input type="text"></input><a className="item-collected-btn" href="#">Submit</a></td>
-                                                </tr>
+                                                <AcceptedOffer offer={offer} post={"Post Item"} item={item} />
                                             )
                                         }
                         
                                     })}
                     
-
-                                    </table>
+                                </main>
+                                   
                                 </div>
                             </div>
                         </div>
+                
             }
         </>
         

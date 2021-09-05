@@ -5,16 +5,22 @@ import axios from 'axios';
 import moment from 'moment';
 import './PendingPosts.css';
 import Bottles from './postPics/bottles.jpg';
-
+import SimpleMap from "../../buyer/posts/Location";
+import '../../buyer/posts/LoadingRing.css';
 export default function Post() {
 
     const { postId } = useParams();
     console.log(postId);
 
     const [postData, setPostData] = useState({});
-    const [offerList, setOfferList] = useState([]);
+    const [offers, setOfferList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false)
+    const offerList = offers?.filter(o => o.wasteItemsListId === "completePost");
+    var offNum = offerList.length;
+    console.log("off",offNum)
+
+    console.log("offersarray",offerList);
 
     useEffect(() => {
         getpost()
@@ -52,7 +58,13 @@ export default function Post() {
               //  history.push(`/seller/home`);
         });
     }
-    
+    const long = postData?.location?.longitude;
+    console.log(long);
+    const lat = postData.location?.latitude;
+    console.log(lat);
+
+    const location={lat,long};
+    console.log(location)
 
   //  console.log(postData);
    // console.log(offerList);
@@ -61,7 +73,12 @@ export default function Post() {
             {
                 isLoading ?
                     <div className="seller-post-list-background">
-                        <h1>Loading....</h1>
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> : hasError ?
                     <div className="seller-post-list-background">
                         <h1>Error occured.</h1>
@@ -86,7 +103,9 @@ export default function Post() {
                                                     <img src={item.selectedFile} alt="img" />
                                                     <p>Quantity : { item.quantity}</p>
                                                     <p>Available On :{moment(item.avbDate).format("LLL")}</p>
-                                                    <a href="#">View Offers For Item</a>
+                                                    <Link style={{ textDecoration: 'none' }}
+                                                                to={`/seller/viewitem/${item._id}`}>View Item Offers <i
+                                                                    className="fas fa-angle-double-right"></i></Link>
                                                 </div>
                                                 
                                             </div>
@@ -99,7 +118,7 @@ export default function Post() {
                                 <div className="seller-post-offers">
                                     <h1>Offers For Colmplete Post</h1>
                                     <div>
-                                        <table className="seller-offer-table">
+                                        <table className="seller-accepted-offers-table">
                                         <tr>
                                             <th>Offer Id</th>
                                             <th>Buyer</th>
@@ -109,8 +128,9 @@ export default function Post() {
                                             <th>Offer Exp: Date</th>
                                             <th>Action</th>
                                             </tr>
+                                           
                                     {offerList.map((offer, offerindex) => {
-                                        if (offer.wasteItemsListId === "completePost") {
+                                        if (offNum !== 0) {
                                             return (
                                                 <tr>
                                                     <td>{offerindex + 1}</td>
@@ -128,6 +148,12 @@ export default function Post() {
                                                     
                                                                                                       
                                             )
+                                        } else {
+                                            return (
+                                               
+                                               <span>No Offers</span>
+                                              
+                                            )
                                         }
                                     })}
                                         </table>
@@ -135,7 +161,13 @@ export default function Post() {
 
                                     </div>  
                         </div>
-                    </div>
+                            </div>
+                            <div>
+                                <SimpleMap loc={location} />
+                                
+                            </div>
+                            
+                            
       
                 </div> 
             }
