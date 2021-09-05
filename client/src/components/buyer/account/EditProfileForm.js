@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsFillXCircleFill , BsFillPlusCircleFill} from "react-icons/bs";
+
 function EditProfileForms() {
 
     const history = useHistory()
@@ -35,6 +36,7 @@ function EditProfileForms() {
         try {
             const response = await axios.get(`/sellerViewBuyerDetails/${buyerId}`)
             console.log(response);
+
             const data = response.data.buyer;
             console.log(data);
             setBuyerDetails(data);
@@ -47,6 +49,7 @@ function EditProfileForms() {
             setImages(data.buyerImages);
           
            // setAreas(areas => [...areas, data.favouriteAreas]);
+
             setIsLoading(false)
         } catch (error) {
             console.error(`Error: ${error}`)
@@ -54,6 +57,7 @@ function EditProfileForms() {
         }
     }
     console.log(buyer);
+
  //   console.log(contact);
     //console.log(areas)
 
@@ -89,6 +93,7 @@ function EditProfileForms() {
             })
         }
     }
+
     
     return(
         <div className="forms-b">
