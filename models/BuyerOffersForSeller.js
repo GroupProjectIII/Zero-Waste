@@ -52,7 +52,17 @@ const sellerOfferSchema = new mongoose.Schema({
     buyerName: {
         type: String,
         required:true
+    },
+    collectedStatus: {
+        type: String,
+        default: "pending"
+    },
+    verificationCode: {
+        type: Number,
+        default: null
     }
+
+
 });
 
 module.exports = mongoose.model('BuyerOffersForSeller', sellerOfferSchema);

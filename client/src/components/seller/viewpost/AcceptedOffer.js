@@ -41,6 +41,7 @@ const AcceptedOffer = (props) => {
                         to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
                             className="fas fa-angle-double-right"></i></Link>
                 </div>
+
             </div>
             </article>
         )

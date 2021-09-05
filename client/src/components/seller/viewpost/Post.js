@@ -103,11 +103,13 @@ export default function Post() {
                                                     <img src={item.selectedFile} alt="img" />
                                                     <p>Quantity : { item.quantity}</p>
                                                     <p>Available On :{moment(item.avbDate).format("LLL")}</p>
+
                                                     <div className="seller-view-offer-button">
                                                     <Link style={{ textDecoration: 'none', color:"#ffffff"}}
                                                                 to={`/seller/viewitem/${item._id}`}>View Item Offers <i
                                                                     className="fas fa-angle-double-right"></i></Link>
                                                     </div>
+
                                                 </div>
                                                 
                                             </div>
