@@ -14,11 +14,8 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
-<<<<<<< HEAD
-    "emailjs": "^3.6.0",
-=======
+
     "emailjs-com": "^3.2.0",
->>>>>>> 8b91598e8c3112d05ae6bc2ff8cbfc2d4bae1469
     "formik": "^2.2.9",
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
