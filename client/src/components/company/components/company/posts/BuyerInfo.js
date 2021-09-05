@@ -1,110 +1,151 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import './AcceptedOffers.css';
-import {useHistory} from "react-router-dom";
+import axios from "axios";
+import {Link} from "react-router-dom";
+import '../../../../buyer/posts/LoadingRing.css';
 
 function BuyerInfo() {
-    const history = useHistory();
 
-    const handleRoute = () =>{
-        history.push("/company/buyerscontact");
+    const [buyerDetails, setBuyerDetails] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
+
+    useEffect(()=>{
+        getAllNotes();
+    }, []);
+
+    const getAllNotes = async () => {
+        setIsLoading(true)
+        try{
+        await axios.get(`/getBuyerDetailsForCompany`)
+            .then ((response)=>{
+                const allNotes=response.data.existingBuyers;
+                setBuyerDetails(allNotes);
+                setIsLoading(false)
+            })
+        }catch (error) {
+            console.error(`Error: ${error}`)
+            setHasError(true)
+        }
     }
+
+    console.log(buyerDetails);
+
+    const filterData = (postsPara, searchKey) => {
+        const result = postsPara.filter(
+            (buyerDetails) =>
+                buyerDetails?.buyerAddress.toLowerCase().includes(searchKey) ||
+                buyerDetails?.favouriteWasteTypes?.map(wasteItem => wasteItem.favouriteWasteTypes).join(' ').toLowerCase().includes(searchKey) ||
+                buyerDetails?.favouriteWasteItems?.map(wasteItem => wasteItem.favouriteWasteItems).join(' ').toLowerCase().includes(searchKey) ||
+                buyerDetails?.favouriteAreas?.map(wasteItem => wasteItem.favouriteAreas).join(' ').toLowerCase().includes(searchKey) ||
+                buyerDetails?.buyerContact?.map(wasteItem => wasteItem.buyerContact).join(' ').toLowerCase().includes(searchKey) ||
+                buyerDetails?.buyerDescription.toLowerCase().includes(searchKey)
+        );
+        setBuyerDetails(result);
+    };
+
+    const handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+
+        axios.get(`/getBuyerDetailsForCompany`).then((res) => {
+            if (res?.data?.success) {
+                filterData(res?.data?.existingBuyers, searchKey);
+            }
+        });
+    };
 
     return(
         <>
-        <div className="tables-c">
-            <div className="tables__container-c">
-                <h1>Direct Offers</h1>
-                <div className="search_box-c">
-                    <input type="text" placeholder="What are you looking for?"></input>
-                    <i className="fas fa-search"></i>
-                </div>
-                <table className="table-c">
-                    <thead>
-                        <tr>
-                            <th>Buyer ID</th>
-                            <th>Buyer</th>
-                            <th>Image</th>
-                            <th>Email</th>
-                            <th>Contact</th>
-                            <th>Collecting Area</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Offer ID">01</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
+            {
+                isLoading ?
+                    <div className="tables-c">
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> : hasError ?
+                        <div className="tables-c">
+                            <h1>Error Occurred</h1>
+                        </div> :
+                        <div className="tables-c">
+                            <div className="tables__container-c">
+                                <h1>Contact Buyers</h1>
+                                <div className="search_box-c">
+                                    <input type="text" placeholder="What are you looking for?" onChange={handleSearchArea}></input>
+                                    <i className="fas fa-search"></i>
+                                </div>
+                                <table className="table-c">
+                                    <thead>
+                                        <tr>
+                                            <th>Buyer ID</th>
+                                            <th>Waste Type</th>
+                                            <th>Waste Item</th>
+                                            <th>Collecting Area</th>
+                                            <th>Contact No</th>
+                                            <th>Description</th>
+                                            <th>Address</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {buyerDetails.map((note,index)=> (
+                                            <tr>
+                                                <td data-label="Offer ID">{index + 1}</td>
+                                                <td data-label="Waste Type">
+                                                {note.favouriteWasteTypes.map((wasteTypes)=>(
+                                                    <span>
+                                                    {wasteTypes}
+                                                    </span>
+                                                ))}
+                                                </td>
+                                                <td data-label="Waste Item">
+                                                    {note.favouriteWasteItems.map((wasteItems)=>(
+                                                        <span>
+                                                    {wasteItems}
+                                                    </span>
+                                                    ))}
+                                                </td>
+                                                <td data-label="Collecting Area">
+                                                    {note.favouriteAreas.map((wasteAreas)=>(
+                                                        <span>
+                                                    {wasteAreas}
+                                                    </span>
+                                                    ))}
+                                                </td>
+                                                <td data-label="Contact No">
+                                                    {note.buyerContact.map((wasteContact)=>(
+                                                        <span>
+                                                    {wasteContact}
+                                                    </span>
+                                                    ))}
+                                                </td>
+                                                <td data-label="Description">{note.buyerDescription}</td>
+                                                <td data-label="Address">{note.buyerAddress}</td>
+                                                <td data-label="Action">
+                                                    <span className="action_btn-c">
+                                                  <Link style={{color: '#000', textDecoration: 'none'}}
+                                                        to={`/company/buyerdirectpost/${note.buyerId}`}>Contact</Link>
+                                                    </span>
+                                                    <span className="action_btn-c">
+                                                  <Link style={{color: '#000', textDecoration: 'none'}}
+                                                        to={`/company/addcomplaints/${note.buyerId}`}>Complain</Link>
+                                                    </span>
+                                                    <span className="action_btn-c">
+                                                  <Link style={{color: '#000', textDecoration: 'none'}}
+                                                        to={`/company/viewbuyerratings/${note.buyerId}`}>Ratings</Link>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+            }
 
-                        <tr>
-                            <td data-label="Offer ID">02</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-label="Offer ID">03</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/paper.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-label="Offer ID">04</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-label="Offer ID">05</td>
-                            <td data-label="Buyer">Tom</td>
-                            <td data-label="Image"><img src="../../images/polythene.jpg" alt=""></img></td>
-                            <td data-label="Waste Type">tom@gmail.com</td>
-                            <td data-label="Waste Item">011-1111111</td>
-                            <td data-label="Date">Colombo</td>
-                            <td data-label="Action">
-                                <span className="action_btn-c">
-                                    <a href="#" onClick={handleRoute}>Contact</a>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </>
+        </>
     );
 }
 

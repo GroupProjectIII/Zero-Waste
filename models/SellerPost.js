@@ -4,7 +4,7 @@ const WasteItem = new mongoose.Schema({
     wasteType: String,
     item: String,
     avbDate: Date,
-    quantity: Number,
+    quantity: String,
     selectedFile: String,
 })
 
@@ -14,10 +14,13 @@ const Location = new mongoose.Schema({
 })
 const postSchema = new mongoose.Schema({
     sellerId: String,
+    sellerName: String,
     postType: String,
     buyer: String,
+    sellerDistrict: String,
     address: String,
     contact: Number,
+    thumbnail: String,
     location: Location,
     createdAt: {
         type: Date,

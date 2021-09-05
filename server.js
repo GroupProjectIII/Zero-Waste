@@ -41,20 +41,42 @@ const postRoutes = require("./routes/posts.js");
 app.use(cors());
 const buyerPosts = require("./routes/buyerPosts");
 const buyerOffersForSeller = require("./routes/buyerOffersForSeller");
+const buyerOffersForCompany = require("./routes/buyerOffersForCompany");
+const complaint = require("./routes/complaint");
+const getHelp = require("./routes/getHelp");
+const rateAndComment = require("./routes/rateAndComment");
 app.use(buyerPosts);
 app.use(buyerOffersForSeller);
+app.use(buyerOffersForCompany);
+app.use(complaint);
+app.use(getHelp);
+app.use(rateAndComment);
+
+const buyerProfile = require("./routes/buyerProfile");
+app.use(buyerProfile);
 
 
+const companyPosts = require("./routes/companyPosts");
+const companyDetail = require("./routes/companyDetail");
+app.use(companyPosts);
+app.use(companyDetail );
+
+const contactBuyer = require("./routes/contactBuyer");
+app.use(contactBuyer);
 
 
-
+app.use('/api/adminuser' , AuserRoute);
 
 
 app.use('/posts', postRoutes);
 //seller
 
 const sellerPostRoutes = require("./routes/sellerPosts");
+const sellerViewBuyerRoutes = require("./routes/SellerViewBuyers");
+const sellerRateAndComment = require("./routes/sellerViewBuyerComments");
+app.use(sellerViewBuyerRoutes);
 app.use(sellerPostRoutes);
+app.use(sellerRateAndComment);
 
 // Error Handler Middleware
 app.use(errorHandler);

@@ -1,137 +1,148 @@
 import './AcceptedOffers.css';
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./Modal.css";
-
+import axios from "axios";
+import moment from "moment";
+import {useHistory, useParams} from "react-router-dom";
+import '../../../../buyer/posts/LoadingRing.css';
 
 function OfferPost() {
-  const [modal, setModal] = useState(false);
 
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
-  if(modal) {
-    document.body.classList.add('active-modal')
-  } else {
-    document.body.classList.remove('active-modal')
-  }
 
-  return(
-    <>
-      <div className="tables-c">
-        <div className="tables__container-c">
-          <h1>Offers</h1>
-          <table className="table-c">
-            <thead>
-              <tr>
-                  <th>Offer ID</th>
-                  <th>Collector</th>
-                  <th>Date</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td data-label="Offer ID">01</td>
-                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="Date">2020 July 07</td>
-                <td data-label="Quantity">2 kg</td>
-                <td data-label="Price">Rs 20</td>
-                <td data-label="Action">
-                  <span className="action_btn-c">
-                    <a href="#" >Accept</a>
-                    <a href="#">Reject</a>
-                  </span>
-                </td>
-              </tr>
+      const companyId=(localStorage.getItem("userId"));
+      console.log(companyId);
 
-              <tr>
-                <td data-label="Offer ID">02</td>
-                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="Date">2020 July 07</td>
-                <td data-label="Quantity">2 kg</td>
-                <td data-label="Price">Rs 20</td>
-                <td data-label="Action">
-                  <span className="action_btn-c">
-                    <a href="#" >Accept</a>
-                    <a href="#">Reject</a>
-                  </span>
-                </td>
-              </tr>
+        const { postId } = useParams();
+        console.log(postId);
 
-              <tr>
-                <td data-label="Offer ID">03</td>
-                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="Date">2020 July 07</td>
-                <td data-label="Quantity">5 kg</td>
-                <td data-label="Price">Rs 25</td>
-                <td data-label="Action">
-                  <span className="action_btn-c">
-                    <a href="#" >Accept</a>
-                    <a href="#">Reject</a>
-                  </span>
-                </td>
-              </tr>
+      const [offers, setOffers] = useState([]);
 
-              <tr>
-                <td data-label="Offer ID">04</td>
-                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="Date">2020 July 07</td>
-                <td data-label="Quantity">3 kg</td>
-                <td data-label="Price">Rs 20</td>
-                <td data-label="Action">
-                  <span className="action_btn-c">
-                    <a href="#" >Accept</a>
-                    <a href="#">Reject</a>
-                  </span>
-                </td>
-              </tr>
+      useEffect(()=>{
+        getAllOffers();
+      }, []);
 
-              <tr>
-                <td data-label="Offer ID">05</td>
-                <td data-label="Collector"><u><button onClick={toggleModal} className="btn-modal-c">Tom</button></u></td>
-                <td data-label="Date">2020 July 07</td>
-                <td data-label="Quantity">3 kg</td>
-                <td data-label="Price">Rs 20</td>
-                <td data-label="Action">
-                  <span className="action_btn-c">
-                    <a href="#" >Accept</a>
-                    <a href="#">Reject</a>
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      const getAllOffers = async () => {
+          setIsLoading(true)
+          try{
+        await axios.get(`/viewPendingCompanyOffersForCompany`)
+            .then ((response)=>{
+              const allNotes=response.data.existingOffers;
+              setOffers(allNotes);
+                setIsLoading(false)
+            })
+          }catch (error) {
+              console.error(`Error: ${error}`)
+              setHasError(true)
+          }
+      }
+      console.log(offers);
 
-      {modal && (
-        <div className="modal-c">
-          <div onClick={toggleModal} className="overlay-c"></div>
-          <div className="modal-content-c">
-            <div className="contact-c">
-              <img src="../../images/polythene.jpg" alt="" className="profileimage-c"></img>
-              <h1>Tom Harrison</h1><br></br>
-              <h2 >Email: th@gmail.com</h2><br></br>
-              <h2>Contact: 011-1111111</h2>
-            </div>
-            <div className="detail-c">
-              <label>Collecting Area: </label><h2>Colombo</h2><br></br>
-              <label>Address: </label><h2> Reid Aveneu, Colombo 07</h2><br></br>
-              <label>Working Hours: </label><h2> 8.00 a.m - 5.00 p.m</h2><br></br>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident perferendis suscipit officia recusandae.</p>
-            </div>
-            
-            <button className="close-modal-c" onClick={toggleModal}>
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
+      const date2 = new Date();
+      date2.setDate(date2.getDate());
+
+        const wasteItem2 = offers?.filter(wasteItem2 =>
+            wasteItem2.status==='accepted' &&
+            wasteItem2.companyId===companyId &&
+            wasteItem2.postId===postId
+        );
+        console.log(wasteItem2);
+
+        const len = wasteItem2.length;
+        console.log(len);
+
+      const wasteItem = offers?.filter(
+          wasteItem => wasteItem.status==='pending' &&
+          wasteItem.companyId===companyId &&
+          new Date(wasteItem.expiryDate)>=date2 &&
+          wasteItem.postId===postId &&
+          len === 0
+      );
+      console.log(wasteItem);
+
+        const history = useHistory();
+
+        const acceptOffer = (id) => {
+            const data = {
+                status:'accepted'
+            };
+            axios.patch(`/editCompanyOfferStatus/${id}`, data)
+                .then((result) => {
+                    history.push('/company/ongoingp');
+                });
+        };
+
+        const rejectOffer = (id) => {
+            const data = {
+                status:'rejected'
+            };
+            axios.patch(`/editCompanyOfferStatus/${id}`, data)
+                .then((result) => {
+                    history.push('/company/ongoingp');
+                });
+        };
+
+      return(
+          <>
+              {
+                  isLoading ?
+                      <div className="tables-c">
+                          <div className="lds-ring">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                          </div>
+                      </div> : hasError ?
+                          <div className="tables-c">
+                              <h1>Error Occurred</h1>
+                          </div> :
+                      <div className="tables-c">
+                        <div className="tables__container-c">
+                          <h1>Offers</h1>
+                          <table className="table-c">
+                            <thead>
+                              <tr>
+                                  <th>Offer ID</th>
+                                  <th>Buyer Name</th>
+                                  <th>Collecting Date</th>
+                                  <th>Expiry Date</th>
+                                  <th>Quantity (Kg)</th>
+                                  <th>Value (Rs)</th>
+                                  <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {wasteItem.map((note,index)=> (
+                              <tr>
+                                <td data-label="Offer ID">{index + 1}</td>
+                                <td data-label="Buyer Name">{note.buyerName}</td>
+                                <td data-label="Collecting Date">{moment(note.collectingDate).fromNow()}</td>
+                                <td data-label="Expiry Date">{moment(note.expiryDate).fromNow()}</td>
+                                <td data-label="Quantity (Kg)">{note.quantity}</td>
+                                <td data-label="Value (Rs)">{note.value}</td>
+                                <td data-label="Action">
+                                  <span className="action_btn-c">
+                                    <button onClick={() => {
+                                        acceptOffer(note._id)
+                                    }}>Accept</button>
+                                    <button onClick={() => {
+                                        rejectOffer(note._id)
+                                    }}>Reject</button>
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                          }
+
+          </>
+      );
+    }
 
 export default OfferPost;

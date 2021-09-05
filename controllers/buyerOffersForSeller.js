@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 const BuyerOffersForSeller = require("../models/BuyerOffersForSeller");
 
 exports.addSellerOffer= async (req,res)=>{
-    const { value, expiryDate, collectingDate, collectingTime, quantity, status, buyerId, postId, wasteItemsListId, sellerId } = req.body;
+    const { value, expiryDate, collectingDate, collectingTime, status, buyerId, postId, wasteItemsListId, sellerId, sellerName, offerThumbnail, buyerName } = req.body;
 
-    const newSellerOffer = new BuyerOffersForSeller({ value, expiryDate, collectingDate, status, collectingTime, quantity, buyerId, postId, wasteItemsListId, sellerId})
+    const newSellerOffer = new BuyerOffersForSeller({ value, expiryDate, collectingDate, status, collectingTime, buyerId, postId, wasteItemsListId, sellerId, sellerName, offerThumbnail, buyerName})
 
     try {
         await newSellerOffer.save();
@@ -43,11 +43,11 @@ exports.deletePendingSellerOffer = async (req, res) => {
 
 exports.editPendingSellerOffer = async (req, res) => {
     const { id } = req.params;
-    const { value, expiryDate, collectingDate, collectingTime, quantity } = req.body;
+    const { value, expiryDate, collectingDate, collectingTime} = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updatedPost = { value, expiryDate, collectingDate, collectingTime, quantity, _id: id };
+    const updatedPost = { value, expiryDate, collectingDate, collectingTime, _id: id };
 
     await BuyerOffersForSeller.findByIdAndUpdate(id, updatedPost, { new: true });
 

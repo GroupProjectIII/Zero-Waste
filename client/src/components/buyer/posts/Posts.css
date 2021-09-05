@@ -38,7 +38,7 @@
     width: 100%;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    height: 300px;
+    height: 250px;
 }
 
 .grid-b > article img:hover{
@@ -327,6 +327,12 @@ ol li:before {
     transition: .3s;
 }
 
+.buyer-view-post-b{
+    margin-left: 450px;
+}
+
+
+
 @media (max-width: 768px){
     .grid-b{
         grid-template-columns: repeat(2, 1fr);
@@ -368,6 +374,9 @@ ol li:before {
     }
     .text-b button{
         display: flex;
+    }
+    .buyer-view-post-b{
+        margin-left: 0px;
     }
 }
 
@@ -423,5 +432,8 @@ ol li:before {
     }
     .text-b button{
         display: flex;
+    }
+    .buyer-view-post-b{
+        margin-left: 0px;
     }
 }

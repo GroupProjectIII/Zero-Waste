@@ -25,7 +25,7 @@ export const PostSidebarData = [
     },
 
     {
-        title: 'Previous Post',
+        title: 'All Posts',
         path: '/company/previousp',
         icon: <FaIcons.FaClock />,
         cName: 'nav-text-c'

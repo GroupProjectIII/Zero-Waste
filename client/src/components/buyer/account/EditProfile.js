@@ -3,6 +3,7 @@ import EditProfileForms from "./EditProfileForm";
 import Navbar from '../home/Navbar';
 import Footer from '../home/Footer';
 import {useHistory} from "react-router-dom";
+import AccountSidebar from "./AccountSidebar";
 
 function EditProfile() {
 
@@ -15,6 +16,7 @@ function EditProfile() {
     return (
         <>
             <Navbar/>
+            <AccountSidebar/>
             <EditProfileForms/>
             <Footer/>
         </>

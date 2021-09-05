@@ -6,6 +6,8 @@ import { createPost, updatePost } from '../../../actions/posts';
 import './PostForm.css';
 import axios from 'axios';
 import e from 'cors';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PublicPost({ currentId, setCurrentId }) {
 
@@ -15,16 +17,21 @@ export default function PublicPost({ currentId, setCurrentId }) {
         history.push("/");
     }
    
-    const sellerId = (localStorage.getItem("id"));
-   
-
-    const [postType, setPostType] = useState("");
-    const [buyer, setBuyer] = useState("");
+    const sellerId = (localStorage.getItem("userId"));
+    const sellerName = (localStorage.getItem("userName"));
+    console.log(sellerName);
+    const postType = "public";
+    const buyer = "all-buyers";
+    const [district, setDistrict] = useState("");
     const [address, setAddress] = useState("");
     const [location, setLocation] = useState([]);
     const [contact, setContact] = useState("");
+    const [thumbnail, setThumbnail] = useState("");
+    const [formErrors, setFormErrors] = useState({});
+    const [itemErrors, setItemErrors] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const wasteItem = {
+    var wasteItem = {
         wasteType: '',
         item: '',
         avbDate: null,
@@ -35,12 +42,19 @@ export default function PublicPost({ currentId, setCurrentId }) {
     //catstste = wasteItemList
     //blankcat= wasteitem
 
-    const [wasteItemList, setWasteItemList] = useState([
+    var [wasteItemList, setWasteItemList] = useState([
         { ...wasteItem }
     ]);
     
     const addWasteItem = () => {
-        setWasteItemList([...wasteItemList, { ...wasteItem }]);
+        var item = wasteItemList[wasteItemList.length -1];
+        if (item.wasteType === "" || item.item === "" || item.selectedFile === "" || item.avbDate === null || item.quantity === null) {
+            alert("Waste Item Cannot Be empty");
+        } else {
+            console.log(item);
+            setWasteItemList([...wasteItemList, { ...wasteItem }]);
+            console.log(wasteItemList);
+        }      
     };
 
     const handleCatChange = (e,base64) => {
@@ -64,15 +78,18 @@ export default function PublicPost({ currentId, setCurrentId }) {
  
   
   
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const formSubmit = async () => {
+       // e.preventDefault();
         const newPostData = {
             sellerId,
+            sellerName,
             postType,
             buyer,
+            district,
             address,
             location,
             contact,
+            thumbnail,
             wasteItemList
         }
 
@@ -81,18 +98,66 @@ export default function PublicPost({ currentId, setCurrentId }) {
             axios.post('/sellerAddPost', newPostData).then((res) => {
                 console.log(res);
                 alert("Post Added Sucessfully!");
+                toastNotification();
+                clear();
             }
             ).catch((err) => {
                 alert(err)
             })
+          
       
         } else {
         
         
         }
     };
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+       setFormErrors(validate());
+        setIsSubmitting(true);
+    };
+    const toastNotification = () => {
+        toast.info("Post added successfully !", {
+            transition: Slide
+        })
+    };
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmitting) {
+            formSubmit();
+        }
+    }, [formErrors]);
 
+    const date = new Date();
+    date.setDate(date.getDate() + 28);
+
+    const date2 = new Date();
+    date2.setDate(date2.getDate());
+
+    const validate = () => {
+        let errors = {};
+        const regex = /^[0-9]+$/;
+        if (district === "" || district === null) {
+            errors.district = "Please select district";
+        }
+        if (address === "" || address === null) {
+            errors.address = "Please add your address";
+        }
+        if (contact === "" || contact === null) {
+            errors.contact = "Please add your contact number";
+        } else if (!regex.test(contact)) {
+            errors.contact = "invalid format";
+        } else if (contact.length !== 10) {
+            errors.contact = "invalid format";
+        }
+        if (location.length === 0) {
+            errors.location = "Please add Location";
+        }
+        
+        return errors;
+      
+    };
+    
+    console.log("itemErr",itemErrors);
     const getlocation = (e) => {
         e.preventDefault();
         if ("geolocation" in navigator) {
@@ -105,15 +170,41 @@ export default function PublicPost({ currentId, setCurrentId }) {
                     longitude: position.coords.longitude
                 }
                 setLocation(locationTp)
+                alert("location added");
             });
         } else {
             console.log("Not Available");
         }
     }
 
-    
-    
-    
+    const deleteWasteItem = (idx) => {
+        console.log(wasteItemList);
+        console.log(idx);
+        if (wasteItemList.length === 1) {
+            console.log("error")
+            alert("Waste Item List cannot be empty")
+        } else {
+            wasteItemList = wasteItemList.splice(idx, 1);
+            console.log(wasteItemList);
+        }
+     //   console.log(wasteItemList[idx]);
+        
+    }
+    // form validation
+
+    const [wasteTypeError, setWasteTypeError] = useState([]);
+
+    const clear = () => {
+        console.log("clear");
+        setDistrict('');
+        setAddress('');
+        setContact();
+        setThumbnail('');
+        setLocation([]);
+        setWasteItemList([{ ...wasteItem }]);
+            
+            
+    }
     return (
                  
         <div className="seller-add-post-background">
@@ -122,47 +213,111 @@ export default function PublicPost({ currentId, setCurrentId }) {
                 <h2>Add New Post</h2>
             </div>
             <form className="seller-add-new-post-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
-                <label className="seller-add-post-label"></label>
-                    <select class="seller-add-post-select" name="option"
-                        onChange={(e) => {
-                            setPostType(e.target.value)
-                        }}>
-                        <option value="0" disabled selected>Select Post Type</option>
-                        <option value="public">Public</option>
-                        <option value="direct">Direct</option>
-                    </select>
-                    <select className="seller-add-post-select" name="option"
-                        onChange={(e) => {
-                         setBuyer(e.target.value)
-                     }}>
-                        <option value="all" selected>All Buyers</option>
-                        <option value="bid1">Lk Collectors</option>
-                        <option value="bid2">Abc Industries</option>
+                    <div className="seller-add-post-row">
+                    <label className="seller-add-post-label">District</label>
+                    <select className="seller-add-post-select" name="option" value={district}
+                            onChange={(e) => {
+                                console.log(e);
+                                    setDistrict(e.target.value) 
+                            
+                        
+                            }}>
+                        <option value="" selected>Choose District</option>    
+                        <option value="Colombo">Colombo</option>
+                        <option value="Gampaha">Gampaha</option>
+                        <option value="Kaluthara">Kaluthara</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Mathale">Mathale</option>
+                        <option value="Nuwara-eliya">Nuwara-Eliya</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Hambanthota">Hambanthota</option>
+                        <option value="Jaffna">Jaffna</option>
+                        <option value="Mannar">Mannar</option>
+                        <option value="Vauniya">Vauniya</option>
+                        <option value="Mulathivu">Mulathivu</option>
+                        <option value="Kilinochchi">Kilinochchi</option>
+                        <option value="Batticaloa">Batticaloa</option>
+                        <option value="Ampara">Apmara</option>
+                        <option value="Trincomalee">Trincomalee</option>
+                        <option value="Kurunegala">Kurunegala</option>
+                        <option value="Puttalam">Puttalam</option>
+                        <option value="Anuradhapura">Anuradhapura</option>
+                        <option value="Polonnaruwa">Polonnaruwa</option>
+                        <option value="Badulla">Badulla</option>
+                        <option value="Monaragala">Monaragala</option>
+                        <option value="Rathnapura">Rathnapura</option>
+                        <option value="Kegalle">Kegalle</option>
 
-                    </select>
-                <div className="seller-add-post-row"> 
+                        </select>
+                        {formErrors.district && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.district}</span>
+                        )}
+                        
+                    </div>
+                   
+                
+                    <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlfor="address">Address</label>
                         <input className="address"
                             id="input"
                             name="address"
                             type="text"
+                            value={address}
                             onChange={(e) => {
-                                setAddress(e.target.value)
+                               
+                                    setAddress(e.target.value)
+                                
                             }}
-                        required></input>
+                            ></input>
+                        {formErrors.address && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.address}</span>
+                                    )}
+                    
                 </div>
+                    
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlfor="contact">Contact Nuber</label>
                         <input className="contact"
                             id="input"
                             name="contact"
                             type="tel"
+                            value={contact}
                            onChange={(e) => setContact(e.target.value)}
-                        required></input>
+                            required></input>
+                        {formErrors.contact && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.contact}</span>
+                                    )}
                 </div>
                 <div className="seller-add-post-row">
                     <label className="seller-add-post-label" for="location">Location</label>
-                    <a href="#" onClick={(e) => { getlocation(e) }}>Get Location</a>
+                        <a href="#" onClick={(e) => { getlocation(e) }}>Get Location</a>
+                        {formErrors.location && (
+                                        <span className="error" style={{color:'red'}}>{formErrors.location}</span>
+                                    )}
+                </div>
+                <div className="seller-add-post-row">
+                        <label className="seller-add-post-label" for="thumbnail_img">Add Thumbnail Image</label>
+                        <input className="Selected-file"
+                            type="file"
+                            accept="image/*"
+                          
+                            onChange={
+                                (e) => {
+                                   // console.log(e);
+                                    const file = e.target.files[0];
+                                    const fileReader = new FileReader();
+                                    fileReader.readAsDataURL(file);
+                                    fileReader.onload = () => {
+                                   //     console.log(fileReader.result);
+                                        let base64 = fileReader.result;
+                                        setThumbnail(base64);
+                                    }
+                                    
+                                }
+                            }
+                        ></input>
+                      <img src={thumbnail}></img> 
                 </div>
         {
           wasteItemList.map((val, idx) => {
@@ -175,11 +330,16 @@ export default function PublicPost({ currentId, setCurrentId }) {
               <div key={`Waste Item-${idx}`} className="seller-post-item">
                 <div className="seller-add-post-item-header">
                       <h3>{`Waste Item #${idx + 1}`}</h3>
-                      <button className="seller-waste-item-delete-btn">Delete Item</button>
+                      <a href="#" className="seller-waste-item-delete-btn" onClick={() => {
+                          deleteWasteItem(idx);
+                      }}>Delete Item #{idx + 1}</a>
+                      
                   </div>
-                  <select className="wasteType" name="wastetype" data-idx={idx} onChange={handleCatChange}>
-                    <option value="0"disabled selected>Select Waste Type</option>
-                    <option value="plastic">Plastic</option>
+                  <div className="seller-add-post-row">
+                      <label className="seller-add-post-label">Select Waste Type</label>
+                      <select className="wasteType" name="wastetype" value={val.wasteType} data-idx={idx} onChange={handleCatChange}>
+                        <option value="">Choose Waste Type</option>
+                          <option value="plastic">Plastic</option>
                     <option value="glass">Glass</option>
                     <option value="paper">Paper</option>
                     <option value="polythene">Polythene</option>
@@ -187,7 +347,9 @@ export default function PublicPost({ currentId, setCurrentId }) {
                     <option value="electronic">Electronic</option>
                     <option value="other">Other</option>
 
-                  </select>
+                      </select>
+                      
+                  </div>
                   <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlFor={itemid}>Item</label>
                     <input className="item"
@@ -198,7 +360,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                         value={wasteItemList[idx].item}
                         onChange={handleCatChange}
                         
-                    ></input>
+                    required></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" htmlFor={quantityid}>Quantity</label>
@@ -209,7 +371,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                           type="text"
                           value={wasteItemList[idx].quantity}
                         onChange={handleCatChange}
-                    ></input>
+                    required></input>
                 </div>
                 <div className="seller-add-post-row"> 
                     <label className="seller-add-post-label" for={avbDateid}>Available On</label>
@@ -220,7 +382,7 @@ export default function PublicPost({ currentId, setCurrentId }) {
                           type="date"
                           value={wasteItemList[idx].avbDate}
                         onChange={handleCatChange}
-                    ></input>
+                    required></input>
                 </div>
                   
                   <div className="seller-add-post-row">
@@ -247,7 +409,8 @@ export default function PublicPost({ currentId, setCurrentId }) {
                                   
                               }
                           }
-                        ></input>
+                      required></input>
+                      <img src={val.selectedFile}></img>
                 </div>
              
              

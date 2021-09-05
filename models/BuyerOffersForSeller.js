@@ -17,10 +17,6 @@ const sellerOfferSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    quantity:{
-        type:Number,
-        required:true
-    },
     offerCreatedAt: {
         type: Date,
         default: new Date(),
@@ -34,7 +30,7 @@ const sellerOfferSchema = new mongoose.Schema({
         required:true
     },
     postId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId, ref:'SellerPost',
         required:true
     },
     wasteItemsListId: {
@@ -44,7 +40,29 @@ const sellerOfferSchema = new mongoose.Schema({
     sellerId: {
         type: String,
         required:false
+    },
+    sellerName: {
+        type: String,
+        required:false
+    },
+    offerThumbnail: {
+        type: String,
+        required:false
+    },
+    buyerName: {
+        type: String,
+        required:true
+    },
+    collectedStatus: {
+        type: String,
+        default: "pending"
+    },
+    verificationCode: {
+        type: Number,
+        default: null
     }
+
+
 });
 
 module.exports = mongoose.model('BuyerOffersForSeller', sellerOfferSchema);

@@ -1,80 +1,211 @@
 import { useHistory } from 'react-router';
-import './SellerOfferList.css';
+import React, { useState, useEffect } from 'react';
+import {Link} from "react-router-dom";
+import axios from 'axios';
+import '../../buyer/posts/LoadingRing.css';
+import moment from 'moment';
+import e from 'cors';
+
 
 export default function SellerOfferList() {
-
-    const history = useHistory()
-    const viewBuyer = () => {
-        history.push('/seller/buyer')
+    if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "seller")) {
+        history.push("/");
     }
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(false);
+
+    const sellerId = (localStorage.getItem("userId"));
+    console.log("offers page");
+    console.log(sellerId)
+    const history = useHistory()
+   
     
+    const [buyerOffers, getBuyerOffers] = useState([]);
+    const WAIT_TIME = 1000;
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            axios.get(`/sellerViewOffers/${sellerId}`)
+                .then(res => {
+                    getBuyerOffers(res.data.existingOffers);
+                })
+                .catch(err => {
+                    console.log(err);
+            })
+       },WAIT_TIME)
+    },[buyerOffers]);
+
+    const getAllBuyerOffers = async () => {
+            setIsLoading(true)
+            try {
+                const response = await axios.get(`/sellerViewOffers/${sellerId}`);
+                console.log(response);
+                const allOffers = response.data.existingOffers;
+                if (allOffers.length === 0) {
+                    setIsEmpty(true)
+                } else {
+                    getBuyerOffers(allOffers);
+                    setIsLoading(false);
+                    setIsEmpty(false);
+                }
+               
+            } catch (error) {
+                console.error(`Error: ${error}`)
+                setHasError(true)
+            }
+    }
+
+    console.log(buyerOffers);
+    
+
+    const sellerDeclineOffer = (offerId, e) => {
+        e.preventDefault();
+        const data = {
+            status:"declined"
+        }
+        axios.patch(`/sellerDeclineOffer/${offerId}`, data)
+            .then((result) => {
+                console.log("offer Rejected");
+                alert("Offer Rejected");
+            });
+    //   window.location.reload();
+    }
+    const sellerAcceptCompletePostOffer = (offerId, postId) => {
+        var vfCode = Math.floor(100000 + Math.random() * 900000);
+        console.log("asp")
+        const data = {
+            status: "accepted",
+            postId: postId,
+            verificationCode: vfCode,
+        };
+        axios.patch(`/sellerAcceptPostOffer/${offerId}`, data)
+            .then((result) => {
+                console.log("ACCPTED")
+                alert("Offer Accepted");
+           //     clear();
+              //  toastNotification();
+              //  history.push(`/seller/home`);
+            });
+    //    window.location.reload();
+        
+    }
+
+    const sellerAcceptWasteItemOffer = (itemId, offerId) => {
+        console.log("accept", itemId);
+        var vfCode = Math.floor(100000 + Math.random() * 900000);
+     
+            console.log("item",itemId)
+            const data = {
+                status: "accepted",
+                wasteItemsListId: itemId,
+                verificationCode: vfCode,
+            };
+            axios.patch(`/sellerAcceptWasteItemOffer/${offerId}`, data)
+                .then((result) => {
+                    console.log("offer accepted")
+                    alert("Offer Accepted");
+                });
+     //   window.location.reload();
+        
+        }
+      
     return (
         <>
-            <div className="seller-offer-list-background">
-            <div className="seller-offer-list">
-                <table className="seller-offer-table">
-                    <tr>
-                        <th>Post Id</th>
-                        <th>Item Id</th>
-                        <th>Type</th>
-                        <th>Item</th>
-                        <th>Due Date</th>
-                        <th>Collecting Date</th>
-                        <th>Buyer Id</th>
-                        <th>Buyer Name</th>
-                        <th>Offer(Rs)</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <td>1<a className="offer-list-view-post" href="#">View Post</a></td>
-                        <td>1</td>
-                        <td>Plastic</td>
-                        <td>Bottles</td>
-                        <td>2021-07-24</td>
-                        <td>2021-07-24</td>
-                        <td>23 <a className="offer-list-view-buyer" href="#" onClick={viewBuyer}>View Buyer</a></td>
-                        <td>Lk Collectors</td>
-                        <td>200.00</td>
-                        <td>
-                            <a className="offer-list-accept" href="#">Accept</a>
-                            <a className="offer-list-decline" href="#">Decline</a>    
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1<a className="offer-list-view-post" href="#">View Post</a></td>
-                        <td>1</td>
-                        <td>Plastic</td>
-                        <td>Bottles</td>
-                        <td>2021-07-24</td>
-                        <td>2021-07-24</td>
-                        <td>23 <a className="offer-list-view-buyer" href="#">View Buyer</a></td>
-                        <td>Lk Collectors</td>
-                        <td>200.00</td>
-                        <td>
-                            <a className="offer-list-accept" href="#">Accept</a>
-                            <a className="offer-list-decline" href="#">Decline</a>    
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1<a className="offer-list-view-post" href="#">View Post</a></td>
-                        <td>1</td>
-                        <td>Plastic</td>
-                        <td>Bottles</td>
-                        <td>2021-07-24</td>
-                        <td>2021-07-24</td>
-                        <td>23 <a className="offer-list-view-buyer" href="#">View Buyer</a></td>
-                        <td>Lk Collectors</td>
-                        <td>200.00</td>
-                        <td>
-                            <a className="offer-list-accept" href="#">Accept</a>
-                            <a className="offer-list-decline" href="#">Decline</a>    
-                        </td>
-                    </tr>
-                    
-                </table>
-                </div>
-                </div>
+            {
+                isLoading ?
+                    <div className="seller-post-list-background">
+                        <div className="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> : hasError ?
+                        <div className="seller-post-list-background">
+                            <h1>Error occured.</h1>
+                        </div> : isEmpty ?
+                            <div className="seller-post-list-background">
+                                <h1>loading ..</h1>
+                            </div> :
+                        <div className="seller-post-list-background">
+                            <div className="seller-post-list">
+                            <main className="grid-b">
+                                {buyerOffers.map((offer) => {
+                                    if (offer.wasteItemsListId === "completePost" && offer.status === "pending")
+                                        return (
+                                            <article>
+                                                <img src={offer.postId.thumbnail} alt=""></img>
+                                                <div className="text-b">
+            
+                                                    <p>Buyer Name: {offer.buyerName}</p>
+                                                    <p>Offer For Complete Post</p>
+                                                    <p>{offer.status}</p>
+                                                    <p>Value: {offer.value}</p>
+                                                    <p>Collecting Date: {offer.collectingDate} At: {offer.collectingTime}</p>
+                                                    <p>Offer Expiery Date: {offer.expiryDate}</p>
+                                                    <div className="buyerlink-b">
+                                                        <Link style={{ color: '#fff', textDecoration: 'none' }}
+                                                            to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
+                                                                className="fas fa-angle-double-right"></i></Link>
+                                                    </div>
+                                                    <div className="buyerlink-b">
+                                                        <button className="accept-btn" onClick={() => {
+
+                                                            sellerAcceptCompletePostOffer(offer._id, offer.postId._id);
+                                                        }}>Accept</button>
+                                                    </div>
+                                                    <div className="buyerlink-b">
+                                                        <button className="accept-btn" onClick={(e) => {
+                                                            sellerDeclineOffer(offer._id,e);
+                                                        }}>Decline</button>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        );
+                                    else if (offer.status === "pending") {
+                                        var item = offer.postId.wasteItemList.find(element => element._id === offer.wasteItemsListId);
+                                        return (
+                                            <article>
+                                                <img src={item.selectedFile} alt=""></img>
+                                                <div className="text-b">
+                                            
+                                                    <p>Buyer Name: {offer.buyerName}</p>
+                                                    <p>Offer For Waste Item</p>
+                                                    <p>{offer.status}</p>
+                                                    <p>Value: {offer.value}</p>
+                                                    <p>Collecting Date: {offer.collectingDate} At: {offer.collectingTime}</p>
+                                                    <p>Offer Expiery Date: {offer.expiryDate}</p>
+                                                    <div className="buyerlink-b">
+                                                        <Link style={{ color: '#fff', textDecoration: 'none' }}
+                                                            to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
+                                                                className="fas fa-angle-double-right"></i></Link>
+                                                    </div>
+                                                    <div className="buyerlink-b">
+                                                        <button className="accept-btn" onClick={() => {
+                                                           sellerAcceptWasteItemOffer(item._id, offer._id) 
+                                                        }}>Accept</button>
+                                                    </div>
+                                                    <div className="buyerlink-b">
+                                                        <button className="accept-btn" onClick={(e) => {
+                                                            sellerDeclineOffer(offer._id,e);
+                                                        }}>Decline</button>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        );
+                                        
+                                    }
+                            })}
+                                </main>
+                          
+                            </div>
+                            
+
+                        </div>
+            }
+
         </>
     )
     
