@@ -217,3 +217,4 @@ INFO: Unsupported notification method: $/setTrace
 [0m2021.09.05 11:04:00 INFO  time: initialize in 2.23s[0m
 [0m2021.09.05 11:04:07 WARN  Build server is not auto-connectable.[0m
 [0m2021.09.05 11:04:07 WARN  no build tool detected in workspace 'C:\Users\hp\Documents\Dev\ZeroWaste\Zero-Waste'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.09.05 14:34:10 INFO  shutting down Metals[0m
