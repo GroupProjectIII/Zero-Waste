@@ -72,6 +72,7 @@ import CompanyPreviousP from './components/company/pages/PreviousP';
 import CompanyAcceptedP from './components/company/pages/AcceptedP';
 import CompanyBuyersInfo from './components/company/pages/BuyersInfo';
 import CompanyBuyersContact from './components/company/pages/BuyersContact';
+import CompanyViewOffers from './components/company/pages/ViewOffers';
 import CompanyGetCompanyDetails from "./components/company/components/company/home/GetCompanyDetails";
 import CompanyBuyerDirectPost from "./components/company/pages/BuyerDirectPost";
 import CompanyEditPost from "./components/company/pages/EditPost";
@@ -198,6 +199,7 @@ function App() {
                     <Route path='/company/acceptedp' component={CompanyAcceptedP} />
                     <Route path='/company/buyersinfo' component={CompanyBuyersInfo} />
                     <Route path='/company/buyerscontact' component={CompanyBuyersContact} />
+                    <Route path='/company/viewoffers' component={CompanyViewOffers} />
                     <Route path='/company/getcompanydetails' component={CompanyGetCompanyDetails} />
                     <Route path='/company/buyerdirectpost/:buyerId' component={CompanyBuyerDirectPost} />
                     <Route path='/company/companyeditpost/:postId' component={CompanyEditPost} />

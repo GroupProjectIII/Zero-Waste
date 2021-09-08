@@ -89,8 +89,8 @@ function OngoingPost() {
                                                         <p>Post Type: {note.postType}</p>
                                                         <p>Waste Type: {note.wasteType}</p>
                                                         <p>Waste Item: {note.item}</p>
-                                                        <p>Quantity: {note.quantity}</p>
-                                                        <p>Available Date: {moment(note.avbDate).fromNow()}</p>
+                                                        <p>Quantity (kg): {note.quantity}</p>
+                                                        <p>Required Date: {moment(note.avbDate).fromNow()}</p>
                                                         <div className="companylink-c">
                                                             <Link style={{color: '#fff', textDecoration: 'none'}}
                                                                   to={`/company/offersforposts/${note._id}`}>View Offers <i className="fas fa-angle-double-right"></i></Link>

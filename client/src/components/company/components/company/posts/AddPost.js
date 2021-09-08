@@ -139,7 +139,7 @@ function AddPost() {
     };
 
     const toastNotification = () => {
-        toast.info("You're added post successfully !", {
+        toast.info("You added the post successfully!", {
             transition: Slide
         })
     };

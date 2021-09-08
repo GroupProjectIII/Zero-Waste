@@ -175,7 +175,7 @@ function EditProfileForm() {
                                 </div>
                             </div>
                             <div className="button-c">
-                                <input type="submit" value="Save Details"></input>
+                                <input type="submit" value="Edit Details"></input>
                                 <ToastContainer position="top-right" toastStyle={{ backgroundColor: "green" }} autoClose={3000} />
                             </div>
                         </form>

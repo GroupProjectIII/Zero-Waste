@@ -156,7 +156,7 @@ function UserProfile() {
                                                     <div className="companylink-c">
                                                         <Link style={{color: '#fff', textDecoration: 'none'}}
                                                               to={`/company/profile`}
-                                                        >View Profile <i className="fas fa-angle-double-right"></i></Link>
+                                                        >Ratings <i className="fas fa-angle-double-right"></i></Link>
                                                     </div>
                                                 </div>
                                             </article>

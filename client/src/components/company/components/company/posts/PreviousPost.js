@@ -87,7 +87,7 @@ function PreviousPost() {
                         </div> :
                         <div className="posts-c">
                             <div className="posts__container-c">
-                                <div className="title-c"><h1>All Post</h1></div>
+                                <div className="title-c"><h1>All Posts</h1></div>
                                 <main className="grid-c">
                                     {notes.map((note,index)=> {
                                         if(wasteItem.find(o=>o.postId === note._id) === undefined && note.companyId===companyId)
