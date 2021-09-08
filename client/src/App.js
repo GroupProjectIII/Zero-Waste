@@ -90,6 +90,7 @@ import AdminReport from './components/admin/pages/report/Report';
 import AdminUserReport from './components/admin/pages/userreport/UserReport';
 import AdminSalesReport from './components/admin/pages/report/SalesReport';
 import AdminStatistics from './components/admin/pages/statistics/Statistics';
+import AdminReviewComplaints from './components/admin/pages/reviewComplaints/Reviewcomplaints';
 
 
 function App() {
@@ -180,6 +181,7 @@ function App() {
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />
                     <Route path='/admin/salesreport' component={AdminSalesReport} />
+                    <Route path='/admin/reviewcomplaints' component={AdminReviewComplaints} />
 
 
 					<Route path='/company' exact component={CompanyHome} />

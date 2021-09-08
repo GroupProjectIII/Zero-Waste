@@ -104,9 +104,13 @@ export default function Post() {
                                                     <img src={item.selectedFile} alt="img" />
                                                     <p>Quantity : { item.quantity}</p>
                                                     <p>Available On :{moment(item.avbDate).format("LLL")}</p>
-                                                    <Link style={{ textDecoration: 'none' }}
+
+                                                    <div className="seller-view-offer-button">
+                                                    <Link style={{ textDecoration: 'none', color:"#ffffff"}}
                                                                 to={`/seller/viewitem/${item._id}`}>View Item Offers <i
                                                                     className="fas fa-angle-double-right"></i></Link>
+                                                    </div>
+
                                                 </div>
                                                 
                                             </div>
@@ -117,7 +121,7 @@ export default function Post() {
                                     })}
                         </div>
                                 <div className="seller-post-offers">
-                                    <h1>Offers For Colmplete Post</h1>
+                                    <div style={{marginBottom:"30px"}}><h1>Offers For Complete Post</h1></div>
                                     <div>
                                         {offNum === 0 ?
                                             <div>There are no Post Offers Available Now</div>

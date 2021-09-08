@@ -1,15 +1,13 @@
 import '../posts/Form.css';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsFillXCircleFill , BsFillPlusCircleFill} from "react-icons/bs";
+
 function EditProfileForms() {
 
     const history = useHistory()
-    if ((!localStorage.getItem("authToken")) || !(localStorage.getItem("usertype") === "buyer")) {
-        history.push("/");
-    }
-   
+
     const buyerId = (localStorage.getItem("userId"));
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
@@ -35,6 +33,7 @@ function EditProfileForms() {
         try {
             const response = await axios.get(`/sellerViewBuyerDetails/${buyerId}`)
             console.log(response);
+
             const data = response.data.buyer;
             console.log(data);
             setBuyerDetails(data);
@@ -47,6 +46,7 @@ function EditProfileForms() {
             setImages(data.buyerImages);
           
            // setAreas(areas => [...areas, data.favouriteAreas]);
+
             setIsLoading(false)
         } catch (error) {
             console.error(`Error: ${error}`)
@@ -54,6 +54,7 @@ function EditProfileForms() {
         }
     }
     console.log(buyer);
+
  //   console.log(contact);
     //console.log(areas)
 
@@ -81,15 +82,16 @@ function EditProfileForms() {
         } else {
             axios.patch(`/buyerUpdateDetails/${buyer._id}`, data).then((res) => {
                 console.log(res);
-                alert("Post Updated Sucessfully!");
-                history.push('/buyer/home');
+                history.push('/buyer/vprofile');
+
             }
             ).catch((err) => {
                 alert(err)
             })
         }
     }
-    
+
+
     return(
         <div className="forms-b">
             <div className="forms__container-b" >
