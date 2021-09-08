@@ -2,7 +2,7 @@ import React from 'react';
 import ViewCompanyRatings from '../components/company/posts/ViewCompanyRatings';
 import Navbar from '../components/company/home/Navbar';
 import Footer from '../components/company/home/Footer';
-import PostSidebar from '../components/company/posts/PostSidebar';
+import Sidebar from '../components/company/posts/Sidebar';
 import { useHistory } from "react-router-dom";
 
 function CompanyRatings() {
@@ -15,7 +15,7 @@ function CompanyRatings() {
     return (
         <>
             <Navbar/>
-            <PostSidebar />
+            <Sidebar />
             <ViewCompanyRatings/>
             <Footer/>
         </>
