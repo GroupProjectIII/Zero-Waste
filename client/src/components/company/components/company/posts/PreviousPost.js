@@ -71,7 +71,7 @@ function PreviousPost() {
                         </div> :
                         <div className="posts-c">
                             <div className="posts__container-c">
-                                <div className="title-c"><h1>All Post</h1></div>
+                                <div className="title-c"><h1>All Posts</h1></div>
                                 <main className="grid-c">
                                     {wasteItem.map((note,index)=> (
                                         <article>
@@ -80,8 +80,8 @@ function PreviousPost() {
                                                 <p>Post Type: {note.postType}</p>
                                                 <p>Waste Type: {note.wasteType}</p>
                                                 <p>Waste Item: {note.item}</p>
-                                                <p>Quantity: {note.quantity}</p>
-                                                <p>Available Date: {moment(note.avbDate).fromNow()}</p>
+                                                <p>Quantity (kg): {note.quantity}</p>
+                                                <p>Required Date: {moment(note.avbDate).fromNow()}</p>
                                                 <div className="companylink-c">
                                                     <Link style={{color: '#fff', textDecoration: 'none'}}
                                                           to={`/company/companyeditpost/${note._id}`}>Edit Post <i className="fas fa-edit"></i></Link>

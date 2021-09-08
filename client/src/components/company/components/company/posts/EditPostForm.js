@@ -113,7 +113,7 @@ function DirectPostForm() {
     };
 
     const toastNotification = () => {
-        toast.info("You're edited post successfully !", {
+        toast.info("Edited successfully !", {
             transition: Slide
         })
     };
@@ -129,7 +129,7 @@ function DirectPostForm() {
                 <div className="forms__container-c" >
                     <div className="container-c">
                         <div className="content-c">
-                            <div className="title-c">Add New Post</div>
+                            <div className="title-c">Edit Post</div>
                             <form onSubmit={handleSubmit} noValidate>
                                 <div className="user-details-c">
                                     <div className="input-box-c">
@@ -160,7 +160,7 @@ function DirectPostForm() {
                                         )}
                                     </div>
                                     <div className="input-box-c">
-                                        <span className="date-c">Available Date</span>
+                                        <span className="date-c">Required Date</span>
                                         <input type="date" name="avbDate" id="avbDate" placeholder="Enter date" value={d2}
                                                onChange={handleChange}
                                                className={formErrors.avbDate && "input-error"}></input>
@@ -179,7 +179,7 @@ function DirectPostForm() {
                                     </div>
                                 </div>
                                 <div className="button-c">
-                                    <input type="submit" value="Add Post"></input>
+                                    <input type="submit" value="Edit Post"></input>
                                     <ToastContainer position="top-right" toastStyle={{ backgroundColor: "green" }} autoClose={3000} />
                                 </div>
                             </form>
