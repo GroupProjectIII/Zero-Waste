@@ -53,7 +53,7 @@ function PreviousPost() {
     }
     console.log(offers);
 
-    const wasteItem = offers?.filter(wasteItem =>wasteItem.status==='accepted' && wasteItem.companyId===companyId);
+    const wasteItem = offers?.filter(wasteItem =>(wasteItem.status==='accepted' || wasteItem.status==='pending') && wasteItem.companyId===companyId);
     console.log(wasteItem);
 
     const toastNotification = () => {
