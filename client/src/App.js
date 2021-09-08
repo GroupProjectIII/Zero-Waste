@@ -79,6 +79,7 @@ import CompanyEditPost from "./components/company/pages/EditPost";
 import CompanyViewAcceptedOffer from "./components/company/pages/ViewAcceptedOffer";
 import CompanyAddComplaint from "./components/company/pages/AddComplaint";
 import CompanyViewRating from "./components/company/pages/ViewRating";
+import CompanyCompanyRatings from "./components/company/pages/CompanyRatings";
 
 import AdminHome from "./components/admin/components/home/Home";
 import AdminUserlist from "./components/admin/pages/userlist/Userlist";
@@ -206,6 +207,7 @@ function App() {
                     <Route path='/company/offersforacceptedposts/:postId' component={CompanyViewAcceptedOffer} />
                     <Route path='/company/addcomplaints/:buyerId' component={CompanyAddComplaint} />
                     <Route path='/company/viewbuyerratings/:buyerId' component={CompanyViewRating} />
+                    <Route path='/company/companyratings/:companyId' component={CompanyCompanyRatings} />
                 </Switch>
             </Router>
         </>
