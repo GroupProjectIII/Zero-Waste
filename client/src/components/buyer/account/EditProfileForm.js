@@ -83,6 +83,7 @@ function EditProfileForms() {
             axios.patch(`/buyerUpdateDetails/${buyer._id}`, data).then((res) => {
                 console.log(res);
                 history.push('/buyer/vprofile');
+
             }
             ).catch((err) => {
                 alert(err)

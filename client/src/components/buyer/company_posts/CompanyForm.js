@@ -35,7 +35,10 @@ function CompanyForms() {
     const wasteItem = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.companyId===companyId);
     console.log(wasteItem);
 
-    const wasteItemLength = wasteItem.length;
+    const wasteItem2 = offers?.filter(wasteItem => wasteItem.status==='accepted' && wasteItem.companyId===companyId && wasteItem.postId===postId);
+    console.log(wasteItem2);
+
+    const wasteItemLength = wasteItem2.length;
     console.log(wasteItemLength);
 
     let quantity=0;
