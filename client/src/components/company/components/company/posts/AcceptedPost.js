@@ -83,7 +83,7 @@ function AcceptedPost() {
                                                         <p>Post Type: {note.postType}</p>
                                                         <p>Waste Type: {note.wasteType}</p>
                                                         <p>Waste Item: {note.item}</p>
-                                                        <p>Quantity: {note.quantity}</p>
+                                                        <p>Quantity: {note.quantity} Kg</p>
                                                         <p>Available Date: {moment(note.avbDate).fromNow()}</p>
                                                         <div className="companylink-c">
                                                             <Link style={{color: '#fff', textDecoration: 'none'}}

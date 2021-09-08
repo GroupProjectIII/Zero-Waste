@@ -38,7 +38,7 @@ function EditCompanyOfferForms() {
     let quantity=0;
 
     for (let i = 0; i < wasteItemLength; i++) {
-        quantity += wasteItem[i].quantity
+        quantity += wasteItem2[i].quantity
     }
 
     console.log(quantity);
@@ -238,7 +238,7 @@ function EditCompanyOfferForms() {
                                     )}
                                 </div>
                                 <div className="input-box-b">
-                                    <span className="details-b">Quantity (Kg)</span>
+                                    <span className="details-b">Quantity (Kg) [Available Quantity - {newQuantity} Kg]</span>
                                     <input type="text" placeholder="Enter quantity" name="quantity" id="quantity" value={formValues.quantity}
                                            onChange={handleChange}
                                            className={formErrors.quantity && "input-error"}></input>
