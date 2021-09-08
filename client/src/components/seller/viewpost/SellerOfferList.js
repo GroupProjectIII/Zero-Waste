@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../../buyer/posts/LoadingRing.css';
 import moment from 'moment';
 import e from 'cors';
+import './PendingPosts.css';
 
 
 export default function SellerOfferList() {
@@ -173,13 +174,13 @@ export default function SellerOfferList() {
                                                             to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
                                                                 className="fas fa-angle-double-right"></i></Link>
                                                     </div>
-                                                    <div className="buyerlink-b">
+                                                    <div className="delete-button-b">
                                                         <button className="accept-btn" onClick={() => {
 
                                                             sellerAcceptCompletePostOffer(offer._id, offer.postId._id, offer.expiryDate);
                                                         }}>Accept</button>
                                                     </div>
-                                                    <div className="buyerlink-b">
+                                                    <div className="delete-button-b">
                                                         <button className="accept-btn" onClick={(e) => {
                                                             sellerDeclineOffer(offer._id,e);
                                                         }}>Decline</button>
@@ -205,12 +206,12 @@ export default function SellerOfferList() {
                                                             to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
                                                                 className="fas fa-angle-double-right"></i></Link>
                                                     </div>
-                                                    <div className="buyerlink-b">
+                                                    <div className="delete-button-b">
                                                         <button className="accept-btn" onClick={() => {
                                                            sellerAcceptWasteItemOffer(item._id, offer._id, offer.expieryDate) 
                                                         }}>Accept</button>
                                                     </div>
-                                                    <div className="buyerlink-b">
+                                                    <div className="delete-button-b">
                                                         <button className="accept-btn" onClick={(e) => {
                                                             sellerDeclineOffer(offer._id,e);
                                                         }}>Decline</button>
