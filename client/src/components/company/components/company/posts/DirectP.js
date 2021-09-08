@@ -36,7 +36,11 @@ function DirectP() {
     }
     console.log(notes);
 
-    const wasteItem = notes?.filter(wasteItem => wasteItem.companyId === companyId);
+    const date2 = new Date();
+    date2.setDate(date2.getDate());
+
+    const wasteItem = notes?.filter(wasteItem => wasteItem.companyId === companyId &&
+        new Date(wasteItem.expiryDate)>=date2);
     console.log(wasteItem);
 
     const filterData = (postsPara, searchKey) => {

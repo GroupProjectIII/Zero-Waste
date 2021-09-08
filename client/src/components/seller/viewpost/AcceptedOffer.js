@@ -2,6 +2,7 @@ import '../../buyer/posts/Posts.css';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 const AcceptedOffer = (props) => {
     const offer = props.offer;
@@ -33,19 +34,14 @@ const AcceptedOffer = (props) => {
                     <p>{offer.status}</p>
                     <p>{offer.verificationCode}</p>
                 <p>Value: {offer.value}</p>
-                    <p>Collecting Date: {offer.collectingDate} At: {offer.collectingTime}</p>
-                <p>Offer Expiery Date: {offer.expiryDate}</p>
+                    <p>Collecting Date: {moment(offer.collectingDate).format("LL")} At: {offer.collectingTime}</p>
+              
                 <div className="buyerlink-b">
                     <Link style={{ color: '#fff', textDecoration: 'none' }}
                         to={`/seller/viewpost/${offer.postId._id}`}>View Post <i
                             className="fas fa-angle-double-right"></i></Link>
                 </div>
-                    <div className="buyerlink-b">
-                        
-                    </div>
-                    <div className="buyerlink-b">
-                       
-                </div>
+
             </div>
             </article>
         )

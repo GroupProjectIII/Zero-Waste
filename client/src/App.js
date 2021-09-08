@@ -22,6 +22,7 @@ import BuyerViewOfferDetails from "./components/buyer/posts/ViewOffers";
 import BuyerDirectPosts from "./components/buyer/posts/DirectPosts";
 import BuyerCompanyDirectPosts from "./components/buyer/company_posts/CompanyDirectPosts";
 import BuyerViewRatings from "./components/buyer/posts/ViewRatings";
+import BuyerViewCompanyOffer from "./components/buyer/company_posts/ViewCompanyOffer";
 
 import BuyerProfileDetails from "./components/buyer/account/ProfileDetails";
 import BuyerViewProfile from './components/buyer/account/ViewProfile';
@@ -53,6 +54,9 @@ import SellerViewNotifications from './components/seller/Profile/SellerViewNotif
 import SellerAddComplaint from './components/seller/Profile/AddComplaints';
 import SellerViewStats from './components/seller/Profile/SellerViewStats';
 import SellerEditPost from './components/seller/Post/EditPost';
+import SellerViewPrvPost from './components/seller/viewpost/ViewPrvPost';
+import SellerViewItemOffers from './components/seller/viewpost/ViewItemOffers';
+import SellerAddComplaintPage from './components/seller/Buyers/AddComplaintPage';
 
 import CompanyHome from './components/company/pages/Home';
 import CompanyProfile from './components/company/pages/Profile';
@@ -87,6 +91,7 @@ import AdminReport from './components/admin/pages/report/Report';
 import AdminUserReport from './components/admin/pages/userreport/UserReport';
 import AdminSalesReport from './components/admin/pages/report/SalesReport';
 import AdminStatistics from './components/admin/pages/statistics/Statistics';
+import AdminReviewComplaints from './components/admin/pages/reviewComplaints/Reviewcomplaints';
 
 
 function App() {
@@ -116,6 +121,7 @@ function App() {
                     <Route path='/buyer/directposts' component={BuyerDirectPosts} />
                     <Route path='/buyer/companydirectposts' component={BuyerCompanyDirectPosts} />
                     <Route path='/buyer/viewratings/:sellerId' component={BuyerViewRatings} />
+                    <Route path='/buyer/viewcompanyofferdetails/:offerId/:companyId' component={BuyerViewCompanyOffer} />
 
                     <Route path='/buyer/vprofile' component={BuyerViewProfile} />
                     <Route path='/buyer/rcomment' component={BuyerRateAndComment} />
@@ -158,6 +164,11 @@ function App() {
                     <Route path='/seller/complaint' component={SellerAddComplaint} />
                     <Route path='/seller/stats' component={SellerViewStats} />
                     <Route path='/seller/editpost/:postId' component={SellerEditPost} />
+                    <Route path='/seller/viewprvpost/:postId' component={SellerViewPrvPost} />
+                    <Route path='/seller/viewitem/:itemId' component={SellerViewItemOffers} />
+                    <Route path='/seller/addcomplaint/:buyerId' component={SellerAddComplaintPage} />
+                    
+                    
                     
 
                     <Route path='/admin' exact component={AdminHome} />
@@ -171,6 +182,7 @@ function App() {
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />
                     <Route path='/admin/salesreport' component={AdminSalesReport} />
+                    <Route path='/admin/reviewcomplaints' component={AdminReviewComplaints} />
 
 
 					<Route path='/company' exact component={CompanyHome} />
