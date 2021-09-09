@@ -105,7 +105,7 @@ function EditProfileForm() {
     };
 
     const toastNotification = () => {
-        toast.info("You're edited profile successfully !", {
+        toast.info("You edited the profile successfully !", {
             transition: Slide
         })
     };
