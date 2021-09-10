@@ -196,7 +196,7 @@ function App() {
                     <Route path='/company/dashboard' component={CompanyDashboard} />
                     <Route path='/company/helpdesk' component={CompanyHelpdesk} />
                     <Route path='/company/companypost' component={CompanyPost} />
-                    <Route path='/company/offersforposts/:postId' component={CompanyOffersForPosts} />
+                    <Route path='/company/offersforposts/:postId/:postQuantity' component={CompanyOffersForPosts} />
                     <Route path='/company/editprofile/:postId' component={CompanyEditProfile} />
                     <Route path='/company/DirectPosts' component={CompanyDirectPosts} />
                     <Route path='/company/notification' component={CompanyNotification} />
