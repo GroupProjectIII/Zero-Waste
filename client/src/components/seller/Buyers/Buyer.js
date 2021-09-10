@@ -109,7 +109,9 @@ export default function Buyer() {
                                                         <img src={buypic} alt="logo" />
                                                         <h1>{buyer.buyerName}</h1>
                                                         <p>{buyer.buyerAddress}</p>
+
                                                         <h4>Ratings</h4>
+
                                                         <div className="ratings-star">
                                                             <span className="fa fa-star checked"></span>
                                                             <span className="fa fa-star checked"></span>
@@ -118,6 +120,7 @@ export default function Buyer() {
                                                             <span className="fa fa-star checked"></span>
                                                         </div>
                                                         <div>
+
                                                             <div className="seller-view-offer-button">
                                                         <Link style={{ textDecoration: 'none', color:"#ffffff"}}
                                                                 to={`/seller/buyer/${buyer.buyerId}`}>View Buyer <i
@@ -130,6 +133,7 @@ export default function Buyer() {
                                                                 to={`/seller/directpost/${buyer.buyerId}`}>Sell Now <i
                                                                     className="fas fa-angle-double-right"></i></Link>
                                                             </div>
+
                                                         </div>
 
 

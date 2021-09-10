@@ -14,7 +14,7 @@ function DirectP() {
     const companyId=(localStorage.getItem("userId"));
     console.log(companyId);
 
-  const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState([]);
 
     useEffect(()=>{
         getAllNotes();

@@ -115,6 +115,11 @@ function OfferPost() {
                           </div> :
                       <div className="tables-c">
                         <div className="tables__container-c">
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
                           <h1>Offers</h1>
                           <table className="table-c">
                             <thead>
@@ -151,6 +156,14 @@ function OfferPost() {
                             ))}
                             </tbody>
                           </table>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
                         </div>
                       </div>
                           }
