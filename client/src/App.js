@@ -91,7 +91,9 @@ import AdminUserReport from './components/admin/pages/userreport/UserReport';
 import AdminSalesReport from './components/admin/pages/report/SalesReport';
 import AdminStatistics from './components/admin/pages/statistics/Statistics';
 import AdminReviewComplaints from './components/admin/pages/reviewComplaints/Reviewcomplaints';
-
+import AdminMessages from './components/admin/pages/messages/Messages';
+import AdminCompanyReport from './components/admin/pages/userreport/Companyreport';
+import AdminNewsfeed from './components/admin/pages/newsfeed/Newsfeed';
 
 function App() {
     return (
@@ -177,11 +179,14 @@ function App() {
                     <Route path='/admin/companies' component={AdminCompany} />
                     <Route path='/admin/user/:_id' component={AdminUser} />
                     <Route path='/admin/userreport/:_id' component={AdminUserReport} />
+                    <Route path='/admin/companyreport/:_id' component={AdminCompanyReport} />
                     <Route path='/admin/newuser' component={AdminNewuser} />
                     <Route path='/admin/report' component={AdminReport} />
                     <Route path='/admin/statistics' component={AdminStatistics} />
                     <Route path='/admin/salesreport' component={AdminSalesReport} />
                     <Route path='/admin/reviewcomplaints' component={AdminReviewComplaints} />
+                    <Route path='/admin/messages' component={AdminMessages} />
+                    <Route path='/admin/newsfeed' component={AdminNewsfeed} />
 
 
 					<Route path='/company' exact component={CompanyHome} />
