@@ -14,6 +14,9 @@ app.use(express.urlencoded({limit: '50mb'}));
 
 const AuserRoute = require('./routes/adminUser')
 const ABSRoute = require('./routes/adminBS')
+const ABCRoute = require('./routes/adminBC')
+const AcompRoute = require('./routes/adminComplaints')
+const AmsgRoute = require('./routes/adminMessages')
 const cors = require("cors");
 
 app.use(cors());
@@ -32,6 +35,9 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 app.use('/api/adminuser' , AuserRoute);
 app.use('/api/adminBS' , ABSRoute);
+app.use('/api/admincomplaints' , AcompRoute);
+app.use('/api/adminBC', ABCRoute);
+app.use('/api/adminmessages', AmsgRoute);
 
 const postRoutes = require("./routes/posts.js");
 app.use(cors());
@@ -60,17 +66,15 @@ app.use(companyDetail );
 const contactBuyer = require("./routes/contactBuyer");
 app.use(contactBuyer);
 
-
-app.use('/api/adminuser' , AuserRoute);
-
-
 app.use('/posts', postRoutes);
 //seller
 
 const sellerPostRoutes = require("./routes/sellerPosts");
 const sellerViewBuyerRoutes = require("./routes/SellerViewBuyers");
+const sellerRateAndComment = require("./routes/sellerViewBuyerComments");
 app.use(sellerViewBuyerRoutes);
 app.use(sellerPostRoutes);
+app.use(sellerRateAndComment);
 
 // Error Handler Middleware
 app.use(errorHandler);
