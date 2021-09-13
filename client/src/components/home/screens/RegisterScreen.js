@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RegisterScreen.css";
@@ -12,7 +12,25 @@ const RegisterScreen = ({ history }) => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [usertype, setUserType] = useState("");
+  const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
+
+  const generateOTP = () => {
+
+    const string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let OTP = '';
+
+    // Find the length of string
+    let len = string.length;
+    for (let i = 0; i < 6; i++ ) {
+      OTP += string[Math.floor(Math.random() * len)];
+    }
+    return OTP;
+  };
+
+  useEffect(()=>{
+    setOtp(generateOTP());
+  }, []);
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -39,7 +57,8 @@ const RegisterScreen = ({ history }) => {
           username,
           email,
           password,
-          usertype
+          usertype,
+          otp
         },
         config
       );
@@ -50,15 +69,17 @@ const RegisterScreen = ({ history }) => {
       localStorage.setItem("userEmail", data.email);
       localStorage.setItem("registeredAt", data.registeredAt);
       localStorage.setItem("userId", data.id);
+      localStorage.setItem("userOTP", data.otp);
+      localStorage.setItem("userAccountStatus", data.accountStatus);
 
       console.log(data.usertype);
       if(data.usertype==="buyer"){
-        history.push("/buyer/profileDetails");
+        history.push("/buyer/verifybuyer");
       }else if(data.usertype==="seller"){
-        history.push("/seller");
+        history.push("/seller/verifyseller");
       }
       else if(data.usertype==="company"){
-        history.push("/company/getcompanydetails");
+        history.push("/company/verifycompany");
       }
       else if(data.usertype==="admin"){
         history.push("/admin");
