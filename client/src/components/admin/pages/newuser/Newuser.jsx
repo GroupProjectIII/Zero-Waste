@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import "./newuser.css"
 import Footer from '../../components/footer/Footer';
 import Navbar from '../../components/navbar/Navbar';
@@ -21,6 +21,24 @@ export default function Newuser() {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [usertype, setUserType] = useState("");
   const [error, setError] = useState("");
+  const [otp, setOtp] = useState("");
+
+  const generateOTP = () => {
+
+    const string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let OTP = '';
+
+    // Find the length of string
+    let len = string.length;
+    for (let i = 0; i < 6; i++ ) {
+      OTP += string[Math.floor(Math.random() * len)];
+    }
+    return OTP;
+  };
+
+  useEffect(()=>{
+    setOtp(generateOTP());
+  }, []);
 
    adduser = async (e) => {
     e.preventDefault();
@@ -47,7 +65,8 @@ export default function Newuser() {
           username,
           email,
           password,
-          usertype
+          usertype,
+          otp
         },
         config
       );  
