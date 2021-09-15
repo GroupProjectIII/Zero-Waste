@@ -101,6 +101,7 @@ import AdminReviewComplaints from './components/admin/pages/reviewComplaints/Rev
 import AdminMessages from './components/admin/pages/messages/Messages';
 import AdminCompanyReport from './components/admin/pages/userreport/Companyreport';
 import AdminNewsfeed from './components/admin/pages/newsfeed/Newsfeed';
+import AdminCompanyposts from './components/admin/pages/newsfeed/Companyposts';
 
 function App() {
     return (
@@ -195,6 +196,7 @@ function App() {
                     <Route path='/admin/reviewcomplaints' component={AdminReviewComplaints} />
                     <Route path='/admin/messages' component={AdminMessages} />
                     <Route path='/admin/newsfeed' component={AdminNewsfeed} />
+                    <Route path='/admin/companyposts' component={AdminCompanyposts} />
 
 
 					<Route path='/company' exact component={CompanyHome} />
