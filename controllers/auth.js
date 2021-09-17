@@ -44,6 +44,18 @@ exports.login = async (req, res, next) => {
 exports.register = async (req, res, next) => {
   const { username, email, password, usertype, otp, accountStatus } = req.body;
 
+  const len=username.length;
+
+    if (len>16) {
+        return next(new ErrorResponse("Username can not have more than 16 characters", 400));
+    }
+
+    const regex=/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
+
+    if (!regex.test(password)) {
+      return next(new ErrorResponse("Enter a strong password", 400));
+    }
+
   try {
     const user = await User.create({
       username,

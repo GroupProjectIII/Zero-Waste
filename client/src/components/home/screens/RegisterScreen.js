@@ -5,6 +5,9 @@ import "./RegisterScreen.css";
 import "./LoginScreen.css";
 import HomeNavbar from "../HomeNavbar";
 import Footer from "../../buyer/home/Footer";
+import PasswordStrengthMeter from "./PasswordStrengthMeter";
+import Popup from './Popup';
+import './Popup.css';
 
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -14,6 +17,12 @@ const RegisterScreen = ({ history }) => {
   const [usertype, setUserType] = useState("");
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
 
   const generateOTP = () => {
 
@@ -124,7 +133,18 @@ const RegisterScreen = ({ history }) => {
           />
         </div>
         <div className="form-group-h">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password: <i className="far fa-question-circle" onClick={togglePopup}></i></label>
+          {isOpen && <Popup
+              content={<>
+              <p>Passwords must contain:</p>
+                <p>1) a minimum of 1 lower case letter [a-z] and</p>
+                <p>2) a minimum of 1 upper case letter [A-Z] and</p>
+                <p>3) a minimum of 1 numeric character [0-9] and</p>
+                <p>4) a minimum of 1 special character: ~`!@#$%^&*()-_+={}[]|\;:",./?</p>
+                <p>5) Passwords must be at least 6 characters in length, but can be much longer.</p>
+              </>}
+              handleClose={togglePopup}
+          />}
           <input
             type="password"
             required
@@ -134,6 +154,7 @@ const RegisterScreen = ({ history }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <PasswordStrengthMeter password={password} />
         </div>
         <div className="form-group-h">
           <label htmlFor="confirmpassword">Confirm Password:</label>
