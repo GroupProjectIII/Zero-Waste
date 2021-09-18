@@ -54,6 +54,8 @@ function GetCompanyDetailsForm() {
     const validate = (values) => {
         let errors = {};
         const regex = /^[0-9]+$/;
+        
+        const len=values.description.length
 
         if (!values.companyName) {
             errors.companyName = "Cannot be blank";
@@ -74,6 +76,9 @@ function GetCompanyDetailsForm() {
         }
         if (!values.description) {
             errors.description = "Cannot be blank";
+        }
+        else if(len>75) {
+            errors.description = "You cannot add more than 75 characters";
         }
 
         return errors;
