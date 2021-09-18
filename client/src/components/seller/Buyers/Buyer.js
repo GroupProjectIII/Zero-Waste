@@ -54,13 +54,14 @@ export default function Buyer() {
     };
 
     const handleSearchArea = (e) => {
-        setIsLoading(true)
+       
+        e.preventDefault();
         const searchKey = e.currentTarget.value;
 
         axios.get(`/viewAllBuyers`).then((res) => {
             if (res?.data?.success) {
                 filterData(res?.data?.buyer, searchKey);
-                setIsLoading(false)
+                
             }
         });
     }
@@ -88,9 +89,9 @@ export default function Buyer() {
                                         <label className="serch-buyer-lable">Waste Type</label>
                                         <input type="text" placeholder="Search.." name="search" onChange={handleSearchArea} id="serchinput"></input>
                                         <label className="serch-buyer-lable">Waste Item</label>
-                                        <input type="text" placeholder="Search.." name="search" id="serchinput"></input>
+                                        <input type="text" placeholder="Search.." name="search" id="serchinput" onChange={handleSearchArea}></input>
                                         <label className="serch-buyer-lable">Area</label>
-                                        <input type="text" placeholder="Search.." name="search" id="serchinput"></input>
+                                        <input type="text" placeholder="Search.." name="search" id="serchinput" onChange={handleSearchArea}></input>
                                         <button className="seller-search-buyer-btn" type="submit" value="Search">Search <BsSearch/></button>
                                     </form>
                                 </div>
