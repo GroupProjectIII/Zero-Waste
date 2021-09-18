@@ -23,6 +23,14 @@ export default function Newuser() {
   const [error, setError] = useState("");
   const [otp, setOtp] = useState("");
 
+  const clear = () => {
+        setUsername('')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+        setUserType('')
+};
+
   const generateOTP = () => {
 
     const string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -69,13 +77,15 @@ export default function Newuser() {
           otp
         },
         config
-      );  
+      );
+      alert("user added successfully")  
+      clear();
 
     } catch (error) {
       setError(error.response.data.error);
       setTimeout(() => {
         setError("");
-        alert(error)
+        alert("An error has occured")
       }, 5000);
     }
   };
