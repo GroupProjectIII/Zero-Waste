@@ -1,10 +1,11 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./newuser.css"
 import Footer from '../../components/footer/Footer';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
+import Popup from '../../../home/screens/Popup';
 
 
 export default function Newuser() {
@@ -14,7 +15,7 @@ export default function Newuser() {
     history.push("/");
   }
 
-  
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,13 +24,19 @@ export default function Newuser() {
   const [error, setError] = useState("");
   const [otp, setOtp] = useState("");
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+
   const clear = () => {
-        setUsername('')
-        setEmail('')
-        setPassword('')
-        setConfirmPassword('')
-        setUserType('')
-};
+    setUsername('')
+    setEmail('')
+    setPassword('')
+    setConfirmPassword('')
+    setUserType('')
+  };
 
   const generateOTP = () => {
 
@@ -38,17 +45,17 @@ export default function Newuser() {
 
     // Find the length of string
     let len = string.length;
-    for (let i = 0; i < 6; i++ ) {
+    for (let i = 0; i < 6; i++) {
       OTP += string[Math.floor(Math.random() * len)];
     }
     return OTP;
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setOtp(generateOTP());
   }, []);
 
-   adduser = async (e) => {
+  adduser = async (e) => {
     e.preventDefault();
 
     const config = {
@@ -78,7 +85,7 @@ export default function Newuser() {
         },
         config
       );
-      alert("user added successfully")  
+      alert("user added successfully")
       clear();
 
     } catch (error) {
@@ -90,9 +97,9 @@ export default function Newuser() {
     }
   };
 
-function adduser(){
+  function adduser() {
 
-}
+  }
 
   return (
     <div>
@@ -128,7 +135,18 @@ function adduser(){
             </div>
 
             <div className="an_fitems">
-              <label>Password</label>
+              <label htmlFor="password">Password: <i className="far fa-question-circle" onClick={togglePopup}></i></label>
+              {isOpen && <Popup
+                content={<>
+                  <p>Passwords must contain:</p>
+                  <p>1) a minimum of 1 lower case letter [a-z] and</p>
+                  <p>2) a minimum of 1 upper case letter [A-Z] and</p>
+                  <p>3) a minimum of 1 numeric character [0-9] and</p>
+                  <p>4) a minimum of 1 special character: ~`!@#$%^&*()-_+={ }[]|\;:",./?</p>
+                  <p>5) Passwords must be at least 6 characters in length, but can be much longer.</p>
+                </>}
+                handleClose={togglePopup}
+              />}
               <input
                 type="password"
                 required
