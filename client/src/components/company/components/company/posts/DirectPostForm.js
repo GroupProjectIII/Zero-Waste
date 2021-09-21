@@ -81,7 +81,7 @@ function DirectPostForm() {
         };
         axios.post(apiUrl, data)
             .then((result) => {
-                //sendEmail();
+                sendEmail();
                 toastNotification();
                 clear();
             });
