@@ -87,7 +87,6 @@ function ViewOfferDetails() {
                                         <div className="text-b">
                                             <h3>Collecting Date: {moment(posts.collectingDate).fromNow()}</h3>
                                             <p>Buyer Name: {posts.buyerName}</p>
-                                            <p>Waste Item: {posts.item}</p>
                                             <p>Offer Quantity: {posts.quantity} kg</p>
                                             <p>Status: {posts.status}</p>
                                             <p>Offer Value (Rs): {posts.value}</p>

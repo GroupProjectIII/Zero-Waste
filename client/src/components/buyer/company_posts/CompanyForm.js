@@ -108,7 +108,7 @@ function CompanyForms() {
         axios.post(apiUrl, data)
             .then((result) => {
                 clear();
-                //sendEmail();
+                sendEmail();
                 toastNotification();
                 //history.push(`/buyer/viewpostdetails/${id}`);
             });
