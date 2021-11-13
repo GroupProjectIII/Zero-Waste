@@ -8,6 +8,7 @@ Users of the system:
 • Admin
 
 #  Link to the deployed web application in a cloud hosting service: https://zero-waste-project3.herokuapp.com/
+Some functions that work in localhost may not be work in this hosted one because this is a free hosting service.
 
 # You can run the backend by following these steps:
 You can clone the project using this command. “git clone https://github.com/GroupProjectIII/Zero-Waste.git”.
